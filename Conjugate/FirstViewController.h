@@ -14,7 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *verbUITextField;
 @property (weak, nonatomic) IBOutlet UITextView *jsonResultsTextView;
 
-- (void) fetchDataWithString:(NSString *)string;
+- (void) conjugteWithString:(NSString *)string;
+- (NSString *) searchVerbFormWithString:(NSString *)string;
 
 @end
 
