@@ -180,7 +180,17 @@ replacementString:(NSString *)string{
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
-                    self.jsonResultsTextView.text =returnedDict.description;
+                   self.jsonResultsTextView.text =returnedDict.description;
+                    
+                    self.jsonResultsTextView.text =[[[returnedDict valueForKey:@"tenses"]valueForKey:@"0"]valueForKey:@"name"];
+                    
+                    
+                    for ( int i =0;i<=22;i++ ) {
+
+                        NSLog(@"%@", [[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"name"]);
+                    }
+
+
 
                 });
                 
