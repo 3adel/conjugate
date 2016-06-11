@@ -29,13 +29,23 @@ NSString *const conjugatorBaseEndPoint = "http://api.verbix.com/conjugator/json/
 NSString *const searchBaseEndPoint = @"http://api.verbix.com/finder/json/eba16c29-e22e-11e5-be88-00089be4dcbc/deu/";
 #endif
 
+@synthesize tapToDismissKeyboard = _tapToDismissKeyboard;
+@synthesize panToDismissKeyboard = _panToDismissKeyboard;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.verbUITextField.delegate = self;
     
-    
-    
-    
+
+
+        
+        _tapToDismissKeyboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+        _panToDismissKeyboard =[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+        
+
+    [self.view addGestureRecognizer:_tapToDismissKeyboard];
+
+
 }
 
 
@@ -105,7 +115,7 @@ replacementString:(NSString *)string{
                     if (returnedDict.count >0) {
                          NSLog(@"Pure verb = %@", [returnedDict objectAtIndex:0]);
                         verbAPISearchResult =[[returnedDict objectAtIndex:0]description];
-                        self.jsonResultsTextView.text =[[returnedDict objectAtIndex:0]description];
+                        //self.jsonResultsTextView.text =[[returnedDict objectAtIndex:0]description];
                         
                         //now pull the dictionary and find the root verb. .
                         self.jsonResultsTextView.text =[[returnedDict objectAtIndex:0] valueForKey:@"verb"];
@@ -180,9 +190,8 @@ replacementString:(NSString *)string{
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
-                   self.jsonResultsTextView.text =returnedDict.description;
+                   //self.jsonResultsTextView.text =returnedDict.description;
                     
-                    self.jsonResultsTextView.text =[[[returnedDict valueForKey:@"tenses"]valueForKey:@"0"]valueForKey:@"name"];
                     
                     
                     for ( int i =0;i<=22;i++ ) {
@@ -192,12 +201,11 @@ replacementString:(NSString *)string{
                             
                             NSLog(@"%@", [[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"name"]);
                             
+                            self.jsonResultsTextView.text = [self.jsonResultsTextView.text stringByAppendingString:[NSString stringWithFormat:@"\n\n%@",[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"name"]]];
+                            self.jsonResultsTextView.text = [self.jsonResultsTextView.text stringByAppendingString:@"\n------------------------"];
+                            
                             //count how many elements in "forms" for each row
                            // NSLog(@"How many elements in each category: %ld", [[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]count]);
-                            
-                            
-                            
-                            
                             
                             
                             
@@ -210,18 +218,34 @@ replacementString:(NSString *)string{
                                 
                                 
                                 
-                                //make sure that form and pronoun are both not null
                                 if ([[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]) {
                                     
-                                    
-                                    //if pronoun is present
-                                    
+                                    //make sure that form and pronoun are both not null
+
                                     if ([[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"pronoun"]) {
                                         NSLog(@"%@: %@",[[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"pronoun"], [[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]);
+                                        
+                                        
+                                            
+                                            self.jsonResultsTextView.text = [self.jsonResultsTextView.text stringByAppendingString:[NSString stringWithFormat:@"\n%@: %@",[[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"pronoun"], [[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]]];
+                                            
+
+                                            
+                                            
+                                            
+
+                                        
+                                        
+                                        
                                     }
                                     
                                     else{
                                         NSLog(@"Form: %@", [[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]);
+                                        
+                                        
+                                        
+                                        
+                                        self.jsonResultsTextView.text = [self.jsonResultsTextView.text stringByAppendingString:[NSString stringWithFormat:@"\n%@", [[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]]];
                                         
                                     }
                                     
@@ -272,5 +296,15 @@ replacementString:(NSString *)string{
     
 }
 
+
+
+-(void)dismissKeyboard {
+    
+
+        [self.verbUITextField resignFirstResponder];
+
+
+
+}
 
 @end

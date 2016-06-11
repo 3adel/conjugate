@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Conjugate/FirstViewController.m"
-            timestampString = "487370072.359398"
+            timestampString = "487375946.51583"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289">
+            startingLineNumber = "323"
+            endingLineNumber = "323">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -24,45 +24,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Conjugate/FirstViewController.m"
-            timestampString = "487370072.359398"
+            timestampString = "487375946.51583"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
             landmarkName = "-conjugteWithString:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__42-[FirstViewController conjugteWithString:]_block_invoke"
-                  moduleName = "Conjugate"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/adel/Developer/Conjugate/Conjugate/FirstViewController.m"
-                  timestampString = "487369047.958835"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "233"
-                  endingLineNumber = "233"
-                  offsetFromSymbolStart = "630">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.101"
-                  moduleName = "Conjugate"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/adel/Developer/Conjugate/Conjugate/FirstViewController.m"
-                  timestampString = "487369047.959409"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "233"
-                  endingLineNumber = "233"
-                  offsetFromSymbolStart = "29">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
