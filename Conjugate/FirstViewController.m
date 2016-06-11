@@ -176,7 +176,7 @@ replacementString:(NSString *)string{
                 
                 
                 //Data successfully received
-                NSLog(@"Data %@", returnedDict);
+               // NSLog(@"Data %@", returnedDict);
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
@@ -186,8 +186,72 @@ replacementString:(NSString *)string{
                     
                     
                     for ( int i =0;i<=22;i++ ) {
+                        
+                        //protect from nul
+                        if ([[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]) {
+                            
+                            NSLog(@"%@", [[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"name"]);
+                            
+                            //count how many elements in "forms" for each row
+                           // NSLog(@"How many elements in each category: %ld", [[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]count]);
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            for (int j=0; j<[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]count]; j++) {
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                //make sure that form and pronoun are both not null
+                                if ([[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]) {
+                                    
+                                    
+                                    //if pronoun is present
+                                    
+                                    if ([[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"pronoun"]) {
+                                        NSLog(@"%@: %@",[[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"pronoun"], [[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]);
+                                    }
+                                    
+                                    else{
+                                        NSLog(@"Form: %@", [[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",j]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]);
+                                        
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                }
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
 
-                        NSLog(@"%@", [[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"name"]);
+                        }
+
+                        
+                        
+                        
+                        
                     }
 
 
