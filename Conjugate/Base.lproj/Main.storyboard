@@ -29,26 +29,56 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No results." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Lk-E8-Ckc">
-                                <rect key="frame" x="25" y="90" width="550" height="461"/>
+                                <rect key="frame" x="25" y="90" width="550" height="161"/>
                                 <color key="backgroundColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="tintColor" red="0.26274509800000001" green="0.69019607839999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fK2-sw-K8S">
+                                <rect key="frame" x="25" y="282" width="550" height="269"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="269" id="Ndw-9H-l52"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="9pv-A4-QxB" id="RCA-SR-0Ia"/>
+                                    <outlet property="delegate" destination="9pv-A4-QxB" id="E6i-9n-iQT"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="OaR-2U-98I" secondAttribute="trailing" constant="5" id="29h-C6-Iei"/>
                             <constraint firstItem="OaR-2U-98I" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="10" id="AGR-f4-niV"/>
+                            <constraint firstItem="fK2-sw-K8S" firstAttribute="trailing" secondItem="6Lk-E8-Ckc" secondAttribute="trailing" id="D5G-qA-ZvG"/>
                             <constraint firstItem="6Lk-E8-Ckc" firstAttribute="leading" secondItem="OaR-2U-98I" secondAttribute="leading" id="JrP-Sl-96Y"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="fK2-sw-K8S" secondAttribute="bottom" id="V1M-Cs-xJX"/>
                             <constraint firstItem="OaR-2U-98I" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="5" id="VbJ-IG-frb"/>
                             <constraint firstItem="6Lk-E8-Ckc" firstAttribute="trailing" secondItem="OaR-2U-98I" secondAttribute="trailing" id="fWF-cq-Y9a"/>
                             <constraint firstItem="6Lk-E8-Ckc" firstAttribute="top" secondItem="OaR-2U-98I" secondAttribute="bottom" constant="10" id="gMo-R2-KdN"/>
+                            <constraint firstItem="fK2-sw-K8S" firstAttribute="top" secondItem="6Lk-E8-Ckc" secondAttribute="bottom" constant="31" id="grG-IK-I32"/>
+                            <constraint firstItem="fK2-sw-K8S" firstAttribute="leading" secondItem="6Lk-E8-Ckc" secondAttribute="leading" id="mLt-aO-E3K"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="6Lk-E8-Ckc" secondAttribute="bottom" id="oif-Mz-f1w"/>
+                            <constraint firstItem="fK2-sw-K8S" firstAttribute="leading" secondItem="6Lk-E8-Ckc" secondAttribute="leading" id="s2p-IG-09B"/>
+                            <constraint firstItem="fK2-sw-K8S" firstAttribute="top" secondItem="6Lk-E8-Ckc" secondAttribute="bottom" constant="10" id="skg-iR-Q1p"/>
+                            <constraint firstItem="fK2-sw-K8S" firstAttribute="trailing" secondItem="6Lk-E8-Ckc" secondAttribute="trailing" id="tJ2-Wz-eTH"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="fK2-sw-K8S" secondAttribute="bottom" id="xLw-QP-1BE"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="D5G-qA-ZvG"/>
+                                <exclude reference="mLt-aO-E3K"/>
+                                <exclude reference="skg-iR-Q1p"/>
+                                <exclude reference="oif-Mz-f1w"/>
+                                <exclude reference="xLw-QP-1BE"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="conjugationResultsUITableView" destination="6Lk-E8-Ckc" id="GNb-bb-pD2"/>
+                        <outlet property="conjugationsTableView" destination="fK2-sw-K8S" id="7JA-DX-7aj"/>
                         <outlet property="jsonResultsTextView" destination="6Lk-E8-Ckc" id="63M-EL-tQw"/>
                         <outlet property="searchDisplayController" destination="Xck-6d-wnB" id="Qz6-hj-P0m"/>
                         <outlet property="verbUITextField" destination="OaR-2U-98I" id="Zq6-Wi-mTS"/>
