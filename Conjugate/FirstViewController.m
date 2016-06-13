@@ -174,7 +174,7 @@ replacementString:(NSString *)string{
                                 @"G" : @[@"Giraffe", @"Greater Rhea"],
                                 @"H" : @[@"Hippopotamus", @"Horse"],
                                 @"K" : @[@"Koala"],
-                                @"L" : @[@"Lion", @"Llama"],
+                                @"L"  : @[@"Lion", @"Llama"],
                                 @"M" : @[@"Manatus", @"Meerkat"],
                                 @"P" : @[@"Pandaaa", @"Peacock", @"Pig", @"Platypus", @"Polar Bear"],
                                 @"R" : @[@"Rhinoceros"],
