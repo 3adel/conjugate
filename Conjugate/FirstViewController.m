@@ -194,6 +194,7 @@ replacementString:(NSString *)string{
                             
                             
                             
+                            
                             //set each section title
              
                             NSLog(@"%@ Type = %@",[NSString stringWithFormat:@"%d",i],[NSString stringWithFormat:@"%@",[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"name"]] );
