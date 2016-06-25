@@ -213,7 +213,7 @@ replacementString:(NSString *)string{
                                 if ([[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]) {
                                     
                                     //make sure that form and pronoun are both not null
-                                    if ([[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"pronoun"]) {
+                                    if ([[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"pronoun"]&&[[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]) {
                                         
                                         NSLog(@"%@: %@",[[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"pronoun"], [[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]);
                                         
@@ -224,13 +224,16 @@ replacementString:(NSString *)string{
 
                                     }
                                     
-                                    else{
-                                        NSLog(@"Form: %@", [[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]);
-
+                                    //prevent empty string form
+                                    else if (![[[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"] isEqualToString:@" "]){
+                                        
+                                        
                                         self.jsonResultsTextView.text = [self.jsonResultsTextView.text stringByAppendingString:[NSString stringWithFormat:@"\n%@", [[[[[returnedDict valueForKey:@"tenses"]valueForKey:[NSString stringWithFormat:@"%d",i]]valueForKey:@"forms"]objectAtIndex:j] valueForKey:@"form"]]];
                                         
                                     }
-                                }
+                                    
+                                    
+                                                                    }
   
                             }
                             
