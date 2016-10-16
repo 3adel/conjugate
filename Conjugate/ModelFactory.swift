@@ -48,14 +48,15 @@ extension Verb: JSONDictInitable {
         var tenses: [TenseGroup: [Tense]] = [
             .indicative: [],
             .conditional: [],
-            .imperative: []
+            .imperative: [],
+            .conjunctive: [],
         ]
         
         if let tensesDict = tensesDict {
             for (_, value) in tensesDict {
                 guard let tense = Tense(with: value),
                     let name = value["name"] as? String,
-                    let firstComponent = name.firstComponent,
+                    let firstComponent = name.firstComponent?.lowercased(),
                     let tenseGroup = TenseGroup(rawValue: firstComponent) else { continue }
                 
                 tenses[tenseGroup]?.append(tense)
@@ -69,7 +70,7 @@ extension Verb: JSONDictInitable {
 extension Tense: JSONDictInitable {
     init?(with dict: JSONDictionary) {
         guard let nameString = dict["name"] as? String,
-            let name = Tense.Name(rawValue: nameString),
+            let name = Tense.Name(rawValue: nameString.secondComponent?.lowercased() ?? ""),
             let formDicts = dict["forms"] as? [JSONDictionary] else { return nil }
         
         let forms: [Form] = ModelFactory.arrayOf(formDicts)
@@ -84,7 +85,7 @@ extension Form: JSONDictInitable {
             let use = dict["use"] as? Int,
             let form = dict["form"] as? String else { return nil }
         
-        let irregular = use == 0
+        let irregular = use != 0
         
         self.init(pronoun: pronoun, irregular: irregular, conjugatedVerb: form)
     }
@@ -97,6 +98,6 @@ extension String {
     }
     var secondComponent: String? {
         let stringComponents = components(separatedBy: "/")
-        return stringComponents.count >= 2 ? stringComponents[2] : nil
+        return stringComponents.count >= 3 ? stringComponents[2] : nil
     }
 }

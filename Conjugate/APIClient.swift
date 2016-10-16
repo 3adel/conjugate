@@ -10,39 +10,41 @@ typealias AnyResult = Result<Any, ConjugateError>
 class APIClient: DataClient {
     let webClient = WebClient()
     
+    let genericErrorResult: AnyResult = .failure(ConjugateError.genericError)
+    
     func search(for verb: String, in language: Locale, completion: @escaping ResultHandler) {
-        guard let languageCode = language.isoLanguageCode else {
-            let errorResult: AnyResult = .failure(ConjugateError.genericError)
-            completion(errorResult)
-            return
+        guard let languageCode = language.isoLanguageCode,
+            let request = webClient.createRequest(endpoint: .finder, ids: ["fromLanguageKey": languageCode, "verbKey": verb])
+            else {
+                let errorResult: AnyResult = .failure(ConjugateError.genericError)
+                completion(errorResult)
+                return
         }
         
-        let request = webClient.createRequest(endpoint: .finder, ids: ["fromLanguage": languageCode, "verbKey": verb])
         webClient.send(request, cache: false, completion: completion)
     }
     
     func conjugate(for verb: String, in language: Locale, completion: @escaping (AnyResult) -> Void) {
-        guard let languageCode = language.isoLanguageCode else {
-            let errorResult: AnyResult = .failure(ConjugateError.genericError)
-            completion(errorResult)
-            return
+        guard let languageCode = language.isoLanguageCode,
+            let request = webClient.createRequest(endpoint: .conjugator, ids: ["fromLanguageKey": languageCode, "verbKey": verb])
+            else {
+                completion(genericErrorResult)
+                return
         }
         
-        let request = webClient.createRequest(endpoint: .conjugator, ids: ["fromLanguage": languageCode])
         webClient.send(request, cache: false, completion: completion)
     }
     
     func translate(for verb: String, from: Locale, to: Locale, completion: @escaping (AnyResult) -> Void) {
         guard let fromLanguageCode = from.isoLanguageCode,
-            let toLanguageCode = to.isoLanguageCode else {
-            let errorResult: AnyResult = .failure(ConjugateError.genericError)
-            completion(errorResult)
-            return
+            let toLanguageCode = to.isoLanguageCode,
+            let request = webClient.createRequest(endpoint: .translator, ids: ["fromLanguageKey": fromLanguageCode, "toLanguageKey": toLanguageCode, "verbKey": verb])
+            else {
+                completion(genericErrorResult)
+                return
         }
         
-        let request = webClient.createRequest(endpoint: .conjugator, ids: ["fromLanguage": fromLanguageCode, "toLanguage:": toLanguageCode])
         webClient.send(request, cache: false, completion: completion)
-
     }
 }
 

@@ -40,10 +40,12 @@ class WebClient {
         self.manager = manager ?? Alamofire.SessionManager.default
     }
     
-    func createRequest(endpoint: Endpoint, ids: [Token:String]? = nil, queryItems: [URLQueryItem]? = nil, json: Data? = nil, method: HTTPMethod = .GET, cache: Bool = false) -> URLRequest {
+    func createRequest(endpoint: Endpoint, ids: [Token:String]? = nil, queryItems: [URLQueryItem]? = nil, json: Data? = nil, method: HTTPMethod = .GET, cache: Bool = false) -> URLRequest? {
         
-        let fullURLString = Endpoint.urlString(from: endpoint, ids: ids, queryItems: queryItems)
-        let url = URL(string: fullURLString)!
+        guard let fullURLString = Endpoint.urlString(from: endpoint, ids: ids, queryItems: queryItems),
+            let url = URL(string: fullURLString)
+            else { return nil }
+        
         let cachePolicy: URLRequest.CachePolicy = cache ? .returnCacheDataElseLoad : .reloadIgnoringLocalAndRemoteCacheData
         
         var request = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: WebClient.RequestTimeOut)
@@ -99,15 +101,15 @@ public enum Endpoint: String {
     public var endTokens: String {
         switch self {
         case .conjugator:
-            return "fromLanguage/verbKey"
+            return "fromLanguageKey/verbKey"
         case .finder:
-            return "fromLanguage/verbKey"
+            return "fromLanguageKey/verbKey"
         case .translator:
-            return "fromLanguage/toLanguage/verbKey"
+            return "fromLanguageKey/toLanguageKey/verbKey"
         }
     }
     
-    public static func urlString(from endpoint: Endpoint, ids:[Token:String]?, queryItems: [URLQueryItem]? = nil) -> String {
+    public static func urlString(from endpoint: Endpoint, ids:[Token:String]?, queryItems: [URLQueryItem]? = nil) -> String? {
         // convert baseURI string to NSURL to avoid cropping of protocol information:
         var baseURL = URL(string: baseURI)
         // appended path components will be URL encoded automatically:
@@ -125,7 +127,7 @@ public enum Endpoint: String {
             urlComponents.queryItems = queryItems
             return urlComponents.string ?? populatedEndPoint
         }
-        return populatedEndPoint
+        return populatedEndPoint.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)
     }
 }
 
