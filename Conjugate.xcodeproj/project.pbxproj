@@ -24,6 +24,10 @@
 		24B9D9AB1DAEF062004EE256 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AA1DAEF062004EE256 /* TabBarController.swift */; };
 		24B9D9AE1DAEF303004EE256 /* ConjugatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AD1DAEF303004EE256 /* ConjugatePresenter.swift */; };
 		24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AF1DAEF621004EE256 /* Extensions.swift */; };
+		24E6F3CD1DB3118200550C8E /* TabbedMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F3CC1DB3118200550C8E /* TabbedMenu.swift */; };
+		24E6F3EA1DB3624F00550C8E /* TabbedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F3E91DB3624F00550C8E /* TabbedContent.swift */; };
+		24E6F3FD1DB3DBE700550C8E /* TenseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F3FC1DB3DBE700550C8E /* TenseTableViewDataSource.swift */; };
+		24E6F3FF1DB3DDD200550C8E /* TenseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24E6F3FE1DB3DDD200550C8E /* TenseTableViewCell.xib */; };
 		F56F08C31CFA61DB008BD25B /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F08C21CFA61DB008BD25B /* FirstViewController.m */; };
 		F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F08C51CFA61DB008BD25B /* SecondViewController.m */; };
 		F56F08C91CFA61DB008BD25B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56F08C71CFA61DB008BD25B /* Main.storyboard */; };
@@ -213,6 +217,10 @@
 		24B9D9AA1DAEF062004EE256 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		24B9D9AD1DAEF303004EE256 /* ConjugatePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConjugatePresenter.swift; sourceTree = "<group>"; };
 		24B9D9AF1DAEF621004EE256 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		24E6F3CC1DB3118200550C8E /* TabbedMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedMenu.swift; sourceTree = "<group>"; };
+		24E6F3E91DB3624F00550C8E /* TabbedContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedContent.swift; sourceTree = "<group>"; };
+		24E6F3FC1DB3DBE700550C8E /* TenseTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenseTableViewDataSource.swift; sourceTree = "<group>"; };
+		24E6F3FE1DB3DDD200550C8E /* TenseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TenseTableViewCell.xib; sourceTree = "<group>"; };
 		F56F08B81CFA61DB008BD25B /* Conjugate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conjugate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56F08C11CFA61DB008BD25B /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		F56F08C21CFA61DB008BD25B /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
@@ -301,6 +309,10 @@
 			isa = PBXGroup;
 			children = (
 				24B9D9A81DAEEE60004EE256 /* Conjugate.swift */,
+				24E6F3CC1DB3118200550C8E /* TabbedMenu.swift */,
+				24E6F3E91DB3624F00550C8E /* TabbedContent.swift */,
+				24E6F3FC1DB3DBE700550C8E /* TenseTableViewDataSource.swift */,
+				24E6F3FE1DB3DDD200550C8E /* TenseTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -393,7 +405,7 @@
 		F56F08B01CFA61DA008BD25B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Adel  Shehadeh";
 				TargetAttributes = {
 					F56F08B71CFA61DB008BD25B = {
@@ -570,6 +582,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F56F08CE1CFA61DB008BD25B /* LaunchScreen.storyboard in Resources */,
+				24E6F3FF1DB3DDD200550C8E /* TenseTableViewCell.xib in Resources */,
 				F56F08CB1CFA61DB008BD25B /* Assets.xcassets in Resources */,
 				F56F08C91CFA61DB008BD25B /* Main.storyboard in Resources */,
 			);
@@ -583,9 +596,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				24B9D9A91DAEEE60004EE256 /* Conjugate.swift in Sources */,
+				24E6F3CD1DB3118200550C8E /* TabbedMenu.swift in Sources */,
 				F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */,
+				24E6F3EA1DB3624F00550C8E /* TabbedContent.swift in Sources */,
 				24B9D9AB1DAEF062004EE256 /* TabBarController.swift in Sources */,
 				24B9D8EB1DAC5232004EE256 /* DataStore.swift in Sources */,
+				24E6F3FD1DB3DBE700550C8E /* TenseTableViewDataSource.swift in Sources */,
 				24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */,
 				24B9D8ED1DAC5261004EE256 /* DataClient.swift in Sources */,
 				24B9D9A21DAED525004EE256 /* Verb.swift in Sources */,
@@ -651,8 +667,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -695,8 +713,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -715,6 +735,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
