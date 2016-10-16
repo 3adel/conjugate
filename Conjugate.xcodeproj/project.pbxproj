@@ -28,6 +28,7 @@
 		24E6F3EA1DB3624F00550C8E /* TabbedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F3E91DB3624F00550C8E /* TabbedContent.swift */; };
 		24E6F3FD1DB3DBE700550C8E /* TenseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F3FC1DB3DBE700550C8E /* TenseTableViewDataSource.swift */; };
 		24E6F3FF1DB3DDD200550C8E /* TenseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24E6F3FE1DB3DDD200550C8E /* TenseTableViewCell.xib */; };
+		24E6F4011DB3EBAC00550C8E /* TextSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F4001DB3EBAC00550C8E /* TextSpeaker.swift */; };
 		F56F08C31CFA61DB008BD25B /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F08C21CFA61DB008BD25B /* FirstViewController.m */; };
 		F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F08C51CFA61DB008BD25B /* SecondViewController.m */; };
 		F56F08C91CFA61DB008BD25B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56F08C71CFA61DB008BD25B /* Main.storyboard */; };
@@ -221,6 +222,7 @@
 		24E6F3E91DB3624F00550C8E /* TabbedContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedContent.swift; sourceTree = "<group>"; };
 		24E6F3FC1DB3DBE700550C8E /* TenseTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenseTableViewDataSource.swift; sourceTree = "<group>"; };
 		24E6F3FE1DB3DDD200550C8E /* TenseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TenseTableViewCell.xib; sourceTree = "<group>"; };
+		24E6F4001DB3EBAC00550C8E /* TextSpeaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSpeaker.swift; sourceTree = "<group>"; };
 		F56F08B81CFA61DB008BD25B /* Conjugate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conjugate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56F08C11CFA61DB008BD25B /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		F56F08C21CFA61DB008BD25B /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				24B9D7251DAAB048004EE256 /* Conjugate-Bridging-Header.h */,
 				24B9D9AA1DAEF062004EE256 /* TabBarController.swift */,
 				24B9D9AF1DAEF621004EE256 /* Extensions.swift */,
+				24E6F4001DB3EBAC00550C8E /* TextSpeaker.swift */,
 			);
 			path = Conjugate;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */,
 				24E6F3EA1DB3624F00550C8E /* TabbedContent.swift in Sources */,
 				24B9D9AB1DAEF062004EE256 /* TabBarController.swift in Sources */,
+				24E6F4011DB3EBAC00550C8E /* TextSpeaker.swift in Sources */,
 				24B9D8EB1DAC5232004EE256 /* DataStore.swift in Sources */,
 				24E6F3FD1DB3DBE700550C8E /* TenseTableViewDataSource.swift in Sources */,
 				24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */,

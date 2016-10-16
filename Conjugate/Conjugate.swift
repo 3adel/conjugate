@@ -72,7 +72,6 @@ class ConjugateViewController: UIViewController {
         
         let textColorRGB: CGFloat = 117/255
         let textColor = UIColor(red: textColorRGB, green: textColorRGB, blue: textColorRGB, alpha: 1)
-        
         let selectedColor = UIColor(red: 74/255, green: 144/255, blue: 226/255, alpha: 1)
         
         let theme = TabbedMenuTheme(textColor: textColor, selectedColor: selectedColor)
@@ -109,6 +108,8 @@ extension ConjugateViewController: ConjugateView {
         viewModel.tenseTabs.forEach { tenseViewModel in
             let tableView = UITableView(frame: CGRect.zero, style: .grouped)
 //            tableView.separatorStyle = .none
+            tableView.allowsMultipleSelection = false
+            tableView.allowsSelection = true
             
             let dataSource = TenseTableViewDataSource(tableView: tableView)
             

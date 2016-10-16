@@ -7,6 +7,8 @@ import UIKit
 class TenseTableViewDataSource: NSObject {
     let tableView: UITableView
     
+    let speaker = TextSpeaker(locale: Locale(identifier: "de_DE"))
+    
     var viewModel = TenseTabViewModel.empty {
         didSet {
             tableView.reloadData()
@@ -48,8 +50,19 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.tenses[section].name
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let tense = viewModel.tenses[indexPath.section].forms[indexPath.row]
+        
+        let text = tense.pronoun + " " + tense.verb
+        
+        if speaker.textPlayed == text && speaker.isPlaying {
+            speaker.stop()
+        } else {
+            speaker.play(text)
+        }
+    }
 }
-
 
 class TenseTableViewCell: UITableViewCell {
     static let identifier = "tenseCell"
@@ -68,5 +81,7 @@ class TenseTableViewCell: UITableViewCell {
         pronounLabel.textColor = textColor
         
         audioImageView.isHidden = viewModel.audioImageHidden
+        
+        selectionStyle = .none
     }
 }
