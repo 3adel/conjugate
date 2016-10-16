@@ -56,7 +56,7 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
         
         let text = tense.pronoun + " " + tense.verb
         
-        if speaker.textPlayed == text && speaker.isPlaying {
+        if speaker.isPlaying(text) {
             speaker.stop()
         } else {
             speaker.play(text)

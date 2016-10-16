@@ -41,4 +41,8 @@ class TextSpeaker {
         synthesizer.stopSpeaking(at: .immediate)
         isPlaying = false
     }
+    
+    func isPlaying(_ text: String) -> Bool {
+        return textPlayed == text && isPlaying
+    }
 }

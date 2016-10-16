@@ -26,7 +26,7 @@
 NSString *const conjugatorBaseEndPoint = @"http://api.verbix.com/conjugator/json/35b1e140-257a-11e6-be88-00089be4dcbc/deu/";
 NSString *const searchBaseEndPoint = @"http://api.verbix.com/finder/json/35b1e140-257a-11e6-be88-00089be4dcbc/deu/";
 #else
-NSString *const conjugatorBaseEndPoint = "http://api.verbix.com/conjugator/json/35b1e140-257a-11e6-be88-00089be4dcbc/deu/";
+NSString *const conjugatorBaseEndPoint = @"http://api.verbix.com/conjugator/json/35b1e140-257a-11e6-be88-00089be4dcbc/deu/";
 NSString *const searchBaseEndPoint = @"http://api.verbix.com/finder/json/35b1e140-257a-11e6-be88-00089be4dcbc/deu/";
 #endif
 
