@@ -20,6 +20,9 @@
 		24B9D99E1DAED1CA004EE256 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D9921DAED1A7004EE256 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24B9D9A21DAED525004EE256 /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9A11DAED525004EE256 /* Verb.swift */; };
 		24B9D9A41DAED9D5004EE256 /* ModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9A31DAED9D5004EE256 /* ModelFactory.swift */; };
+		24B9D9A91DAEEE60004EE256 /* Conjugate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9A81DAEEE60004EE256 /* Conjugate.swift */; };
+		24B9D9AB1DAEF062004EE256 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AA1DAEF062004EE256 /* TabBarController.swift */; };
+		24B9D9AE1DAEF303004EE256 /* ConjugatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AD1DAEF303004EE256 /* ConjugatePresenter.swift */; };
 		24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AF1DAEF621004EE256 /* Extensions.swift */; };
 		F56F08C31CFA61DB008BD25B /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F08C21CFA61DB008BD25B /* FirstViewController.m */; };
 		F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F08C51CFA61DB008BD25B /* SecondViewController.m */; };
@@ -206,6 +209,9 @@
 		24B9D9821DAED1A7004EE256 /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
 		24B9D9A11DAED525004EE256 /* Verb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
 		24B9D9A31DAED9D5004EE256 /* ModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFactory.swift; sourceTree = "<group>"; };
+		24B9D9A81DAEEE60004EE256 /* Conjugate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conjugate.swift; sourceTree = "<group>"; };
+		24B9D9AA1DAEF062004EE256 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		24B9D9AD1DAEF303004EE256 /* ConjugatePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConjugatePresenter.swift; sourceTree = "<group>"; };
 		24B9D9AF1DAEF621004EE256 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F56F08B81CFA61DB008BD25B /* Conjugate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conjugate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56F08C11CFA61DB008BD25B /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
@@ -289,6 +295,22 @@
 				24B9D99C1DAED1A7004EE256 /* Result-watchOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		24B9D9A71DAEEE51004EE256 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				24B9D9A81DAEEE60004EE256 /* Conjugate.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		24B9D9AC1DAEF2DA004EE256 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				24B9D9AD1DAEF303004EE256 /* ConjugatePresenter.swift */,
+			);
+			name = Presenter;
 			sourceTree = "<group>";
 		};
 		F56F08AF1CFA61DA008BD25B = {
@@ -560,11 +582,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24B9D9A91DAEEE60004EE256 /* Conjugate.swift in Sources */,
 				F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */,
+				24B9D9AB1DAEF062004EE256 /* TabBarController.swift in Sources */,
 				24B9D8EB1DAC5232004EE256 /* DataStore.swift in Sources */,
 				24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */,
 				24B9D8ED1DAC5261004EE256 /* DataClient.swift in Sources */,
 				24B9D9A21DAED525004EE256 /* Verb.swift in Sources */,
+				24B9D9AE1DAEF303004EE256 /* ConjugatePresenter.swift in Sources */,
 				24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */,
 				24B9D9A41DAED9D5004EE256 /* ModelFactory.swift in Sources */,
 				24B9D8F11DAC542F004EE256 /* WebClient.swift in Sources */,

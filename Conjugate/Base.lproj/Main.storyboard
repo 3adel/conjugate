@@ -72,9 +72,114 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="-278" y="-756"/>
         </scene>
-        <!--Second-->
+        <!--Conjugate View Controller-->
+        <scene sceneID="Mqa-v2-5M0">
+            <objects>
+                <viewController id="JkI-yB-tlS" customClass="ConjugateViewController" customModule="Conjugate" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xlN-5c-ujh"/>
+                        <viewControllerLayoutGuide type="bottom" id="tua-RL-URc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Oeq-U5-utG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lco-cj-31l">
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Konjugate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qVw-sn-PoZ">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="JkI-yB-tlS" id="IAc-Wb-Si6"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="qVw-sn-PoZ" secondAttribute="bottom" constant="2" id="6pg-bl-tQD"/>
+                                    <constraint firstItem="qVw-sn-PoZ" firstAttribute="top" secondItem="Lco-cj-31l" secondAttribute="top" constant="2" id="Org-O4-1dI"/>
+                                    <constraint firstItem="qVw-sn-PoZ" firstAttribute="leading" secondItem="Lco-cj-31l" secondAttribute="leading" constant="11" id="akC-Ga-XOO"/>
+                                    <constraint firstAttribute="height" constant="52" id="fJO-gk-tFN"/>
+                                    <constraint firstAttribute="trailing" secondItem="qVw-sn-PoZ" secondAttribute="trailing" constant="11" id="jtZ-uV-iPz"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="verb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYK-Cg-bOi">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="y04-on-VWL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sjc-p0-m0e">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="AOv-oQ-fvS"/>
+                                    <constraint firstAttribute="height" constant="32" id="SFg-WN-LHw"/>
+                                </constraints>
+                                <state key="normal" image="Share"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICH-dS-ovp">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="fOl-8B-raa"/>
+                                    <constraint firstAttribute="width" constant="32" id="osw-5V-Gdy"/>
+                                </constraints>
+                                <state key="normal" image="Star"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EN - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewS-TE-rhh">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="39" id="dgo-MX-vj1"/>
+                                    <constraint firstAttribute="height" constant="21" id="ywx-ee-7HD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.32156862745098036" green="0.32156862745098036" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="meaning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaV-99-AV1">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="m4J-DK-Wax"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Lco-cj-31l" firstAttribute="top" secondItem="xlN-5c-ujh" secondAttribute="bottom" constant="15" id="0aK-mH-BwF"/>
+                            <constraint firstItem="Lco-cj-31l" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leadingMargin" id="1G1-E6-g2n"/>
+                            <constraint firstItem="ewS-TE-rhh" firstAttribute="top" secondItem="PYK-Cg-bOi" secondAttribute="bottom" constant="13" id="2g5-ME-DXz"/>
+                            <constraint firstItem="ewS-TE-rhh" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leadingMargin" id="5h5-EU-SoX"/>
+                            <constraint firstItem="ZaV-99-AV1" firstAttribute="top" secondItem="ICH-dS-ovp" secondAttribute="bottom" constant="6" id="8Ms-OO-PEI"/>
+                            <constraint firstItem="PYK-Cg-bOi" firstAttribute="top" secondItem="Lco-cj-31l" secondAttribute="bottom" constant="23" id="AuL-jB-D3d"/>
+                            <constraint firstItem="PYK-Cg-bOi" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leadingMargin" id="GRc-Qo-XzF"/>
+                            <constraint firstItem="ICH-dS-ovp" firstAttribute="trailing" secondItem="Oeq-U5-utG" secondAttribute="trailingMargin" id="JFg-Y5-XgY"/>
+                            <constraint firstItem="Lco-cj-31l" firstAttribute="trailing" secondItem="Oeq-U5-utG" secondAttribute="trailingMargin" id="NnP-qU-95A"/>
+                            <constraint firstItem="ZaV-99-AV1" firstAttribute="leading" secondItem="ewS-TE-rhh" secondAttribute="trailing" constant="8" id="Toh-3P-obX"/>
+                            <constraint firstItem="ICH-dS-ovp" firstAttribute="top" secondItem="Lco-cj-31l" secondAttribute="bottom" constant="18" id="VBm-au-So4"/>
+                            <constraint firstItem="Sjc-p0-m0e" firstAttribute="top" secondItem="Lco-cj-31l" secondAttribute="bottom" constant="17" id="Y02-fZ-5c8"/>
+                            <constraint firstItem="ZaV-99-AV1" firstAttribute="trailing" secondItem="Oeq-U5-utG" secondAttribute="trailingMargin" id="Y66-Og-mg6"/>
+                            <constraint firstItem="Sjc-p0-m0e" firstAttribute="leading" secondItem="PYK-Cg-bOi" secondAttribute="trailing" constant="15" id="cxO-Ai-gre"/>
+                            <constraint firstItem="ICH-dS-ovp" firstAttribute="leading" secondItem="Sjc-p0-m0e" secondAttribute="trailing" constant="12" id="fNs-wt-Jry"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="XjV-9F-c6H"/>
+                    <connections>
+                        <outlet property="languageLabel" destination="ewS-TE-rhh" id="MXa-G9-ztP"/>
+                        <outlet property="meaningLabel" destination="ZaV-99-AV1" id="oE4-aQ-55L"/>
+                        <outlet property="searchField" destination="qVw-sn-PoZ" id="By7-8g-trk"/>
+                        <outlet property="searchView" destination="Lco-cj-31l" id="A3m-94-ASO"/>
+                        <outlet property="verbLabel" destination="PYK-Cg-bOi" id="fgp-6n-ivk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yUY-00-Wcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1716" y="-286.50674662668666"/>
+        </scene>
+        <!--Second View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="SecondViewController" sceneMemberID="viewController">
@@ -108,16 +213,16 @@
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" id="dSc-jc-Sbt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="1688.8" y="359.37031484257875"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController id="49e-Tb-3d3" customClass="TabBarController" customModule="Conjugate" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -125,16 +230,57 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="isn-CU-ieL" kind="relationship" relationship="viewControllers" id="RxS-I8-NwM"/>
+                        <segue destination="QwT-cS-0pF" kind="relationship" relationship="viewControllers" id="rek-mk-Rkq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="toT-E9-Nqt">
+            <objects>
+                <navigationController storyboardIdentifier="conjugateNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="isn-CU-ieL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" image="conjugate_tab" selectedImage="conjugate_tab" id="iH5-ki-YiH"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EZr-w7-BRs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="JkI-yB-tlS" kind="relationship" relationship="rootViewController" id="9Lj-Ms-IID"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hvu-Xs-JZR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="-287"/>
+        </scene>
+        <!--Second-->
+        <scene sceneID="Tqe-6q-uNF">
+            <objects>
+                <navigationController storyboardIdentifier="savedNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="QwT-cS-0pF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EYM-bt-7rX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="CBx-62-d8i"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7n8-YG-Q0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749.60000000000002" y="359.37031484257875"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Share" width="19" height="27"/>
+        <image name="Star" width="28" height="25"/>
+        <image name="conjugate_tab" width="30" height="30"/>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
