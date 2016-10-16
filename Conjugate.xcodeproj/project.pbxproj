@@ -10,10 +10,17 @@
 		24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D7261DAAB048004EE256 /* AppDelegate.swift */; };
 		24B9D8DB1DAC51B7004EE256 /* Dodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8D61DAC51A9004EE256 /* Dodo.framework */; };
 		24B9D8DC1DAC51B7004EE256 /* Dodo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8D61DAC51A9004EE256 /* Dodo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		24B9D8E01DAC51C0004EE256 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8C11DAC51A4004EE256 /* BrightFutures.framework */; };
-		24B9D8E11DAC51C0004EE256 /* BrightFutures.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8C11DAC51A4004EE256 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24B9D8E41DAC51C4004EE256 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8A91DAC519B004EE256 /* Alamofire.framework */; };
 		24B9D8E51DAC51C4004EE256 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8A91DAC519B004EE256 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		24B9D8EB1DAC5232004EE256 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D8EA1DAC5232004EE256 /* DataStore.swift */; };
+		24B9D8ED1DAC5261004EE256 /* DataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D8EC1DAC5261004EE256 /* DataClient.swift */; };
+		24B9D8EF1DAC52D1004EE256 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D8EE1DAC52D1004EE256 /* APIClient.swift */; };
+		24B9D8F11DAC542F004EE256 /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D8F01DAC542F004EE256 /* WebClient.swift */; };
+		24B9D99D1DAED1CA004EE256 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D9921DAED1A7004EE256 /* Result.framework */; };
+		24B9D99E1DAED1CA004EE256 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D9921DAED1A7004EE256 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		24B9D9A21DAED525004EE256 /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9A11DAED525004EE256 /* Verb.swift */; };
+		24B9D9A41DAED9D5004EE256 /* ModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9A31DAED9D5004EE256 /* ModelFactory.swift */; };
+		24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AF1DAEF621004EE256 /* Extensions.swift */; };
 		F56F08C31CFA61DB008BD25B /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F08C21CFA61DB008BD25B /* FirstViewController.m */; };
 		F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F08C51CFA61DB008BD25B /* SecondViewController.m */; };
 		F56F08C91CFA61DB008BD25B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56F08C71CFA61DB008BD25B /* Main.storyboard */; };
@@ -191,8 +198,15 @@
 		24B9D7251DAAB048004EE256 /* Conjugate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Conjugate-Bridging-Header.h"; sourceTree = "<group>"; };
 		24B9D7261DAAB048004EE256 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24B9D89D1DAC519B004EE256 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
-		24B9D8B61DAC51A3004EE256 /* BrightFutures.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BrightFutures.xcodeproj; path = Carthage/Checkouts/BrightFutures/BrightFutures.xcodeproj; sourceTree = "<group>"; };
 		24B9D8CE1DAC51A9004EE256 /* Dodo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Dodo.xcodeproj; path = Carthage/Checkouts/Dodo/Dodo.xcodeproj; sourceTree = "<group>"; };
+		24B9D8EA1DAC5232004EE256 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		24B9D8EC1DAC5261004EE256 /* DataClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClient.swift; sourceTree = "<group>"; };
+		24B9D8EE1DAC52D1004EE256 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		24B9D8F01DAC542F004EE256 /* WebClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
+		24B9D9821DAED1A7004EE256 /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
+		24B9D9A11DAED525004EE256 /* Verb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
+		24B9D9A31DAED9D5004EE256 /* ModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFactory.swift; sourceTree = "<group>"; };
+		24B9D9AF1DAEF621004EE256 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F56F08B81CFA61DB008BD25B /* Conjugate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conjugate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56F08C11CFA61DB008BD25B /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		F56F08C21CFA61DB008BD25B /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
@@ -242,11 +256,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		24B9D8E81DAC5204004EE256 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				24B9D8D61DAC51A9004EE256 /* Dodo.framework */,
-				24B9D8D81DAC51A9004EE256 /* DodoTests.xctest */,
-				24B9D8DA1DAC51A9004EE256 /* Demo.app */,
+				24B9D8EE1DAC52D1004EE256 /* APIClient.swift */,
+				24B9D8F01DAC542F004EE256 /* WebClient.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		24B9D8E91DAC5224004EE256 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				24B9D8EA1DAC5232004EE256 /* DataStore.swift */,
+				24B9D8EC1DAC5261004EE256 /* DataClient.swift */,
+				24B9D9A11DAED525004EE256 /* Verb.swift */,
+				24B9D9A31DAED9D5004EE256 /* ModelFactory.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		24B9D9831DAED1A7004EE256 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,8 +561,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */,
+				24B9D8EB1DAC5232004EE256 /* DataStore.swift in Sources */,
 				24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */,
+				24B9D8ED1DAC5261004EE256 /* DataClient.swift in Sources */,
+				24B9D9A21DAED525004EE256 /* Verb.swift in Sources */,
+				24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */,
+				24B9D9A41DAED9D5004EE256 /* ModelFactory.swift in Sources */,
+				24B9D8F11DAC542F004EE256 /* WebClient.swift in Sources */,
 				F56F08C31CFA61DB008BD25B /* FirstViewController.m in Sources */,
+				24B9D8EF1DAC52D1004EE256 /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
