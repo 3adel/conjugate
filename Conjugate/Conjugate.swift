@@ -15,6 +15,8 @@ class ConjugateViewController: UIViewController {
     let tabbedMenuSegue = "tabbedMenuSegue"
     let tabbedContentSegue = "tabbedContentSegue"
     
+    var loadingView: LoadingView?
+    
     var presenter: ConjugatePresnterType!
     
     var searchTimer: Timer?
@@ -129,6 +131,20 @@ extension ConjugateViewController: ConjugateView {
 }
 
 extension ConjugateViewController {
+    override func showLoader() {
+        loadingView = LoadingView.showIn(view: view, withFrame: verbLabel.frame)
+        verbLabel.isHidden = true
+    }
+    
+    override func hideLoader() {
+        loadingView?.stop()
+        loadingView = nil
+        
+        verbLabel.isHidden = false
+    }
+}
+
+extension ConjugateViewController {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         searchTimer?.invalidate()
@@ -145,5 +161,3 @@ extension ConjugateViewController {
         return true
     }
 }
-
-

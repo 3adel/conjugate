@@ -9,7 +9,7 @@ protocol View {
     func hideLoader()
 }
 
-protocol ConjugateView {
+protocol ConjugateView: View {
     func updateUI(with viewModel: ConjugateViewModel)
 }
 
@@ -57,6 +57,7 @@ class ConjugatePresenter: ConjugatePresnterType {
     }
     
     func search(for verb: String) {
+        view.showLoader()
         dataStore.getInfinitive(of: verb, in: searchLocale) { [weak self] result in
             guard let strongSelf = self else { return }
             
@@ -85,6 +86,8 @@ class ConjugatePresenter: ConjugatePresnterType {
     func translate(_ verb: Verb) {
         dataStore.getTranslation(of: verb, in: searchLocale, for: locale) { [weak self] result in
             guard let strongSelf = self else { return }
+            
+            strongSelf.view.hideLoader()
             
             switch result {
             case .success(let verb):

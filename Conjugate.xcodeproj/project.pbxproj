@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		241B89BB1DB7D1BA0068C189 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241B89BA1DB7D1BA0068C189 /* LoadingView.swift */; };
 		24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D7261DAAB048004EE256 /* AppDelegate.swift */; };
 		24B9D8DB1DAC51B7004EE256 /* Dodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8D61DAC51A9004EE256 /* Dodo.framework */; };
 		24B9D8DC1DAC51B7004EE256 /* Dodo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8D61DAC51A9004EE256 /* Dodo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -203,6 +204,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		241B89BA1DB7D1BA0068C189 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		24B9D7251DAAB048004EE256 /* Conjugate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Conjugate-Bridging-Header.h"; sourceTree = "<group>"; };
 		24B9D7261DAAB048004EE256 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24B9D89D1DAC519B004EE256 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				24E6F3E91DB3624F00550C8E /* TabbedContent.swift */,
 				24E6F3FC1DB3DBE700550C8E /* TenseTableViewDataSource.swift */,
 				24E6F3FE1DB3DDD200550C8E /* TenseTableViewCell.xib */,
+				241B89BA1DB7D1BA0068C189 /* LoadingView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				24B9D8F11DAC542F004EE256 /* WebClient.swift in Sources */,
 				F56F08C31CFA61DB008BD25B /* FirstViewController.m in Sources */,
 				24B9D8EF1DAC52D1004EE256 /* APIClient.swift in Sources */,
+				241B89BB1DB7D1BA0068C189 /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
