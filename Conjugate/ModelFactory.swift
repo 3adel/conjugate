@@ -49,12 +49,13 @@ extension Verb: JSONDictInitable {
             .indicative: [],
             .conditional: [],
             .imperative: [],
-            .conjunctive: [],
+            .subjunctive: [],
         ]
         
         if let tensesDict = tensesDict {
-            for (_, value) in tensesDict {
-                guard let tense = Tense(with: value),
+            for (key, value) in tensesDict {
+                
+                guard let tense = Tense(with: value, verbixId: key),
                     let name = value["name"] as? String,
                     let firstComponent = name.firstComponent?.lowercased(),
                     let tenseGroup = TenseGroup(rawValue: firstComponent) else { continue }
@@ -67,10 +68,10 @@ extension Verb: JSONDictInitable {
     }
 }
 
-extension Tense: JSONDictInitable {
-    init?(with dict: JSONDictionary) {
+extension Tense {
+    init?(with dict: JSONDictionary, verbixId: String = "") {
         guard let nameString = dict["name"] as? String,
-            let name = Tense.Name(rawValue: nameString.secondComponent?.lowercased() ?? ""),
+            let name = Tense.Name(verbixId: verbixId) ?? Tense.Name(rawValue: nameString.secondComponent?.lowercased() ?? ""),
             let formDicts = dict["forms"] as? [JSONDictionary] else { return nil }
         
         let forms: [Form] = ModelFactory.arrayOf(formDicts)
@@ -78,6 +79,43 @@ extension Tense: JSONDictInitable {
     }
 }
 
+extension Tense.Name {
+    var verbixId: String? {
+        switch self {
+        case .presentPerfect:
+            return "10"
+        case .pastPerfect:
+            return "12"
+        case .future:
+            return "5"
+        case .future2:
+            return "15"
+        case .conditionalPast:
+            return "7"
+        case .conditionalPastPerfect:
+            return "17"
+        case .subjunctivePastPerfect:
+            return "13"
+        case .subjunctivePresentPerfect:
+            return "11"
+        default:
+            return nil
+        }
+    }
+    
+    init?(verbixId: String) {
+        var tense: Tense.Name? = nil
+        
+        Tense.Name.allTenses.forEach { name in
+            if verbixId == name.verbixId {
+                tense = name
+            }
+        }
+        
+        guard let name = tense else { return nil }
+        self = name
+    }
+}
 
 extension Form: JSONDictInitable {
     init?(with dict: JSONDictionary) {
