@@ -134,7 +134,7 @@ class ConjugatePresenter: ConjugatePresnterType {
                         let formViewModel = FormViewModel(pronoun: form.pronoun, verb: form.conjugatedVerb, textColor: color, audioImageHidden: false)
                         formViewModels.append(formViewModel)
                     }
-                    let tenseViewModel = TenseViewModel(name: tense.name.rawValue, forms: formViewModels)
+                    let tenseViewModel = TenseViewModel(name: tense.name.text, forms: formViewModels)
                     tenseViewModels.append(tenseViewModel)
                 }
             }
