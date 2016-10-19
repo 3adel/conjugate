@@ -30,28 +30,29 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="1bo-GP-A3k">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8c-02-BXM">
                     <constraints>
-                        <constraint firstAttribute="width" constant="20" id="2Ix-Dd-Xwd"/>
-                        <constraint firstAttribute="height" constant="18" id="O2D-7F-zke"/>
+                        <constraint firstAttribute="width" constant="44" id="0fV-zK-IOu"/>
+                        <constraint firstAttribute="height" constant="44" id="Gc9-uL-4Cw"/>
                     </constraints>
-                </imageView>
+                    <state key="normal" image="speaker"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="tly-lc-TTW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="6Pw-ae-Az6"/>
+                <constraint firstItem="V8c-02-BXM" firstAttribute="leading" secondItem="jsH-AT-ArY" secondAttribute="trailing" constant="14" id="Cub-Rs-DHL"/>
                 <constraint firstItem="tly-lc-TTW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="Jub-LI-Hmf"/>
-                <constraint firstItem="1bo-GP-A3k" firstAttribute="leading" secondItem="jsH-AT-ArY" secondAttribute="trailing" constant="8" id="Kj3-vj-bcz"/>
-                <constraint firstAttribute="trailing" secondItem="1bo-GP-A3k" secondAttribute="trailing" constant="22" id="NAq-2i-u08"/>
                 <constraint firstItem="jsH-AT-ArY" firstAttribute="leading" secondItem="tly-lc-TTW" secondAttribute="trailing" constant="8" id="Ryv-X0-2FF"/>
+                <constraint firstItem="V8c-02-BXM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SU3-Bv-JKE"/>
                 <constraint firstItem="jsH-AT-ArY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="Wz7-Mb-6wa"/>
-                <constraint firstItem="1bo-GP-A3k" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="13" id="rlQ-aT-qLp"/>
+                <constraint firstAttribute="trailing" secondItem="V8c-02-BXM" secondAttribute="trailing" constant="15" id="uUz-Z7-CJE"/>
                 <constraint firstItem="jsH-AT-ArY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="xlm-QI-P5P"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="audioImageView" destination="1bo-GP-A3k" id="AhF-u3-5i3"/>
+                <outlet property="audioButton" destination="V8c-02-BXM" id="aaj-B2-RKk"/>
                 <outlet property="pronounLabel" destination="tly-lc-TTW" id="nGZ-AJ-brc"/>
                 <outlet property="verbLabel" destination="jsH-AT-ArY" id="Vkk-yO-Sr7"/>
             </connections>

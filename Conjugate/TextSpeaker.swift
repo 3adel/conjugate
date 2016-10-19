@@ -21,7 +21,7 @@ class TextSpeaker {
     
     func play(_ text: String) {
         utterance = AVSpeechUtterance(string: text)
-        utterance?.rate = 0.3
+        utterance?.rate = AVSpeechUtteranceDefaultSpeechRate
         utterance?.voice = AVSpeechSynthesisVoice(language: locale.identifier)
         
         guard let utterance = utterance else { return }
