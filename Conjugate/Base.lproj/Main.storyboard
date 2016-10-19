@@ -88,7 +88,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lco-cj-31l">
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Konjugate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qVw-sn-PoZ">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Konjugate" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qVw-sn-PoZ">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="36"/>
@@ -318,6 +318,10 @@
         <scene sceneID="vNg-AL-jz1">
             <objects>
                 <viewController id="hab-dK-RMs" customClass="TabbedContentViewController" customModule="Conjugate" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="REr-1u-Bsy"/>
+                        <viewControllerLayoutGuide type="bottom" id="LWG-bf-yby"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pkf-bb-Gpa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="402"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
