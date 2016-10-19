@@ -177,8 +177,10 @@ public class TabbedMenuView: UIView {
         
         tabs.forEach(setup)
         selectedIndex = 0
-        updateSelectedButtons(newIndex: selectedIndex)
         
+        guard !buttons.isEmpty else { return }
+
+        updateSelectedButtons(newIndex: selectedIndex)
         moveBottomLine(from: buttons[selectedIndex], to: buttons[selectedIndex], animate: false)
     }
     
@@ -215,7 +217,7 @@ public class TabbedMenuView: UIView {
             var previouslySelectedButton = buttons[oldIndex]
             updateUI(for: &previouslySelectedButton, with: theme, selected: false)
         }
-        
+
         var selectedButton = buttons[newIndex]
         updateUI(for: &selectedButton, with: theme, selected: true)
     }

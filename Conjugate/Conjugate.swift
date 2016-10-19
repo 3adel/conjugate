@@ -33,6 +33,8 @@ class ConjugateViewController: UIViewController {
         
         tabbedContentViewController?.menuController = tabbedMenuViewController
         tabbedMenuViewController?.contentController = tabbedContentViewController
+        
+        updateUI(with: viewModel)
     }
     
     override func setupUI() {
