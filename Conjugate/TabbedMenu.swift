@@ -287,18 +287,28 @@ public class TabbedMenuView: UIView {
         selectedIndex = index
         
         let newButtonRight = newButton.frame.right
+        let newButtonLeft = newButton.frame.origin.x
+        let leftAlign = newButtonLeft < scrollView.contentOffset.x
+        let rightAlign = newButtonRight > scrollView.contentOffset.x + frame.width
         
-        if newButtonRight > scrollView.contentOffset.x + frame.width {
-           scroll(to: newButton.frame)
+        if rightAlign || leftAlign {
+           scroll(to: newButton.frame, leftAlign: leftAlign)
         }
     }
     
-    fileprivate func scroll(to buttonFrame: CGRect) {
+    fileprivate func scroll(to buttonFrame: CGRect, leftAlign: Bool) {
         let x = buttonFrame.origin.x
         let buttonPadding = x == 0 ? 0 : theme.buttonPadding
-        let buttonOriginX = x + buttonFrame.width + buttonPadding
-        let lastPointX = scrollView.contentSize.width - scrollView.frame.width
-        let contentOffsetX = CGFloat.minimum(buttonOriginX, lastPointX)
+        
+        var contentOffsetX: CGFloat = 0
+        
+        if leftAlign {
+            contentOffsetX = x - buttonPadding
+        } else {
+            let buttonOriginX = x + buttonFrame.width + buttonPadding
+            let lastPointX = scrollView.contentSize.width - scrollView.frame.width
+            contentOffsetX = CGFloat.minimum(buttonOriginX, lastPointX)
+        }
         
         scrollView.setContentOffset(CGPoint(x: contentOffsetX, y: 0), animated: true)
     }
