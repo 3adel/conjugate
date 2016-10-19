@@ -51,7 +51,7 @@ class ConjugateViewController: UIViewController {
     
     func search() {
         let text = searchField.text ?? ""
-        presenter.search(for: text)
+        presenter.search(for: text.lowercased())
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
