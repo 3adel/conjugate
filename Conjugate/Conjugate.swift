@@ -107,7 +107,6 @@ extension ConjugateViewController: ConjugateView {
         
         viewModel.tenseTabs.forEach { tenseViewModel in
             let tableView = UITableView(frame: CGRect.zero, style: .grouped)
-//            tableView.separatorStyle = .none
             tableView.allowsMultipleSelection = false
             tableView.allowsSelection = true
             
