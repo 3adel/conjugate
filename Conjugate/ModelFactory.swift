@@ -119,11 +119,19 @@ extension Tense.Name {
 
 extension Form: JSONDictInitable {
     init?(with dict: JSONDictionary) {
-        guard let pronoun = dict["pronoun"] as? String,
+        guard var pronoun = dict["pronoun"] as? String,
             let use = dict["use"] as? Int,
             let form = dict["form"] as? String else { return nil }
         
         let irregular = use != 0
+        
+        //Workaround for bad structure of the pronouns in API response
+        if pronoun.contains("er") {
+            pronoun = "er/sie/es"
+        } else {
+            //Replace the seperator ";" that is used by the API for multiple pronouns, with "/" which looks better
+            pronoun = pronoun.replacingOccurrences(of: ";", with: "/")
+        }
         
         self.init(pronoun: pronoun, irregular: irregular, conjugatedVerb: form)
     }
@@ -137,5 +145,9 @@ extension String {
     var secondComponent: String? {
         let stringComponents = components(separatedBy: "/")
         return stringComponents.count >= 3 ? stringComponents[2] : nil
+    }
+    
+    func adding(components: [String], withSeperator seperator: String = "") -> String {
+        return components.reduce("") { $0 + seperator + $1 }
     }
 }
