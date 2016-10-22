@@ -7,6 +7,15 @@ import Foundation
 protocol View {
     func showLoader()
     func hideLoader()
+    func show(errorMessage: String)
+    func hideErrorMessage()
+}
+
+extension View {
+    func showLoader() {}
+    func hideLoader() {}
+    func show(errorMessage: String) {}
+    func hideErrorMessage() {}
 }
 
 protocol ConjugateView: View {
@@ -24,6 +33,10 @@ struct ConjugateViewModel {
     let meaning: String
     let starSelected: Bool
     let tenseTabs: [TenseTabViewModel]
+    
+    var isEmpty: Bool {
+        return verb == ""
+    }
     
     static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", language: "", meaning: "", starSelected: false, tenseTabs: [])
 }
@@ -49,6 +62,7 @@ struct TenseViewModel {
 struct FormViewModel {
     let pronoun: String
     let verb: String
+    let audioText: String
     let textColor: (Float, Float, Float)
     let audioImageHidden: Bool
 }
@@ -72,14 +86,17 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     func search(for verb: String) {
         view.showLoader()
+        view.hideErrorMessage()
+        
         dataStore.getInfinitive(of: verb, in: searchLocale) { [weak self] result in
             guard let strongSelf = self else { return }
             
             switch result {
             case .success(let verb):
                 strongSelf.conjugate(verb.name)
-            default:
-                break
+            case .failure(let error):
+                strongSelf.view.hideLoader()
+                strongSelf.view.show(errorMessage: error.localizedDescription)
             }
         }
     }
@@ -91,8 +108,9 @@ class ConjugatePresenter: ConjugatePresnterType {
             switch result {
             case .success(let verb):
                 strongSelf.translate(verb)
-            default:
-                break
+            case .failure(let error):
+                strongSelf.view.hideLoader()
+                strongSelf.view.show(errorMessage: error.localizedDescription)
             }
         }
     }
@@ -107,8 +125,8 @@ class ConjugatePresenter: ConjugatePresnterType {
             case .success(let verb):
                 strongSelf.viewModel = strongSelf.makeConjugateViewModel(from: verb)
                 strongSelf.view.updateUI(with: strongSelf.viewModel)
-            default:
-                break
+            case .failure(let error):
+                strongSelf.view.show(errorMessage: error.localizedDescription)
             }
         }
     }
@@ -159,8 +177,10 @@ class ConjugatePresenter: ConjugatePresnterType {
                         
                         let color = (colorR, colorG, colorB)
                         
+                        let audioPronoun = form.pronoun.components(separatedBy: "/").first ?? ""
+                        let audioText = audioPronoun + " " + form.conjugatedVerb
                         
-                        let formViewModel = FormViewModel(pronoun: form.pronoun, verb: form.conjugatedVerb, textColor: color, audioImageHidden: false)
+                        let formViewModel = FormViewModel(pronoun: form.pronoun, verb: form.conjugatedVerb, audioText: audioText, textColor: color, audioImageHidden: false)
                         formViewModels.append(formViewModel)
                     }
                     let tenseViewModel = TenseViewModel(name: tense.name.text, forms: formViewModels)

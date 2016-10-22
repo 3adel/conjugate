@@ -11,6 +11,7 @@ class ConjugateViewController: UIViewController {
     @IBOutlet var verbLabel: UILabel!
     @IBOutlet var languageLabel: UILabel!
     @IBOutlet var meaningLabel: UILabel!
+    @IBOutlet var errorLabel: UILabel!
     
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var shareButton: UIButton!
@@ -54,6 +55,9 @@ class ConjugateViewController: UIViewController {
         
         let grayColor: CGFloat = 230/255.0
         searchView.layer.borderColor = UIColor(red: grayColor, green: grayColor, blue: grayColor, alpha: 1.0).cgColor
+        
+        verbLabel.set(labelType: .regular)
+        errorLabel.set(labelType: .error)
     }
     
     func search() {
@@ -107,6 +111,13 @@ extension ConjugateViewController {
 
 extension ConjugateViewController: ConjugateView {
     func updateUI(with viewModel: ConjugateViewModel) {
+        
+        saveButton.isHidden = viewModel.isEmpty
+        shareButton.isHidden = viewModel.isEmpty
+        
+        verbLabel.isHidden = viewModel.isEmpty
+        errorLabel.isHidden = true
+        
         verbLabel.text = viewModel.verb
         languageLabel.text = viewModel.language.isEmpty ? "" : viewModel.language + " - "
         meaningLabel.text = viewModel.meaning
@@ -162,6 +173,17 @@ extension ConjugateViewController {
         loadingView = nil
         
         verbLabel.isHidden = false
+    }
+    
+    func show(errorMessage: String) {
+        updateUI(with: ConjugateViewModel.empty)
+        
+        errorLabel.text = errorMessage
+        errorLabel.isHidden = false
+    }
+    
+    func hideErrorMessage() {
+        errorLabel.isHidden = true
     }
 }
 
