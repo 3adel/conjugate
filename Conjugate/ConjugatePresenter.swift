@@ -15,15 +15,17 @@ protocol ConjugateView: View {
 
 protocol ConjugatePresnterType {
     func search(for verb: String)
+    func toggleSavingVerb()
 }
 
 struct ConjugateViewModel {
     let verb: String
     let language: String
     let meaning: String
+    let starSelected: Bool
     let tenseTabs: [TenseTabViewModel]
     
-    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", language: "", meaning: "", tenseTabs: [])
+    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", language: "", meaning: "", starSelected: false, tenseTabs: [])
 }
 
 struct TenseTabViewModel {
@@ -31,6 +33,12 @@ struct TenseTabViewModel {
     let tenses: [TenseViewModel]
     
     static let empty = TenseTabViewModel(name: "", tenses: [])
+}
+
+extension TenseTabViewModel: Equatable {}
+
+func ==(lhs: TenseTabViewModel, rhs: TenseTabViewModel) -> Bool {
+    return lhs.name == rhs.name
 }
 
 struct TenseViewModel {
@@ -49,11 +57,17 @@ class ConjugatePresenter: ConjugatePresnterType {
     let dataStore = DataStore()
     let view: ConjugateView
     
+    var viewModel = ConjugateViewModel.empty
+    var verb: Verb?
+    
     let searchLocale = Locale(identifier: "de_DE")
     let locale = Locale(identifier: "en_US")
     
+    let storage = Storage()
+    
     init(view: ConjugateView) {
         self.view = view
+        storage.loadVerbs()
     }
     
     func search(for verb: String) {
@@ -91,15 +105,30 @@ class ConjugatePresenter: ConjugatePresnterType {
             
             switch result {
             case .success(let verb):
-                let viewModel = strongSelf.makeConjugateViewModel(from: verb)
-                strongSelf.view.updateUI(with: viewModel)
+                strongSelf.viewModel = strongSelf.makeConjugateViewModel(from: verb)
+                strongSelf.view.updateUI(with: strongSelf.viewModel)
             default:
                 break
             }
         }
     }
     
+    func toggleSavingVerb() {
+        guard let verb = verb else { return }
+        
+        if storage.verbExists(verb) {
+            storage.remove(verb: verb)
+        } else {
+           storage.save(verb: verb)
+        }
+        
+        viewModel = makeConjugateViewModel(from: verb)
+        view.updateUI(with: viewModel)
+    }
+    
     func makeConjugateViewModel(from verb: Verb) -> ConjugateViewModel {
+        self.verb = verb
+        
         var tenseTabs = [TenseTabViewModel]()
         
         Verb.TenseGroup.allCases.forEach { tenseGroup in
@@ -152,7 +181,9 @@ class ConjugatePresenter: ConjugatePresnterType {
             meaningText += translation
         }
         
-        let viewModel = ConjugateViewModel(verb: verb.name, language: locale.languageCode!.uppercased(), meaning: meaningText, tenseTabs: tenseTabs)
+        let verbIsSaved = storage.loadVerbs().filter { $0 == verb }.isEmpty
+        
+        let viewModel = ConjugateViewModel(verb: verb.name, language: locale.languageCode!.uppercased(), meaning: meaningText, starSelected: !verbIsSaved, tenseTabs: tenseTabs)
         return viewModel
     }
 }

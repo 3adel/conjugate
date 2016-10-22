@@ -6,7 +6,7 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
-    enum Tabs: String {
+    enum Tab: String {
         case conjugate
         case saved
         
@@ -22,7 +22,16 @@ class TabBarController: UITabBarController {
             return UIImage(named: imageString)
         }
         
-        static var allTabs: [Tabs] {
+        var name: String {
+            switch self {
+            case .saved:
+                return "Saved Verbs"
+            default:
+                return rawValue.capitalized
+            }
+        }
+        
+        static var allTabs: [Tab] {
             return [
                 .conjugate,
                 .saved
@@ -40,12 +49,14 @@ class TabBarController: UITabBarController {
     
     private func setupTabs() {
         var controllers = [UIViewController]()
-        Tabs.allTabs.forEach {
+        Tab.allTabs.forEach {
             guard let tabNavigationController = storyboard?.instantiateViewController(withIdentifier: $0.navigationControllerIdentifier),
                 let tabImage = $0.image else { return }
             
-            let tabBarItem = UITabBarItem(title: $0.rawValue, image: tabImage, tag: 0)
+            let tabBarItem = UITabBarItem(title: $0.name, image: tabImage, tag: 0)
             tabNavigationController.tabBarItem = tabBarItem
+            
+            tabNavigationController.navigationController?.navigationBar.tintColor = Theme.mainTintColor
             
             controllers.append(tabNavigationController)
         }

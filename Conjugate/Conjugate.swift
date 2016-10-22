@@ -12,6 +12,9 @@ class ConjugateViewController: UIViewController {
     @IBOutlet var languageLabel: UILabel!
     @IBOutlet var meaningLabel: UILabel!
     
+    @IBOutlet var saveButton: UIButton!
+    @IBOutlet var shareButton: UIButton!
+    
     let tabbedMenuSegue = "tabbedMenuSegue"
     let tabbedContentSegue = "tabbedContentSegue"
     
@@ -95,12 +98,30 @@ class ConjugateViewController: UIViewController {
     }
 }
 
+//Actions
+extension ConjugateViewController {
+    @IBAction func saveButtonPressed(_ sender: UIButton) {
+        presenter.toggleSavingVerb()
+    }
+}
+
 extension ConjugateViewController: ConjugateView {
     func updateUI(with viewModel: ConjugateViewModel) {
         verbLabel.text = viewModel.verb
-        languageLabel.text = viewModel.language + " - "
+        languageLabel.text = viewModel.language.isEmpty ? "" : viewModel.language + " - "
         meaningLabel.text = viewModel.meaning
-        updateTabs(with: viewModel)
+        
+        let starImageString = viewModel.starSelected ? "star_selected" : "star"
+        
+        let starImage = UIImage(named: starImageString)
+        
+        saveButton.setImage(starImage, for: .normal)
+        
+        if viewModel.tenseTabs != self.viewModel.tenseTabs || viewModel.verb != self.viewModel.verb {
+            updateTabs(with: viewModel)
+        }
+        
+        self.viewModel = viewModel
     }
     
     func updateTabs(with viewModel: ConjugateViewModel) {

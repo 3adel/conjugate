@@ -11,7 +11,7 @@ public enum ButtonType: Int {
     public var backgroundColor: UIColor {
         switch(self) {
         case .regular:
-            return UIColor(red: 216, green: 216, blue: 216)
+            return UIColor(red: 74, green: 144, blue: 226)
         case .mainTint:
             return Theme.mainTintColor
         }
@@ -32,7 +32,7 @@ public enum ButtonType: Int {
 }
 
 public struct Theme {
-    static let mainTintColor = UIColor(red: 207, green: 69, blue: 85)
+    static let mainTintColor = UIColor(red: 74, green: 144, blue: 226)
 }
 
 extension UIImageView {
