@@ -28,6 +28,11 @@ class ConjugateViewController: UIViewController {
         updateUI(with: viewModel)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.updateViewModel()
+    }
+    
     override func setupUI() {
         super.setupUI()
         

@@ -30,13 +30,13 @@ class VerbDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
+        updateUI(with: viewModel, all: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateUI(with: viewModel)
+        presenter.updateViewModel()
     }
     
     override func setupUI() {
@@ -95,6 +95,9 @@ extension VerbDetailViewController {
 
 extension VerbDetailViewController: ConjugateView {
     func updateUI(with viewModel: ConjugateViewModel) {
+        self.updateUI(with: viewModel, all: false)
+    }
+    func updateUI(with viewModel: ConjugateViewModel, all: Bool ) {
         
         title = viewModel.verb
         
@@ -114,7 +117,9 @@ extension VerbDetailViewController: ConjugateView {
         
         saveButton.setImage(starImage, for: .normal)
         
-        updateTabs(with: viewModel)
+        if viewModel.tenseTabs != self.viewModel.tenseTabs || viewModel.verb != self.viewModel.verb || all {
+            updateTabs(with: viewModel)
+        }
         
         self.viewModel = viewModel
     }

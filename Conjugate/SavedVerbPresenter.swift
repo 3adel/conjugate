@@ -37,11 +37,10 @@ class SavedVerbPresenter: SavedVerbPresenterType {
     
     init(view: SavedVerbView) {
         self.view = view
-        storage.loadVerbs()
     }
     
     func getSavedVerbs() {
-        verbs = storage.loadVerbs()
+        verbs = storage.getSavedVerbs()
         
         viewModel = makeViewModel(from: verbs)
         view.update(with: viewModel)
