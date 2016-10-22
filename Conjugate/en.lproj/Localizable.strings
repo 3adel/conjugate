@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Conjugate
+
+  Created by Halil Gursoy on 22/10/16.
+  Copyright © 2016 Adel  Shehadeh. All rights reserved.
+*/
+
+
+"mobile.ios.conjugate.error.verbNotFound" = "The verb you searched for could not be found";
+"mobile.ios.conjugate.error.translationNotFound" = "The translation for the verb could not be found";
+"mobile.ios.conjugate.error.conjugationNotFound" = "The verb could not be conjugated";
+"mobile.ios.conjugate.error.serverError" = "There was a problem with the server. Please try again";
+"mobile.ios.conjugate.error.genericError" = "There was an unknown problem. Please try again";

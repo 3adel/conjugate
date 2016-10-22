@@ -31,6 +31,20 @@ public enum ButtonType: Int {
     }
 }
 
+public enum LabelType: Int {
+    case regular
+    case error
+    
+    public var textColor: UIColor {
+        switch(self) {
+        case .regular:
+            return UIColor.black
+        case .error:
+            return UIColor(red: 209, green: 51, blue: 51)
+        }
+    }
+}
+
 public struct Theme {
     static let mainTintColor = UIColor(red: 74, green: 144, blue: 226)
 }
@@ -63,6 +77,10 @@ extension UIButton {
 extension UILabel {
     var textWidth: CGFloat {
        return text?.widthWithConstrainedHeight(height: frame.height, font: font ?? UIFont.systemFont(ofSize: 13)) ?? 0
+    }
+    
+    func set(labelType: LabelType) {
+        textColor = labelType.textColor
     }
 }
 

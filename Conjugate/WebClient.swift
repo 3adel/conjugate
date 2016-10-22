@@ -28,7 +28,7 @@ public enum ContentType: String {
     }
 }
 
-typealias ResultHandler = (AnyResult) -> Void
+typealias APIResultHandler = (AnyAPIResult) -> Void
 
 class WebClient {
     
@@ -63,15 +63,21 @@ class WebClient {
         return request
     }
     
-    func send(_ request: URLRequest, cache: Bool = false, completion: ResultHandler? = nil) {
+    func send(_ request: URLRequest, cache: Bool = false, completion: APIResultHandler? = nil) {
         manager.request(request)
             .validate()
-            .responseJSON { response in
-                var result: AnyResult!
+            .responseJSON { alamofireResponse in
+                var result: AnyAPIResult!
 
-                switch response.result {
+                switch alamofireResponse.result {
                 case .failure(_):
-                    result = .failure(ConjugateError.genericError)
+                    guard let statusCode = alamofireResponse.response?.statusCode
+                        else {
+                            result = .failure(APIError.genericNetworkError)
+                            break
+                    }
+                    let error = APIError(statusCode: statusCode) ?? APIError.genericNetworkError
+                    result = .failure(error)
                 case .success(let value):
                     result = .success(value)
                 }
@@ -107,6 +113,39 @@ public enum Endpoint: String {
         case .translator:
             return "fromLanguageKey/toLanguageKey/verbKey"
         }
+    }
+    
+    
+    public func appError(from apiError: APIError) -> ConjugateError {
+        if apiError == .serverError {
+            return ConjugateError.serverError
+        }
+        
+        switch (self) {
+        case .conjugator:
+            switch (apiError) {
+            case .notFound:
+                return ConjugateError.conjugationNotFound
+            default:
+                break
+            }
+            
+        case .finder:
+            switch (apiError) {
+            case .notFound:
+                return ConjugateError.verbNotFound
+            default:
+                break
+            }
+        case .translator:
+            switch (apiError) {
+            case .notFound:
+                return ConjugateError.translationNotFound
+            default:
+                break
+            }
+        }
+        return ConjugateError.genericError
     }
     
     public static func urlString(from endpoint: Endpoint, ids:[Token:String]?, queryItems: [URLQueryItem]? = nil) -> String? {

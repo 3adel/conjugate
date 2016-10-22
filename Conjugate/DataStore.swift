@@ -5,9 +5,6 @@
 import Foundation
 import Result
 
-enum ConjugateError: Error {
-    case genericError
-}
 
 class DataStore {
     private static let defaultClient = APIClient()
@@ -21,8 +18,8 @@ class DataStore {
     func getInfinitive(of verbString: String, in language: Locale, completion: @escaping (Result<Verb, ConjugateError>) -> Void) {
         dataClient.search(for: verbString, in: language) { result in
             switch result {
-            case .failure:
-                completion(.failure(ConjugateError.genericError))
+            case .failure (let error):
+                completion(.failure(error))
             case .success(let value):
                 guard let array = value as? JSONArray,
                     let dict = array.first as? JSONDictionary,
@@ -40,8 +37,8 @@ class DataStore {
     func conjugate(_ verb: String, in language: Locale, completion: @escaping (Result<Verb, ConjugateError>) -> Void) {
         dataClient.conjugate(for: verb, in: language) { result in
             switch result {
-            case .failure:
-                completion(.failure(ConjugateError.genericError))
+            case .failure (let error):
+                completion(.failure(error))
             case .success(let value):
                 guard let dict = value as? JSONDictionary,
                     let verb = Verb(with: dict)
@@ -57,8 +54,8 @@ class DataStore {
     func getTranslation(of verb: Verb, in fromLanguage: Locale, for toLanguage: Locale, completion: @escaping (Result<Verb, ConjugateError>) -> Void) {
         dataClient.translate(for: verb.name, from: fromLanguage, to: toLanguage) { result in
             switch result {
-            case .failure:
-                completion(.failure(ConjugateError.genericError))
+            case .failure (let error):
+                completion(.failure(error))
             case .success(let value):
                 guard let array = value as? [JSONDictionary]
                     else {

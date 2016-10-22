@@ -177,6 +177,7 @@ public class TabbedMenuView: UIView {
         
         tabs.forEach(setup)
         selectedIndex = 0
+        selectedBottomLine.isHidden = buttons.isEmpty
         
         guard !buttons.isEmpty else { return }
 

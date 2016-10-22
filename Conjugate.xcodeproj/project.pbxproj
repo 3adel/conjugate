@@ -11,6 +11,9 @@
 		245D31E41DB82E9500E5352F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D31E31DB82E9500E5352F /* Storage.swift */; };
 		245D31F71DB8401200E5352F /* SavedVerbs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D31F61DB8401200E5352F /* SavedVerbs.swift */; };
 		245D31F91DB8411F00E5352F /* SavedVerbPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D31F81DB8411F00E5352F /* SavedVerbPresenter.swift */; };
+		245D32D01DBB6DCF00E5352F /* ConjugateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D32CF1DBB6DCF00E5352F /* ConjugateError.swift */; };
+		245D32EA1DBB76FE00E5352F /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D32E91DBB76FE00E5352F /* Localization.swift */; };
+		245D331D1DBB9AE400E5352F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 245D331F1DBB9AE400E5352F /* Localizable.strings */; };
 		24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D7261DAAB048004EE256 /* AppDelegate.swift */; };
 		24B9D8DB1DAC51B7004EE256 /* Dodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8D61DAC51A9004EE256 /* Dodo.framework */; };
 		24B9D8DC1DAC51B7004EE256 /* Dodo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8D61DAC51A9004EE256 /* Dodo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -211,6 +214,9 @@
 		245D31E31DB82E9500E5352F /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		245D31F61DB8401200E5352F /* SavedVerbs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedVerbs.swift; sourceTree = "<group>"; };
 		245D31F81DB8411F00E5352F /* SavedVerbPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedVerbPresenter.swift; sourceTree = "<group>"; };
+		245D32CF1DBB6DCF00E5352F /* ConjugateError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConjugateError.swift; sourceTree = "<group>"; };
+		245D32E91DBB76FE00E5352F /* Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		245D331E1DBB9AE400E5352F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		24B9D7251DAAB048004EE256 /* Conjugate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Conjugate-Bridging-Header.h"; sourceTree = "<group>"; };
 		24B9D7261DAAB048004EE256 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24B9D89D1DAC519B004EE256 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
@@ -256,6 +262,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		245D32CE1DBB6DC200E5352F /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				245D32CF1DBB6DCF00E5352F /* ConjugateError.swift */,
+				245D32E91DBB76FE00E5352F /* Localization.swift */,
+			);
+			name = Foundation;
+			sourceTree = "<group>";
+		};
 		24B9D89E1DAC519B004EE256 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				24B9D7261DAAB048004EE256 /* AppDelegate.swift */,
+				245D32CE1DBB6DC200E5352F /* Foundation */,
 				24B9D9AC1DAEF2DA004EE256 /* Presenter */,
 				24B9D9A71DAEEE51004EE256 /* View */,
 				24B9D8E91DAC5224004EE256 /* Model */,
@@ -386,6 +402,7 @@
 		F56F08BB1CFA61DB008BD25B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				245D331F1DBB9AE400E5352F /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -596,6 +613,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				245D331D1DBB9AE400E5352F /* Localizable.strings in Resources */,
 				F56F08CE1CFA61DB008BD25B /* LaunchScreen.storyboard in Resources */,
 				24E6F3FF1DB3DDD200550C8E /* TenseTableViewCell.xib in Resources */,
 				F56F08CB1CFA61DB008BD25B /* Assets.xcassets in Resources */,
@@ -619,8 +637,10 @@
 				245D31F91DB8411F00E5352F /* SavedVerbPresenter.swift in Sources */,
 				24E6F4011DB3EBAC00550C8E /* TextSpeaker.swift in Sources */,
 				24B9D8EB1DAC5232004EE256 /* DataStore.swift in Sources */,
+				245D32EA1DBB76FE00E5352F /* Localization.swift in Sources */,
 				24E6F3FD1DB3DBE700550C8E /* TenseTableViewDataSource.swift in Sources */,
 				24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */,
+				245D32D01DBB6DCF00E5352F /* ConjugateError.swift in Sources */,
 				24B9D8ED1DAC5261004EE256 /* DataClient.swift in Sources */,
 				24B9D9A21DAED525004EE256 /* Verb.swift in Sources */,
 				245D31F71DB8401200E5352F /* SavedVerbs.swift in Sources */,
@@ -655,6 +675,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		245D331F1DBB9AE400E5352F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				245D331E1DBB9AE400E5352F /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		F56F08C71CFA61DB008BD25B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

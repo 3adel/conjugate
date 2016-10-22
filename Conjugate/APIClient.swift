@@ -5,7 +5,10 @@
 import Foundation
 import Result
 
+typealias AnyAPIResult = Result<Any, APIError>
 typealias AnyResult = Result<Any, ConjugateError>
+
+typealias ResultHandler = (AnyResult) -> Void
 
 class APIClient: DataClient {
     let webClient = WebClient()
@@ -13,38 +16,57 @@ class APIClient: DataClient {
     let genericErrorResult: AnyResult = .failure(ConjugateError.genericError)
     
     func search(for verb: String, in language: Locale, completion: @escaping ResultHandler) {
+        let endpoint = Endpoint.finder
+        
         guard let languageCode = language.isoLanguageCode,
-            let request = webClient.createRequest(endpoint: .finder, ids: ["fromLanguageKey": languageCode, "verbKey": verb])
+            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb])
             else {
                 let errorResult: AnyResult = .failure(ConjugateError.genericError)
                 completion(errorResult)
                 return
         }
-        
-        webClient.send(request, cache: false, completion: completion)
+        send(request: request, endpoint: endpoint, completion: completion)
     }
     
     func conjugate(for verb: String, in language: Locale, completion: @escaping (AnyResult) -> Void) {
+        let endpoint = Endpoint.conjugator
+        
         guard let languageCode = language.isoLanguageCode,
-            let request = webClient.createRequest(endpoint: .conjugator, ids: ["fromLanguageKey": languageCode, "verbKey": verb])
+            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb])
             else {
                 completion(genericErrorResult)
                 return
         }
         
-        webClient.send(request, cache: false, completion: completion)
+        send(request: request, endpoint: endpoint, completion: completion)
     }
     
     func translate(for verb: String, from: Locale, to: Locale, completion: @escaping (AnyResult) -> Void) {
+        let endpoint = Endpoint.translator
+        
         guard let fromLanguageCode = from.isoLanguageCode,
             let toLanguageCode = to.isoLanguageCode,
-            let request = webClient.createRequest(endpoint: .translator, ids: ["fromLanguageKey": fromLanguageCode, "toLanguageKey": toLanguageCode, "verbKey": verb])
+            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": fromLanguageCode, "toLanguageKey": toLanguageCode, "verbKey": verb])
             else {
                 completion(genericErrorResult)
                 return
         }
         
-        webClient.send(request, cache: false, completion: completion)
+        send(request: request, endpoint: endpoint, completion: completion)
+    }
+    
+    func send(request: URLRequest, endpoint: Endpoint, completion: @escaping ResultHandler) {
+        webClient.send(request, cache: false) { result in
+            switch (result) {
+            case .failure(let apiError):
+                let appError = Endpoint.finder.appError(from: apiError)
+                let result: AnyResult = .failure(appError)
+                completion(result)
+            case .success(let apiResult):
+                let result = AnyResult(apiResult)
+                completion(result)
+            }
+        }
     }
 }
 
