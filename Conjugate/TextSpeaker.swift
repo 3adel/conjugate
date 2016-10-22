@@ -20,6 +20,8 @@ class TextSpeaker {
     }
     
     func play(_ text: String) {
+        activatePlayer()
+        
         utterance = AVSpeechUtterance(string: text)
         utterance?.rate = AVSpeechUtteranceDefaultSpeechRate
         utterance?.voice = AVSpeechSynthesisVoice(language: locale.identifier)
@@ -44,5 +46,21 @@ class TextSpeaker {
     
     func isPlaying(_ text: String) -> Bool {
         return textPlayed == text && isPlaying
+    }
+    
+    func activatePlayer() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        }
+        catch let error as NSError {
+            print("Error: Could not set audio category: \(error), \(error.userInfo)")
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+        }
+        catch let error as NSError {
+            print("Error: Could not setActive to true: \(error), \(error.userInfo)")
+        }
     }
 }
