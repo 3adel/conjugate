@@ -25,6 +25,7 @@ protocol ConjugateView: View {
 protocol ConjugatePresnterType {
     func search(for verb: String)
     func toggleSavingVerb()
+    func updateViewModel()
 }
 
 struct ConjugateViewModel {
@@ -81,7 +82,7 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     init(view: ConjugateView) {
         self.view = view
-        storage.loadVerbs()
+        storage.getSavedVerbs()
     }
     
     func search(for verb: String) {
@@ -144,6 +145,12 @@ class ConjugatePresenter: ConjugatePresnterType {
         view.updateUI(with: viewModel)
     }
     
+    func updateViewModel() {
+        guard let verb = verb else { return }
+        viewModel = makeConjugateViewModel(from: verb)
+        view.updateUI(with: viewModel)
+    }
+    
     func makeConjugateViewModel(from verb: Verb) -> ConjugateViewModel {
         self.verb = verb
         
@@ -201,7 +208,7 @@ class ConjugatePresenter: ConjugatePresnterType {
             meaningText += translation
         }
         
-        let verbIsSaved = storage.loadVerbs().filter { $0 == verb }.isEmpty
+        let verbIsSaved = storage.getSavedVerbs().filter { $0 == verb }.isEmpty
         
         let viewModel = ConjugateViewModel(verb: verb.name, language: locale.languageCode!.uppercased(), meaning: meaningText, starSelected: !verbIsSaved, tenseTabs: tenseTabs)
         return viewModel

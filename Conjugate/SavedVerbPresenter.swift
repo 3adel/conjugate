@@ -11,6 +11,7 @@ protocol SavedVerbView: View {
 
 protocol SavedVerbPresenterType {
     func getSavedVerbs()
+    func openVerbDetails(at index: Int)
 }
 
 struct SavedVerbViewModel {
@@ -36,11 +37,10 @@ class SavedVerbPresenter: SavedVerbPresenterType {
     
     init(view: SavedVerbView) {
         self.view = view
-        storage.loadVerbs()
     }
     
     func getSavedVerbs() {
-        verbs = storage.loadVerbs()
+        verbs = storage.getSavedVerbs()
         
         viewModel = makeViewModel(from: verbs)
         view.update(with: viewModel)
@@ -64,6 +64,13 @@ class SavedVerbPresenter: SavedVerbPresenterType {
             meaningText += translation
         }
         return SavedVerbCellViewModel(verb: verb.name, meaning: meaningText)
+    }
+    
+    func openVerbDetails(at index: Int) {
+        let verb = verbs[index]
+        let router = Router(view: view)
+        
+        router?.openDetail(of: verb)
     }
     
 }

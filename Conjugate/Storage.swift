@@ -15,7 +15,7 @@ class Storage {
         self.userDefaults = userDefaults
     }
     
-    @discardableResult func loadVerbs() -> [Verb] {
+    @discardableResult func getSavedVerbs() -> [Verb] {
         guard let savedArray = userDefaults.array(forKey: Storage.verbsKey)
             else { return [Verb]() }
         
@@ -38,7 +38,7 @@ class Storage {
     
     func save(verb: Verb) {
         if savedVerbs.index(of: verb) == nil {
-            savedVerbs.append(verb)
+            savedVerbs.insert(verb, at: 0)
             saveVerbs()
         }
     }
