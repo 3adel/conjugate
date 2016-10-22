@@ -62,6 +62,7 @@ struct TenseViewModel {
 struct FormViewModel {
     let pronoun: String
     let verb: String
+    let audioText: String
     let textColor: (Float, Float, Float)
     let audioImageHidden: Bool
 }
@@ -176,8 +177,10 @@ class ConjugatePresenter: ConjugatePresnterType {
                         
                         let color = (colorR, colorG, colorB)
                         
+                        let audioPronoun = form.pronoun.components(separatedBy: "/").first ?? ""
+                        let audioText = audioPronoun + " " + form.conjugatedVerb
                         
-                        let formViewModel = FormViewModel(pronoun: form.pronoun, verb: form.conjugatedVerb, textColor: color, audioImageHidden: false)
+                        let formViewModel = FormViewModel(pronoun: form.pronoun, verb: form.conjugatedVerb, audioText: audioText, textColor: color, audioImageHidden: false)
                         formViewModels.append(formViewModel)
                     }
                     let tenseViewModel = TenseViewModel(name: tense.name.text, forms: formViewModels)

@@ -31,12 +31,10 @@ class TenseTableViewDataSource: NSObject {
         
         let tense = viewModel.tenses[indexPath.section].forms[indexPath.row]
         
-        let text = tense.pronoun + " " + tense.verb
-        
-        if speaker.isPlaying(text) {
+        if speaker.isPlaying(tense.audioText) {
             speaker.stop()
         } else {
-            speaker.play(text)
+            speaker.play(tense.audioText)
         }
 
     }
