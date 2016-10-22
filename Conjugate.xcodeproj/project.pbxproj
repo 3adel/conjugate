@@ -14,6 +14,8 @@
 		245D32D01DBB6DCF00E5352F /* ConjugateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D32CF1DBB6DCF00E5352F /* ConjugateError.swift */; };
 		245D32EA1DBB76FE00E5352F /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D32E91DBB76FE00E5352F /* Localization.swift */; };
 		245D331D1DBB9AE400E5352F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 245D331F1DBB9AE400E5352F /* Localizable.strings */; };
+		245D332E1DBBA47800E5352F /* VerbDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D332D1DBBA47800E5352F /* VerbDetailViewController.swift */; };
+		245D33421DBBA81400E5352F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D33411DBBA81400E5352F /* Router.swift */; };
 		24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D7261DAAB048004EE256 /* AppDelegate.swift */; };
 		24B9D8DB1DAC51B7004EE256 /* Dodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8D61DAC51A9004EE256 /* Dodo.framework */; };
 		24B9D8DC1DAC51B7004EE256 /* Dodo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8D61DAC51A9004EE256 /* Dodo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -217,6 +219,8 @@
 		245D32CF1DBB6DCF00E5352F /* ConjugateError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConjugateError.swift; sourceTree = "<group>"; };
 		245D32E91DBB76FE00E5352F /* Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		245D331E1DBB9AE400E5352F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		245D332D1DBBA47800E5352F /* VerbDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbDetailViewController.swift; sourceTree = "<group>"; };
+		245D33411DBBA81400E5352F /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		24B9D7251DAAB048004EE256 /* Conjugate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Conjugate-Bridging-Header.h"; sourceTree = "<group>"; };
 		24B9D7261DAAB048004EE256 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24B9D89D1DAC519B004EE256 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
@@ -269,6 +273,14 @@
 				245D32E91DBB76FE00E5352F /* Localization.swift */,
 			);
 			name = Foundation;
+			sourceTree = "<group>";
+		};
+		245D33401DBBA80500E5352F /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				245D33411DBBA81400E5352F /* Router.swift */,
+			);
+			name = Router;
 			sourceTree = "<group>";
 		};
 		24B9D89E1DAC519B004EE256 /* Products */ = {
@@ -340,6 +352,7 @@
 				24E6F3FE1DB3DDD200550C8E /* TenseTableViewCell.xib */,
 				241B89BA1DB7D1BA0068C189 /* LoadingView.swift */,
 				245D31F61DB8401200E5352F /* SavedVerbs.swift */,
+				245D332D1DBBA47800E5352F /* VerbDetailViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -376,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				24B9D7261DAAB048004EE256 /* AppDelegate.swift */,
+				245D33401DBBA80500E5352F /* Router */,
 				245D32CE1DBB6DC200E5352F /* Foundation */,
 				24B9D9AC1DAEF2DA004EE256 /* Presenter */,
 				24B9D9A71DAEEE51004EE256 /* View */,
@@ -630,6 +644,8 @@
 			files = (
 				24B9D9A91DAEEE60004EE256 /* Conjugate.swift in Sources */,
 				24E6F3CD1DB3118200550C8E /* TabbedMenu.swift in Sources */,
+				245D33421DBBA81400E5352F /* Router.swift in Sources */,
+				245D332E1DBBA47800E5352F /* VerbDetailViewController.swift in Sources */,
 				F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */,
 				245D31E41DB82E9500E5352F /* Storage.swift in Sources */,
 				24E6F3EA1DB3624F00550C8E /* TabbedContent.swift in Sources */,
