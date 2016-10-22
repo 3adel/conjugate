@@ -171,7 +171,7 @@ extension ConjugateViewController {
         searchTimer?.invalidate()
         searchTimer = nil
         
-        searchTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(search), userInfo: nil, repeats: false)
+        searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(search), userInfo: nil, repeats: false)
         
         return true
     }
