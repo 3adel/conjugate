@@ -456,7 +456,7 @@
 				TargetAttributes = {
 					F56F08B71CFA61DB008BD25B = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = A88UHFQD28;
+						DevelopmentTeam = 2UB7THC2G3;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -813,7 +813,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A88UHFQD28;
+				DEVELOPMENT_TEAM = 2UB7THC2G3;
 				INFOPLIST_FILE = Conjugate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adelshehadeh.konjugate;
@@ -833,7 +833,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A88UHFQD28;
+				DEVELOPMENT_TEAM = 2UB7THC2G3;
 				INFOPLIST_FILE = Conjugate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adelshehadeh.konjugate;
