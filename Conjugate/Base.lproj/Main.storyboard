@@ -207,11 +207,22 @@
                                 <color key="textColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRe-nd-uKJ">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="HI6-JA-GfB"/>
+                                    <constraint firstAttribute="width" constant="42" id="Sgi-Du-G2V"/>
+                                </constraints>
+                                <state key="normal" image="speaker"/>
+                                <connections>
+                                    <action selector="playAudio:" destination="JkI-yB-tlS" eventType="touchUpInside" id="2VB-an-laz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="PYK-Cg-bOi" firstAttribute="top" secondItem="xlN-5c-ujh" secondAttribute="bottom" constant="14" id="2Fc-pw-PyZ"/>
                             <constraint firstItem="ewS-TE-rhh" firstAttribute="top" secondItem="PYK-Cg-bOi" secondAttribute="bottom" constant="13" id="2g5-ME-DXz"/>
+                            <constraint firstItem="pRe-nd-uKJ" firstAttribute="top" secondItem="xlN-5c-ujh" secondAttribute="bottom" constant="6" id="3Mw-bk-mti"/>
                             <constraint firstItem="N9b-Lz-S0S" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leading" constant="16" id="4ka-Le-EMR"/>
                             <constraint firstItem="ewS-TE-rhh" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leadingMargin" id="5h5-EU-SoX"/>
                             <constraint firstItem="Uk7-4V-R1z" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leading" id="6bz-br-dZK"/>
@@ -221,13 +232,14 @@
                             <constraint firstItem="PYK-Cg-bOi" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leadingMargin" id="GRc-Qo-XzF"/>
                             <constraint firstItem="ICH-dS-ovp" firstAttribute="top" secondItem="xlN-5c-ujh" secondAttribute="bottom" constant="9" id="JEW-fB-mZ7"/>
                             <constraint firstItem="ICH-dS-ovp" firstAttribute="trailing" secondItem="Oeq-U5-utG" secondAttribute="trailingMargin" id="JFg-Y5-XgY"/>
+                            <constraint firstItem="pRe-nd-uKJ" firstAttribute="leading" secondItem="PYK-Cg-bOi" secondAttribute="trailing" constant="8" id="L6v-HT-d5e"/>
                             <constraint firstItem="BCv-6b-7xl" firstAttribute="top" secondItem="N9b-Lz-S0S" secondAttribute="bottom" constant="15" id="LgV-qM-Uxq"/>
                             <constraint firstItem="tua-RL-URc" firstAttribute="top" secondItem="Uk7-4V-R1z" secondAttribute="bottom" constant="-49" id="RIN-yW-d0M"/>
                             <constraint firstItem="ZaV-99-AV1" firstAttribute="leading" secondItem="ewS-TE-rhh" secondAttribute="trailing" constant="1" id="Toh-3P-obX"/>
                             <constraint firstItem="BCv-6b-7xl" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leading" id="U7M-bo-8ga"/>
                             <constraint firstAttribute="trailing" secondItem="BCv-6b-7xl" secondAttribute="trailing" id="UzC-uz-seN"/>
                             <constraint firstItem="ZaV-99-AV1" firstAttribute="trailing" secondItem="Oeq-U5-utG" secondAttribute="trailingMargin" constant="-7" id="Y66-Og-mg6"/>
-                            <constraint firstItem="Sjc-p0-m0e" firstAttribute="leading" secondItem="PYK-Cg-bOi" secondAttribute="trailing" constant="15" id="cxO-Ai-gre"/>
+                            <constraint firstItem="Sjc-p0-m0e" firstAttribute="leading" secondItem="pRe-nd-uKJ" secondAttribute="trailing" constant="7" id="bTE-Yn-68v"/>
                             <constraint firstItem="ICH-dS-ovp" firstAttribute="leading" secondItem="Sjc-p0-m0e" secondAttribute="trailing" constant="12" id="fNs-wt-Jry"/>
                             <constraint firstItem="Uk7-4V-R1z" firstAttribute="top" secondItem="BCv-6b-7xl" secondAttribute="bottom" id="pRC-Su-fqS"/>
                             <constraint firstItem="BCv-6b-7xl" firstAttribute="top" secondItem="ewS-TE-rhh" secondAttribute="bottom" constant="16" id="tDK-lN-G0G"/>
@@ -236,6 +248,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="XjV-9F-c6H"/>
                     <connections>
+                        <outlet property="audioButton" destination="pRe-nd-uKJ" id="dfJ-D2-0Eb"/>
                         <outlet property="errorLabel" destination="N9b-Lz-S0S" id="eCK-Jg-9Ro"/>
                         <outlet property="languageLabel" destination="ewS-TE-rhh" id="MXa-G9-ztP"/>
                         <outlet property="meaningLabel" destination="ZaV-99-AV1" id="oE4-aQ-55L"/>
@@ -246,7 +259,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yUY-00-Wcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2938" y="-304"/>
+            <point key="canvasLocation" x="2936.8000000000002" y="-304.4977511244378"/>
         </scene>
         <!--Saved Verbs View Controller-->
         <scene sceneID="wg7-f3-ORb">
@@ -410,6 +423,7 @@
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
         <image name="share" width="19" height="27"/>
+        <image name="speaker" width="23" height="20"/>
         <image name="star" width="28" height="25"/>
     </resources>
 </document>

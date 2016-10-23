@@ -12,14 +12,15 @@ class VerbDetailViewController: UIViewController {
     
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var shareButton: UIButton!
+    @IBOutlet var audioButton: UIButton!
     
     let tabbedMenuSegue = "tabbedMenuSegue"
     let tabbedContentSegue = "tabbedContentSegue"
     
     var loadingView: LoadingView?
+    let speaker = TextSpeaker(locale: Locale(identifier: "de_DE"))
     
     var presenter: ConjugatePresnterType!
-    
     var viewModel = ConjugateViewModel.empty
     
     var tabbedMenuViewController: TabbedMenuViewController?
@@ -44,6 +45,7 @@ class VerbDetailViewController: UIViewController {
         
         verbLabel.set(labelType: .regular)
         errorLabel.set(labelType: .error)
+        
         
         navigationItem.backBarButtonItem?.setTitleTextAttributes([
             NSForegroundColorAttributeName: UIColor.clear
@@ -92,6 +94,14 @@ extension VerbDetailViewController {
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         presenter.toggleSavingVerb()
     }
+    
+    @IBAction func playAudio(_ sender: UIButton) {
+        if speaker.isPlaying(viewModel.verb) {
+            speaker.stop()
+        } else {
+            speaker.play(viewModel.verb)
+        }
+    }
 }
 
 extension VerbDetailViewController: ConjugateView {
@@ -104,6 +114,7 @@ extension VerbDetailViewController: ConjugateView {
         
         saveButton.isHidden = viewModel.isEmpty
         shareButton.isHidden = viewModel.isEmpty
+        audioButton.isHidden = viewModel.isEmpty
         
         verbLabel.isHidden = viewModel.isEmpty
         errorLabel.isHidden = true
