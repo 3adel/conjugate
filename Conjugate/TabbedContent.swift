@@ -4,6 +4,10 @@
 
 import UIKit
 
+protocol TabbedContentDelegate: class {
+    func tabbedViewDidScroll(_ scrollView: UIScrollView)
+}
+
 class TabbedContentViewController: UIViewController {
     var views = [UIView]() {
         didSet {
@@ -14,6 +18,7 @@ class TabbedContentViewController: UIViewController {
     let tabbedContentView: TabbedContentView
     
     weak var menuController: TabController?
+    weak var delegate: TabbedContentDelegate?
     
     var hasFullSizedContent: Bool {
         get {
@@ -156,15 +161,21 @@ class TabbedContentView: UIView {
 extension TabbedContentView: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-            scrollViewDidScroll()
+            scrollViewDidEndScrolling()
         }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        scrollViewDidScroll()
+        scrollViewDidEndScrolling()
     }
     
-    func scrollViewDidScroll() {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView.contentOffset.x > 0 else { return }
+        
+        controller.delegate?.tabbedViewDidScroll(scrollView)
+    }
+    
+    func scrollViewDidEndScrolling() {
         let offsetX = scrollView.contentOffset.x
         let currentPageOffsetX = CGFloat(selectedIndex) * frame.width
         

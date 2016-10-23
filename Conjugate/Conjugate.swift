@@ -124,9 +124,6 @@ extension ConjugateViewController {
 
         }
     }
-
-    
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         search()

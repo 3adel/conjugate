@@ -82,6 +82,7 @@ class VerbDetailViewController: UIViewController {
     func setup(tabbedContentViewController: TabbedContentViewController) {
         
         self.tabbedContentViewController = tabbedContentViewController
+        self.tabbedContentViewController?.delegate = self
     }
     
 }
@@ -181,5 +182,9 @@ extension VerbDetailViewController {
     }
 }
 
-
+extension VerbDetailViewController: TabbedContentDelegate {
+    func tabbedViewDidScroll(_ scrollView: UIScrollView) {
+        UIApplication.shared.sendAction(#selector(resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
 
