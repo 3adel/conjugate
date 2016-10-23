@@ -138,6 +138,7 @@ extension VerbDetailViewController: ConjugateView {
             let tableView = UITableView(frame: CGRect.zero, style: .grouped)
             tableView.allowsMultipleSelection = false
             tableView.allowsSelection = true
+            tableView.keyboardDismissMode = .onDrag
             
             let dataSource = TenseTableViewDataSource(tableView: tableView)
             

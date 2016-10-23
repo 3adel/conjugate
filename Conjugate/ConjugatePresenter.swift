@@ -80,12 +80,18 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     let storage = Storage()
     
+    var isSearching = false
+    
     init(view: ConjugateView) {
         self.view = view
         storage.getSavedVerbs()
     }
     
     func search(for verb: String) {
+        guard !isSearching else { return }
+        
+        isSearching = true
+        
         view.showLoader()
         view.hideErrorMessage()
         
@@ -96,8 +102,7 @@ class ConjugatePresenter: ConjugatePresnterType {
             case .success(let verb):
                 strongSelf.conjugate(verb.name)
             case .failure(let error):
-                strongSelf.view.hideLoader()
-                strongSelf.view.show(errorMessage: error.localizedDescription)
+                strongSelf.handle(error: error)
             }
         }
     }
@@ -110,8 +115,7 @@ class ConjugatePresenter: ConjugatePresnterType {
             case .success(let verb):
                 strongSelf.translate(verb)
             case .failure(let error):
-                strongSelf.view.hideLoader()
-                strongSelf.view.show(errorMessage: error.localizedDescription)
+                strongSelf.handle(error: error)
             }
         }
     }
@@ -124,12 +128,19 @@ class ConjugatePresenter: ConjugatePresnterType {
             
             switch result {
             case .success(let verb):
+                strongSelf.isSearching = false
                 strongSelf.viewModel = strongSelf.makeConjugateViewModel(from: verb)
                 strongSelf.view.updateUI(with: strongSelf.viewModel)
             case .failure(let error):
-                strongSelf.view.show(errorMessage: error.localizedDescription)
+                strongSelf.handle(error: error)
             }
         }
+    }
+    
+    fileprivate func handle(error: Error) {
+        isSearching = false
+        view.hideLoader()
+        view.show(errorMessage: error.localizedDescription)
     }
     
     func toggleSavingVerb() {

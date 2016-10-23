@@ -19,6 +19,7 @@ class ConjugateViewController: UIViewController {
     var searchTimer: Timer?
     
     var viewModel = ConjugateViewModel.empty
+    var searchText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +46,15 @@ class ConjugateViewController: UIViewController {
         
         let grayColor: CGFloat = 230/255.0
         searchView.layer.borderColor = UIColor(red: grayColor, green: grayColor, blue: grayColor, alpha: 1.0).cgColor
+        
+        searchField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     func search() {
-        let text = searchField.text ?? ""
-        presenter.search(for: text.lowercased())
+        let minNumOfCharacters = 2
+        if searchText.characters.count >= minNumOfCharacters {
+            presenter.search(for: searchText.lowercased())
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -100,14 +105,27 @@ extension ConjugateViewController {
 }
 
 extension ConjugateViewController {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text,
+            text.characters.count > searchText.characters.count //Search should only be done if the user is entering characters, not when deleting them
+            else {
+                searchText = textField.text ?? ""
+                return
+        }
         
-        searchTimer?.invalidate()
-        searchTimer = nil
+        searchText = text
+        let minNumOfCharacters = 2
         
-        searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(search), userInfo: nil, repeats: false)
-        
-        return true
+        if text.characters.count >= minNumOfCharacters {
+            searchTimer?.invalidate()
+            searchTimer = nil
+            
+            searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(search), userInfo: nil, repeats: false)
+
+        }
+    }
+
+    
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
