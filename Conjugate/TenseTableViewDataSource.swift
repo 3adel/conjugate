@@ -33,6 +33,7 @@ class TenseTableViewDataSource: NSObject {
         
         if speaker.isPlaying(tense.audioText) {
             speaker.stop()
+            speaker.play(tense.audioText)
         } else {
             speaker.play(tense.audioText)
         }
