@@ -98,6 +98,7 @@ extension VerbDetailViewController {
     @IBAction func playAudio(_ sender: UIButton) {
         if speaker.isPlaying(viewModel.verb) {
             speaker.stop()
+            speaker.play(viewModel.verb)
         } else {
             speaker.play(viewModel.verb)
         }
