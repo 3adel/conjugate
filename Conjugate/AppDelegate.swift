@@ -3,6 +3,8 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -10,6 +12,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
+
+        Fabric.with([Crashlytics.self])
         
         Endpoint.baseURI = "http://api.verbix.com"
         Endpoint.apiKey = "35b1e140-257a-11e6-be88-00089be4dcbc/"
