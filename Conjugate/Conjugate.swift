@@ -106,8 +106,7 @@ extension ConjugateViewController {
 
 extension ConjugateViewController {
     func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text,
-            text.characters.count > searchText.characters.count //Search should only be done if the user is entering characters, not when deleting them
+        guard let text = textField.text
             else {
                 searchText = textField.text ?? ""
                 return
