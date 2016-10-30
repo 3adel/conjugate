@@ -12,3 +12,16 @@
 "mobile.ios.conjugate.error.conjugationNotFound" = "The verb could not be conjugated";
 "mobile.ios.conjugate.error.serverError" = "There was a problem with the server. Please try again";
 "mobile.ios.conjugate.error.genericError" = "There was an unknown problem. Please try again";
+
+"mobile.ios.conjugate.tense.present" = "Präsens";
+"mobile.ios.conjugate.tense.past" = "Präteritum";
+"mobile.ios.conjugate.tense.presentPerfect" = "Perfekt";
+"mobile.ios.conjugate.tense.pastPerfect" = "Plusquam";
+"mobile.ios.conjugate.tense.future" = "Futur I";
+"mobile.ios.conjugate.tense.future2" = "Futur II";
+"mobile.ios.conjugate.tense.conditionalPast" = "Präteritum (würde)";
+"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Plusquam (würde)";
+
+"mobile.ios.conjugate.tenseGroup.indicative" = "Indikativ";
+"mobile.ios.conjugate.tenseGroup.subjunctive" = "Konjunktiv";
+"mobile.ios.conjugate.tenseGroup.imperative" = "Imperative";
