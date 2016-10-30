@@ -119,7 +119,7 @@ struct Tense {
             case .subjunctivePastPerfect:
                 return Name.pastPerfect.text
             case .subjunctivePresentPerfect:
-                return Name.pastPerfect.text
+                return Name.presentPerfect.text
             case .noTense:
                 return rawValue
             default:
