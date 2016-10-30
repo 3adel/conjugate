@@ -206,7 +206,7 @@ class ConjugatePresenter: ConjugatePresnterType {
                 }
             }
             
-            let tenseTabViewModel = TenseTabViewModel(name: tenseGroup.rawValue.capitalized, tenses: tenseViewModels)
+            let tenseTabViewModel = TenseTabViewModel(name: tenseGroup.text.capitalized, tenses: tenseViewModels)
             tenseTabs.append(tenseTabViewModel)
         }
         

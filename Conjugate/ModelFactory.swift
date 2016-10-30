@@ -47,7 +47,6 @@ extension Verb: JSONDictInitable {
         
         var tenses: [TenseGroup: [Tense]] = [
             .indicative: [],
-            .conditional: [],
             .imperative: [],
             .subjunctive: [],
         ]
@@ -58,7 +57,11 @@ extension Verb: JSONDictInitable {
                 guard let tense = Tense(with: value, verbixId: key),
                     let name = value["name"] as? String,
                     let firstComponent = name.firstComponent?.lowercased(),
-                    let tenseGroup = TenseGroup(rawValue: firstComponent) else { continue }
+                    var tenseGroup = TenseGroup(rawValue: firstComponent) else { continue }
+                
+                if tenseGroup == .conditional {
+                    tenseGroup = .subjunctive
+                }
                 
                 tenses[tenseGroup]?.append(tense)
             }
