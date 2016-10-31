@@ -18,6 +18,7 @@
 		245D331D1DBB9AE400E5352F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 245D331F1DBB9AE400E5352F /* Localizable.strings */; };
 		245D332E1DBBA47800E5352F /* VerbDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D332D1DBBA47800E5352F /* VerbDetailViewController.swift */; };
 		245D33421DBBA81400E5352F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D33411DBBA81400E5352F /* Router.swift */; };
+		24A1306C1DC7F0CB009CFCF8 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A1306B1DC7F0CB009CFCF8 /* AlertHandler.swift */; };
 		24A510991DC5DD4E002BE909 /* ViewPresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A510981DC5DD4E002BE909 /* ViewPresenterInterface.swift */; };
 		24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D7261DAAB048004EE256 /* AppDelegate.swift */; };
 		24B9D8DB1DAC51B7004EE256 /* Dodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8D61DAC51A9004EE256 /* Dodo.framework */; };
@@ -226,6 +227,7 @@
 		245D331E1DBB9AE400E5352F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		245D332D1DBBA47800E5352F /* VerbDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbDetailViewController.swift; sourceTree = "<group>"; };
 		245D33411DBBA81400E5352F /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		24A1306B1DC7F0CB009CFCF8 /* AlertHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		24A510981DC5DD4E002BE909 /* ViewPresenterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPresenterInterface.swift; sourceTree = "<group>"; };
 		24B9D7251DAAB048004EE256 /* Conjugate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Conjugate-Bridging-Header.h"; sourceTree = "<group>"; };
 		24B9D7261DAAB048004EE256 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				241B89BA1DB7D1BA0068C189 /* LoadingView.swift */,
 				245D31F61DB8401200E5352F /* SavedVerbs.swift */,
 				245D332D1DBBA47800E5352F /* VerbDetailViewController.swift */,
+				24A1306B1DC7F0CB009CFCF8 /* AlertHandler.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 			files = (
 				24B9D9A91DAEEE60004EE256 /* Conjugate.swift in Sources */,
 				24E6F3CD1DB3118200550C8E /* TabbedMenu.swift in Sources */,
+				24A1306C1DC7F0CB009CFCF8 /* AlertHandler.swift in Sources */,
 				245D33421DBBA81400E5352F /* Router.swift in Sources */,
 				245D332E1DBBA47800E5352F /* VerbDetailViewController.swift in Sources */,
 				F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */,

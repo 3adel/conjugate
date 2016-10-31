@@ -77,7 +77,16 @@ class ConjugatePresenter: ConjugatePresnterType {
     fileprivate func handle(error: Error) {
         isSearching = false
         view.hideLoader()
-        view.show(errorMessage: error.localizedDescription)
+        
+        guard let appError = error as? ConjugateError,
+            appError == .verbNotFound || appError == .conjugationNotFound
+            else {
+                view.show(errorMessage: ConjugateError.genericError.localizedDescription)
+                return
+        }
+        
+        view.updateUI(with: ConjugateViewModel.empty)
+        view.showVerbNotFoundError(message: appError.localizedDescription)
     }
     
     func toggleSavingVerb() {

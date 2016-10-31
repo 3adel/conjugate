@@ -12,6 +12,7 @@ class ConjugateViewController: UIViewController {
     let verbDetailSegue = "verbDetailSegue"
     
     var loadingView: LoadingView?
+    var alertHandler: AlertHandler?
     
     var presenter: ConjugatePresnterType!
     var verbDetailViewController: VerbDetailViewController?
@@ -48,6 +49,8 @@ class ConjugateViewController: UIViewController {
         searchView.layer.borderColor = UIColor(red: grayColor, green: grayColor, blue: grayColor, alpha: 1.0).cgColor
         
         searchField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        alertHandler = AlertHandler(view: view, topLayoutGuide: topLayoutGuide, bottomLayoutGuide: bottomLayoutGuide)
     }
     
     func search() {
@@ -84,6 +87,10 @@ extension ConjugateViewController: ConjugateView {
         self.viewModel = viewModel
         verbDetailViewController?.updateUI(with: viewModel)
     }
+    
+    func showVerbNotFoundError(message: String) {
+        verbDetailViewController?.showVerbNotFoundError(message: message)
+    }
 }
 
 extension ConjugateViewController {
@@ -96,7 +103,7 @@ extension ConjugateViewController {
     }
     
     func show(errorMessage: String) {
-        verbDetailViewController?.show(errorMessage: errorMessage)
+        alertHandler?.show(errorMessage: errorMessage)
     }
     
     func hideErrorMessage() {
@@ -106,6 +113,8 @@ extension ConjugateViewController {
 
 extension ConjugateViewController {
     func textFieldDidChange(_ textField: UITextField) {
+        hideErrorMessage()
+        
         guard let text = textField.text
             else {
                 searchText = textField.text ?? ""
@@ -116,15 +125,19 @@ extension ConjugateViewController {
         let minNumOfCharacters = 2
         
         if text.characters.count >= minNumOfCharacters {
-            searchTimer?.invalidate()
-            searchTimer = nil
-            
+            clearSearchTimer()
             searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(search), userInfo: nil, repeats: false)
 
         }
     }
     
+    func clearSearchTimer() {
+        searchTimer?.invalidate()
+        searchTimer = nil
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        clearSearchTimer()
         search()
         view.endEditing(true)
         return true

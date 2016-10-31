@@ -24,7 +24,7 @@ extension View {
 
 protocol ConjugateView: View {
     func updateUI(with viewModel: ConjugateViewModel)
-    func showVerbNotFoundError(
+    func showVerbNotFoundError(message: String)
 }
 
 protocol ConjugatePresnterType {
