@@ -12,6 +12,7 @@ protocol SavedVerbView: View {
 protocol SavedVerbPresenterType {
     func getSavedVerbs()
     func openVerbDetails(at index: Int)
+    func deleteVerb(at index: Int)
 }
 
 struct SavedVerbViewModel {
@@ -71,6 +72,11 @@ class SavedVerbPresenter: SavedVerbPresenterType {
         let router = Router(view: view)
         
         router?.openDetail(of: verb)
+    }
+    
+    func deleteVerb(at index: Int) {
+        storage.remove(verb: verbs[index])
+        getSavedVerbs()
     }
     
 }
