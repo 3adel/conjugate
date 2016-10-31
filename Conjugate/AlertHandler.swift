@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Dodo
 
-class AlertView {
+class AlertHandler {
     let view: UIView
     
     required init(view: UIView, topLayoutGuide: UILayoutSupport? = nil, bottomLayoutGuide: UILayoutSupport? = nil) {
@@ -19,20 +19,25 @@ class AlertView {
     }
     
     func setupDodo(_ topLayoutGuide: UILayoutSupport?, bottomLayoutGuide: UILayoutSupport?) {
-        view.dodo.style.leftButton.icon = .close
-        view.dodo.style.leftButton.onTap = hide
+        view.dodo.style.bar.cornerRadius = 0
+        view.dodo.style.bar.animationShow = DodoAnimations.slideVertically.show
+        view.dodo.style.bar.animationHide = DodoAnimations.slideVertically.hide
+        view.dodo.style.bar.hideOnTap = true
+        view.dodo.style.bar.backgroundColor = DodoColor.fromHexString("#ED2939")
+        
         
         view.dodo.bottomLayoutGuide = bottomLayoutGuide
         view.dodo.topLayoutGuide = topLayoutGuide
+    
     }
     
-    func showError(_ message: String) {
-        view.dodo.error(message)
+    func show(errorMessage: String) {
+        view.dodo.error(errorMessage)
         autoHide()
     }
     
-    func showSuccess(_ message: String) {
-        view.dodo.success(message)
+    func show(succesMessage: String) {
+        view.dodo.success(succesMessage)
         autoHide()
     }
     
