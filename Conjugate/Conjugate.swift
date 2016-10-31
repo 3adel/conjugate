@@ -28,6 +28,16 @@ class ConjugateViewController: UIViewController {
         setupPresenter()
         
         updateUI(with: viewModel)
+        
+        let launchChecker = AppLaunchChecker()
+        if launchChecker.isFirstInstall {
+            let welcomeVerb = "begrüßen"
+            searchField.text = welcomeVerb
+            searchText = welcomeVerb
+            search()
+            
+            launchChecker.appLaunched()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
