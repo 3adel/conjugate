@@ -44,7 +44,7 @@ class VerbDetailViewController: UIViewController {
         super.setupUI()
         
         verbLabel.set(labelType: .regular)
-        errorLabel.set(labelType: .error)
+        errorLabel.set(labelType: .regular)
         
         
         navigationItem.backBarButtonItem?.setTitleTextAttributes([
@@ -166,6 +166,11 @@ extension VerbDetailViewController: ConjugateView {
         
         tabbedMenuViewController?.tabs = tabs
         tabbedContentViewController?.views = tabTableViews
+    }
+    
+    func showVerbNotFoundError(message: String) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
     }
 }
 
