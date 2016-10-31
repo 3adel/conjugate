@@ -7,7 +7,7 @@ import UIKit
 
 class ConjugateViewController: UIViewController {
     @IBOutlet var searchView: UIView!
-    @IBOutlet var searchField: UITextField!
+    @IBOutlet var searchField: FlexLanguageTextField!
     
     let verbDetailSegue = "verbDetailSegue"
     
@@ -37,6 +37,8 @@ class ConjugateViewController: UIViewController {
     
     override func setupUI() {
         super.setupUI()
+        
+        searchField.locale = "de_DE"
         
         navigationController?.isNavigationBarHidden = true
         
