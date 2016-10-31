@@ -31,6 +31,7 @@ class SavedVerbsViewController: UIViewController {
         title = TabBarController.Tab.saved.name
         
         navigationController?.navigationBar.tintColor = Theme.mainTintColor
+        tableView.tableFooterView = UIView()
     }
 }
 
@@ -38,7 +39,7 @@ class SavedVerbsViewController: UIViewController {
 extension SavedVerbsViewController: SavedVerbView {
     func update(with viewModel: SavedVerbViewModel) {
         self.viewModel = viewModel
-        tableView.reloadData()
+        tableView.reloadSections([0], with: .automatic)
     }
 }
 
@@ -63,6 +64,16 @@ extension SavedVerbsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.openVerbDetails(at: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            presenter.deleteVerb(at: indexPath.row)
+        }
     }
 }
 
