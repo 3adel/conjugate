@@ -7,7 +7,7 @@
 */
 
 
-"mobile.ios.conjugate.error.verbNotFound" = "The verb you searched for could not be found";
+"mobile.ios.conjugate.error.verbNotFound" = "Verb is not found. Check spelling please!";
 "mobile.ios.conjugate.error.translationNotFound" = "The translation for the verb could not be found";
 "mobile.ios.conjugate.error.conjugationNotFound" = "The verb could not be conjugated";
 "mobile.ios.conjugate.error.serverError" = "There was a problem with the server. Please try again";
