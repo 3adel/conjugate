@@ -77,6 +77,8 @@ class SavedVerbPresenter: SavedVerbPresenterType {
     func deleteVerb(at index: Int) {
         storage.remove(verb: verbs[index])
         getSavedVerbs()
+        
+        view.show(successMessage: LocalizedString("mobile.ios.conjugate.verbDeleted"))
     }
     
 }

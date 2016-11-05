@@ -26,3 +26,6 @@
 "mobile.ios.conjugate.tenseGroup.subjunctive" = "Konjunktiv";
 "mobile.ios.conjugate.tenseGroup.imperative" = "Imperative";
 
+"mobile.ios.conjugate.verbSaved" = "The verb has been saved.";
+"mobile.ios.conjugate.verbDeleted" = "The verb has been deleted.";
+

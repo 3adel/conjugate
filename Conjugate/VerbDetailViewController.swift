@@ -22,6 +22,8 @@ class VerbDetailViewController: UIViewController {
     var presenter: ConjugatePresnterType!
     var viewModel = ConjugateViewModel.empty
     
+    var alertHandler: AlertHandler?
+    
     var tabbedMenuViewController: TabbedMenuViewController?
     var tabbedContentViewController: TabbedContentViewController?
     
@@ -47,6 +49,7 @@ class VerbDetailViewController: UIViewController {
         
         audioButton.images = [#imageLiteral(resourceName: "speaker_1"), #imageLiteral(resourceName: "speaker"), #imageLiteral(resourceName: "speaker_3")]
 
+        alertHandler = AlertHandler(view: view, topLayoutGuide: topLayoutGuide, bottomLayoutGuide: bottomLayoutGuide)
         
         navigationItem.backBarButtonItem?.setTitleTextAttributes([
             NSForegroundColorAttributeName: UIColor.clear
@@ -176,6 +179,10 @@ extension VerbDetailViewController: ConjugateView {
     
     func stopAnimatingInfinitiveAudioButton() {
         audioButton.stopAnimating()
+    }
+    
+    func show(successMessage: String) {
+        alertHandler?.show(succesMessage: successMessage)
     }
 }
 
