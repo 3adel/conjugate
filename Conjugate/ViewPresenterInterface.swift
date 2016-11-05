@@ -13,6 +13,7 @@ protocol View {
     func hideLoader()
     func show(errorMessage: String)
     func hideErrorMessage()
+    func show(successMessage: String)
 }
 
 extension View {
@@ -20,6 +21,7 @@ extension View {
     func hideLoader() {}
     func show(errorMessage: String) {}
     func hideErrorMessage() {}
+    func show(successMessage: String) {}
 }
 
 protocol ConjugateView: View {

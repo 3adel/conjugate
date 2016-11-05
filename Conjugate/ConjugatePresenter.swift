@@ -102,8 +102,10 @@ class ConjugatePresenter: ConjugatePresnterType {
         
         if storage.verbExists(verb) {
             storage.remove(verb: verb)
+            view.show(successMessage: LocalizedString("mobile.ios.conjugate.verbDeleted"))
         } else {
-           storage.save(verb: verb)
+            storage.save(verb: verb)
+            view.show(successMessage: LocalizedString("mobile.ios.conjugate.verbSaved"))
         }
         
         viewModel = makeConjugateViewModel(from: verb)

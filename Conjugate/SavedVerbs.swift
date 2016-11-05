@@ -12,6 +12,8 @@ class SavedVerbsViewController: UIViewController {
     
     var presenter: SavedVerbPresenterType!
     
+    var alertHandler: AlertHandler?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPresenter()
@@ -32,6 +34,7 @@ class SavedVerbsViewController: UIViewController {
         
         navigationController?.navigationBar.tintColor = Theme.mainTintColor
         tableView.tableFooterView = UIView()
+        alertHandler = AlertHandler(view: view, topLayoutGuide: topLayoutGuide, bottomLayoutGuide: bottomLayoutGuide)
     }
 }
 
@@ -40,6 +43,10 @@ extension SavedVerbsViewController: SavedVerbView {
     func update(with viewModel: SavedVerbViewModel) {
         self.viewModel = viewModel
         tableView.reloadSections([0], with: .automatic)
+    }
+    
+    func show(successMessage: String) {
+        alertHandler?.show(succesMessage: successMessage)
     }
 }
 

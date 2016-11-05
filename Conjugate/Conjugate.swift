@@ -129,6 +129,10 @@ extension ConjugateViewController {
     func hideErrorMessage() {
         verbDetailViewController?.hideErrorMessage()
     }
+    
+    func show(successMessage: String) {
+        alertHandler?.show(succesMessage: successMessage)
+    }
 }
 
 extension ConjugateViewController {

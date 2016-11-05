@@ -23,8 +23,6 @@ class AlertHandler {
         view.dodo.style.bar.animationShow = DodoAnimations.slideVertically.show
         view.dodo.style.bar.animationHide = DodoAnimations.slideVertically.hide
         view.dodo.style.bar.hideOnTap = true
-        view.dodo.style.bar.backgroundColor = DodoColor.fromHexString("#ED2939")
-        
         
         view.dodo.bottomLayoutGuide = bottomLayoutGuide
         view.dodo.topLayoutGuide = topLayoutGuide
@@ -41,8 +39,16 @@ class AlertHandler {
         autoHide()
     }
     
+    func styleBarForSuccess() {
+        view.dodo.style.bar.backgroundColor = DodoColor.fromHexString("#03C03C")
+    }
+    
+    func styleBarForError() {
+        view.dodo.style.bar.backgroundColor = DodoColor.fromHexString("#ED2939")
+    }
+    
     func autoHide() {
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hide), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(hide), userInfo: nil, repeats: false)
     }
     
     @objc func hide() {
