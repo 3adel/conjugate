@@ -12,13 +12,12 @@ class VerbDetailViewController: UIViewController {
     
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var shareButton: UIButton!
-    @IBOutlet var audioButton: UIButton!
+    @IBOutlet var audioButton: AnimatedButton!
     
     let tabbedMenuSegue = "tabbedMenuSegue"
     let tabbedContentSegue = "tabbedContentSegue"
     
     var loadingView: LoadingView?
-    let speaker = TextSpeaker(locale: Locale(identifier: "de_DE"))
     
     var presenter: ConjugatePresnterType!
     var viewModel = ConjugateViewModel.empty
@@ -46,6 +45,8 @@ class VerbDetailViewController: UIViewController {
         verbLabel.set(labelType: .regular)
         errorLabel.set(labelType: .regular)
         
+        audioButton.images = [#imageLiteral(resourceName: "speaker_1"), #imageLiteral(resourceName: "speaker"), #imageLiteral(resourceName: "speaker_3")]
+
         
         navigationItem.backBarButtonItem?.setTitleTextAttributes([
             NSForegroundColorAttributeName: UIColor.clear
@@ -96,14 +97,10 @@ extension VerbDetailViewController {
     }
     
     @IBAction func playAudio(_ sender: UIButton) {
-        if speaker.isPlaying(viewModel.verb) {
-            speaker.stop()
-            speaker.play(viewModel.verb)
-        } else {
-            speaker.play(viewModel.verb)
-        }
+        presenter.playAudioForInfinitveVerb()
     }
 }
+
 
 extension VerbDetailViewController: ConjugateView {
     func updateUI(with viewModel: ConjugateViewModel) {
@@ -171,6 +168,14 @@ extension VerbDetailViewController: ConjugateView {
     func showVerbNotFoundError(message: String) {
         errorLabel.text = message
         errorLabel.isHidden = false
+    }
+    
+    func animateInfinitveAudioButton() {
+        audioButton.startAnimating()
+    }
+    
+    func stopAnimatingInfinitiveAudioButton() {
+        audioButton.stopAnimating()
     }
 }
 

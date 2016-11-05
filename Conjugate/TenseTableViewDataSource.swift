@@ -15,21 +15,28 @@ class TenseTableViewDataSource: NSObject {
         }
     }
     
+    var playedAudioButton: AnimatedButton?
+    
     init(tableView: UITableView) {
         self.tableView = tableView
         
         super.init()
         
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.register(UINib.init(nibName: TenseTableViewCell.nib, bundle: Bundle.main), forCellReuseIdentifier: TenseTableViewCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib.init(nibName: TenseTableViewCell.nib, bundle: Bundle.main), forCellReuseIdentifier: TenseTableViewCell.identifier)
+        
+        speaker.delegate = self
     }
     
     @objc func soundButtonClicked(_ button: UIButton) {
         let location = tableView.convert(button.center, from: button.superview)
-        guard let indexPath = tableView.indexPathForRow(at: location) else { return }
+        guard let indexPath = tableView.indexPathForRow(at: location),
+            let animatedButton = button as? AnimatedButton else { return }
         
         let tense = viewModel.tenses[indexPath.section].forms[indexPath.row]
+        
+        playedAudioButton = animatedButton
         
         if speaker.isPlaying(tense.audioText) {
             speaker.stop()
@@ -37,7 +44,16 @@ class TenseTableViewDataSource: NSObject {
         } else {
             speaker.play(tense.audioText)
         }
+    }
+}
 
+extension TenseTableViewDataSource: TextSpeakerDelegate {
+    func speakerDidStartPlayback(for text: String) {
+        playedAudioButton?.startAnimating()
+    }
+    
+    func speakerDidFinishPlayback(for text: String) {
+        playedAudioButton?.stopAnimating()
     }
 }
 
@@ -53,13 +69,18 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TenseTableViewCell.identifier) as? TenseTableViewCell else { return UITableViewCell() }
+        guard let cell = cellFor(section: indexPath.section, row: indexPath.row) else { return UITableViewCell() }
         
-        cell.audioButton.addTarget(self, action: #selector(soundButtonClicked(_:)), for: .touchUpInside)
+        return cell
+    }
+    
+    func cellFor(section: Int, row: Int) -> TenseTableViewCell? {
+         let cell = tableView.dequeueReusableCell(withIdentifier: TenseTableViewCell.identifier) as? TenseTableViewCell
+        cell?.audioButton.addTarget(self, action: #selector(soundButtonClicked(_:)), for: .touchUpInside)
         
-        let tense = viewModel.tenses[indexPath.section].forms[indexPath.row]
+        let tense = viewModel.tenses[section].forms[row]
         
-        cell.setup(with: tense)
+        cell?.render(with: tense)
         
         return cell
     }
@@ -75,9 +96,17 @@ class TenseTableViewCell: UITableViewCell {
     
     @IBOutlet var pronounLabel: UILabel!
     @IBOutlet var verbLabel: UILabel!
-    @IBOutlet var audioButton: UIButton!
+    @IBOutlet var audioButton: AnimatedButton!
     
-    func setup(with viewModel: FormViewModel) {
+    override func awakeFromNib() {
+        setupUI()
+    }
+    
+    func setupUI() {
+        audioButton.images = [#imageLiteral(resourceName: "speaker_1"), #imageLiteral(resourceName: "speaker"), #imageLiteral(resourceName: "speaker_3")]
+    }
+    
+    func render(with viewModel: FormViewModel) {
         pronounLabel.text = viewModel.pronoun
         verbLabel.text = viewModel.verb
         

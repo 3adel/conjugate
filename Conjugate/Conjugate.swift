@@ -103,6 +103,14 @@ extension ConjugateViewController: ConjugateView {
     func showVerbNotFoundError(message: String) {
         verbDetailViewController?.showVerbNotFoundError(message: message)
     }
+    
+    func animateInfinitveAudioButton() {
+        verbDetailViewController?.animateInfinitveAudioButton()
+    }
+    
+    func stopAnimatingInfinitiveAudioButton() {
+        verbDetailViewController?.stopAnimatingInfinitiveAudioButton()
+    }
 }
 
 extension ConjugateViewController {

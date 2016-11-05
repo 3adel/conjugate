@@ -5,8 +5,15 @@
 import Foundation
 import AVFoundation
 
-class TextSpeaker {
+protocol TextSpeakerDelegate {
+    func speakerDidStartPlayback(for text: String)
+    func speakerDidFinishPlayback(for text: String)
+}
+
+class TextSpeaker: NSObject {
     var locale = Locale(identifier: "de_DE")
+    
+    var delegate: TextSpeakerDelegate?
     
     let synthesizer = AVSpeechSynthesizer()
     
@@ -17,6 +24,10 @@ class TextSpeaker {
     
     init(locale: Locale) {
         self.locale = locale
+        
+        super.init()
+        
+        synthesizer.delegate = self
     }
     
     func play(_ text: String) {
@@ -32,6 +43,8 @@ class TextSpeaker {
         synthesizer.speak(utterance)
         isPlaying = true
         textPlayed = text
+        
+        delegate?.speakerDidStartPlayback(for: text)
     }
     
     func pause() {
@@ -62,5 +75,19 @@ class TextSpeaker {
         catch let error as NSError {
             print("Error: Could not setActive to true: \(error), \(error.userInfo)")
         }
+    }
+}
+
+extension TextSpeaker: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
+        delegate?.speakerDidFinishPlayback(for: textPlayed)
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        delegate?.speakerDidFinishPlayback(for: textPlayed)
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        delegate?.speakerDidFinishPlayback(for: textPlayed)
     }
 }
