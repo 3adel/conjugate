@@ -13,6 +13,8 @@ class ConjugatePresenter: ConjugatePresnterType {
     var verb: Verb?
     
     let searchLocale = Locale(identifier: "de_DE")
+    let speaker = TextSpeaker(locale: Locale(identifier: "de_DE"))
+
     let locale = Locale(identifier: "en_US")
     
     let storage = Storage()
@@ -22,6 +24,7 @@ class ConjugatePresenter: ConjugatePresnterType {
     init(view: ConjugateView) {
         self.view = view
         storage.getSavedVerbs()
+        speaker.delegate = self
     }
     
     func search(for verb: String) {
@@ -87,6 +90,11 @@ class ConjugatePresenter: ConjugatePresnterType {
         
         view.updateUI(with: ConjugateViewModel.empty)
         view.showVerbNotFoundError(message: appError.localizedDescription)
+    }
+    
+    func playAudioForInfinitveVerb() {
+        guard let name = verb?.name else { return }
+        speaker.play(name)
     }
     
     func toggleSavingVerb() {
@@ -169,5 +177,15 @@ class ConjugatePresenter: ConjugatePresnterType {
         
         let viewModel = ConjugateViewModel(verb: verb.name, language: locale.languageCode!.uppercased(), meaning: meaningText, starSelected: !verbIsSaved, tenseTabs: tenseTabs)
         return viewModel
+    }
+}
+
+extension ConjugatePresenter: TextSpeakerDelegate {
+    func speakerDidStartPlayback(for text: String) {
+        view.animateInfinitveAudioButton()
+    }
+    
+    func speakerDidFinishPlayback(for text: String) {
+        view.stopAnimatingInfinitiveAudioButton()
     }
 }

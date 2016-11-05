@@ -25,10 +25,13 @@ extension View {
 protocol ConjugateView: View {
     func updateUI(with viewModel: ConjugateViewModel)
     func showVerbNotFoundError(message: String)
+    func animateInfinitveAudioButton()
+    func stopAnimatingInfinitiveAudioButton()
 }
 
 protocol ConjugatePresnterType {
     func search(for verb: String)
+    func playAudioForInfinitveVerb()
     func toggleSavingVerb()
     func updateViewModel()
 }
