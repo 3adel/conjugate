@@ -179,7 +179,13 @@ public class TabbedMenuView: UIView {
         selectedIndex = 0
         selectedBottomLine.isHidden = buttons.isEmpty
         
-        guard !buttons.isEmpty else { return }
+        guard !buttons.isEmpty
+            else {
+                isHidden = true
+                return
+        }
+        
+        isHidden = false
 
         updateSelectedButtons(newIndex: selectedIndex)
         moveBottomLine(from: buttons[selectedIndex], to: buttons[selectedIndex], animate: false)
