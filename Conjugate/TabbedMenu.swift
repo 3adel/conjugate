@@ -215,7 +215,7 @@ public class TabbedMenuView: UIView {
         button.frame = buttonFrame
         
         scrollView.addSubview(button)
-        scrollView.contentSize = CGSize(width: button.frame.right + theme.buttonPadding, height: button.frame.height)
+        scrollView.contentSize = CGSize(width: button.frame.right + theme.buttonPadding, height: 0)
         buttons.append(button)
     }
     
