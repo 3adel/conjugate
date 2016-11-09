@@ -183,6 +183,9 @@
                                     <constraint firstAttribute="height" constant="32" id="SFg-WN-LHw"/>
                                 </constraints>
                                 <state key="normal" image="share"/>
+                                <connections>
+                                    <action selector="shareButtonPressed:" destination="JkI-yB-tlS" eventType="touchUpInside" id="4eC-8U-sPj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICH-dS-ovp">
                                 <rect key="frame" x="327" y="9" width="32" height="32"/>

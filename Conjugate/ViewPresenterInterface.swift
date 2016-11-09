@@ -38,6 +38,7 @@ protocol ConjugatePresnterType {
     func playAudioForInfinitveVerb()
     func toggleSavingVerb()
     func updateViewModel()
+    func shareVerb()
 }
 
 protocol SettingsView: View {
