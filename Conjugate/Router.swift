@@ -6,13 +6,13 @@ import UIKit
 
 class Router {
     
-    let viewController: UIViewController
+    let rootViewController: UIViewController
     
     init(viewController: UIViewController) {
-        self.viewController = viewController
+        self.rootViewController = viewController
     }
     
-    convenience init?(view: SavedVerbView) {
+    convenience init?(view: View) {
         guard let viewController = view as? UIViewController
             else { return nil }
         self.init(viewController: viewController)
@@ -26,7 +26,15 @@ class Router {
         vc.presenter = conjugatePresenter
         vc.viewModel = conjugatePresenter.makeConjugateViewModel(from: verb)
         
-        viewController.navigationController?.pushViewController(vc, animated: true)
+        rootViewController.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func show(viewController: UIViewController) {
+        rootViewController.present(viewController, animated: true, completion: nil)
+    }
+    
+    func dismiss() {
+        rootViewController.dismiss(animated: true, completion: nil)
     }
 }
 

@@ -9,6 +9,7 @@ class TabBarController: UITabBarController {
     enum Tab: String {
         case conjugate
         case saved
+        case more
         
         var navigationControllerIdentifier: String {
             return self.rawValue+"NavigationController"
@@ -34,11 +35,11 @@ class TabBarController: UITabBarController {
         static var allTabs: [Tab] {
             return [
                 .conjugate,
-                .saved
+                .saved,
+                .more
             ]
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +51,14 @@ class TabBarController: UITabBarController {
     private func setupTabs() {
         var controllers = [UIViewController]()
         Tab.allTabs.forEach {
-            guard let tabNavigationController = storyboard?.instantiateViewController(withIdentifier: $0.navigationControllerIdentifier),
+            guard let tabNavigationController = storyboard?.instantiateViewController(withIdentifier: $0.navigationControllerIdentifier) as? UINavigationController,
                 let tabImage = $0.image else { return }
             
             let tabBarItem = UITabBarItem(title: $0.name, image: tabImage, tag: 0)
             tabNavigationController.tabBarItem = tabBarItem
             
-            tabNavigationController.navigationController?.navigationBar.tintColor = Theme.mainTintColor
+            tabNavigationController.navigationBar.tintColor = Theme.mainTintColor
+            tabNavigationController.viewControllers.first?.title = $0.name
             
             controllers.append(tabNavigationController)
         }

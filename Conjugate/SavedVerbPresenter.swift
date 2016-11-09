@@ -31,7 +31,8 @@ struct SavedVerbCellViewModel {
 
 class SavedVerbPresenter: SavedVerbPresenterType {
     let storage = Storage()
-    let view: SavedVerbView
+    
+    unowned let view: SavedVerbView
     
     var viewModel = SavedVerbViewModel.empty
     var verbs = [Verb]()

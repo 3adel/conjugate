@@ -8,12 +8,13 @@
 
 import Foundation
 
-protocol View {
+protocol View: class {
     func showLoader()
     func hideLoader()
     func show(errorMessage: String)
     func hideErrorMessage()
     func show(successMessage: String)
+    func dismissView()
 }
 
 extension View {
@@ -22,6 +23,7 @@ extension View {
     func show(errorMessage: String) {}
     func hideErrorMessage() {}
     func show(successMessage: String) {}
+    func dismissView() {}
 }
 
 protocol ConjugateView: View {
@@ -36,6 +38,15 @@ protocol ConjugatePresnterType {
     func playAudioForInfinitveVerb()
     func toggleSavingVerb()
     func updateViewModel()
+}
+
+protocol SettingsView: View {
+    func render(with viewModel: SettingsViewModel)
+}
+
+protocol SettingsPresenterType {
+    func getOptions()
+    func optionSelected(at index: Int)
 }
 
 struct ConjugateViewModel {
@@ -76,4 +87,11 @@ struct FormViewModel {
     let audioText: String
     let textColor: (Float, Float, Float)
     let audioImageHidden: Bool
+}
+
+struct SettingsViewModel {
+    let options: [String]
+    let footerTitle: String
+    
+    static let empty: SettingsViewModel = SettingsViewModel(options: [], footerTitle: "")
 }
