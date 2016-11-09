@@ -30,8 +30,6 @@ class SavedVerbsViewController: UIViewController {
     }
     
     override func setupUI() {
-        title = TabBarController.Tab.saved.name
-        
         navigationController?.navigationBar.tintColor = Theme.mainTintColor
         tableView.tableFooterView = UIView()
         alertHandler = AlertHandler(view: view, topLayoutGuide: topLayoutGuide, bottomLayoutGuide: bottomLayoutGuide)
