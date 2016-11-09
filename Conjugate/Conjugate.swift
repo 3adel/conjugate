@@ -87,13 +87,6 @@ class ConjugateViewController: UIViewController {
     }
 }
 
-//Actions
-extension ConjugateViewController {
-    @IBAction func saveButtonPressed(_ sender: UIButton) {
-        presenter.toggleSavingVerb()
-    }
-}
-
 extension ConjugateViewController: ConjugateView {
     func updateUI(with viewModel: ConjugateViewModel) {
         self.viewModel = viewModel

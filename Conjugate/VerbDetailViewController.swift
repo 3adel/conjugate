@@ -102,8 +102,10 @@ extension VerbDetailViewController {
     @IBAction func playAudio(_ sender: UIButton) {
         presenter.playAudioForInfinitveVerb()
     }
+    @IBAction func shareButtonPressed(_ sender: UIButton) {
+        presenter.shareVerb()
+    }
 }
-
 
 extension VerbDetailViewController: ConjugateView {
     func updateUI(with viewModel: ConjugateViewModel) {

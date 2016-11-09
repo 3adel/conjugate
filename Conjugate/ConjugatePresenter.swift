@@ -119,6 +119,13 @@ class ConjugatePresenter: ConjugatePresnterType {
         view.updateUI(with: viewModel)
     }
     
+    func shareVerb() {
+        guard let verb = verb else { return }
+        
+        let shareController = ShareController(view: view)
+        shareController.share(verb: verb)
+    }
+    
     func makeConjugateViewModel(from verb: Verb) -> ConjugateViewModel {
         self.verb = verb
         
