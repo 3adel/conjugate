@@ -7,7 +7,8 @@ import Foundation
 
 class ConjugatePresenter: ConjugatePresnterType {
     let dataStore = DataStore()
-    let view: ConjugateView
+    
+    unowned let view: ConjugateView
     
     var viewModel = ConjugateViewModel.empty
     var verb: Verb?
