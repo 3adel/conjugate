@@ -21,6 +21,11 @@
 		245D331D1DBB9AE400E5352F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 245D331F1DBB9AE400E5352F /* Localizable.strings */; };
 		245D332E1DBBA47800E5352F /* VerbDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D332D1DBBA47800E5352F /* VerbDetailViewController.swift */; };
 		245D33421DBBA81400E5352F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D33411DBBA81400E5352F /* Router.swift */; };
+		247770D11DD3AC030012EDFF /* EmailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247770D01DD3AC030012EDFF /* EmailComposer.swift */; };
+		247770D31DD3AC5A0012EDFF /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247770D21DD3AC5A0012EDFF /* ShareController.swift */; };
+		248597741DCFB884006D7AA2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248597731DCFB884006D7AA2 /* AVFoundation.framework */; };
+		248597871DCFBACB006D7AA2 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248597861DCFBACB006D7AA2 /* MoreViewController.swift */; };
+		248597891DCFBCC8006D7AA2 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248597881DCFBCC8006D7AA2 /* SettingsPresenter.swift */; };
 		24A1306C1DC7F0CB009CFCF8 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A1306B1DC7F0CB009CFCF8 /* AlertHandler.swift */; };
 		24A130821DC7F96A009CFCF8 /* FlexLanguageTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A130811DC7F96A009CFCF8 /* FlexLanguageTextField.m */; };
 		24A510991DC5DD4E002BE909 /* ViewPresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A510981DC5DD4E002BE909 /* ViewPresenterInterface.swift */; };
@@ -234,6 +239,11 @@
 		245D331E1DBB9AE400E5352F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		245D332D1DBBA47800E5352F /* VerbDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerbDetailViewController.swift; sourceTree = "<group>"; };
 		245D33411DBBA81400E5352F /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		247770D01DD3AC030012EDFF /* EmailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailComposer.swift; sourceTree = "<group>"; };
+		247770D21DD3AC5A0012EDFF /* ShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
+		248597731DCFB884006D7AA2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		248597861DCFBACB006D7AA2 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		248597881DCFBCC8006D7AA2 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		24A1306B1DC7F0CB009CFCF8 /* AlertHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		24A130811DC7F96A009CFCF8 /* FlexLanguageTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexLanguageTextField.m; sourceTree = "<group>"; };
 		24A130951DC7F980009CFCF8 /* FlexLanguageTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlexLanguageTextField.h; sourceTree = "<group>"; };
@@ -274,6 +284,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				248597741DCFB884006D7AA2 /* AVFoundation.framework in Frameworks */,
 				24B9D99D1DAED1CA004EE256 /* Result.framework in Frameworks */,
 				102DEF5A1DC15616001A8872 /* Fabric.framework in Frameworks */,
 				24B9D8DB1DAC51B7004EE256 /* Dodo.framework in Frameworks */,
@@ -300,6 +311,23 @@
 				245D33411DBBA81400E5352F /* Router.swift */,
 			);
 			name = Router;
+			sourceTree = "<group>";
+		};
+		247770BE1DD3ABF70012EDFF /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				247770D01DD3AC030012EDFF /* EmailComposer.swift */,
+				247770D21DD3AC5A0012EDFF /* ShareController.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		248597721DCFB884006D7AA2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				248597731DCFB884006D7AA2 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		24A510861DC5DD22002BE909 /* View Presenter Interface */ = {
@@ -384,6 +412,7 @@
 				24A130811DC7F96A009CFCF8 /* FlexLanguageTextField.m */,
 				24A130951DC7F980009CFCF8 /* FlexLanguageTextField.h */,
 				2435169A1DCA89F900382E5A /* AnimatedButton.swift */,
+				248597861DCFBACB006D7AA2 /* MoreViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -393,6 +422,7 @@
 			children = (
 				24B9D9AD1DAEF303004EE256 /* ConjugatePresenter.swift */,
 				245D31F81DB8411F00E5352F /* SavedVerbPresenter.swift */,
+				248597881DCFBCC8006D7AA2 /* SettingsPresenter.swift */,
 			);
 			name = Presenter;
 			sourceTree = "<group>";
@@ -407,6 +437,7 @@
 				24B9D89D1DAC519B004EE256 /* Alamofire.xcodeproj */,
 				F56F08BA1CFA61DB008BD25B /* Conjugate */,
 				F56F08B91CFA61DB008BD25B /* Products */,
+				248597721DCFB884006D7AA2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -421,6 +452,7 @@
 		F56F08BA1CFA61DB008BD25B /* Conjugate */ = {
 			isa = PBXGroup;
 			children = (
+				247770BE1DD3ABF70012EDFF /* Utility */,
 				24B9D7261DAAB048004EE256 /* AppDelegate.swift */,
 				245D33401DBBA80500E5352F /* Router */,
 				24A510861DC5DD22002BE909 /* View Presenter Interface */,
@@ -493,7 +525,7 @@
 				TargetAttributes = {
 					F56F08B71CFA61DB008BD25B = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 2UB7THC2G3;
+						DevelopmentTeam = A88UHFQD28;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -697,15 +729,18 @@
 			files = (
 				24B9D9A91DAEEE60004EE256 /* Conjugate.swift in Sources */,
 				24E6F3CD1DB3118200550C8E /* TabbedMenu.swift in Sources */,
+				247770D11DD3AC030012EDFF /* EmailComposer.swift in Sources */,
 				24A1306C1DC7F0CB009CFCF8 /* AlertHandler.swift in Sources */,
 				245D33421DBBA81400E5352F /* Router.swift in Sources */,
 				245D332E1DBBA47800E5352F /* VerbDetailViewController.swift in Sources */,
+				248597871DCFBACB006D7AA2 /* MoreViewController.swift in Sources */,
 				F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */,
 				245D31E41DB82E9500E5352F /* Storage.swift in Sources */,
 				24E6F3EA1DB3624F00550C8E /* TabbedContent.swift in Sources */,
 				24B9D9AB1DAEF062004EE256 /* TabBarController.swift in Sources */,
 				245D31F91DB8411F00E5352F /* SavedVerbPresenter.swift in Sources */,
 				24E6F4011DB3EBAC00550C8E /* TextSpeaker.swift in Sources */,
+				247770D31DD3AC5A0012EDFF /* ShareController.swift in Sources */,
 				2409921D1DC80256008F763D /* UserDefaultKeys.swift in Sources */,
 				24B9D8EB1DAC5232004EE256 /* DataStore.swift in Sources */,
 				245D32EA1DBB76FE00E5352F /* Localization.swift in Sources */,
@@ -723,6 +758,7 @@
 				24B9D9A41DAED9D5004EE256 /* ModelFactory.swift in Sources */,
 				24B9D8F11DAC542F004EE256 /* WebClient.swift in Sources */,
 				F56F08C31CFA61DB008BD25B /* FirstViewController.m in Sources */,
+				248597891DCFBCC8006D7AA2 /* SettingsPresenter.swift in Sources */,
 				24B9D8EF1DAC52D1004EE256 /* APIClient.swift in Sources */,
 				2435169B1DCA89F900382E5A /* AnimatedButton.swift in Sources */,
 				241B89BB1DB7D1BA0068C189 /* LoadingView.swift in Sources */,
@@ -872,14 +908,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 2UB7THC2G3;
+				DEVELOPMENT_TEAM = A88UHFQD28;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Conjugate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adelshehadeh.konjugate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.halil.konjugate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Conjugate/Conjugate-Bridging-Header.h";
@@ -896,14 +932,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 2UB7THC2G3;
+				DEVELOPMENT_TEAM = A88UHFQD28;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Conjugate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adelshehadeh.konjugate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.halil.konjugate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Conjugate/Conjugate-Bridging-Header.h";
