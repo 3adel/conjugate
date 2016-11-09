@@ -13,7 +13,9 @@
 
 - (UITextInputMode *) textInputMode {
     for (UITextInputMode *tim in [UITextInputMode activeInputModes]) {
+        self.autocorrectionType = UITextAutocorrectionTypeNo;
         if ([[FlexLanguageTextField langFromLocale:_locale] isEqualToString:[FlexLanguageTextField langFromLocale:tim.primaryLanguage]])
+            self.autocorrectionType = UITextAutocorrectionTypeYes;
             return tim;
     }
     return [super textInputMode];
