@@ -157,6 +157,11 @@ extension VerbDetailViewController: ConjugateView {
             
             let dataSource = TenseTableViewDataSource(tableView: tableView)
             
+            let tabIndex = viewModel.tenseTabs.index(of: tenseViewModel) ?? 0
+            dataSource.onRowDidSelect = { [weak self] row, section in
+                self?.presenter.tappedForm(inTab: tabIndex, atTense: section, at: row)
+            }
+            
             dataSource.viewModel = tenseViewModel
             
             tabTableViews.append(tableView)
@@ -185,6 +190,23 @@ extension VerbDetailViewController: ConjugateView {
     
     func show(successMessage: String) {
         alertHandler?.show(succesMessage: successMessage)
+    }
+    
+    func showActionsForForm(inTab tab: Int, atTense tense: Int, at index: Int) {
+        let actionController = ActionController(viewController: self.parent ?? self)
+        
+        let titles = ["Copy", "Share"]
+        
+        let copyAction: ()->() = {
+            self.presenter.copyForm(inTab: tab, atTense: tense, at: index)
+        }
+        
+        let shareAction: ()->() = {
+            self.presenter.shareForm(inTab: tab, atTense: tense, at: index)
+        }
+        
+        let actions = [copyAction, shareAction]
+        actionController.showActions(withTitles: titles, actions: actions)
     }
 }
 

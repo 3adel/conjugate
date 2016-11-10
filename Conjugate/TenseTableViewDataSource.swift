@@ -15,6 +15,8 @@ class TenseTableViewDataSource: NSObject {
         }
     }
     
+    var onRowDidSelect: ((_ row: Int, _ section: Int) -> ())?
+    
     var playedAudioButton: AnimatedButton?
     
     init(tableView: UITableView) {
@@ -87,6 +89,10 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.tenses[section].name
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        onRowDidSelect?(indexPath.row, indexPath.section)
     }
 }
 

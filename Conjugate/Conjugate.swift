@@ -129,6 +129,12 @@ extension ConjugateViewController {
 }
 
 extension ConjugateViewController {
+    func showActionsForForm(inTab tab: Int, atTense tense: Int,  at index: Int) {
+        verbDetailViewController?.showActionsForForm(inTab: tab, atTense: tense, at: index)
+    }
+}
+
+extension ConjugateViewController {
     func textFieldDidChange(_ textField: UITextField) {
         hideErrorMessage()
         

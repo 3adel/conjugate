@@ -31,6 +31,7 @@ protocol ConjugateView: View {
     func showVerbNotFoundError(message: String)
     func animateInfinitveAudioButton()
     func stopAnimatingInfinitiveAudioButton()
+    func showActionsForForm(inTab tab: Int, atTense tense: Int, at index: Int)
 }
 
 protocol ConjugatePresnterType {
@@ -39,6 +40,9 @@ protocol ConjugatePresnterType {
     func toggleSavingVerb()
     func updateViewModel()
     func shareVerb()
+    func tappedForm(inTab tab: Int, atTense tense: Int, at index: Int)
+    func copyForm(inTab tab: Int, atTense tense: Int, at index: Int)
+    func shareForm(inTab tab: Int, atTense tense: Int,  at index: Int)
 }
 
 protocol SettingsView: View {
