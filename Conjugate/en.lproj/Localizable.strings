@@ -13,6 +13,7 @@
 "mobile.ios.conjugate.error.serverError" = "There was a problem with the server. Please try again";
 "mobile.ios.conjugate.error.genericError" = "There was an unknown problem. Please try again";
 "mobile.ios.conjugate.error.noEmailSetup" = "You don't have an email account setup.";
+"mobile.ios.conjugate.error.networkUnavailable" = "You don't have internet connection.";
 
 "mobile.ios.conjugate.tense.present" = "Präsens";
 "mobile.ios.conjugate.tense.past" = "Präteritum";
