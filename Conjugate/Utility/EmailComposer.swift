@@ -39,10 +39,10 @@ class EmailComposer: NSObject {
         
         if let build = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String),
             let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") {
-            let messageBody = "\n\n\n\n\n" +
+            let messageBody = "\n\n\n\n\n" + "‾‾‾‾‾\n" +
                 "App Version: \(version)\n" +
-                "Build: \(build)\n" +
-            "‾‾‾‾‾"
+            "Build: \(build)\n"
+
             mailVC.setMessageBody(messageBody, isHTML: false)
         }
         router?.show(viewController: mailVC)
