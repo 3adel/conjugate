@@ -126,6 +126,38 @@ class ConjugatePresenter: ConjugatePresnterType {
         shareController.share(verb: verb)
     }
     
+    func tappedForm(inTab tab: Int, atTense tense: Int, at index: Int) {
+        view.showActionsForForm(inTab: tab, atTense: tense, at: index)
+    }
+    
+    func copyForm(inTab tab: Int, atTense tense: Int, at index: Int) {
+        let selectedTab = Verb.TenseGroup.allCases[tab]
+        guard let verb = verb,
+            let tense = verb.tenses[selectedTab]?[tense] else { return }
+        
+        let form = tense.forms[index]
+        let conjugation = form.pronoun + " " + form.conjugatedVerb
+        Clipboard().copy(conjugation)
+    }
+    
+    func shareForm(inTab tab: Int, atTense tense: Int, at index: Int) {
+        let selectedTab = Verb.TenseGroup.allCases[tab]
+        guard let verb = verb,
+            let tense = verb.tenses[selectedTab]?[tense] else { return }
+        
+        let form = tense.forms[index]
+        let tenseName = tense.name.text
+        let verbName = verb.name
+        let conjugation = form.pronoun + " " + form.conjugatedVerb
+        
+        let text = "\(tenseName) conjugation of the verb \(verbName) is: \(conjugation)\n"
+                    + "Via konj.me app for iOS. Download here "
+        let url = "http://konj.me"
+        
+        let shareController = ShareController(view: view)
+        shareController.share(text: text, url: url)
+    }
+    
     func makeConjugateViewModel(from verb: Verb) -> ConjugateViewModel {
         self.verb = verb
         
