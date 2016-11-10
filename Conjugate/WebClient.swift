@@ -36,6 +36,9 @@ class WebClient {
 
     let manager: Alamofire.SessionManager
     
+    var reachabilityManager: NetworkReachabilityManager?
+    var reachabilityStatus: NetworkReachabilityManager.NetworkReachabilityStatus?
+    
     init(manager: Alamofire.SessionManager? = nil) {
         self.manager = manager ?? Alamofire.SessionManager.default
     }
@@ -64,6 +67,8 @@ class WebClient {
     }
     
     func send(_ request: URLRequest, cache: Bool = false, completion: APIResultHandler? = nil) {
+        setupReachabilityManager(for: request.url?.host ?? "")
+        
         manager.request(request)
             .validate()
             .responseJSON { alamofireResponse in
@@ -71,18 +76,35 @@ class WebClient {
 
                 switch alamofireResponse.result {
                 case .failure(_):
-                    guard let statusCode = alamofireResponse.response?.statusCode
-                        else {
-                            result = .failure(APIError.genericNetworkError)
-                            break
+                    if let reachabilityStatus = self.reachabilityStatus,
+                        reachabilityStatus == .notReachable || reachabilityStatus == .unknown {
+                        result = .failure(APIError.networkUnavailable)
+                    } else {
+                        guard let statusCode = alamofireResponse.response?.statusCode
+                            else {
+                                result = .failure(APIError.genericNetworkError)
+                                break
+                        }
+                        let error = APIError(statusCode: statusCode) ?? APIError.genericNetworkError
+                        result = .failure(error)
                     }
-                    let error = APIError(statusCode: statusCode) ?? APIError.genericNetworkError
-                    result = .failure(error)
                 case .success(let value):
                     result = .success(value)
                 }
             completion?(result)
         }
+    }
+    
+    func setupReachabilityManager(for host: String) {
+        reachabilityManager?.stopListening()
+        
+        reachabilityManager = Alamofire.NetworkReachabilityManager(host: host)
+        reachabilityManager?.listener = listenTo
+        reachabilityManager?.startListening()
+    }
+    
+    func listenTo(reachabilityStatus: NetworkReachabilityManager.NetworkReachabilityStatus) {
+        self.reachabilityStatus = reachabilityStatus
     }
 }
 
@@ -119,6 +141,8 @@ public enum Endpoint: String {
     public func appError(from apiError: APIError) -> ConjugateError {
         if apiError == .serverError {
             return ConjugateError.serverError
+        } else if apiError == .networkUnavailable {
+            return ConjugateError.networkUnavailable
         }
         
         switch (self) {
