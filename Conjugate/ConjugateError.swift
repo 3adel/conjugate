@@ -11,6 +11,7 @@ public enum ConjugateError: ConjugateErrorType {
     case translationNotFound
     case conjugationNotFound
     case serverError
+    case networkUnavailable
     
     public var _domain: String {
         return domainBase+".error"
@@ -58,6 +59,7 @@ public enum APIError: Error {
     case badRequest
     case serverError
     case genericNetworkError
+    case networkUnavailable
     
     init?(statusCode: Int) {
         switch(statusCode) {

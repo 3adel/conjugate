@@ -82,8 +82,7 @@ class ConjugatePresenter: ConjugatePresnterType {
         isSearching = false
         view.hideLoader()
         
-        guard let appError = error as? ConjugateError,
-            appError == .verbNotFound || appError == .conjugationNotFound
+        guard let appError = error as? ConjugateError
             else {
                 view.show(errorMessage: ConjugateError.genericError.localizedDescription)
                 return
