@@ -13,6 +13,7 @@ class SettingsPresenter: SettingsPresenterType {
         case sendFeedback
         case share
         case reportBug
+        case rate
         
         var title: String {
             return LocalizedString("mobile.ios.conjugate.settings."+rawValue)
@@ -32,7 +33,8 @@ class SettingsPresenter: SettingsPresenterType {
     var settingsData: [TableCell] = [
             TableCell(cellType: .reportBug),
             TableCell(cellType: .sendFeedback),
-            TableCell(cellType: .share)
+            TableCell(cellType: .share),
+            TableCell(cellType: .rate)
     ]
     
     var viewModel = SettingsViewModel.empty
@@ -60,6 +62,8 @@ class SettingsPresenter: SettingsPresenterType {
         case .share:
             let shareController = ShareController(view: view)
             shareController.shareApp()
+        case .rate:
+            rateUs()
         }
     }
     
@@ -81,6 +85,11 @@ class SettingsPresenter: SettingsPresenterType {
         
         emailComposer = EmailComposer(view: view)
         emailComposer?.sendEmail(withSubject: subject, recipient: "feedback@konj.me", version: versionNumber, build: buildNumber)
+    }
+    
+    func rateUs(){
+        UIApplication.shared.openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1163600729")! as URL)
+
     }
 }
 
