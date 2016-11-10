@@ -37,7 +37,7 @@ class ShareController {
         share(text: textToShare, url: urlStringToShare)
     }
     
-    fileprivate func share(text: String, url: String) {
+    func share(text: String, url: String) {
         let objectToShare = [text, url]
         let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
         
