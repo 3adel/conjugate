@@ -111,6 +111,7 @@ extension UIViewController {
 extension UIViewController: UITextFieldDelegate {
     func closeKeyboard() {
         view.endEditing(true)
+        view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
     }
     
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
