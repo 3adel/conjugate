@@ -12,6 +12,7 @@ public enum ConjugateError: ConjugateErrorType {
     case conjugationNotFound
     case serverError
     case networkUnavailable
+    case noSavedVerbs
     
     public var _domain: String {
         return domainBase+".error"

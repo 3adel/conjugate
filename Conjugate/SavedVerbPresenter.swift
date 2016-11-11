@@ -17,8 +17,10 @@ protocol SavedVerbPresenterType {
 
 struct SavedVerbViewModel {
     let verbs: [SavedVerbCellViewModel]
+    let showNoSavedVerbMessage: Bool
+    let showVerbsList: Bool
     
-    static let empty = SavedVerbViewModel(verbs: [])
+    static let empty = SavedVerbViewModel(verbs: [], showNoSavedVerbMessage: false, showVerbsList: false)
 }
 
 struct SavedVerbCellViewModel {
@@ -53,7 +55,9 @@ class SavedVerbPresenter: SavedVerbPresenterType {
         
         verbViewModels = verbs.map(makeCellViewModel)
         
-        return SavedVerbViewModel(verbs: verbViewModels)
+        let showNoSavedVerbMessage = verbViewModels.isEmpty
+        
+        return SavedVerbViewModel(verbs: verbViewModels, showNoSavedVerbMessage: showNoSavedVerbMessage, showVerbsList: !showNoSavedVerbMessage)
     }
     
     func makeCellViewModel(from verb: Verb) -> SavedVerbCellViewModel {

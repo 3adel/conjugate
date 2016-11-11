@@ -6,7 +6,8 @@ import UIKit
 
 class SavedVerbsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
-    
+    @IBOutlet var noVerbsLabel: UILabel!
+    @IBOutlet var noVerbsImageView: UIImageView!
     
     var viewModel = SavedVerbViewModel.empty
     
@@ -33,6 +34,8 @@ class SavedVerbsViewController: UIViewController {
         navigationController?.navigationBar.tintColor = Theme.mainTintColor
         tableView.tableFooterView = UIView()
         alertHandler = AlertHandler(view: view, topLayoutGuide: topLayoutGuide, bottomLayoutGuide: bottomLayoutGuide)
+        
+        noVerbsLabel.text = ConjugateError.noSavedVerbs.localizedDescription
     }
 }
 
@@ -41,6 +44,10 @@ extension SavedVerbsViewController: SavedVerbView {
     func update(with viewModel: SavedVerbViewModel) {
         self.viewModel = viewModel
         tableView.reloadSections([0], with: .automatic)
+        
+        tableView.isHidden = !viewModel.showVerbsList
+        noVerbsLabel.isHidden = !viewModel.showNoSavedVerbMessage
+        noVerbsImageView.isHidden = noVerbsLabel.isHidden
     }
     
     func show(successMessage: String) {
