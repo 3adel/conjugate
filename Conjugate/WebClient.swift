@@ -123,7 +123,12 @@ public enum Endpoint: String {
     case translator
     
     public var path: String {
-        return self.rawValue
+        switch self {
+        case .translator:
+            return "translatorv2"
+        default:
+            return self.rawValue
+        }
     }
     
     public var endTokens: String {

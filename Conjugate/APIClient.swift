@@ -44,8 +44,8 @@ class APIClient: DataClient {
     func translate(for verb: String, from: Locale, to: Locale, completion: @escaping (AnyResult) -> Void) {
         let endpoint = Endpoint.translator
         
-        guard let fromLanguageCode = from.isoLanguageCode,
-            let toLanguageCode = to.isoLanguageCode,
+        guard let fromLanguageCode = from.languageCode,
+            let toLanguageCode = to.languageCode,
             let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": fromLanguageCode, "toLanguageKey": toLanguageCode, "verbKey": verb])
             else {
                 completion(genericErrorResult)
