@@ -124,86 +124,47 @@ class ConjugatePresenter: ConjugatePresnterType {
         let shareController = ShareController(view: view)
         shareController.share(verb: verb)
     }
-    
+}
+
+// MARK: Actions
+extension ConjugatePresenter {
     func tappedForm(inTab tab: Int, atTense tense: Int, at index: Int) {
         view.showActionsForForm(inTab: tab, atTense: tense, at: index)
     }
     
     func copyForm(inTab tab: Int, atTense tense: Int, at index: Int) {
-        let selectedTab = Verb.TenseGroup.allCases[tab]
-        guard let verb = verb,
-            let tense = verb.tenses[selectedTab]?[tense] else { return }
-        
+        let selectedTab = viewModel.tenseTabs[tab]
+        let tense = selectedTab.tenses[tense]
         let form = tense.forms[index]
-        let conjugation = form.pronoun + " " + form.conjugatedVerb
+        
+        let conjugation = form.pronoun + " " + form.verb
         Clipboard().copy(conjugation)
     }
     
     func shareForm(inTab tab: Int, atTense tense: Int, at index: Int) {
-        let selectedTab = Verb.TenseGroup.allCases[tab]
-        guard let verb = verb,
-            let tense = verb.tenses[selectedTab]?[tense] else { return }
-        
+        let selectedTab = viewModel.tenseTabs[tab]
+        let tense = selectedTab.tenses[tense]
         let form = tense.forms[index]
-        let tenseName = tense.name.text
-        let verbName = verb.name
-        let conjugation = form.pronoun + " " + form.conjugatedVerb
+        
+        let conjugation = form.pronoun + " " + form.verb
+        let tenseName = tense.name
+        let verbName = viewModel.verb
         
         let text = "\(tenseName) conjugation of the verb \(verbName) is: \(conjugation)\n"
-                    + "Via konj.me app for iOS. Download here "
+            + "Via konj.me app for iOS. Download here "
         let url = "http://konj.me"
         
         let shareController = ShareController(view: view)
         shareController.share(text: text, url: url)
     }
-    
+}
+
+//MARK: ViewModel Factory
+extension ConjugatePresenter {
     func makeConjugateViewModel(from verb: Verb) -> ConjugateViewModel {
         self.verb = verb
         
-        var tenseTabs = [TenseTabViewModel]()
-        
-        Verb.TenseGroup.allCases.forEach { tenseGroup in
-            guard let tenses = verb.tenses[tenseGroup],
-                !tenses.isEmpty
-                else { return }
-            
-            var tenseViewModels = [TenseViewModel]()
-            
-            Tense.Name.allTenses.forEach { tenseName in
-                let tensesWithThisName = tenses.filter { $0.name == tenseName }
-                tensesWithThisName.forEach { tense in
-                    var formViewModels = [FormViewModel]()
-                    tense.forms.forEach { form in
-                        var colorR: Float = 0
-                        var colorG: Float = 0
-                        var colorB: Float = 0
-                        
-                        if form.irregular {
-                            colorR = 208/255
-                            colorG = 2/255
-                            colorB = 27/255
-                        } else {
-                            colorR = 63/255
-                            colorG = colorR
-                            colorB = colorR
-                        }
-                        
-                        let color = (colorR, colorG, colorB)
-                        
-                        let audioPronoun = form.pronoun.components(separatedBy: "/").first ?? ""
-                        let audioText = audioPronoun + " " + form.conjugatedVerb
-                        
-                        let formViewModel = FormViewModel(pronoun: form.pronoun, verb: form.conjugatedVerb, audioText: audioText, textColor: color, audioImageHidden: false)
-                        formViewModels.append(formViewModel)
-                    }
-                    let tenseViewModel = TenseViewModel(name: tense.name.text, forms: formViewModels)
-                    tenseViewModels.append(tenseViewModel)
-                }
-            }
-            
-            let tenseTabViewModel = TenseTabViewModel(name: tenseGroup.text.capitalized, tenses: tenseViewModels)
-            tenseTabs.append(tenseTabViewModel)
-        }
+        let tenseTabs = Verb.TenseGroup.allCases.flatMap(makeTenseTabViewModel)
         
         var meaningText = ""
         
@@ -218,6 +179,49 @@ class ConjugatePresenter: ConjugatePresnterType {
         
         let viewModel = ConjugateViewModel(verb: verb.name, language: locale.languageCode!.uppercased(), meaning: meaningText, starSelected: !verbIsSaved, tenseTabs: tenseTabs)
         return viewModel
+    }
+    
+    func makeTenseTabViewModel(from tenseGroup: Verb.TenseGroup) -> TenseTabViewModel? {
+        guard let verb = self.verb,
+            let tenses = verb.tenses[tenseGroup],
+            !tenses.isEmpty
+            else { return nil }
+        
+        var tenseViewModels = [TenseViewModel]()
+        
+        Tense.Name.allTenses.forEach { tenseName in
+            let tensesWithThisName = tenses.filter { $0.name == tenseName }
+            tenseViewModels.append(contentsOf: tensesWithThisName.map(makeTenseViewModel))
+        }
+        return TenseTabViewModel(name: tenseGroup.text.capitalized, tenses: tenseViewModels)
+    }
+    
+    func makeFormViewModel(from form: Form) -> FormViewModel {
+        var colorR: Float = 0
+        var colorG: Float = 0
+        var colorB: Float = 0
+        
+        if form.irregular {
+            colorR = 208/255
+            colorG = 2/255
+            colorB = 27/255
+        } else {
+            colorR = 63/255
+            colorG = colorR
+            colorB = colorR
+        }
+        
+        let color = (colorR, colorG, colorB)
+        
+        let audioPronoun = form.pronoun.components(separatedBy: "/").first ?? ""
+        let audioText = audioPronoun + " " + form.conjugatedVerb
+        
+        return FormViewModel(pronoun: form.pronoun, verb: form.conjugatedVerb, audioText: audioText, textColor: color, audioImageHidden: false)
+    }
+    
+    func makeTenseViewModel(from tense: Tense) -> TenseViewModel {
+        let formViewModels = tense.forms.map(makeFormViewModel)
+        return TenseViewModel(name: tense.name.text, forms: formViewModels)
     }
 }
 
