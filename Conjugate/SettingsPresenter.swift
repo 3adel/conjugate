@@ -70,9 +70,10 @@ class SettingsPresenter: SettingsPresenterType {
     func makeViewModel(from options: [TableCell]) -> SettingsViewModel {
         let titles = settingsData.map { $0.cellTitle }
         
-        let footerTitle = "In collaboration with http://verbix.com"
+        let footerURL = "http://verbix.com"
+        let footerTitle = "In collaboration with " + footerURL
         
-        return SettingsViewModel(options: titles, footerTitle: footerTitle)
+        return SettingsViewModel(options: titles, footerTitle: footerTitle, footerURL: footerURL)
     }
     
     func sendSupportEmail(subject: String) {

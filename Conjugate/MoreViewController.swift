@@ -11,7 +11,7 @@ import UIKit
 class MoreViewController: UIViewController, SettingsView {
     
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var footerLabel: UILabel!
+    @IBOutlet var footerTextView: UITextView!
     
     var dataSource: SettingsDataSource?
     var presenter: SettingsPresenter!
@@ -24,6 +24,7 @@ class MoreViewController: UIViewController, SettingsView {
     override func setupUI() {
         setupPresenter()
         setupCollectionView()
+        footerTextView.delegate = self
     }
     
     func setupPresenter() {
@@ -35,8 +36,19 @@ class MoreViewController: UIViewController, SettingsView {
     }
     
     func render(with viewModel: SettingsViewModel) {
-        footerLabel.text = viewModel.footerTitle
+        let attributedString = NSMutableAttributedString(string: viewModel.footerTitle,
+                                                         attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 17)]
+        )
+        attributedString.set(viewModel.footerURL, asLink: viewModel.footerURL)
+
+        footerTextView.attributedText = attributedString
         dataSource?.render(with: viewModel.options)
+    }
+}
+
+extension MoreViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        return true
     }
 }
 
