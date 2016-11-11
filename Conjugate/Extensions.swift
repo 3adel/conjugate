@@ -189,3 +189,16 @@ extension CGRect {
         }
     }
 }
+
+extension NSMutableAttributedString {
+    
+    @discardableResult
+    public func set(_ text :String, asLink link:String) -> Bool {
+        let foundRange = self.mutableString.range(of: text)
+        if foundRange.location != NSNotFound {
+            self.addAttribute(NSLinkAttributeName, value: link, range: foundRange)
+            return true
+        }
+        return false
+    }
+}

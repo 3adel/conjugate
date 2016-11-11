@@ -97,6 +97,7 @@ struct FormViewModel {
 struct SettingsViewModel {
     let options: [String]
     let footerTitle: String
+    let footerURL: String
     
-    static let empty: SettingsViewModel = SettingsViewModel(options: [], footerTitle: "")
+    static let empty: SettingsViewModel = SettingsViewModel(options: [], footerTitle: "", footerURL: "")
 }
