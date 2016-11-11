@@ -21,25 +21,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen" translatesAutoresizingMaskIntoConstraints="NO" id="9n7-l4-r2q">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="konj.me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eZ-6R-eOx">
-                                <rect key="frame" x="108.5" y="306" width="159" height="55"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
-                                <color key="textColor" red="0.24543955520792793" green="0.69628435318368498" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="93.5" y="295" width="188.5" height="77"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Light" family="Kohinoor Bangla" pointSize="55"/>
+                                <color key="textColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="1" green="0.19095288473963568" blue="0.29760180030682537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="beta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dz-Ol-9p0">
-                                <rect key="frame" x="113.5" y="368" width="29" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="1" green="0.12069576184978292" blue="0.23438631867944271" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="9n7-l4-r2q" secondAttribute="bottom" id="6ra-m8-Koe"/>
                             <constraint firstItem="0eZ-6R-eOx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="O9B-B1-nlv"/>
-                            <constraint firstItem="6dz-Ol-9p0" firstAttribute="top" secondItem="0eZ-6R-eOx" secondAttribute="bottom" constant="7" id="W8N-sb-lPt"/>
+                            <constraint firstAttribute="trailing" secondItem="9n7-l4-r2q" secondAttribute="trailing" id="Z1C-vz-fmY"/>
                             <constraint firstItem="0eZ-6R-eOx" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ZvS-kR-qw8"/>
-                            <constraint firstItem="6dz-Ol-9p0" firstAttribute="leading" secondItem="0eZ-6R-eOx" secondAttribute="leading" constant="5" id="hg4-xD-Emt"/>
+                            <constraint firstItem="9n7-l4-r2q" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="aAN-qq-SVB"/>
+                            <constraint firstItem="9n7-l4-r2q" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="zVv-Kn-mVV"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -48,4 +47,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launch_screen" width="3726" height="6624"/>
+    </resources>
 </document>
