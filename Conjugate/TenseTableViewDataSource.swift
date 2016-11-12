@@ -16,8 +16,8 @@ class TenseTableViewDataSource: NSObject {
     }
     
     var onRowDidSelect: ((_ row: Int, _ section: Int) -> ())?
-    
     var playedAudioButton: AnimatedButton?
+    var edgeInsetsForCell = UIEdgeInsetsMake(0, 7, 0, 0)
     
     init(tableView: UITableView) {
         self.tableView = tableView
@@ -27,6 +27,7 @@ class TenseTableViewDataSource: NSObject {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib.init(nibName: TenseTableViewCell.nib, bundle: Bundle.main), forCellReuseIdentifier: TenseTableViewCell.identifier)
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         
         speaker.delegate = self
     }
@@ -94,6 +95,18 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         onRowDidSelect?(indexPath.row, indexPath.section)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)) {
+            cell.separatorInset = edgeInsetsForCell
+        }
+        if cell.responds(to: #selector(setter: UIView.preservesSuperviewLayoutMargins)) {
+            cell.preservesSuperviewLayoutMargins = false
+        }
+        if cell.responds(to: #selector(setter: UIView.layoutMargins)) {
+            cell.layoutMargins = edgeInsetsForCell
+        }
     }
 }
 
