@@ -5,6 +5,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,7 +24,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = tabBarController
         
-        return true
+        //facebook analytics tracking
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
+    
+    
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        //facebook analytics tracking
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
+    //facebook analytics tracking
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        FBSDKAppEvents.activateApp()
+    }
+    
+    
     
 }

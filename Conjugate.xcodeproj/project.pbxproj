@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		102DEF591DC15616001A8872 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 102DEF571DC15616001A8872 /* Crashlytics.framework */; };
 		102DEF5A1DC15616001A8872 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 102DEF581DC15616001A8872 /* Fabric.framework */; };
+		10AE617A1DD782FF00B510C4 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE61791DD782FF00B510C4 /* FBSDKCoreKit.framework */; };
+		10AE618D1DD78B2B00B510C4 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10AE618C1DD78B2B00B510C4 /* Bolts.framework */; };
 		2409921D1DC80256008F763D /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2409921C1DC80256008F763D /* UserDefaultKeys.swift */; };
 		240992301DC80284008F763D /* AppLaunchChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2409922F1DC80284008F763D /* AppLaunchChecker.swift */; };
 		241B89BB1DB7D1BA0068C189 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241B89BA1DB7D1BA0068C189 /* LoadingView.swift */; };
@@ -227,6 +229,8 @@
 /* Begin PBXFileReference section */
 		102DEF571DC15616001A8872 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		102DEF581DC15616001A8872 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		10AE61791DD782FF00B510C4 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		10AE618C1DD78B2B00B510C4 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		2409921C1DC80256008F763D /* UserDefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		2409922F1DC80284008F763D /* AppLaunchChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLaunchChecker.swift; sourceTree = "<group>"; };
 		241B89BA1DB7D1BA0068C189 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -286,8 +290,10 @@
 				24B9D99D1DAED1CA004EE256 /* Result.framework in Frameworks */,
 				102DEF5A1DC15616001A8872 /* Fabric.framework in Frameworks */,
 				24B9D8DB1DAC51B7004EE256 /* Dodo.framework in Frameworks */,
+				10AE617A1DD782FF00B510C4 /* FBSDKCoreKit.framework in Frameworks */,
 				102DEF591DC15616001A8872 /* Crashlytics.framework in Frameworks */,
 				24B9D8E41DAC51C4004EE256 /* Alamofire.framework in Frameworks */,
+				10AE618D1DD78B2B00B510C4 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +331,8 @@
 		248597721DCFB884006D7AA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10AE618C1DD78B2B00B510C4 /* Bolts.framework */,
+				10AE61791DD782FF00B510C4 /* FBSDKCoreKit.framework */,
 				248597731DCFB884006D7AA2 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
