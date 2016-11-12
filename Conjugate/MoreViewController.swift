@@ -36,8 +36,10 @@ class MoreViewController: UIViewController, SettingsView {
     }
     
     func render(with viewModel: SettingsViewModel) {
+        let style = NSMutableParagraphStyle()
+        style.alignment = NSTextAlignment.center
         let attributedString = NSMutableAttributedString(string: viewModel.footerTitle,
-                                                         attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 17)]
+                                                         attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSParagraphStyleAttributeName: style]
         )
         attributedString.set(viewModel.footerURL, asLink: viewModel.footerURL)
 
