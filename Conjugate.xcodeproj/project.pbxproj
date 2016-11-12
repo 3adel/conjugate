@@ -53,8 +53,6 @@
 		24E6F3FD1DB3DBE700550C8E /* TenseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F3FC1DB3DBE700550C8E /* TenseTableViewDataSource.swift */; };
 		24E6F3FF1DB3DDD200550C8E /* TenseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24E6F3FE1DB3DDD200550C8E /* TenseTableViewCell.xib */; };
 		24E6F4011DB3EBAC00550C8E /* TextSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F4001DB3EBAC00550C8E /* TextSpeaker.swift */; };
-		F56F08C31CFA61DB008BD25B /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F08C21CFA61DB008BD25B /* FirstViewController.m */; };
-		F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F08C51CFA61DB008BD25B /* SecondViewController.m */; };
 		F56F08C91CFA61DB008BD25B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56F08C71CFA61DB008BD25B /* Main.storyboard */; };
 		F56F08CB1CFA61DB008BD25B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F56F08CA1CFA61DB008BD25B /* Assets.xcassets */; };
 		F56F08CE1CFA61DB008BD25B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56F08CC1CFA61DB008BD25B /* LaunchScreen.storyboard */; };
@@ -273,10 +271,6 @@
 		24E6F3FE1DB3DDD200550C8E /* TenseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TenseTableViewCell.xib; sourceTree = "<group>"; };
 		24E6F4001DB3EBAC00550C8E /* TextSpeaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSpeaker.swift; sourceTree = "<group>"; };
 		F56F08B81CFA61DB008BD25B /* Conjugate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Conjugate.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F56F08C11CFA61DB008BD25B /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		F56F08C21CFA61DB008BD25B /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		F56F08C41CFA61DB008BD25B /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		F56F08C51CFA61DB008BD25B /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		F56F08C81CFA61DB008BD25B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F56F08CA1CFA61DB008BD25B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F56F08CD1CFA61DB008BD25B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -459,7 +453,6 @@
 			isa = PBXGroup;
 			children = (
 				247770BE1DD3ABF70012EDFF /* Utility */,
-				24B9D7261DAAB048004EE256 /* AppDelegate.swift */,
 				245D33401DBBA80500E5352F /* Router */,
 				24A510861DC5DD22002BE909 /* View Presenter Interface */,
 				245D32CE1DBB6DC200E5352F /* Foundation */,
@@ -467,11 +460,8 @@
 				24B9D9A71DAEEE51004EE256 /* View */,
 				24B9D8E91DAC5224004EE256 /* Model */,
 				24B9D8E81DAC5204004EE256 /* API */,
-				F56F08C11CFA61DB008BD25B /* FirstViewController.h */,
-				F56F08C21CFA61DB008BD25B /* FirstViewController.m */,
-				F56F08C41CFA61DB008BD25B /* SecondViewController.h */,
-				F56F08C51CFA61DB008BD25B /* SecondViewController.m */,
 				F56F08C71CFA61DB008BD25B /* Main.storyboard */,
+				24B9D7261DAAB048004EE256 /* AppDelegate.swift */,
 				F56F08CA1CFA61DB008BD25B /* Assets.xcassets */,
 				F56F08CC1CFA61DB008BD25B /* LaunchScreen.storyboard */,
 				F56F08CF1CFA61DB008BD25B /* Info.plist */,
@@ -742,7 +732,6 @@
 				249FF0E21DD3E8A20083DB0C /* ActionController.swift in Sources */,
 				248597871DCFBACB006D7AA2 /* MoreViewController.swift in Sources */,
 				249FF3381DD51B5E0083DB0C /* Clipboard.swift in Sources */,
-				F56F08C61CFA61DB008BD25B /* SecondViewController.m in Sources */,
 				245D31E41DB82E9500E5352F /* Storage.swift in Sources */,
 				24E6F3EA1DB3624F00550C8E /* TabbedContent.swift in Sources */,
 				24B9D9AB1DAEF062004EE256 /* TabBarController.swift in Sources */,
@@ -765,7 +754,6 @@
 				24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */,
 				24B9D9A41DAED9D5004EE256 /* ModelFactory.swift in Sources */,
 				24B9D8F11DAC542F004EE256 /* WebClient.swift in Sources */,
-				F56F08C31CFA61DB008BD25B /* FirstViewController.m in Sources */,
 				248597891DCFBCC8006D7AA2 /* SettingsPresenter.swift in Sources */,
 				24B9D8EF1DAC52D1004EE256 /* APIClient.swift in Sources */,
 				2435169B1DCA89F900382E5A /* AnimatedButton.swift in Sources */,

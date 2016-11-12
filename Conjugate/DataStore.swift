@@ -62,9 +62,12 @@ class DataStore {
                         completion(.failure(ConjugateError.translationNotFound))
                         return
                 }
+                
                 var translations = [String]()
                 array.forEach { dict in
-                    guard let translation = dict["translation"] as? String else { return }
+                    guard let translation = dict["translation"] as? String,
+                        !translations.contains(translation)
+                        else { return }
                     translations.append(translation)
                 }
                 
