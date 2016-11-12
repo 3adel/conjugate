@@ -170,9 +170,10 @@ extension ConjugatePresenter {
         
         verb.translations?.forEach { translation in
             
-            if verb.translations?.index(of: translation)! != nil {
-                meaningText += translation + ", "
+            if verb.translations?.index(of: translation)! != 0 {
+                meaningText += ", "
             }
+            meaningText += translation
         }
         
         let verbIsSaved = storage.getSavedVerbs().filter { $0 == verb }.isEmpty
