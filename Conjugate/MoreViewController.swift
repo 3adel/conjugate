@@ -79,11 +79,16 @@ class SettingsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.optionSelected(at: indexPath.row)
+        let frameForCell = tableView.rectForRow(at: indexPath)
+        presenter.optionSelected(at: indexPath.row, sourceView: tableView, sourceRect: frameForCell)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return makeCell(for: indexPath)
+    }
+    
+    func makeCell(for indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") else { return UITableViewCell() }
         
         let settingsTitle = options[indexPath.row]

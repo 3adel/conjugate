@@ -33,6 +33,17 @@ class Router {
         rootViewController.present(viewController, animated: true, completion: nil)
     }
     
+    func present(sheetViewController viewController: UIViewController, sourceView: UIView? = nil, sourceRect: CGRect? = nil) {
+        if isPad() {
+            viewController.modalPresentationStyle = .popover
+            viewController.popoverPresentationController?.sourceView = sourceView
+            if let sourceRect = sourceRect {
+                viewController.popoverPresentationController?.sourceRect = sourceRect
+            }
+        }
+        rootViewController.present(viewController, animated: true, completion: nil)
+    }
+    
     func dismiss() {
         rootViewController.dismiss(animated: true, completion: nil)
     }

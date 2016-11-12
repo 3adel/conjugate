@@ -166,3 +166,5 @@ extension ConjugateViewController {
         return true
     }
 }
+
+extension UIView: View { }

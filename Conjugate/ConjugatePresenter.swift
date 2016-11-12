@@ -118,11 +118,11 @@ class ConjugatePresenter: ConjugatePresnterType {
         view.updateUI(with: viewModel)
     }
     
-    func shareVerb() {
+    func shareVerb(sourceView: View) {
         guard let verb = verb else { return }
         
         let shareController = ShareController(view: view)
-        shareController.share(verb: verb)
+        shareController.share(verb: verb, sourceView: sourceView)
     }
 }
 
@@ -141,7 +141,7 @@ extension ConjugatePresenter {
         Clipboard().copy(conjugation)
     }
     
-    func shareForm(inTab tab: Int, atTense tense: Int, at index: Int) {
+    func shareForm(inTab tab: Int, atTense tense: Int, at index: Int, sourceView: View, sourceRect: CGRect) {
         let selectedTab = viewModel.tenseTabs[tab]
         let tense = selectedTab.tenses[tense]
         let form = tense.forms[index]
@@ -155,7 +155,7 @@ extension ConjugatePresenter {
         let url = "http://konj.me"
         
         let shareController = ShareController(view: view)
-        shareController.share(text: text, url: url)
+        shareController.share(text: text, url: url, sourceView: sourceView, sourceRect: sourceRect)
     }
 }
 
