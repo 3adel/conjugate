@@ -22,8 +22,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="konj.me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eZ-6R-eOx">
-                                <rect key="frame" x="108.5" y="306" width="159" height="55"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                <rect key="frame" x="95.5" y="302" width="185.5" height="64.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="54"/>
                                 <color key="textColor" red="0.24543955520792793" green="0.69628435318368498" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="1" green="0.19095288473963568" blue="0.29760180030682537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
