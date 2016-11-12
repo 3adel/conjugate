@@ -95,6 +95,7 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         onRowDidSelect?(indexPath.row, indexPath.section)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -135,7 +136,5 @@ class TenseTableViewCell: UITableViewCell {
         pronounLabel.textColor = textColor
         
         audioButton.isHidden = viewModel.audioImageHidden
-        
-        selectionStyle = .none
     }
 }
