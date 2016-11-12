@@ -103,7 +103,7 @@ extension VerbDetailViewController {
         presenter.playAudioForInfinitveVerb()
     }
     @IBAction func shareButtonPressed(_ sender: UIButton) {
-        presenter.shareVerb()
+        presenter.shareVerb(sourceView: sender)
     }
 }
 
@@ -197,16 +197,24 @@ extension VerbDetailViewController: ConjugateView {
         
         let titles = ["Copy", "Share"]
         
+        let source = getSource(inTab: tab, atTense: tense, atForm: index)
+        
         let copyAction: ()->() = {
             self.presenter.copyForm(inTab: tab, atTense: tense, at: index)
         }
         
         let shareAction: ()->() = {
-            self.presenter.shareForm(inTab: tab, atTense: tense, at: index)
+            self.presenter.shareForm(inTab: tab, atTense: tense, at: index, sourceView: source.sourceView, sourceRect: source.sourceRect)
         }
         
         let actions = [copyAction, shareAction]
-        actionController.showActions(withTitles: titles, actions: actions)
+        actionController.showActions(withTitles: titles, actions: actions, sourceView: source.sourceView, sourceRect: source.sourceRect)
+    }
+    
+    func getSource(inTab tabIndex: Int, atTense tenseIndex: Int, atForm formIndex: Int) -> (sourceView: View, sourceRect: CGRect) {
+        let dataSource = self.tabTableViewDatasources[tabIndex]
+        let rectForCell = dataSource.tableView.rectForRow(at: IndexPath(row: formIndex, section: tenseIndex))
+        return (sourceView: dataSource.tableView, sourceRect: rectForCell)
     }
 }
 

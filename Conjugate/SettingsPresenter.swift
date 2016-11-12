@@ -51,7 +51,7 @@ class SettingsPresenter: SettingsPresenterType {
         view.render(with: viewModel)
     }
     
-    func optionSelected(at index: Int) {
+    func optionSelected(at index: Int, sourceView: View, sourceRect: CGRect) {
         let selectedSettings = settingsData[index]
         
         switch selectedSettings.cellType {
@@ -61,7 +61,7 @@ class SettingsPresenter: SettingsPresenterType {
             sendSupportEmail(subject: "konj.me iOS feedback")
         case .share:
             let shareController = ShareController(view: view)
-            shareController.shareApp()
+            shareController.shareApp(sourceView: sourceView, sourceRect: sourceRect)
         case .rate:
             rateUs()
         }

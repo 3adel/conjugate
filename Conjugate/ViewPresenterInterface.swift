@@ -39,10 +39,10 @@ protocol ConjugatePresnterType {
     func playAudioForInfinitveVerb()
     func toggleSavingVerb()
     func updateViewModel()
-    func shareVerb()
+    func shareVerb(sourceView: View)
     func tappedForm(inTab tab: Int, atTense tense: Int, at index: Int)
     func copyForm(inTab tab: Int, atTense tense: Int, at index: Int)
-    func shareForm(inTab tab: Int, atTense tense: Int,  at index: Int)
+    func shareForm(inTab tab: Int, atTense tense: Int,  at index: Int, sourceView: View, sourceRect: CGRect)
 }
 
 protocol SettingsView: View {
@@ -51,7 +51,7 @@ protocol SettingsView: View {
 
 protocol SettingsPresenterType {
     func getOptions()
-    func optionSelected(at index: Int)
+    func optionSelected(at index: Int, sourceView: View, sourceRect: CGRect)
 }
 
 struct ConjugateViewModel {

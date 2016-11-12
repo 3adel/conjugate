@@ -10,12 +10,14 @@ import UIKit
 
 class ActionController {
     unowned let viewController: UIViewController
+    let router: Router?
     
     init(viewController: UIViewController) {
         self.viewController = viewController
+        self.router = Router(viewController: viewController)
     }
     
-    func showActions(withTitles titles: [String], actions: [()->()]) {
+    func showActions(withTitles titles: [String], actions: [()->()], sourceView: View, sourceRect: CGRect? = nil) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         for (index, title) in titles.enumerated() {
@@ -30,6 +32,7 @@ class ActionController {
         })
         
         alert.addAction(cancelAction)
-        viewController.present(alert, animated: true, completion: nil)
+        
+        router?.present(sheetViewController: alert, sourceView: sourceView as? UIView, sourceRect: sourceRect)
     }
 }

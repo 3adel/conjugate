@@ -202,3 +202,21 @@ extension NSMutableAttributedString {
         return false
     }
 }
+
+
+// MARK: - device
+
+public func isPad() -> Bool {
+    return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
+}
+
+public func isPhone() -> Bool {
+    return (!isPad()) && UIApplication.shared.canOpenURL(URL(string: "tel:123")!)
+}
+
+// MARK: - Screen
+
+public func isRetina() -> Bool {
+    return UIScreen.main.scale >= 2.0
+}
+
