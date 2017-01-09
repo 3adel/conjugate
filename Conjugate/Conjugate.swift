@@ -8,6 +8,7 @@ import UIKit
 class ConjugateViewController: UIViewController {
     @IBOutlet var searchView: UIView!
     @IBOutlet var searchField: FlexLanguageTextField!
+    @IBOutlet var searchLanguageSwitch: SevenSwitch!
     
     let verbDetailSegue = "verbDetailSegue"
     
@@ -63,6 +64,12 @@ class ConjugateViewController: UIViewController {
         searchField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         alertHandler = AlertHandler(view: view, topLayoutGuide: topLayoutGuide, bottomLayoutGuide: bottomLayoutGuide)
+        
+        searchLanguageSwitch.offLabel.text = "DE"
+        searchLanguageSwitch.onLabel.text = "EN"
+        
+        searchLanguageSwitch.onThumbImage = UIImage(named: "en_flag")
+        searchLanguageSwitch.offThumbImage = UIImage(named: "de_flag")
     }
     
     func search() {
