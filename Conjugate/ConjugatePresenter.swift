@@ -12,11 +12,14 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     var viewModel = ConjugateViewModel.empty
     var verb: Verb?
+    var translations = [String]()
     
-    let searchLocale = Locale(identifier: "de_DE")
+    let targetLocale = Locale(identifier: "de_DE")
     let speaker = TextSpeaker(locale: Locale(identifier: "de_DE"))
 
-    let locale = Locale(identifier: "en_US")
+    let locale = Locale(identifier: "en_GB")
+    
+    var searchLocale: Locale
     
     let storage = Storage()
     
@@ -24,11 +27,13 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     init(view: ConjugateView) {
         self.view = view
+        self.searchLocale = targetLocale
+        
         storage.getSavedVerbs()
         speaker.delegate = self
     }
     
-    func search(for verb: String) {
+    func search(for verb: String, searchLocale: Locale?) {
         guard !isSearching else { return }
         
         isSearching = true
@@ -36,20 +41,49 @@ class ConjugatePresenter: ConjugatePresnterType {
         view.showLoader()
         view.hideErrorMessage()
         
-        dataStore.getInfinitive(of: verb, in: searchLocale) { [weak self] result in
-            guard let strongSelf = self else { return }
-            
-            switch result {
-            case .success(let verb):
-                strongSelf.conjugate(verb.name)
-            case .failure(let error):
-                strongSelf.handle(error: error)
+        let searchLocale = searchLocale ?? self.searchLocale
+        
+        if searchLocale == locale {
+            translate(verb, fromInterfaceLanguage: locale, to: targetLocale) { [weak self] translations in
+                self?.isSearching = false
+                self?.view.hideLoader()
+                
+                guard let strongSelf = self,
+                    let translations = translations
+                    else {
+                        return
+                }
+                
+                strongSelf.translations = translations
+                let translationsViewModel = strongSelf.makeTranslationsViewModel(translations: translations)
+                
+                strongSelf.view.render(with: translationsViewModel)
+                
+            }
+        } else {
+            dataStore.getInfinitive(of: verb, in: targetLocale) { [weak self] result in
+                guard let strongSelf = self else { return }
+                
+                switch result {
+                case .success(let verb):
+                    strongSelf.conjugate(verb.name)
+                case .failure(let error):
+                    strongSelf.handle(error: error)
+                }
             }
         }
     }
     
+    func search(for verb: String) {
+        search(for: verb, searchLocale: searchLocale)
+    }
+
+    func translationSelected(at index: Int) {
+        search(for: translations[index], searchLocale: targetLocale)
+    }
+    
     func conjugate(_ verb: String) {
-        dataStore.conjugate(verb, in: searchLocale) { [weak self] result in
+        dataStore.conjugate(verb, in: targetLocale) { [weak self] result in
             guard let strongSelf = self else { return }
             
             switch result {
@@ -62,7 +96,7 @@ class ConjugatePresenter: ConjugatePresnterType {
     }
     
     func translate(_ verb: Verb) {
-        dataStore.getTranslation(of: verb, in: searchLocale, for: locale) { [weak self] result in
+        dataStore.getTranslation(of: verb, in: targetLocale, for: locale) { [weak self] result in
             guard let strongSelf = self else { return }
             
             strongSelf.view.hideLoader()
@@ -78,6 +112,30 @@ class ConjugatePresenter: ConjugatePresnterType {
         }
     }
     
+    func translate(_ verb: String, fromInterfaceLanguage interfaceLanguage: Locale, to targetLocale: Locale, completion: (([String]?) -> ())? = nil) {
+        view.showLoader()
+        
+        dataStore.getTranslation(of: verb, in: interfaceLanguage, for: targetLocale) { [weak self] result in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.view.hideLoader()
+            
+            switch result {
+            case .success(let translations):
+                completion?(translations)
+            case.failure(let error):
+                strongSelf.handle(error: error)
+                completion?(nil)
+            }
+        }
+    }
+    
+    func getInitialData() {
+        viewModel = makeConjugateViewModel()
+        view.updateUI(with: viewModel)
+    }
+    
+    
     fileprivate func handle(error: Error) {
         isSearching = false
         view.hideLoader()
@@ -88,7 +146,8 @@ class ConjugatePresenter: ConjugatePresnterType {
                 return
         }
         
-        view.updateUI(with: ConjugateViewModel.empty)
+        viewModel = makeConjugateViewModel()
+        view.updateUI(with: viewModel)
         view.showVerbNotFoundError(message: appError.localizedDescription)
     }
     
@@ -110,6 +169,12 @@ class ConjugatePresenter: ConjugatePresnterType {
         
         viewModel = makeConjugateViewModel(from: verb)
         view.updateUI(with: viewModel)
+    }
+    
+    func searchLanguageChanged(to languageCode: String) {
+        searchLocale = targetLocale.languageCode?.lowercased() == languageCode.lowercased() ? targetLocale : locale
+        
+        view.update(searchFieldPlaceholder: getSearchPlaceHolderText())
     }
     
     func updateViewModel() {
@@ -161,24 +226,74 @@ extension ConjugatePresenter {
 
 //MARK: ViewModel Factory
 extension ConjugatePresenter {
-    func makeConjugateViewModel(from verb: Verb) -> ConjugateViewModel {
-        self.verb = verb
+    func makeTranslationsViewModel(translations: [String]) -> TranslationsViewModel {
+        return TranslationsViewModel(translations: translations)
+    }
+    
+    func getSearchPlaceHolderText() -> String {
+        let searchFieldPlaceholderVerbs = searchLocale == targetLocale ? ["trank", "hast"] : ["drink", "have"]
         
-        let tenseTabs = Verb.TenseGroup.allCases.flatMap(makeTenseTabViewModel)
+        let searchFieldPlaceHolder = LocalizedString("searchPlaceholder", args: searchFieldPlaceholderVerbs[0], searchFieldPlaceholderVerbs[1])
         
-        var meaningText = ""
-        
-        verb.translations?.forEach { translation in
-            
-            if verb.translations?.index(of: translation)! != 0 {
-                meaningText += ", "
-            }
-            meaningText += translation
-        }
-        
+        return searchFieldPlaceHolder
+    }
+    
+    func makeConjugateViewModel(from verb: Verb? = nil) -> ConjugateViewModel {
         let verbIsSaved = storage.getSavedVerbs().filter { $0 == verb }.isEmpty
         
-        let viewModel = ConjugateViewModel(verb: verb.name, language: locale.languageCode!.uppercased(), meaning: meaningText, starSelected: !verbIsSaved, tenseTabs: tenseTabs)
+        let switchInterfaceLanguage = locale.languageCode!.uppercased()
+        
+        let flagSuffix = "_flag"
+        let switchInterfaceLanguageFlagImage = locale.regionCode!.lowercased()+flagSuffix
+        let switchLanguageFlagImage = targetLocale.regionCode!.lowercased()+flagSuffix
+        
+        let switchSearchLanguage = targetLocale.regionCode!.uppercased()
+        
+        let searchFieldPlaceHolder = getSearchPlaceHolderText()
+        
+        var viewModel = ConjugateViewModel.empty
+
+        if let verb = verb {
+        
+            self.verb = verb
+            
+            let tenseTabs = Verb.TenseGroup.allCases.flatMap(makeTenseTabViewModel)
+            
+            var meaningText = ""
+            
+            verb.translations?.forEach { translation in
+                
+                if verb.translations?.index(of: translation)! != 0 {
+                    meaningText += ", "
+                }
+                meaningText += translation
+            }
+            
+            let language = locale.languageCode!.uppercased()
+            
+            viewModel = ConjugateViewModel(verb: verb.name,
+                                               switchInterfaceLanguage: switchInterfaceLanguage,
+                                               switchSearchLanguage: switchSearchLanguage,
+                                               switchInterfaceLanguageFlagImage: switchInterfaceLanguageFlagImage,
+                                               switchLanguageFlagImage: switchLanguageFlagImage,
+                                               language: language,
+                                               meaning: meaningText,
+                                               starSelected: !verbIsSaved,
+                                               tenseTabs: tenseTabs,
+                                               searchFieldPlaceholder: searchFieldPlaceHolder)
+        } else {
+            viewModel = ConjugateViewModel(verb: "",
+                                           switchInterfaceLanguage: switchInterfaceLanguage,
+                                           switchSearchLanguage: switchSearchLanguage,
+                                           switchInterfaceLanguageFlagImage: switchInterfaceLanguageFlagImage,
+                                           switchLanguageFlagImage: switchLanguageFlagImage,
+                                           language: "",
+                                           meaning: "",
+                                           starSelected: false,
+                                           tenseTabs: [],
+                                           searchFieldPlaceholder: searchFieldPlaceHolder)
+
+        }
         return viewModel
     }
     
