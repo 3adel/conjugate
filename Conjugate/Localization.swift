@@ -7,9 +7,15 @@ import Foundation
 // MARK: - Localize
 
 public func LocalizedString(_ key: String, args: String...) -> String {
-    let str = NSLocalizedString(key, comment: "")
-    return replacePlaceholders(str, args: args)
+    let prefix = "mobile.ios.conjugate"
     
+    var finalKey = key
+    if !key.contains(prefix) {
+        finalKey = prefix+"."+key
+    }
+
+    let str = NSLocalizedString(finalKey, comment: "")
+    return replacePlaceholders(str, args: args)
 }
 
 public func LocalizedUppercaseString(_ string:String, args: String...) -> String {
