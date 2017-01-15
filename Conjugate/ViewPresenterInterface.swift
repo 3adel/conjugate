@@ -27,6 +27,8 @@ extension View {
 }
 
 protocol ConjugateView: View {
+    func render(with viewModel: TranslationsViewModel)
+    func update(searchFieldPlaceholder: String)
     func updateUI(with viewModel: ConjugateViewModel)
     func showVerbNotFoundError(message: String)
     func animateInfinitveAudioButton()
@@ -34,8 +36,16 @@ protocol ConjugateView: View {
     func showActionsForForm(inTab tab: Int, atTense tense: Int, at index: Int)
 }
 
+extension ConjugateView {
+    func render(with viewModel: TranslationsViewModel) {}
+    func update(searchFieldPlaceholder: String) {}
+}
+
 protocol ConjugatePresnterType {
+    func getInitialData()
     func search(for verb: String)
+    func translationSelected(at index: Int)
+    func searchLanguageChanged(to languageCode: String)
     func playAudioForInfinitveVerb()
     func toggleSavingVerb()
     func updateViewModel()
@@ -56,16 +66,25 @@ protocol SettingsPresenterType {
 
 struct ConjugateViewModel {
     let verb: String
+    let switchInterfaceLanguage: String
+    let switchSearchLanguage: String
+    let switchInterfaceLanguageFlagImage: String
+    let switchLanguageFlagImage: String
     let language: String
     let meaning: String
     let starSelected: Bool
     let tenseTabs: [TenseTabViewModel]
+    let searchFieldPlaceholder: String
     
     var isEmpty: Bool {
         return verb == ""
     }
     
-    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", language: "", meaning: "", starSelected: false, tenseTabs: [])
+    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "")
+}
+
+struct TranslationsViewModel {
+    let translations: [String]
 }
 
 struct TenseTabViewModel {
