@@ -172,12 +172,17 @@ extension Tense: DictConvertible {
 }
 
 struct Form {
+    enum FormType: Int {
+        case regular, accepted, irregular
+    }
+    
     let pronoun: String
-    let irregular: Bool
+    let type: FormType
     let conjugatedVerb: String
     
     static let pronounKey = "pronoun"
     static let irregularKey = "irregular"
+    static let typeKey = "type"
     static let verbKey = "verb"
 }
 
@@ -186,7 +191,7 @@ extension Form: DictConvertible {
         var dict = JSONDictionary()
         
         dict[Form.pronounKey] = pronoun
-        dict[Form.irregularKey] = irregular
+        dict[Form.typeKey] = type.rawValue
         dict[Form.verbKey] = conjugatedVerb
         
         return dict
@@ -194,11 +199,18 @@ extension Form: DictConvertible {
 
     static func from(dict: JSONDictionary) -> Form? {
         guard let pronoun = dict[Form.pronounKey] as? String,
-            let irregular = dict[Form.irregularKey] as? Bool,
             let conjugateVerb = dict[Form.verbKey] as? String
         else { return nil }
         
-        return self.init(pronoun: pronoun, irregular: irregular, conjugatedVerb: conjugateVerb)
+        var type: FormType!
+        
+        if let typeRawValue = dict[Form.typeKey] as? Int {
+            type = FormType(rawValue: typeRawValue)
+        } else if let irregular = dict[Form.irregularKey] as? Bool {
+            type = irregular ? FormType.irregular : FormType.regular
+        }
+        
+        return self.init(pronoun: pronoun, type: type, conjugatedVerb: conjugateVerb)
     }
 }
 

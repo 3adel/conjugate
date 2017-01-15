@@ -202,14 +202,19 @@ extension ConjugatePresenter {
         var colorG: Float = 0
         var colorB: Float = 0
         
-        if form.irregular {
-            colorR = 208/255
-            colorG = 2/255
-            colorB = 27/255
-        } else {
+        switch form.type {
+        case .regular:
             colorR = 63/255
             colorG = colorR
             colorB = colorR
+        case .irregular:
+            colorR = 208/255
+            colorG = 2/255
+            colorB = 27/255
+        case .accepted:
+            colorR = 74/255
+            colorG = 144/255
+            colorB = 226/255
         }
         
         let color = (colorR, colorG, colorB)

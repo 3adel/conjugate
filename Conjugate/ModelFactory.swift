@@ -126,7 +126,7 @@ extension Form: JSONDictInitable {
             let use = dict["use"] as? Int,
             let form = dict["form"] as? String else { return nil }
         
-        let irregular = use != 0
+        let type = FormType(rawValue: use) ?? FormType.regular
         
         //Workaround for bad structure of the pronouns in API response
         if pronoun.contains("er") {
@@ -136,7 +136,7 @@ extension Form: JSONDictInitable {
             pronoun = pronoun.replacingOccurrences(of: ";", with: "/")
         }
         
-        self.init(pronoun: pronoun, irregular: irregular, conjugatedVerb: form)
+        self.init(pronoun: pronoun, type: type, conjugatedVerb: form)
     }
 }
 
