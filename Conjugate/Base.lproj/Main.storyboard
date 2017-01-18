@@ -471,7 +471,7 @@
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="berlin_skyline" translatesAutoresizingMaskIntoConstraints="NO" id="8YK-8v-Fdi">
                                 <rect key="frame" x="0.0" y="490" width="375" height="128"/>
-                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.81258264137673253" green="0.81258264137673253" blue="0.81258264137673253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="oMT-s4-fhG"/>
                                 </constraints>
@@ -515,6 +515,7 @@
                     <navigationItem key="navigationItem" id="AD1-Ic-xEm"/>
                     <connections>
                         <outlet property="footerTextView" destination="K9H-P6-0k7" id="NXX-nW-Wl5"/>
+                        <outlet property="skylineImageView" destination="8YK-8v-Fdi" id="AGo-g2-Mlo"/>
                         <outlet property="tableView" destination="xyg-Wa-c0Y" id="FCX-7k-bPg"/>
                     </connections>
                 </viewController>
