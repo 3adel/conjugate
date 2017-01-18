@@ -116,6 +116,7 @@ extension UIViewController: UITextFieldDelegate {
     
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let tapRec = UITapGestureRecognizer(target: self, action: #selector(UIViewController.closeKeyboard))
+        tapRec.cancelsTouchesInView = false
         view.addGestureRecognizer(tapRec)
         return true
     }
