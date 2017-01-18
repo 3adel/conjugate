@@ -10,73 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--First-->
-        <scene sceneID="hNz-n2-bh7">
-            <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
-                        <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Konjugate " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OaR-2U-98I">
-                                <rect key="frame" x="21" y="30" width="333" height="50"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.58498663651315785" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="SD2-14-GnE"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="No results." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Lk-E8-Ckc">
-                                <rect key="frame" x="25" y="90" width="550" height="461"/>
-                                <color key="backgroundColor" red="0.64203774929046631" green="0.80266940593719482" blue="0.99919462203979492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.26274509800000001" green="0.69019607839999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="OaR-2U-98I" secondAttribute="trailing" constant="5" id="29h-C6-Iei"/>
-                            <constraint firstItem="OaR-2U-98I" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="10" id="AGR-f4-niV"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="6Lk-E8-Ckc" secondAttribute="bottom" id="Cgd-fI-BZH"/>
-                            <constraint firstItem="6Lk-E8-Ckc" firstAttribute="leading" secondItem="OaR-2U-98I" secondAttribute="leading" id="JrP-Sl-96Y"/>
-                            <constraint firstItem="OaR-2U-98I" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="5" id="VbJ-IG-frb"/>
-                            <constraint firstItem="6Lk-E8-Ckc" firstAttribute="trailing" secondItem="OaR-2U-98I" secondAttribute="trailing" id="fWF-cq-Y9a"/>
-                            <constraint firstItem="6Lk-E8-Ckc" firstAttribute="top" secondItem="OaR-2U-98I" secondAttribute="bottom" constant="10" id="gMo-R2-KdN"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="6Lk-E8-Ckc" secondAttribute="bottom" id="oif-Mz-f1w"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="oif-Mz-f1w"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
-                    <connections>
-                        <outlet property="conjugationResultsUITableView" destination="6Lk-E8-Ckc" id="GNb-bb-pD2"/>
-                        <outlet property="jsonResultsTextView" destination="6Lk-E8-Ckc" id="63M-EL-tQw"/>
-                        <outlet property="searchDisplayController" destination="Xck-6d-wnB" id="Qz6-hj-P0m"/>
-                        <outlet property="verbUITextField" destination="OaR-2U-98I" id="Zq6-Wi-mTS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="Xck-6d-wnB">
-                    <connections>
-                        <outlet property="delegate" destination="9pv-A4-QxB" id="sfp-di-Ne4"/>
-                        <outlet property="searchContentsController" destination="9pv-A4-QxB" id="bsq-jg-uzR"/>
-                        <outlet property="searchResultsDataSource" destination="9pv-A4-QxB" id="XMw-dv-9oH"/>
-                        <outlet property="searchResultsDelegate" destination="9pv-A4-QxB" id="OTp-Un-ha7"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="-278" y="-756"/>
-        </scene>
         <!--Conjugate View Controller-->
         <scene sceneID="CoV-6e-oSW">
             <objects>
@@ -594,7 +527,6 @@
         <image name="berlin_skyline" width="687" height="259"/>
         <image name="conjugate_tab" width="30" height="30"/>
         <image name="de_flag" width="300" height="300"/>
-        <image name="first" width="30" height="30"/>
         <image name="sad_face" width="181" height="181"/>
         <image name="second" width="30" height="30"/>
         <image name="share" width="19" height="27"/>
