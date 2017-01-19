@@ -329,9 +329,9 @@ extension ConjugatePresenter {
             colorG = 2/255
             colorB = 27/255
         case .accepted:
-            colorR = 74/255
-            colorG = 144/255
-            colorB = 226/255
+            colorR = 0/255
+            colorG = 118/255
+            colorB = 255/255
         }
         
         let color = (colorR, colorG, colorB)
