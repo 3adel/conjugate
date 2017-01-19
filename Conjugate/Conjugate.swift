@@ -109,6 +109,12 @@ extension ConjugateViewController: ConjugateView {
     }
     
     func render(with viewModel: TranslationsViewModel) {
+        guard !viewModel.translations.isEmpty
+            else {
+                hideTranslationTableView()
+                return
+        }
+        
         if let translationTableView = translationTableView,
             let dataSource = translationDataSource {
             

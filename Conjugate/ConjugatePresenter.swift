@@ -48,9 +48,11 @@ class ConjugatePresenter: ConjugatePresnterType {
                 self?.isSearching = false
                 self?.view.hideLoader()
                 
-                guard let strongSelf = self,
-                    let translations = translations
+                guard let strongSelf = self else { return }
+                
+                guard let translations = translations
                     else {
+                        strongSelf.view.render(with: strongSelf.makeTranslationsViewModel(translations: []))
                         return
                 }
                 

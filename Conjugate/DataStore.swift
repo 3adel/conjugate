@@ -83,7 +83,8 @@ class DataStore {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let value):
-                guard let array = value as? [JSONDictionary]
+                guard let array = value as? [JSONDictionary],
+                    !array.isEmpty
                     else {
                         completion(.failure(ConjugateError.translationNotFound))
                         return
