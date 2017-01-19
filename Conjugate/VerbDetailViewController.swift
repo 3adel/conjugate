@@ -220,6 +220,8 @@ extension VerbDetailViewController: ConjugateView {
 
 extension VerbDetailViewController {
     override func showLoader() {
+        guard loadingView == nil else { return }
+        
         loadingView = LoadingView.showIn(view: view, withFrame: verbLabel.frame)
         verbLabel.isHidden = true
     }

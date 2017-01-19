@@ -12,6 +12,7 @@ class MoreViewController: UIViewController, SettingsView {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var footerTextView: UITextView!
+    @IBOutlet var skylineImageView: UIImageView!
     
     var dataSource: SettingsDataSource?
     var presenter: SettingsPresenter!
@@ -25,6 +26,10 @@ class MoreViewController: UIViewController, SettingsView {
         setupPresenter()
         setupCollectionView()
         footerTextView.delegate = self
+        skylineImageView.image = skylineImageView.image?.withRenderingMode(.alwaysTemplate)
+        
+        let grayTone: Float = 207/255.0
+        skylineImageView.tintColor = UIColor(colorLiteralRed: grayTone, green: grayTone, blue: grayTone, alpha: 1.0)
     }
     
     func setupPresenter() {
