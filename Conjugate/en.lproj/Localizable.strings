@@ -24,7 +24,7 @@
 "mobile.ios.conjugate.tense.future2" = "Futur II";
 "mobile.ios.conjugate.tense.conditionalPast" = "Präteritum (würde)";
 "mobile.ios.conjugate.tense.conditionalPastPerfect" = "Plusquam (würde)";
-"mobile.ios.conjugate.searchPlaceholder" = "Try <verb1> or <verb2> or ...";
+"mobile.ios.conjugate.searchPlaceholder" = "Try \"<verb1>\" or \"<verb2>\" or ...";
 
 "mobile.ios.conjugate.tenseGroup.indicative" = "Indikativ";
 "mobile.ios.conjugate.tenseGroup.subjunctive" = "Konjunktiv";
