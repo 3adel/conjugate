@@ -31,7 +31,7 @@ struct Verb {
         var ids: [String] {
             switch self {
             case .nominal:
-                return ["20", "21", "22"]
+                return ["22","21"]
             default:
                 return []
             }
