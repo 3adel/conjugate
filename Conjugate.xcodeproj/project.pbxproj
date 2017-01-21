@@ -52,6 +52,9 @@
 		24B9D9AB1DAEF062004EE256 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AA1DAEF062004EE256 /* TabBarController.swift */; };
 		24B9D9AE1DAEF303004EE256 /* ConjugatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AD1DAEF303004EE256 /* ConjugatePresenter.swift */; };
 		24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AF1DAEF621004EE256 /* Extensions.swift */; };
+		24D4FABE1E337287004FBE62 /* TranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24D4FABD1E337287004FBE62 /* TranslationCell.xib */; };
+		24D4FAD31E3372A7004FBE62 /* TranslationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D4FAD21E3372A7004FBE62 /* TranslationCell.swift */; };
+		24D4FAD51E337506004FBE62 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D4FAD41E337506004FBE62 /* Translation.swift */; };
 		24E6F3CD1DB3118200550C8E /* TabbedMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F3CC1DB3118200550C8E /* TabbedMenu.swift */; };
 		24E6F3EA1DB3624F00550C8E /* TabbedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F3E91DB3624F00550C8E /* TabbedContent.swift */; };
 		24E6F3FD1DB3DBE700550C8E /* TenseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F3FC1DB3DBE700550C8E /* TenseTableViewDataSource.swift */; };
@@ -206,6 +209,13 @@
 			remoteGlobalIDString = D454807C1A957361009D7229;
 			remoteInfo = "Result-iOS";
 		};
+		24D4FAD01E337288004FBE62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24B9D9821DAED1A7004EE256 /* Result.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D03579B01B2B78A1005D26AE;
+			remoteInfo = "Result-watchOSTests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -269,6 +279,9 @@
 		24B9D9AA1DAEF062004EE256 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		24B9D9AD1DAEF303004EE256 /* ConjugatePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConjugatePresenter.swift; sourceTree = "<group>"; };
 		24B9D9AF1DAEF621004EE256 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		24D4FABD1E337287004FBE62 /* TranslationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TranslationCell.xib; sourceTree = "<group>"; };
+		24D4FAD21E3372A7004FBE62 /* TranslationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationCell.swift; sourceTree = "<group>"; };
+		24D4FAD41E337506004FBE62 /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		24E6F3CC1DB3118200550C8E /* TabbedMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedMenu.swift; sourceTree = "<group>"; };
 		24E6F3E91DB3624F00550C8E /* TabbedContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedContent.swift; sourceTree = "<group>"; };
 		24E6F3FC1DB3DBE700550C8E /* TenseTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenseTableViewDataSource.swift; sourceTree = "<group>"; };
@@ -393,6 +406,7 @@
 				24B9D8EC1DAC5261004EE256 /* DataClient.swift */,
 				24B9D9A11DAED525004EE256 /* Verb.swift */,
 				24B9D9A31DAED9D5004EE256 /* ModelFactory.swift */,
+				24D4FAD41E337506004FBE62 /* Translation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -407,6 +421,7 @@
 				24B9D9961DAED1A7004EE256 /* Result.framework */,
 				24B9D9981DAED1A7004EE256 /* Result-tvOSTests.xctest */,
 				24B9D99A1DAED1A7004EE256 /* Result.framework */,
+				24D4FAD11E337288004FBE62 /* Result-watchOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -454,6 +469,8 @@
 		9F66A0B51E2BD8D4007646A5 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				24D4FABD1E337287004FBE62 /* TranslationCell.xib */,
+				24D4FAD21E3372A7004FBE62 /* TranslationCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -710,6 +727,13 @@
 			remoteRef = 24B9D9991DAED1A7004EE256 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		24D4FAD11E337288004FBE62 /* Result-watchOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Result-watchOSTests.xctest";
+			remoteRef = 24D4FAD01E337288004FBE62 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -722,6 +746,7 @@
 				24E6F3FF1DB3DDD200550C8E /* TenseTableViewCell.xib in Resources */,
 				F56F08CB1CFA61DB008BD25B /* Assets.xcassets in Resources */,
 				F56F08C91CFA61DB008BD25B /* Main.storyboard in Resources */,
+				24D4FABE1E337287004FBE62 /* TranslationCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,6 +779,7 @@
 				249898F41E23D8DE0071E423 /* SevenSwitch.swift in Sources */,
 				24A1306C1DC7F0CB009CFCF8 /* AlertHandler.swift in Sources */,
 				245D33421DBBA81400E5352F /* Router.swift in Sources */,
+				24D4FAD51E337506004FBE62 /* Translation.swift in Sources */,
 				245D332E1DBBA47800E5352F /* VerbDetailViewController.swift in Sources */,
 				249FF0E21DD3E8A20083DB0C /* ActionController.swift in Sources */,
 				248597871DCFBACB006D7AA2 /* MoreViewController.swift in Sources */,
@@ -771,6 +797,7 @@
 				24B9D8EB1DAC5232004EE256 /* DataStore.swift in Sources */,
 				245D32EA1DBB76FE00E5352F /* Localization.swift in Sources */,
 				24E6F3FD1DB3DBE700550C8E /* TenseTableViewDataSource.swift in Sources */,
+				24D4FAD31E3372A7004FBE62 /* TranslationCell.swift in Sources */,
 				24A510991DC5DD4E002BE909 /* ViewPresenterInterface.swift in Sources */,
 				24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */,
 				245D32D01DBB6DCF00E5352F /* ConjugateError.swift in Sources */,

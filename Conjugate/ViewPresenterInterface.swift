@@ -84,7 +84,12 @@ struct ConjugateViewModel {
 }
 
 struct TranslationsViewModel {
-    let translations: [String]
+    let translations: [TranslationViewModel]
+}
+
+struct TranslationViewModel {
+    let verb: String
+    let meaning: String
 }
 
 struct TenseTabViewModel {

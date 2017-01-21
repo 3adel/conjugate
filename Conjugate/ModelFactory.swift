@@ -140,6 +140,20 @@ extension Form: JSONDictInitable {
     }
 }
 
+extension Translation: JSONDictInitable {
+    init?(with dict: JSONDictionary) {
+        guard let verb = dict["translation"] as? String,
+            let meaning = dict["meaning"] as? String
+            else { return nil }
+        
+        let unwantedCharacters = CharacterSet(charactersIn: "\\[]()")
+        let strippedVerb = verb.removingCharacters(in: unwantedCharacters)
+        let strippedMeaning = meaning.removingCharacters(in: unwantedCharacters)
+        
+        self.init(verb: strippedVerb, meaning: strippedMeaning)
+    }
+}
+
 extension String {
     var firstComponent: String? {
         let stringComponents = components(separatedBy: "/")
@@ -152,5 +166,11 @@ extension String {
     
     func adding(components: [String], withSeperator seperator: String = "") -> String {
         return components.reduce("") { $0 + seperator + $1 }
+    }
+}
+
+extension String {
+    func removingCharacters(in characterSet: CharacterSet) -> String {
+        return components(separatedBy: characterSet).joined()
     }
 }

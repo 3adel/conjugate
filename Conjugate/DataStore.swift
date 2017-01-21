@@ -77,7 +77,7 @@ class DataStore {
         }
     }
     
-    func getTranslation(of verb: String, in fromLanguage: Locale, for toLanguage: Locale, completion: @escaping (Result<[String], ConjugateError>) -> Void) {
+    func getTranslation(of verb: String, in fromLanguage: Locale, for toLanguage: Locale, completion: @escaping (Result<[Translation], ConjugateError>) -> Void) {
         dataClient.translate(for: verb, from: fromLanguage, to: toLanguage) { result in
             switch result {
             case .failure(let error):
@@ -89,13 +89,8 @@ class DataStore {
                         completion(.failure(ConjugateError.translationNotFound))
                         return
                 }
-                var translations = [String]()
-                array.forEach { dict in
-                    guard let translation = dict["translation"] as? String,
-                        !translations.contains(translation)
-                        else { return }
-                    translations.append(translation)
-                }
+                let translations = array.flatMap { Translation(with: $0) }
+                
                 completion(.success(translations))
             }
             

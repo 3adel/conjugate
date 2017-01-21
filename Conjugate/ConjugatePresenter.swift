@@ -12,7 +12,7 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     var viewModel = ConjugateViewModel.empty
     var verb: Verb?
-    var translations = [String]()
+    var translations = [Translation]()
     
     let targetLocale = Locale(identifier: "de_DE")
     let speaker = TextSpeaker(locale: Locale(identifier: "de_DE"))
@@ -81,7 +81,8 @@ class ConjugatePresenter: ConjugatePresnterType {
     }
 
     func translationSelected(at index: Int) {
-        search(for: translations[index], searchLocale: targetLocale)
+        let translation = translations[index]
+        search(for: translation.verb, searchLocale: targetLocale)
     }
     
     func conjugate(_ verb: String) {
@@ -114,7 +115,7 @@ class ConjugatePresenter: ConjugatePresnterType {
         }
     }
     
-    func translate(_ verb: String, fromInterfaceLanguage interfaceLanguage: Locale, to targetLocale: Locale, completion: (([String]?) -> ())? = nil) {
+    func translate(_ verb: String, fromInterfaceLanguage interfaceLanguage: Locale, to targetLocale: Locale, completion: (([Translation]?) -> ())? = nil) {
         view.showLoader()
         
         dataStore.getTranslation(of: verb, in: interfaceLanguage, for: targetLocale) { [weak self] result in
@@ -228,8 +229,17 @@ extension ConjugatePresenter {
 
 //MARK: ViewModel Factory
 extension ConjugatePresenter {
-    func makeTranslationsViewModel(translations: [String]) -> TranslationsViewModel {
-        return TranslationsViewModel(translations: translations)
+    func makeTranslationsViewModel(translations: [Translation]) -> TranslationsViewModel {
+        let translationViewModels = translations.map (makeTranslationViewModel)
+        
+        return TranslationsViewModel(translations: translationViewModels)
+    }
+    
+    func makeTranslationViewModel(translation: Translation) -> TranslationViewModel {
+        let verb = translation.verb
+        let meaning = translation.meaning
+        
+        return TranslationViewModel(verb: verb, meaning: meaning)
     }
     
     func getSearchPlaceHolderText() -> String {
