@@ -243,12 +243,12 @@ extension ConjugateViewController {
     
     func heightForTranslationTableView(_ tableView: UITableView, dataSource: TranslationDataSource) -> CGFloat {
         let expectedHeight = dataSource.contentHeight
-        let bottomPadding: CGFloat = 100
+        let bottomPadding: CGFloat = 150
         
         //TODO: Get keyboard height dynamically
         let keyboardHeight: CGFloat = 250
         
-        let maxHeight = view.frame.height - keyboardHeight - tableView.frame.origin.y - bottomPadding
+        let maxHeight = view.frame.height - keyboardHeight - bottomPadding
         
         let height = min(maxHeight, expectedHeight)
         return height
