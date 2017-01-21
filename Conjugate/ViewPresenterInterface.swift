@@ -66,6 +66,7 @@ protocol SettingsPresenterType {
 
 struct ConjugateViewModel {
     let verb: String
+    let nominalForms: String
     let switchInterfaceLanguage: String
     let switchSearchLanguage: String
     let switchInterfaceLanguageFlagImage: String
@@ -80,7 +81,7 @@ struct ConjugateViewModel {
         return verb == ""
     }
     
-    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "")
+    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", nominalForms: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "")
 }
 
 struct TranslationsViewModel {

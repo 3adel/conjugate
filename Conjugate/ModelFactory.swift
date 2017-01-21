@@ -51,7 +51,21 @@ extension Verb: JSONDictInitable {
             .subjunctive: [],
         ]
         
+        var nominalForms = [String]()
         if let tensesDict = tensesDict {
+            nominalForms = TenseGroup.nominal.ids.reduce([]) {
+                guard let tenseDict = tensesDict[$0.1],
+                    let formsArray = tenseDict["forms"] as? JSONArray,
+                    let formDict = formsArray.first as? JSONDictionary,
+                    let form = formDict["form"] as? String
+                    else { return $0.0 }
+                
+                var finalForms = $0.0
+                finalForms.append(form)
+                
+                return finalForms
+            }
+            
             for (key, value) in tensesDict {
                 
                 guard let tense = Tense(with: value, verbixId: key),
@@ -67,7 +81,7 @@ extension Verb: JSONDictInitable {
             }
         }
         
-        self.init(name: name, tenses: tenses)
+        self.init(name: name, tenses: tenses, nominalForms: nominalForms)
     }
 }
 
