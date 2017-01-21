@@ -10,11 +10,10 @@ import UIKit
 
 class TranslationDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     let tableView: UITableView
-    let cellIdentifier = "TranslationCell"
     
     let cellHeight: CGFloat = 50
     
-    var translations = [String]()
+    var translations = [TranslationViewModel]()
     
     var onTranslationSelected: ((_: Int) -> ())?
     
@@ -27,11 +26,8 @@ class TranslationDataSource: NSObject, UITableViewDataSource, UITableViewDelegat
     init(tableView: UITableView) {
         self.tableView = tableView
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-    }
-    
-    func setup(_ cell: UITableViewCell) {
-        cell.accessoryType = .disclosureIndicator
+        let cellNib = UINib(nibName: TranslationCell.Nib, bundle: Bundle.main)
+        tableView.register(cellNib, forCellReuseIdentifier: TranslationCell.Identifier)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -42,15 +38,17 @@ class TranslationDataSource: NSObject, UITableViewDataSource, UITableViewDelegat
         return translations.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TranslationCell.Identifier) as? TranslationCell
             else {
                 return UITableViewCell()
         }
         
-        setup(cell)
-        
-        cell.textLabel?.text = translations[indexPath.row]
+        cell.update(with: translations[indexPath.row])
         
         return cell
     }
@@ -58,6 +56,7 @@ class TranslationDataSource: NSObject, UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         onTranslationSelected?(indexPath.row)
     }
+    
 }
 
 
