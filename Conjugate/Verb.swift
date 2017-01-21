@@ -18,6 +18,7 @@ struct Verb {
         case conditional
         case imperative
         case subjunctive
+        case nominal
         
         var translationKey: String {
             return "mobile.ios.conjugate.tenseGroup."+self.rawValue
@@ -25,6 +26,15 @@ struct Verb {
         
         var text: String {
             return LocalizedString(translationKey)
+        }
+        
+        var ids: [String] {
+            switch self {
+            case .nominal:
+                return ["20", "21", "22"]
+            default:
+                return []
+            }
         }
         
         static let allCases: [TenseGroup] = [
@@ -38,15 +48,18 @@ struct Verb {
     let name: String
     let translations: [String]?
     let tenses: Tenses
+    let nominalForms: [String]
     
     static let nameKey = "name"
     static let translationsKey = "translations"
     static let tensesKey = "tenses"
+    static let nominalFormKey = "nomialForm"
     
-    init(name: String, translations: [String]? = nil, tenses: Tenses = Tenses()) {
+    init(name: String, translations: [String]? = nil, tenses: Tenses = Tenses(), nominalForms: [String] = []) {
         self.name = name
         self.translations = translations
         self.tenses = tenses
+        self.nominalForms = nominalForms
     }
 }
 
@@ -61,6 +74,7 @@ extension Verb: DictConvertible {
         var dict = JSONDictionary()
         
         dict[Verb.nameKey] = name
+        dict[Verb.nominalFormKey] = nominalForms
         dict[Verb.translationsKey] = translations
         
         var tensesArray = [String: JSONArray]()
@@ -91,7 +105,10 @@ extension Verb: DictConvertible {
                 }
             }
         }
-        return self.init(name: name, translations: translations, tenses: tenses)
+        
+        let nominalForms = dict[Verb.nominalFormKey] as? [String] ?? [String]()
+        
+        return self.init(name: name, translations: translations, tenses: tenses, nominalForms: nominalForms)
     }
 }
 

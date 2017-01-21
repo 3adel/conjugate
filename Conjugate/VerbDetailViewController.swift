@@ -5,14 +5,17 @@
 import UIKit
 
 class VerbDetailViewController: UIViewController {
-    @IBOutlet var verbLabel: UILabel!
-    @IBOutlet var languageLabel: UILabel!
-    @IBOutlet var meaningLabel: UILabel!
-    @IBOutlet var errorLabel: UILabel!
+    @IBOutlet weak var verbLabel: UILabel!
+    @IBOutlet weak var nominalLabel: UILabel!
+    @IBOutlet weak var languageLabel: UILabel!
+    @IBOutlet weak var meaningLabel: UILabel!
+    @IBOutlet weak var errorLabel: UILabel!
     
-    @IBOutlet var saveButton: UIButton!
-    @IBOutlet var shareButton: UIButton!
-    @IBOutlet var audioButton: AnimatedButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var audioButton: AnimatedButton!
+    
+    @IBOutlet weak var nominalFormHeightConstraint: NSLayoutConstraint!
     
     let tabbedMenuSegue = "tabbedMenuSegue"
     let tabbedContentSegue = "tabbedContentSegue"
@@ -120,11 +123,16 @@ extension VerbDetailViewController: ConjugateView {
         audioButton.isHidden = viewModel.isEmpty
         
         verbLabel.isHidden = viewModel.isEmpty
+        nominalLabel.isHidden = viewModel.isEmpty
+        
         errorLabel.isHidden = true
         
         verbLabel.text = viewModel.verb
+        nominalLabel.text = viewModel.nominalForms
         languageLabel.text = viewModel.language.isEmpty ? "" : viewModel.language + " - "
         meaningLabel.text = viewModel.meaning
+        
+        nominalFormHeightConstraint.constant = viewModel.nominalForms.isEmpty ? 0 : 21
         
         let starImageString = viewModel.starSelected ? "star_selected" : "star"
         

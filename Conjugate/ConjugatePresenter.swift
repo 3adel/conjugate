@@ -268,6 +268,7 @@ extension ConjugatePresenter {
         if let verb = verb {
         
             self.verb = verb
+            let nominalFormsString = verb.nominalForms.joined(separator: ", ")
             
             let tenseTabs = Verb.TenseGroup.allCases.flatMap(makeTenseTabViewModel)
             
@@ -284,6 +285,7 @@ extension ConjugatePresenter {
             let language = locale.languageCode!.uppercased()
             
             viewModel = ConjugateViewModel(verb: verb.name,
+                                               nominalForms: nominalFormsString,
                                                switchInterfaceLanguage: switchInterfaceLanguage,
                                                switchSearchLanguage: switchSearchLanguage,
                                                switchInterfaceLanguageFlagImage: switchInterfaceLanguageFlagImage,
@@ -295,6 +297,7 @@ extension ConjugatePresenter {
                                                searchFieldPlaceholder: searchFieldPlaceHolder)
         } else {
             viewModel = ConjugateViewModel(verb: "",
+                                           nominalForms: "",
                                            switchInterfaceLanguage: switchInterfaceLanguage,
                                            switchSearchLanguage: switchSearchLanguage,
                                            switchInterfaceLanguageFlagImage: switchInterfaceLanguageFlagImage,
