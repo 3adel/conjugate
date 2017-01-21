@@ -38,9 +38,14 @@ class TenseTableViewDataSource: NSObject {
         guard let indexPath = tableView.indexPathForRow(at: location),
             let animatedButton = button as? AnimatedButton else { return }
         
-        let tense = viewModel.tenses[indexPath.section].forms[indexPath.row]
+        // If the clicked button is already playing don't do anything
+        guard playedAudioButton !== animatedButton else { return }
+        
+        //Stop animating the previous played sound button
+        playedAudioButton?.stopAnimating()
         
         playedAudioButton = animatedButton
+        let tense = viewModel.tenses[indexPath.section].forms[indexPath.row]
         
         if speaker.isPlaying(tense.audioText) {
             speaker.stop()
@@ -58,6 +63,7 @@ extension TenseTableViewDataSource: TextSpeakerDelegate {
     
     func speakerDidFinishPlayback(for text: String) {
         playedAudioButton?.stopAnimating()
+        playedAudioButton = nil
     }
 }
 
