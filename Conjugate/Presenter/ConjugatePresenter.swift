@@ -7,11 +7,28 @@ import Foundation
 
 class ConjugatePresenter: ConjugatePresnterType {
     let dataStore = DataStore()
+    let quickActionController: QuickActionController?
     
     unowned let view: ConjugateView
     
+    //A verb string can be pre-configured to automatically search when the view is presented
+    var verbToBeSearched: String? {
+        didSet {
+            guard let verbToBeSearched = verbToBeSearched else { return }
+            search(for: verbToBeSearched)
+        }
+    }
+    
     var viewModel = ConjugateViewModel.empty
-    var verb: Verb?
+    var verb: Verb? {
+        didSet {
+            guard let verb = verb,
+                !verb.name.isEmpty else { return }
+            
+            let quickAction = QuickAction(type: .search, title: verb.name)
+            quickActionController?.add(quickAction: quickAction)
+        }
+    }
     var translations = [Translation]()
     
     let targetLocale = Locale(identifier: "de_DE")
@@ -25,8 +42,9 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     var isSearching = false
     
-    init(view: ConjugateView) {
+    init(view: ConjugateView, quickActionController: QuickActionController? = nil) {
         self.view = view
+        self.quickActionController = quickActionController
         self.searchLocale = targetLocale
         
         storage.getSavedVerbs()
@@ -134,8 +152,12 @@ class ConjugatePresenter: ConjugatePresnterType {
     }
     
     func getInitialData() {
-        viewModel = makeConjugateViewModel()
-        view.updateUI(with: viewModel)
+        if let verbString = verbToBeSearched {
+            search(for: verbString)
+        } else {
+            viewModel = makeConjugateViewModel()
+            view.updateUI(with: viewModel)
+        }
     }
     
     
