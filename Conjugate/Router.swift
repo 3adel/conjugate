@@ -19,18 +19,33 @@ class Router {
     }
     
     func openDetail(of verb: Verb) {
+        guard let vc = makeDetailView(from: verb) else { return }
+        rootViewController.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func makeDetailViewController(from verb: Verb) -> VerbDetailViewController? {
         guard let vc = UIStoryboard.main.instantiateViewController(withIdentifier: "VerbDetailViewController") as? VerbDetailViewController
-            else { return }
+            else { return nil}
+        return vc
+    }
+    
+    func makeDetailView(from verb: Verb) -> VerbDetailViewController? {
+        guard let vc = makeDetailViewController(from: verb) else { return nil }
         
         let conjugatePresenter = ConjugatePresenter(view: vc)
         vc.presenter = conjugatePresenter
         vc.viewModel = conjugatePresenter.makeConjugateViewModel(from: verb)
         
-        rootViewController.navigationController?.pushViewController(vc, animated: true)
+        return vc
     }
     
     func show(viewController: UIViewController) {
         rootViewController.present(viewController, animated: true, completion: nil)
+    }
+    
+    func show(view: View) {
+        guard let vc = view as? UIViewController else { return }
+        show(viewController: vc)
     }
     
     func present(sheetViewController viewController: UIViewController, sourceView: UIView? = nil, sourceRect: CGRect? = nil) {

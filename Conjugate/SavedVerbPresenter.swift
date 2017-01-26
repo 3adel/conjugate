@@ -12,7 +12,9 @@ protocol SavedVerbView: View {
 protocol SavedVerbPresenterType {
     func getSavedVerbs()
     func openVerbDetails(at index: Int)
+    func open(verbDetailView view: ConjugateView)
     func deleteVerb(at index: Int)
+    func getVerbDetailView(at index: Int) -> ConjugateView?
 }
 
 struct SavedVerbViewModel {
@@ -39,8 +41,11 @@ class SavedVerbPresenter: SavedVerbPresenterType {
     var viewModel = SavedVerbViewModel.empty
     var verbs = [Verb]()
     
+    let router: Router?
+    
     init(view: SavedVerbView) {
         self.view = view
+        self.router = Router(view: view)
     }
     
     func getSavedVerbs() {
@@ -86,4 +91,12 @@ class SavedVerbPresenter: SavedVerbPresenterType {
         view.show(successMessage: LocalizedString("mobile.ios.conjugate.verbDeleted"))
     }
     
+    func getVerbDetailView(at index: Int) -> ConjugateView? {
+        let verb = verbs[index]
+        return router?.makeDetailView(from: verb)
+    }
+    
+    func open(verbDetailView view: ConjugateView) {
+        router?.show(view: view)
+    }
 }

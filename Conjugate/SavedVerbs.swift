@@ -15,10 +15,20 @@ class SavedVerbsViewController: UIViewController {
     
     var alertHandler: AlertHandler?
     
+    var previewDelegate: SavedVerbPreviewingDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPresenter()
         setupUI()
+        
+        previewDelegate = SavedVerbPreviewingDelegate(tableView: tableView, getVerbDetailView: { index in
+            return self.presenter.getVerbDetailView(at: index) as? VerbDetailViewController
+        },
+                                                      openVerbDetail: presenter.openVerbDetails)
+        if let previewDelegate = previewDelegate {
+            registerForPreviewing(with: previewDelegate, sourceView: tableView)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +99,37 @@ extension SavedVerbsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+
+class SavedVerbPreviewingDelegate: NSObject, UIViewControllerPreviewingDelegate {
+    let tableView: UITableView
+    let getVerbDetailView: (_: Int) -> VerbDetailViewController?
+    let openVerbDetail: (_: Int) -> ()
+    
+    var index = 0
+    
+    
+    init(tableView: UITableView, getVerbDetailView: @escaping (_: Int) -> VerbDetailViewController?, openVerbDetail: @escaping (_: Int) -> ()) {
+        self.tableView = tableView
+        self.getVerbDetailView = getVerbDetailView
+        self.openVerbDetail = openVerbDetail
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = tableView.indexPathForRow(at: location) else { return nil }
+        
+        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+        
+        index = indexPath.row
+        return getVerbDetailView(index)
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        previewingContext.sourceRect = tableView.rectForRow(at: IndexPath(row: index, section: 0))
+        openVerbDetail(self.index)
+    }
+
+}
 
 class SavedVerbCell: UITableViewCell {
     static let identifier = "SavedVerbCell"
