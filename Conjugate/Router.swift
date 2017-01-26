@@ -6,7 +6,29 @@ import UIKit
 
 class Router {
     
+    enum PresenterType {
+        case conjugate, savedVerb, settings
+    }
+    
     let rootViewController: UIViewController
+    
+    let presenterViewLookupTable: [String: PresenterType] = [
+        ConjugateViewController.Identifier : .conjugate,
+        SavedVerbsViewController.Identifier : .savedVerb,
+        MoreViewController.Identifier : .settings
+    ]
+    
+    var isViewReady = false {
+        didSet {
+            if let quickAction = quickActionToBePerformed,
+                isViewReady {
+                route(using: quickAction)
+                quickActionToBePerformed = nil
+            }
+        }
+    }
+    
+    var quickActionToBePerformed: QuickAction?
     
     init(viewController: UIViewController) {
         self.rootViewController = viewController
@@ -16,6 +38,40 @@ class Router {
         guard let viewController = view as? UIViewController
             else { return nil }
         self.init(viewController: viewController)
+    }
+    
+    fileprivate var visibleController: UIViewController {
+        return UIWindow.visibleViewControllerFrom(self.rootViewController)
+    }
+    
+    func setupTabs() {
+        guard let tabBarController = rootViewController as? TabBarController else { return }
+        
+        tabBarController.viewControllers?.forEach { viewController in
+            guard let rootNavigationViewController = viewController as? UINavigationController,
+                let initalViewController = rootNavigationViewController.viewControllers.first else { return }
+            
+            let viewControllerType = type(of: initalViewController)
+            
+            guard let presenterType = presenterViewLookupTable[viewControllerType.Identifier] else { return }
+            
+            switch presenterType {
+            case .conjugate:
+                guard let conjugateViewController = initalViewController as? ConjugateViewController,
+                    let presenter = makeConjugatePresenter(with: conjugateViewController) else { break }
+                conjugateViewController.presenter = presenter
+            default:
+                break
+            }
+        }
+    }
+    
+    func openSearch(withVerb verb: String) {
+        let tabBarController = rootViewController as? TabBarController
+        tabBarController?.selectedIndex = 0
+        
+        guard let presenter = (visibleController as? ConjugateViewController)?.presenter as? ConjugatePresenter else { return }
+        presenter.verbToBeSearched = verb
     }
     
     func openDetail(of verb: Verb) {
@@ -30,13 +86,33 @@ class Router {
     }
     
     func makeDetailView(from verb: Verb) -> VerbDetailViewController? {
-        guard let vc = makeDetailViewController(from: verb) else { return nil }
+        guard let vc = makeDetailViewController(from: verb),
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            else { return nil }
         
-        let conjugatePresenter = ConjugatePresenter(view: vc)
+        let conjugatePresenter = ConjugatePresenter(view: vc, quickActionController: appDelegate.quickActionController)
         vc.presenter = conjugatePresenter
         vc.viewModel = conjugatePresenter.makeConjugateViewModel(from: verb)
         
         return vc
+    }
+    
+    func makeConjugatePresenter(with viewController: ConjugateViewController) -> ConjugatePresenter? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            else { return nil }
+        
+        return ConjugatePresenter(view: viewController, quickActionController: appDelegate.quickActionController)
+    }
+    
+    func route(using quickAction: QuickAction) {
+        guard isViewReady else {
+            quickActionToBePerformed = quickAction
+            return
+        }
+        
+        if quickAction.type == .search {
+            openSearch(withVerb: quickAction.title)
+        }
     }
     
     func show(viewController: UIViewController) {
@@ -67,5 +143,30 @@ class Router {
 extension UIStoryboard {
     static var main: UIStoryboard {
         return UIStoryboard(name: "Main", bundle: Bundle.main)
+    }
+}
+
+fileprivate extension UIWindow {
+    
+    class func visibleViewControllerFrom(_ vc: UIViewController) -> UIViewController {
+        var visibleController: UIViewController?
+        switch vc {
+        case let vc as UINavigationController:
+            visibleController = vc.visibleViewController
+        case let vc as UITabBarController:
+            guard let selectedVC = vc.selectedViewController else { break }
+            visibleController = selectedVC
+        case let vc as UISplitViewController:
+            if let detailViewController = vc.viewControllers.last {
+                visibleController = detailViewController
+            }
+        case let vc as UISearchController:
+            return vc.presentingViewController!
+        case let vc where vc.presentedViewController != nil:
+            visibleController = vc.presentedViewController!
+        default:
+            break
+        }
+        return visibleController != nil ? visibleViewControllerFrom(visibleController!) : vc
     }
 }
