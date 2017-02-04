@@ -15,7 +15,7 @@ class ConjugatePresenter: ConjugatePresnterType {
     var verbToBeSearched: String? {
         didSet {
             guard let verbToBeSearched = verbToBeSearched else { return }
-            search(for: verbToBeSearched)
+            searchVerbToBeSearched(verbToBeSearched)
         }
     }
     
@@ -153,11 +153,19 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     func getInitialData() {
         if let verbString = verbToBeSearched {
-            search(for: verbString)
+            searchVerbToBeSearched(verbString)
         } else {
             viewModel = makeConjugateViewModel()
             view.updateUI(with: viewModel)
         }
+    }
+    
+    fileprivate func searchVerbToBeSearched(_ verbString: String) {
+        guard let targetLanguageCode = targetLocale.languageCode?.lowercased() else { return }
+        
+        searchLanguageChanged(to: targetLanguageCode)
+        search(for: verbString)
+
     }
     
     
@@ -199,7 +207,7 @@ class ConjugatePresenter: ConjugatePresnterType {
     func searchLanguageChanged(to languageCode: String) {
         searchLocale = targetLocale.languageCode?.lowercased() == languageCode.lowercased() ? targetLocale : locale
         
-        view.update(searchFieldPlaceholder: getSearchPlaceHolderText())
+        view.update(searchLanguage: languageCode, searchFieldPlaceholder: makeSearchPlaceHolderText())
     }
     
     func updateViewModel() {
@@ -264,7 +272,7 @@ extension ConjugatePresenter {
         return TranslationViewModel(verb: verb, meaning: meaning)
     }
     
-    func getSearchPlaceHolderText() -> String {
+    func makeSearchPlaceHolderText() -> String {
         let searchFieldPlaceholderVerbs = searchLocale == targetLocale ? ["trank", "hast"] : ["drink", "have"]
         
         let searchFieldPlaceHolder = LocalizedString("searchPlaceholder", args: searchFieldPlaceholderVerbs[0], searchFieldPlaceholderVerbs[1])
@@ -283,7 +291,7 @@ extension ConjugatePresenter {
         
         let switchSearchLanguage = targetLocale.regionCode!.uppercased()
         
-        let searchFieldPlaceHolder = getSearchPlaceHolderText()
+        let searchFieldPlaceHolder = makeSearchPlaceHolderText()
         
         var viewModel = ConjugateViewModel.empty
 

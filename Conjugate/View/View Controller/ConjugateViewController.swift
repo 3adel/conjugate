@@ -98,7 +98,10 @@ class ConjugateViewController: UIViewController {
 }
 
 extension ConjugateViewController: ConjugateView {
-    func update(searchFieldPlaceholder: String) {
+    func update(searchLanguage: String, searchFieldPlaceholder: String) {
+        let searchLanguageSwitchOn = searchLanguage == viewModel.switchInterfaceLanguage
+        searchLanguageSwitch.setOn(searchLanguageSwitchOn, animated: false)
+        
         searchField.placeholder = searchFieldPlaceholder
     }
     

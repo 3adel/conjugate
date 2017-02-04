@@ -28,7 +28,7 @@ extension View {
 
 protocol ConjugateView: View {
     func render(with viewModel: TranslationsViewModel)
-    func update(searchFieldPlaceholder: String)
+    func update(searchLanguage: String, searchFieldPlaceholder: String)
     func updateUI(with viewModel: ConjugateViewModel)
     func showVerbNotFoundError(message: String)
     func animateInfinitveAudioButton()
@@ -38,7 +38,7 @@ protocol ConjugateView: View {
 
 extension ConjugateView {
     func render(with viewModel: TranslationsViewModel) {}
-    func update(searchFieldPlaceholder: String) {}
+    func update(searchLanguage: String, searchFieldPlaceholder: String) {}
 }
 
 protocol ConjugatePresnterType {
