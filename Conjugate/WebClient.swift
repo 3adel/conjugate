@@ -95,6 +95,12 @@ class WebClient {
         }
     }
     
+    func cancellAllRequests() {
+        manager.session.getAllTasks { tasks in
+            tasks.forEach { $0.cancel() }
+        }
+    }
+    
     func setupReachabilityManager(for host: String) {
         reachabilityManager?.stopListening()
         

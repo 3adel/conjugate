@@ -16,6 +16,8 @@ class APIClient: DataClient {
     let genericErrorResult: AnyResult = .failure(ConjugateError.genericError)
     
     func search(for verb: String, in language: Locale, completion: @escaping ResultHandler) {
+        webClient.cancellAllRequests()
+        
         let endpoint = Endpoint.finder
         
         guard let languageCode = language.isoLanguageCode,
@@ -29,6 +31,8 @@ class APIClient: DataClient {
     }
     
     func conjugate(for verb: String, in language: Locale, completion: @escaping (AnyResult) -> Void) {
+        webClient.cancellAllRequests()
+        
         let endpoint = Endpoint.conjugator
         
         guard let languageCode = language.isoLanguageCode,
@@ -42,6 +46,8 @@ class APIClient: DataClient {
     }
     
     func translate(for verb: String, from: Locale, to: Locale, completion: @escaping (AnyResult) -> Void) {
+        webClient.cancellAllRequests()
+        
         let endpoint = Endpoint.translator
         
         guard let fromLanguageCode = from.languageCode,
