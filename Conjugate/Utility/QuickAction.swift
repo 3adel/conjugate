@@ -21,12 +21,16 @@ enum QuickActionType: String {
 }
 
 struct QuickAction {
+    static let kLocaleKey = "locale"
+    
     let type: QuickActionType
     let title: String
+    let userInfo: [String: Any]?
     
-    init(type: QuickActionType, title: String) {
+    init(type: QuickActionType, title: String, userInfo: [String: Any]? = nil) {
         self.type = type
         self.title = title
+        self.userInfo = userInfo
     }
 }
 
@@ -68,13 +72,14 @@ class QuickActionController {
         guard let type = QuickActionType(rawValue: shortcutItem.type) else { return nil }
         
         let title = shortcutItem.localizedTitle
+        let userInfo = shortcutItem.userInfo
         
-        return QuickAction(type: type, title: title)
+        return QuickAction(type: type, title: title, userInfo: userInfo)
     }
     
     func makeShortcutItem(from quickAction: QuickAction) -> UIApplicationShortcutItem {
         let icon = UIApplicationShortcutIcon(type: quickAction.type.shortcutIconType)
-        let shortcutItem = UIApplicationShortcutItem(type: quickAction.type.shortcutItemType, localizedTitle: quickAction.title, localizedSubtitle: nil, icon: icon, userInfo: nil)
+        let shortcutItem = UIApplicationShortcutItem(type: quickAction.type.shortcutItemType, localizedTitle: quickAction.title, localizedSubtitle: nil, icon: icon, userInfo: quickAction.userInfo)
         
         return shortcutItem
     }
