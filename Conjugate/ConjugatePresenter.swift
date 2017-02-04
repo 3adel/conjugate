@@ -23,7 +23,7 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     let storage = Storage()
     
-    var isSearching = false
+    var lastSearchText = ""
     
     init(view: ConjugateView) {
         self.view = view
@@ -34,9 +34,9 @@ class ConjugatePresenter: ConjugatePresnterType {
     }
     
     func search(for verb: String, searchLocale: Locale?) {
-        guard !isSearching else { return }
+        guard lastSearchText != verb else { return }
         
-        isSearching = true
+        lastSearchText = verb
         
         view.showLoader()
         view.hideErrorMessage()
@@ -45,7 +45,6 @@ class ConjugatePresenter: ConjugatePresnterType {
         
         if searchLocale == locale {
             translate(verb, fromInterfaceLanguage: locale, to: targetLocale) { [weak self] translations in
-                self?.isSearching = false
                 self?.view.hideLoader()
                 
                 guard let strongSelf = self else { return }
@@ -106,7 +105,6 @@ class ConjugatePresenter: ConjugatePresnterType {
             
             switch result {
             case .success(let verb):
-                strongSelf.isSearching = false
                 strongSelf.viewModel = strongSelf.makeConjugateViewModel(from: verb)
                 strongSelf.view.updateUI(with: strongSelf.viewModel)
             case .failure(let error):
@@ -140,7 +138,6 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     
     fileprivate func handle(error: Error) {
-        isSearching = false
         view.hideLoader()
         
         guard let appError = error as? ConjugateError
