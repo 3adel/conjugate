@@ -6,6 +6,8 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
+    var router: Router?
+    
     enum Tab: String {
         case conjugate
         case saved
@@ -46,6 +48,8 @@ class TabBarController: UITabBarController {
         setupTabs()
         
         tabBar.backgroundColor = UIColor.white
+        
+        router?.isViewReady = true
     }
     
     private func setupTabs() {
@@ -64,5 +68,7 @@ class TabBarController: UITabBarController {
         }
         
         viewControllers = controllers
+        
+        router?.setupTabs()
     }
 }

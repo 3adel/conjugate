@@ -15,7 +15,7 @@ class ConjugateViewController: UIViewController {
     var loadingView: LoadingView?
     var alertHandler: AlertHandler?
     
-    var presenter: ConjugatePresnterType!
+    var presenter: ConjugatePresnterType?
     var verbDetailViewController: VerbDetailViewController?
     
     var searchTimer: Timer?
@@ -30,9 +30,8 @@ class ConjugateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupPresenter()
         
-        presenter.getInitialData()
+        presenter?.getInitialData()
         
         let launchChecker = AppLaunchChecker()
         if launchChecker.isFirstInstall {
@@ -47,7 +46,7 @@ class ConjugateViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.updateViewModel()
+        presenter?.updateViewModel()
     }
     
     override func setupUI() {
@@ -79,7 +78,7 @@ class ConjugateViewController: UIViewController {
     func search() {
         let minNumOfCharacters = 2
         if searchText.characters.count >= minNumOfCharacters {
-            presenter.search(for: searchText.lowercased())
+            presenter?.search(for: searchText.lowercased())
         }
     }
     
@@ -92,19 +91,17 @@ class ConjugateViewController: UIViewController {
         }
     }
     
-    private func setupPresenter() {
-        presenter = ConjugatePresenter(view: self)
-        verbDetailViewController?.presenter = presenter
-    }
-    
     func switchChanged(_ sender: SevenSwitch) {
         let language = sender.isOn() ? viewModel.switchInterfaceLanguage : viewModel.switchSearchLanguage
-        presenter.searchLanguageChanged(to: language)
+        presenter?.searchLanguageChanged(to: language)
     }
 }
 
 extension ConjugateViewController: ConjugateView {
-    func update(searchFieldPlaceholder: String) {
+    func update(searchLanguage: String, searchFieldPlaceholder: String) {
+        let searchLanguageSwitchOn = searchLanguage == viewModel.switchInterfaceLanguage
+        searchLanguageSwitch.setOn(searchLanguageSwitchOn, animated: false)
+        
         searchField.placeholder = searchFieldPlaceholder
     }
     
@@ -142,7 +139,8 @@ extension ConjugateViewController: ConjugateView {
         self.viewModel = viewModel
         
         searchField.placeholder = viewModel.searchFieldPlaceholder
-        
+        searchField.text = viewModel.verb
+        searchText = viewModel.verb
         
         searchLanguageSwitch.offLabel.text = viewModel.switchSearchLanguage
         searchLanguageSwitch.onLabel.text = viewModel.switchInterfaceLanguage
@@ -264,7 +262,7 @@ extension ConjugateViewController {
     
     func translationSelected(index: Int) {
         hideTranslationTableView()
-        presenter.translationSelected(at: index)
+        presenter?.translationSelected(at: index)
     }
     
     func hideTranslationTableView() {
