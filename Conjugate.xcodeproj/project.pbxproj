@@ -210,13 +210,6 @@
 			remoteGlobalIDString = D454807C1A957361009D7229;
 			remoteInfo = "Result-iOS";
 		};
-		24D4FAD01E337288004FBE62 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 24B9D9821DAED1A7004EE256 /* Result.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D03579B01B2B78A1005D26AE;
-			remoteInfo = "Result-watchOSTests";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -425,7 +418,6 @@
 				24B9D9961DAED1A7004EE256 /* Result.framework */,
 				24B9D9981DAED1A7004EE256 /* Result-tvOSTests.xctest */,
 				24B9D99A1DAED1A7004EE256 /* Result.framework */,
-				24D4FAD11E337288004FBE62 /* Result-watchOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -581,7 +573,7 @@
 				TargetAttributes = {
 					F56F08B71CFA61DB008BD25B = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = A88UHFQD28;
+						DevelopmentTeam = 2UB7THC2G3;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -736,13 +728,6 @@
 			fileType = wrapper.framework;
 			path = Result.framework;
 			remoteRef = 24B9D9991DAED1A7004EE256 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		24D4FAD11E337288004FBE62 /* Result-watchOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Result-watchOSTests.xctest";
-			remoteRef = 24D4FAD01E337288004FBE62 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -972,14 +957,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A88UHFQD28;
+				DEVELOPMENT_TEAM = 2UB7THC2G3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Conjugate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.halilgursoy.konjugate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adelshehadeh.konjugate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Conjugate/Conjugate-Bridging-Header.h";
@@ -996,14 +981,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A88UHFQD28;
+				DEVELOPMENT_TEAM = 2UB7THC2G3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Conjugate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.halilgursoy.konjugate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adelshehadeh.konjugate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Conjugate/Conjugate-Bridging-Header.h";
