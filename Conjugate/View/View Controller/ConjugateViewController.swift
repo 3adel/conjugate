@@ -140,9 +140,7 @@ extension ConjugateViewController: ConjugateView {
         
         searchField.placeholder = viewModel.searchFieldPlaceholder
         
-        if !viewModel.verb.isEmpty {
-            searchField.text = viewModel.verb
-        }
+        searchField.text = viewModel.searchText
         
         searchLanguageSwitch.offLabel.text = viewModel.switchSearchLanguage
         searchLanguageSwitch.onLabel.text = viewModel.switchInterfaceLanguage
@@ -309,14 +307,6 @@ extension ConjugateViewController {
         searchText = text
         
         presenter?.userDidInput(searchText: searchText)
-        
-//        let minNumOfCharacters = 2
-//        
-//        if text.characters.count >= minNumOfCharacters {
-//            clearSearchTimer()
-//            searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(search), userInfo: nil, repeats: false)
-//
-//        }
     }
     
     func clearSearchTimer() {
