@@ -15,7 +15,7 @@ class ConjugateViewController: UIViewController {
     var loadingView: LoadingView?
     var alertHandler: AlertHandler?
     
-    var presenter: ConjugatePresnterType?
+    var presenter: ConjugatePresenterType?
     var verbDetailViewController: VerbDetailViewController?
     
     var searchTimer: Timer?
@@ -139,8 +139,10 @@ extension ConjugateViewController: ConjugateView {
         self.viewModel = viewModel
         
         searchField.placeholder = viewModel.searchFieldPlaceholder
-        searchField.text = viewModel.verb
-        searchText = viewModel.verb
+        
+        if !viewModel.verb.isEmpty {
+            searchField.text = viewModel.verb
+        }
         
         searchLanguageSwitch.offLabel.text = viewModel.switchSearchLanguage
         searchLanguageSwitch.onLabel.text = viewModel.switchInterfaceLanguage
@@ -305,13 +307,16 @@ extension ConjugateViewController {
         }
         
         searchText = text
-        let minNumOfCharacters = 2
         
-        if text.characters.count >= minNumOfCharacters {
-            clearSearchTimer()
-            searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(search), userInfo: nil, repeats: false)
-
-        }
+        presenter?.userDidInput(searchText: searchText)
+        
+//        let minNumOfCharacters = 2
+//        
+//        if text.characters.count >= minNumOfCharacters {
+//            clearSearchTimer()
+//            searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(search), userInfo: nil, repeats: false)
+//
+//        }
     }
     
     func clearSearchTimer() {
@@ -321,7 +326,7 @@ extension ConjugateViewController {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         clearSearchTimer()
-        search()
+        presenter?.userDidTapSearchButton()
         view.endEditing(true)
         return true
     }

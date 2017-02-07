@@ -5,7 +5,7 @@
 import Foundation
 
 
-class ConjugatePresenter: ConjugatePresnterType {
+class ConjugatePresenter: ConjugatePresenterType {
     let dataStore = DataStore()
     let quickActionController: QuickActionController?
     
@@ -40,7 +40,11 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     let storage = Storage()
     
+    var searchText = ""
     var lastSearchText = ""
+    
+    var searchTimer: Timer?
+    let kMinNumbOfCharactersForSearch = 2
     
     init(view: ConjugateView, quickActionController: QuickActionController? = nil) {
         self.view = view
@@ -123,8 +127,7 @@ class ConjugatePresenter: ConjugatePresnterType {
             
             switch result {
             case .success(let verb):
-                strongSelf.viewModel = strongSelf.makeConjugateViewModel(from: verb)
-                strongSelf.view.updateUI(with: strongSelf.viewModel)
+                strongSelf.didSearch(verb)
             case .failure(let error):
                 strongSelf.handle(error: error)
             }
@@ -166,6 +169,12 @@ class ConjugatePresenter: ConjugatePresnterType {
 
     }
     
+    fileprivate func didSearch(_ verb: Verb) {
+        viewModel = makeConjugateViewModel(from: verb)
+        view.updateUI(with: viewModel)
+        
+        AppReviewController.sharedInstance.didSignificantEvent()
+    }
     
     fileprivate func handle(error: Error) {
         view.hideLoader()
@@ -218,6 +227,37 @@ class ConjugatePresenter: ConjugatePresnterType {
         
         let shareController = ShareController(view: view)
         shareController.share(verb: verb, sourceView: sourceView)
+    }
+}
+
+
+// MARK: Handle user input for search
+extension ConjugatePresenter {
+    func userDidInput(searchText: String) {
+        dataStore.cancelPreviousSearches()
+        clearSearchTimer()
+        
+        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+            self.searchText = searchText
+            searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(doSearch), userInfo: nil, repeats: false)
+            
+        }
+    }
+    
+    func userDidTapSearchButton() {
+        doSearch()
+    }
+    
+    @objc func doSearch() {
+        dataStore.cancelPreviousSearches()
+        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+            search(for: searchText)
+        }
+    }
+    
+    func clearSearchTimer() {
+        searchTimer?.invalidate()
+        searchTimer = nil
     }
 }
 

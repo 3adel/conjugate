@@ -9,6 +9,7 @@ protocol DataClient {
     func search(for verb: String, in language: Locale, completion: @escaping ResultHandler)
     func translate(for verb: String, from: Locale, to: Locale, completion: @escaping ResultHandler)
     func conjugate(for verb: String, in language: Locale, completion: @escaping ResultHandler)
+    func cancelAllOperations()
 }
 
 

@@ -97,5 +97,9 @@ class DataStore {
         }
     }
     
+    func cancelPreviousSearches() {
+        dataClient.cancelAllOperations()
+    }
+    
 }
 
