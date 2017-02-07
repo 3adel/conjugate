@@ -22,7 +22,7 @@ class VerbDetailViewController: UIViewController {
     
     var loadingView: LoadingView?
     
-    var presenter: ConjugatePresnterType!
+    var presenter: ConjugatePresenterType!
     var viewModel = ConjugateViewModel.empty
     
     var alertHandler: AlertHandler?

@@ -41,7 +41,7 @@ extension ConjugateView {
     func update(searchLanguage: String, searchFieldPlaceholder: String) {}
 }
 
-protocol ConjugatePresnterType {
+protocol ConjugatePresenterType {
     func getInitialData()
     func search(for verb: String)
     func translationSelected(at index: Int)
@@ -53,6 +53,8 @@ protocol ConjugatePresnterType {
     func tappedForm(inTab tab: Int, atTense tense: Int, at index: Int)
     func copyForm(inTab tab: Int, atTense tense: Int, at index: Int)
     func shareForm(inTab tab: Int, atTense tense: Int,  at index: Int, sourceView: View, sourceRect: CGRect)
+    func userDidInput(searchText: String)
+    func userDidTapSearchButton()
 }
 
 protocol SettingsView: View {
@@ -66,6 +68,7 @@ protocol SettingsPresenterType {
 
 struct ConjugateViewModel {
     let verb: String
+    let searchText: String
     let nominalForms: String
     let switchInterfaceLanguage: String
     let switchSearchLanguage: String
@@ -81,7 +84,7 @@ struct ConjugateViewModel {
         return verb == ""
     }
     
-    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", nominalForms: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "")
+    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", searchText: "", nominalForms: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "")
 }
 
 struct TranslationsViewModel {

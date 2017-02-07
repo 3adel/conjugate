@@ -5,7 +5,7 @@
 import Foundation
 
 
-class ConjugatePresenter: ConjugatePresnterType {
+class ConjugatePresenter: ConjugatePresenterType {
     let dataStore = DataStore()
     let quickActionController: QuickActionController?
     
@@ -40,7 +40,11 @@ class ConjugatePresenter: ConjugatePresnterType {
     
     let storage = Storage()
     
+    var searchText = ""
     var lastSearchText = ""
+    
+    var searchTimer: Timer?
+    let kMinNumbOfCharactersForSearch = 2
     
     init(view: ConjugateView, quickActionController: QuickActionController? = nil) {
         self.view = view
@@ -52,8 +56,6 @@ class ConjugatePresenter: ConjugatePresnterType {
     }
     
     func search(for verb: String, searchLocale: Locale?) {
-        guard lastSearchText != verb else { return }
-        
         lastSearchText = verb
         
         view.showLoader()
@@ -123,8 +125,7 @@ class ConjugatePresenter: ConjugatePresnterType {
             
             switch result {
             case .success(let verb):
-                strongSelf.viewModel = strongSelf.makeConjugateViewModel(from: verb)
-                strongSelf.view.updateUI(with: strongSelf.viewModel)
+                strongSelf.didSearch(verb)
             case .failure(let error):
                 strongSelf.handle(error: error)
             }
@@ -162,10 +163,16 @@ class ConjugatePresenter: ConjugatePresnterType {
         guard let targetLanguageCode = targetLocale.languageCode?.lowercased() else { return }
         
         searchLanguageChanged(to: targetLanguageCode)
+        
+        searchText = verbString
         search(for: verbString)
 
     }
     
+    fileprivate func didSearch(_ verb: Verb) {
+        viewModel = makeConjugateViewModel(from: verb)
+        view.updateUI(with: viewModel)
+    }
     
     fileprivate func handle(error: Error) {
         view.hideLoader()
@@ -218,6 +225,40 @@ class ConjugatePresenter: ConjugatePresnterType {
         
         let shareController = ShareController(view: view)
         shareController.share(verb: verb, sourceView: sourceView)
+    }
+}
+
+
+// MARK: Handle user input for search
+extension ConjugatePresenter {
+    func userDidInput(searchText: String) {
+        dataStore.cancelPreviousSearches()
+        clearSearchTimer()
+        
+        self.searchText = searchText
+        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+            searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(doSearch), userInfo: nil, repeats: false)
+            
+        }
+    }
+    
+    func userDidTapSearchButton() {
+        clearSearchTimer()
+        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+            doSearch()
+        }
+    }
+    
+    @objc func doSearch() {
+        dataStore.cancelPreviousSearches()
+        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+            search(for: searchText)
+        }
+    }
+    
+    func clearSearchTimer() {
+        searchTimer?.invalidate()
+        searchTimer = nil
     }
 }
 
@@ -312,18 +353,20 @@ extension ConjugatePresenter {
             let language = locale.languageCode!.uppercased()
             
             viewModel = ConjugateViewModel(verb: verb.name,
-                                               nominalForms: nominalFormsString,
-                                               switchInterfaceLanguage: switchInterfaceLanguage,
-                                               switchSearchLanguage: switchSearchLanguage,
-                                               switchInterfaceLanguageFlagImage: switchInterfaceLanguageFlagImage,
-                                               switchLanguageFlagImage: switchLanguageFlagImage,
-                                               language: language,
-                                               meaning: meaningText,
-                                               starSelected: !verbIsSaved,
-                                               tenseTabs: tenseTabs,
-                                               searchFieldPlaceholder: searchFieldPlaceHolder)
+                                           searchText: searchText,
+                                           nominalForms: nominalFormsString,
+                                           switchInterfaceLanguage: switchInterfaceLanguage,
+                                           switchSearchLanguage: switchSearchLanguage,
+                                           switchInterfaceLanguageFlagImage: switchInterfaceLanguageFlagImage,
+                                           switchLanguageFlagImage: switchLanguageFlagImage,
+                                           language: language,
+                                           meaning: meaningText,
+                                           starSelected: !verbIsSaved,
+                                           tenseTabs: tenseTabs,
+                                           searchFieldPlaceholder: searchFieldPlaceHolder)
         } else {
             viewModel = ConjugateViewModel(verb: "",
+                                           searchText: searchText,
                                            nominalForms: "",
                                            switchInterfaceLanguage: switchInterfaceLanguage,
                                            switchSearchLanguage: switchSearchLanguage,
