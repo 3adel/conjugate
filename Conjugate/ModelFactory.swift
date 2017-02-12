@@ -61,7 +61,7 @@ extension Verb: JSONDictInitable {
                     else { return $0.0 }
                 
                 var finalForms = $0.0
-                finalForms.append(form)
+                finalForms.append(form.trimmingWhitespaces())
                 
                 return finalForms
             }
@@ -186,5 +186,9 @@ extension String {
 extension String {
     func removingCharacters(in characterSet: CharacterSet) -> String {
         return components(separatedBy: characterSet).joined()
+    }
+    
+    func trimmingWhitespaces() -> String {
+        return self.trimmingCharacters(in: .whitespaces)
     }
 }
