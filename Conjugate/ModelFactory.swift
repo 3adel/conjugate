@@ -60,7 +60,6 @@ extension Verb: JSONDictInitable {
                     let form = formDict["form"] as? String
                     else { return $0.0 }
                 
-                
                 var finalForms = $0.0
                 finalForms.append(form.trimmingWhitespaces())
                 
