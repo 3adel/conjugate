@@ -24,6 +24,9 @@
 		2498991E1E2436E90071E423 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248597731DCFB884006D7AA2 /* AVFoundation.framework */; };
 		249FF0E21DD3E8A20083DB0C /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249FF0E11DD3E8A20083DB0C /* ActionController.swift */; };
 		249FF3381DD51B5E0083DB0C /* Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249FF3371DD51B5E0083DB0C /* Clipboard.swift */; };
+		24A4E5841E466C0E00FCD144 /* Armchair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A4E5741E466C0400FCD144 /* Armchair.framework */; };
+		24A4E5851E466C0E00FCD144 /* Armchair.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24A4E5741E466C0400FCD144 /* Armchair.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		24A4E5891E466C5600FCD144 /* AppReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A4E5881E466C5600FCD144 /* AppReviewController.swift */; };
 		24A510991DC5DD4E002BE909 /* ViewPresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A510981DC5DD4E002BE909 /* ViewPresenterInterface.swift */; };
 		24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D7261DAAB048004EE256 /* AppDelegate.swift */; };
 		24B9D8DB1DAC51B7004EE256 /* Dodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B9D8D61DAC51A9004EE256 /* Dodo.framework */; };
@@ -70,6 +73,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		24A4E5731E466C0400FCD144 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24A4E5651E466C0400FCD144 /* Armchair.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E6D8B8B519C7274F001AD043;
+			remoteInfo = Armchair;
+		};
+		24A4E5751E466C0400FCD144 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24A4E5651E466C0400FCD144 /* Armchair.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E6D8B8F919C756A4001AD043;
+			remoteInfo = ArmchairMac;
+		};
+		24A4E5771E466C0400FCD144 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24A4E5651E466C0400FCD144 /* Armchair.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E6A0AF6519C9CFF400C3A7DC;
+			remoteInfo = ArmchairLocalizable;
+		};
+		24A4E5791E466C0400FCD144 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24A4E5651E466C0400FCD144 /* Armchair.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E6F6159419C9FFDA00C0B51C;
+			remoteInfo = ArmchairLocalizableMac;
+		};
+		24A4E5861E466C0E00FCD144 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24A4E5651E466C0400FCD144 /* Armchair.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
+			remoteInfo = Armchair;
+		};
 		24B9D8A81DAC519B004EE256 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 24B9D89D1DAC519B004EE256 /* Alamofire.xcodeproj */;
@@ -220,6 +258,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				24B9D99E1DAED1CA004EE256 /* Result.framework in Embed Frameworks */,
+				24A4E5851E466C0E00FCD144 /* Armchair.framework in Embed Frameworks */,
 				24B9D8DC1DAC51B7004EE256 /* Dodo.framework in Embed Frameworks */,
 				24B9D8E51DAC51C4004EE256 /* Alamofire.framework in Embed Frameworks */,
 			);
@@ -246,6 +285,8 @@
 		249899061E23D8FA0071E423 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		249FF0E11DD3E8A20083DB0C /* ActionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionController.swift; sourceTree = "<group>"; };
 		249FF3371DD51B5E0083DB0C /* Clipboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clipboard.swift; sourceTree = "<group>"; };
+		24A4E5651E466C0400FCD144 /* Armchair.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Armchair.xcodeproj; path = Carthage/Checkouts/Armchair/Armchair.xcodeproj; sourceTree = "<group>"; };
+		24A4E5881E466C5600FCD144 /* AppReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReviewController.swift; sourceTree = "<group>"; };
 		24A510981DC5DD4E002BE909 /* ViewPresenterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPresenterInterface.swift; sourceTree = "<group>"; };
 		24B9D7251DAAB048004EE256 /* Conjugate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Conjugate-Bridging-Header.h"; sourceTree = "<group>"; };
 		24B9D7261DAAB048004EE256 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -300,6 +341,7 @@
 				2498991E1E2436E90071E423 /* AVFoundation.framework in Frameworks */,
 				249899071E23D8FA0071E423 /* QuartzCore.framework in Frameworks */,
 				24B9D99D1DAED1CA004EE256 /* Result.framework in Frameworks */,
+				24A4E5841E466C0E00FCD144 /* Armchair.framework in Frameworks */,
 				102DEF5A1DC15616001A8872 /* Fabric.framework in Frameworks */,
 				24B9D8DB1DAC51B7004EE256 /* Dodo.framework in Frameworks */,
 				10AE617A1DD782FF00B510C4 /* FBSDKCoreKit.framework in Frameworks */,
@@ -339,6 +381,7 @@
 				249FF0E11DD3E8A20083DB0C /* ActionController.swift */,
 				249FF3371DD51B5E0083DB0C /* Clipboard.swift */,
 				24F96B7C1E39FAB000EC27A0 /* QuickAction.swift */,
+				24A4E5881E466C5600FCD144 /* AppReviewController.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -352,6 +395,17 @@
 				248597731DCFB884006D7AA2 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		24A4E5661E466C0400FCD144 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24A4E5741E466C0400FCD144 /* Armchair.framework */,
+				24A4E5761E466C0400FCD144 /* Armchair.framework */,
+				24A4E5781E466C0400FCD144 /* Armchair.bundle */,
+				24A4E57A1E466C0400FCD144 /* Armchair.bundle */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		24A510861DC5DD22002BE909 /* View Presenter Interface */ = {
@@ -487,6 +541,7 @@
 				24B9D9821DAED1A7004EE256 /* Result.xcodeproj */,
 				24B9D8CE1DAC51A9004EE256 /* Dodo.xcodeproj */,
 				24B9D89D1DAC519B004EE256 /* Alamofire.xcodeproj */,
+				24A4E5651E466C0400FCD144 /* Armchair.xcodeproj */,
 				F56F08BA1CFA61DB008BD25B /* Conjugate */,
 				F56F08B91CFA61DB008BD25B /* Products */,
 				248597721DCFB884006D7AA2 /* Frameworks */,
@@ -556,6 +611,7 @@
 				24B9D8DE1DAC51B7004EE256 /* PBXTargetDependency */,
 				24B9D8E71DAC51C4004EE256 /* PBXTargetDependency */,
 				24B9D9A01DAED1CA004EE256 /* PBXTargetDependency */,
+				24A4E5871E466C0E00FCD144 /* PBXTargetDependency */,
 			);
 			name = Conjugate;
 			productName = Conjugate;
@@ -573,7 +629,7 @@
 				TargetAttributes = {
 					F56F08B71CFA61DB008BD25B = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 2UB7THC2G3;
+						DevelopmentTeam = A88UHFQD28;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -595,6 +651,10 @@
 					ProjectRef = 24B9D89D1DAC519B004EE256 /* Alamofire.xcodeproj */;
 				},
 				{
+					ProductGroup = 24A4E5661E466C0400FCD144 /* Products */;
+					ProjectRef = 24A4E5651E466C0400FCD144 /* Armchair.xcodeproj */;
+				},
+				{
 					ProductGroup = 24B9D8CF1DAC51A9004EE256 /* Products */;
 					ProjectRef = 24B9D8CE1DAC51A9004EE256 /* Dodo.xcodeproj */;
 				},
@@ -611,6 +671,34 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		24A4E5741E466C0400FCD144 /* Armchair.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Armchair.framework;
+			remoteRef = 24A4E5731E466C0400FCD144 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		24A4E5761E466C0400FCD144 /* Armchair.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Armchair.framework;
+			remoteRef = 24A4E5751E466C0400FCD144 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		24A4E5781E466C0400FCD144 /* Armchair.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Armchair.bundle;
+			remoteRef = 24A4E5771E466C0400FCD144 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		24A4E57A1E466C0400FCD144 /* Armchair.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Armchair.bundle;
+			remoteRef = 24A4E5791E466C0400FCD144 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		24B9D8A91DAC519B004EE256 /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -784,6 +872,7 @@
 				247770D31DD3AC5A0012EDFF /* ShareController.swift in Sources */,
 				2409921D1DC80256008F763D /* UserDefaultKeys.swift in Sources */,
 				24F96B971E3A51D400EC27A0 /* SettingsPresenter.swift in Sources */,
+				24A4E5891E466C5600FCD144 /* AppReviewController.swift in Sources */,
 				24F96B961E3A51D400EC27A0 /* SavedVerbPresenter.swift in Sources */,
 				9F66A0B91E2BD92D007646A5 /* Identifiable.swift in Sources */,
 				24F96BBE1E3A546B00EC27A0 /* FlexLanguageTextField.m in Sources */,
@@ -817,6 +906,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		24A4E5871E466C0E00FCD144 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Armchair;
+			targetProxy = 24A4E5861E466C0E00FCD144 /* PBXContainerItemProxy */;
+		};
 		24B9D8DE1DAC51B7004EE256 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Dodo;
@@ -957,14 +1051,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 2UB7THC2G3;
+				DEVELOPMENT_TEAM = A88UHFQD28;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Conjugate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adelshehadeh.konjugate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.halilgursoy.konjugate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Conjugate/Conjugate-Bridging-Header.h";
@@ -981,14 +1075,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 2UB7THC2G3;
+				DEVELOPMENT_TEAM = A88UHFQD28;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Conjugate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adelshehadeh.konjugate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.halilgursoy.konjugate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Conjugate/Conjugate-Bridging-Header.h";
