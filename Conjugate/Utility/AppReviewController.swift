@@ -10,7 +10,7 @@ import Foundation
 import Armchair
 
 class AppReviewController {
-    let significantEventsUntilPrompt: UInt = 5
+    let significantEventsUntilPrompt: UInt = 10
     let daysUntilPrompt: UInt = 0
     let usesUntilPrompt: UInt = 1
     
