@@ -29,13 +29,13 @@ class ShareController {
     func share(verb: Verb, sourceView: View, sourceRect: CGRect? = nil) {
         guard let presentTenseForms = verb.tenses[.indicative]?.filter({ $0.name == .present }).first?.forms else { return }
         
-        var textToShare = "Präsens conjugations of the verb \(verb.name):" + "\n\n"
+        var textToShare = "Präsens forms of the verb \(verb.name):" + "\n\n"
         for form in presentTenseForms {
             textToShare += "\(form.pronoun) \(form.conjugatedVerb)" + "\n"
         }
         
-        textToShare += "\nVia konj.me app for iOS. Download here "
-        let urlStringToShare = "http://www.konj.me"
+        textToShare += "\nVia konj.me app "
+        let urlStringToShare = "https://goo.gl/0iUTJI"
         share(text: textToShare, url: urlStringToShare, sourceView: sourceView, sourceRect: sourceRect)
     }
     

@@ -294,9 +294,9 @@ extension ConjugatePresenter {
         let tenseName = !tense.name.isEmpty ? "\(tenseGroupName) \(tense.name)" : tenseGroupName
         let verbName = viewModel.verb
         
-        let text = "\(tenseName) conjugation of the verb \(verbName) is: \(conjugation)\n"
-            + "Via konj.me app for iOS. Download here "
-        let url = "http://konj.me"
+        let text = "\(tenseName) form of the verb \(verbName) is \(conjugation).\n\n"
+            + "Via konj.me app"
+        let url = "https://goo.gl/0iUTJI"
         
         let shareController = ShareController(view: view)
         shareController.share(text: text, url: url, sourceView: sourceView, sourceRect: sourceRect)
