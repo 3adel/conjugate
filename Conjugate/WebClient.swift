@@ -39,6 +39,8 @@ class WebClient {
     var reachabilityManager: NetworkReachabilityManager?
     var reachabilityStatus: NetworkReachabilityManager.NetworkReachabilityStatus?
     
+    var cancelledRequests: [URLRequest] = []
+    
     init(manager: Alamofire.SessionManager? = nil) {
         self.manager = manager ?? Alamofire.SessionManager.default
     }
@@ -69,11 +71,19 @@ class WebClient {
     func send(_ request: URLRequest, cache: Bool = false, completion: APIResultHandler? = nil) {
         setupReachabilityManager(for: request.url?.host ?? "")
         
+        removeRequestFromCancelled(request)
+        
         manager.request(request)
             .validate()
             .responseJSON { alamofireResponse in
+                guard !self.requestIsCancelled(alamofireResponse.request)
+                    else {
+                        self.removeRequestFromCancelled(alamofireResponse.request)
+                        return
+                }
+                
                 var result: AnyAPIResult!
-
+                
                 switch alamofireResponse.result {
                 case .failure(_):
                     if let reachabilityStatus = self.reachabilityStatus,
@@ -95,9 +105,40 @@ class WebClient {
         }
     }
     
+    func requestIsCancelled(_ request: URLRequest?) -> Bool {
+        var isCancelled = false
+        
+        for cancelledRequest in cancelledRequests {
+            guard let request = request
+                else { continue }
+            
+            isCancelled = request.url == cancelledRequest.url
+            
+            if isCancelled {
+                break
+            }
+        }
+        
+        return isCancelled
+    }
+    
+    func removeRequestFromCancelled(_ request: URLRequest?) {
+        guard let request = request else { return }
+        cancelledRequests.remove(object: request)
+    }
+    
     func cancellAllRequests() {
         manager.session.getAllTasks { tasks in
-            tasks.forEach { $0.cancel() }
+            tasks.forEach { [weak self] in
+                guard let strongSelf = self else { return }
+                
+                if let request = $0.currentRequest,
+                    !strongSelf.cancelledRequests.contains(request) {
+                    
+                    strongSelf.cancelledRequests.append(request)
+                }
+                $0.cancel()
+            }
         }
     }
     
