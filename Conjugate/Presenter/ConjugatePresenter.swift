@@ -285,7 +285,8 @@ extension ConjugatePresenter {
         let form = tense.forms[index]
         
         let conjugation = form.pronoun + " " + form.verb
-        let tenseName = tense.name
+        let tenseGroupName = selectedTab.name
+        let tenseName = !tense.name.isEmpty ? "\(tenseGroupName) \(tense.name)" : tenseGroupName
         let verbName = viewModel.verb
         
         let text = "\(tenseName) conjugation of the verb \(verbName) is: \(conjugation)\n"
