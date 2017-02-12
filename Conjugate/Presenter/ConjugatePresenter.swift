@@ -232,7 +232,7 @@ class ConjugatePresenter: ConjugatePresenterType {
 // MARK: Handle user input for search
 extension ConjugatePresenter {
     func userDidInput(searchText: String) {
-        dataStore.cancelPreviousSearches()
+        cancelSearch()
         clearSearchTimer()
         
         self.searchText = searchText
@@ -250,10 +250,15 @@ extension ConjugatePresenter {
     }
     
     @objc func doSearch() {
-        dataStore.cancelPreviousSearches()
+        cancelSearch()
         if searchText.characters.count >= kMinNumbOfCharactersForSearch {
             search(for: searchText)
         }
+    }
+    
+    func cancelSearch() {
+        dataStore.cancelPreviousSearches()
+        view.hideLoader()
     }
     
     func clearSearchTimer() {
