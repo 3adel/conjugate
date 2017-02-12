@@ -65,3 +65,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
+
+extension AppDelegate {
+    override class func initialize() {
+        AppDelegate.setupAppReviewController()
+    }
+    
+    class func setupAppReviewController() {
+        AppReviewController.with(appID: "1163600729")
+    }
+}

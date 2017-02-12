@@ -1,3 +1,4 @@
 github "Alamofire/Alamofire" == 4.0.0
 github "marketplacer/Dodo"
 github "antitypical/Result" "master"
+github "UrbanApps/Armchair" "swift3"

@@ -172,6 +172,8 @@ class ConjugatePresenter: ConjugatePresenterType {
     fileprivate func didSearch(_ verb: Verb) {
         viewModel = makeConjugateViewModel(from: verb)
         view.updateUI(with: viewModel)
+        
+        AppReviewController.sharedInstance.didSignificantEvent()
     }
     
     fileprivate func handle(error: Error) {
