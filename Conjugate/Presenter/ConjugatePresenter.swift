@@ -173,7 +173,6 @@ class ConjugatePresenter: ConjugatePresenterType {
         viewModel = makeConjugateViewModel(from: verb)
         view.updateUI(with: viewModel)
         
-        AppReviewController.sharedInstance.didSignificantEvent()
     }
     
     fileprivate func handle(error: Error) {
@@ -204,6 +203,7 @@ class ConjugatePresenter: ConjugatePresenterType {
         } else {
             storage.save(verb: verb)
             view.show(successMessage: LocalizedString("mobile.ios.conjugate.verbSaved"))
+            AppReviewController.sharedInstance.didSignificantEvent()
         }
         
         viewModel = makeConjugateViewModel(from: verb)
