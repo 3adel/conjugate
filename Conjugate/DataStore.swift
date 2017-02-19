@@ -32,6 +32,7 @@ class DataStore {
                         Answers.logCustomEvent(withName: "Fail-\(language.description)-get-verb-infinitive",customAttributes: ["Query": verbString])
                         
                         
+                        
                         return
                 }
                 completion(.success(verb))
