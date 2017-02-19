@@ -3,6 +3,8 @@
 //
 
 import Foundation
+import Fabric
+import Crashlytics
 
 
 class ConjugatePresenter: ConjugatePresenterType {
@@ -173,6 +175,9 @@ class ConjugatePresenter: ConjugatePresenterType {
         viewModel = makeConjugateViewModel(from: verb)
         view.updateUI(with: viewModel)
         
+        //Track successful conjugations
+        Answers.logCustomEvent(withName: "\(targetLocale.description)-verb successful conjugation",customAttributes: ["Query": searchText])
+   
     }
     
     fileprivate func handle(error: Error) {

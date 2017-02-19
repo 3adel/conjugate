@@ -4,6 +4,7 @@
 
 import Foundation
 import Result
+import Crashlytics
 
 
 class DataStore {
@@ -26,6 +27,11 @@ class DataStore {
                     let verb = Verb(with: dict)
                     else {
                         completion(.failure(ConjugateError.verbNotFound))
+                        
+                        //Track failed conjugations
+                        Answers.logCustomEvent(withName: "\(language.description)-verb not found",customAttributes: ["Query": verbString])
+                        
+                        
                         return
                 }
                 completion(.success(verb))
@@ -37,7 +43,7 @@ class DataStore {
     func conjugate(_ verb: String, in language: Locale, completion: @escaping (Result<Verb, ConjugateError>) -> Void) {
         dataClient.conjugate(for: verb, in: language) { result in
             switch result {
-            case .failure (let error):  
+            case .failure (let error):
                 completion(.failure(error))
             case .success(let value):
                 guard let dict = value as? JSONDictionary,
