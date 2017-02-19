@@ -176,7 +176,7 @@ class ConjugatePresenter: ConjugatePresenterType {
         view.updateUI(with: viewModel)
         
         //Track successful conjugations
-        Answers.logCustomEvent(withName: "\(targetLocale.description)-verb successful conjugation",customAttributes: ["Query": searchText])
+        Answers.logCustomEvent(withName: "Success-\(targetLocale.description)-verb-conjugation",customAttributes: ["Query": searchText])
    
     }
     

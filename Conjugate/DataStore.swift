@@ -29,7 +29,7 @@ class DataStore {
                         completion(.failure(ConjugateError.verbNotFound))
                         
                         //Track failed conjugations
-                        Answers.logCustomEvent(withName: "\(language.description)-verb not found",customAttributes: ["Query": verbString])
+                        Answers.logCustomEvent(withName: "Fail-\(language.description)-get-verb-infinitive",customAttributes: ["Query": verbString])
                         
                         
                         return
@@ -93,11 +93,17 @@ class DataStore {
                     !array.isEmpty
                     else {
                         completion(.failure(ConjugateError.translationNotFound))
+                        
+                        //Track failed translations
+                        Answers.logCustomEvent(withName: "Not-found-\(fromLanguage.description)-translation",customAttributes: ["Query": verb])
                         return
                 }
                 let translations = array.flatMap { Translation(with: $0) }
                 
                 completion(.success(translations))
+                
+                //Track successful translations
+                Answers.logCustomEvent(withName: "Found-\(fromLanguage.description)-translation",customAttributes: ["Query": verb])
             }
             
         }
