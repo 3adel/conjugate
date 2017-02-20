@@ -3,6 +3,8 @@
 //
 
 import Foundation
+import Fabric
+import Crashlytics
 
 
 class ConjugatePresenter: ConjugatePresenterType {
@@ -173,6 +175,9 @@ class ConjugatePresenter: ConjugatePresenterType {
         viewModel = makeConjugateViewModel(from: verb)
         view.updateUI(with: viewModel)
         
+        //Track successful conjugations
+        Answers.logCustomEvent(withName: "Success-\(targetLocale.description)-verb-conjugation",customAttributes: ["Query": searchText])
+   
     }
     
     fileprivate func handle(error: Error) {
@@ -200,10 +205,20 @@ class ConjugatePresenter: ConjugatePresenterType {
         if storage.verbExists(verb) {
             storage.remove(verb: verb)
             view.show(successMessage: LocalizedString("mobile.ios.conjugate.verbDeleted"))
+            
+            //Track deleting a verb
+            Answers.logCustomEvent(withName: "Unfavorited Verb",customAttributes: ["Verb": verb.name])
+            
         } else {
             storage.save(verb: verb)
             view.show(successMessage: LocalizedString("mobile.ios.conjugate.verbSaved"))
             AppReviewController.sharedInstance.didSignificantEvent()
+            
+            //Track saving a verb
+            Answers.logCustomEvent(withName: "Favorited Verb",customAttributes: ["Verb": verb.name])
+            
+            
+            
         }
         
         viewModel = makeConjugateViewModel(from: verb)

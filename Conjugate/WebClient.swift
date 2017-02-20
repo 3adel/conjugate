@@ -4,6 +4,7 @@
 
 import Foundation
 import Alamofire
+import Crashlytics
 
 
 public enum ServerErrorUserInfoKey: String {
@@ -192,9 +193,22 @@ public enum Endpoint: String {
     
     public func appError(from apiError: APIError) -> ConjugateError {
         if apiError == .serverError {
+            
+            
+            Answers.logCustomEvent(withName: "Error-server",customAttributes: ["Error": apiError.localizedDescription])
+            
             return ConjugateError.serverError
+            
+
+            
         } else if apiError == .networkUnavailable {
+            
+            Answers.logCustomEvent(withName: "Error-network-unavailable",customAttributes: ["Error": apiError.localizedDescription])
+            
             return ConjugateError.networkUnavailable
+            
+            
+            
         }
         
         switch (self) {
@@ -221,6 +235,10 @@ public enum Endpoint: String {
                 break
             }
         }
+        
+        
+        Answers.logCustomEvent(withName: "Error-unknown",customAttributes: ["Error": ConjugateError.genericError.localizedDescription])
+        
         return ConjugateError.genericError
     }
     
