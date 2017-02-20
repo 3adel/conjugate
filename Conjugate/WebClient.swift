@@ -125,7 +125,7 @@ class WebClient {
     
     func removeRequestFromCancelled(_ request: URLRequest?) {
         guard let request = request else { return }
-        cancelledRequests.remove(object: request)
+        cancelledRequests.remove(request)
     }
     
     func cancellAllRequests() {
@@ -272,4 +272,25 @@ private extension String {
 
 public enum HTTPMethod: String {
     case OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, CONNECT
+}
+
+protocol URLRequestType {
+    var url: URL? { get }
+}
+
+extension URLRequest: URLRequestType {}
+
+extension Array where Element: URLRequestType {
+    
+    mutating func remove(_ request: URLRequestType) {
+        var indexesToBeRemoved: [Int] = []
+        
+        self.enumerated().forEach {
+            if $0.element.url == request.url {
+                indexesToBeRemoved.append($0.offset)
+            }
+        }
+        
+        indexesToBeRemoved.forEach { remove(at: $0) }
+    }
 }
