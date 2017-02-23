@@ -21,7 +21,7 @@ class APIClient: DataClient {
         let endpoint = Endpoint.finder
         
         guard let languageCode = language.isoLanguageCode,
-            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb])
+            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb.lowercased()])
             else {
                 let errorResult: AnyResult = .failure(ConjugateError.genericError)
                 completion(errorResult)
@@ -36,7 +36,7 @@ class APIClient: DataClient {
         let endpoint = Endpoint.conjugator
         
         guard let languageCode = language.isoLanguageCode,
-            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb])
+            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb.lowercased()])
             else {
                 completion(genericErrorResult)
                 return
@@ -52,7 +52,7 @@ class APIClient: DataClient {
         
         guard let fromLanguageCode = from.languageCode,
             let toLanguageCode = to.languageCode,
-            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": fromLanguageCode, "toLanguageKey": toLanguageCode, "verbKey": verb])
+            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": fromLanguageCode, "toLanguageKey": toLanguageCode, "verbKey": verb.lowercased()])
             else {
                 completion(genericErrorResult)
                 return
