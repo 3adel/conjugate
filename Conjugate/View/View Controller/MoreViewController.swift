@@ -59,11 +59,10 @@ extension MoreViewController: UITextViewDelegate {
     }
 }
 
-
 class SettingsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     let tableView: UITableView
     
-    var options = [String]()
+    var options = [SettingsOptionViewModel]()
     
     let presenter: SettingsPresenter
     
@@ -74,11 +73,9 @@ class SettingsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SettingsCell")
     }
     
-    func render(with options: [String]) {
+    func render(with options: [SettingsOptionViewModel]) {
         self.options = options
         tableView.reloadData()
     }
@@ -94,11 +91,10 @@ class SettingsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func makeCell(for indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.Identifier) as? SettingsCell else { return UITableViewCell() }
         
-        let settingsTitle = options[indexPath.row]
-        
-        cell.textLabel?.text = settingsTitle
+        let option = options[indexPath.row]
+        cell.update(with: option)
         
         return cell
     }

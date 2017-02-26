@@ -18,6 +18,10 @@ class SettingsPresenter: SettingsPresenterType {
         var title: String {
             return LocalizedString("mobile.ios.conjugate.settings."+rawValue)
         }
+        
+        var imageName: String {
+            return "settings_"+rawValue
+        }
     }
     
     struct TableCell {
@@ -68,12 +72,19 @@ class SettingsPresenter: SettingsPresenterType {
     }
     
     func makeViewModel(from options: [TableCell]) -> SettingsViewModel {
-        let titles = settingsData.map { $0.cellTitle }
+        let options = settingsData.map(makeSettingsOptionViewModel)
         
         let footerURL = "http://verbix.com"
         let footerTitle = "In collaboration with " + footerURL
         
-        return SettingsViewModel(options: titles, footerTitle: footerTitle, footerURL: footerURL)
+        return SettingsViewModel(options: options, footerTitle: footerTitle, footerURL: footerURL)
+    }
+    
+    func makeSettingsOptionViewModel(cellData: TableCell) -> SettingsOptionViewModel {
+        let title = cellData.cellTitle
+        let imageName = cellData.cellType.imageName
+        
+        return SettingsOptionViewModel(title: title, imageName: imageName)
     }
     
     func sendSupportEmail(subject: String) {
