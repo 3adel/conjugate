@@ -63,7 +63,7 @@ protocol SettingsView: View {
 
 protocol SettingsPresenterType {
     func getOptions()
-    func optionSelected(at index: Int, sourceView: View, sourceRect: CGRect)
+    func optionSelected(at section: Int, index: Int, sourceView: View, sourceRect: CGRect)
 }
 
 struct ConjugateViewModel {
@@ -123,14 +123,27 @@ struct FormViewModel {
 }
 
 struct SettingsViewModel {
-    let options: [SettingsOptionViewModel]
+    let sections: [TableSectionViewModel]
     let footerTitle: String
     let footerURL: String
     
-    static let empty: SettingsViewModel = SettingsViewModel(options: [], footerTitle: "", footerURL: "")
+    static let empty: SettingsViewModel = SettingsViewModel(sections: [], footerTitle: "", footerURL: "")
 }
 
-struct SettingsOptionViewModel {
+protocol CellViewModel {}
+
+struct TableSectionViewModel {
+    let title: String
+    let cells: [CellViewModel]
+}
+
+struct SettingsOptionViewModel: CellViewModel {
     let title: String
     let imageName: String
+}
+
+struct SettingsLanguageViewModel: CellViewModel {
+    let title: String
+    let languageName: String
+    let languageImageName: String
 }

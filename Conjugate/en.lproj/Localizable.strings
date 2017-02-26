@@ -33,6 +33,9 @@
 "mobile.ios.conjugate.verbSaved" = "The verb has been saved.";
 "mobile.ios.conjugate.verbDeleted" = "The verb has been deleted.";
 
+"mobile.ios.conjugate.settings.section.language" = "Language Options";
+"mobile.ios.conjugate.settings.conjugationLanguage" = "Conjugation Language";
+"mobile.ios.conjugate.settings.translationLanguage" = "Translation Language";
 "mobile.ios.conjugate.settings.reportBug" = "Report a bug";
 "mobile.ios.conjugate.settings.sendFeedback" = "Send Feedback";
 "mobile.ios.conjugate.settings.share" = "Tell a Friend";

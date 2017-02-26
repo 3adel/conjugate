@@ -14,6 +14,8 @@ class SettingsPresenter: SettingsPresenterType {
         case share
         case reportBug
         case rate
+        case conjugationLanguage
+        case translationLanguage
         
         var title: String {
             return LocalizedString("mobile.ios.conjugate.settings."+rawValue)
@@ -25,8 +27,8 @@ class SettingsPresenter: SettingsPresenterType {
     }
     
     struct TableCell {
-        var cellType: CellType
-        var cellTitle: String
+        let cellType: CellType
+        let cellTitle: String
         
         init(cellType: CellType) {
             self.cellType = cellType
@@ -34,12 +36,18 @@ class SettingsPresenter: SettingsPresenterType {
         }
     }
     
-    var settingsData: [TableCell] = [
-            TableCell(cellType: .reportBug),
-            TableCell(cellType: .sendFeedback),
-            TableCell(cellType: .share),
-            TableCell(cellType: .rate)
-    ]
+    struct TableSection {
+        let title: String
+        let cells: [TableCell]
+    }
+    
+    let languageCells: [TableCell]
+    let optionCells: [TableCell]
+    
+    let languageSection: TableSection
+    let optionSection: TableSection
+    
+    let sections: [TableSection]
     
     var viewModel = SettingsViewModel.empty
     var emailComposer: EmailComposer?
@@ -48,17 +56,37 @@ class SettingsPresenter: SettingsPresenterType {
     
     init(view: SettingsView) {
         self.view = view
+        
+        languageCells = [
+            TableCell(cellType: .conjugationLanguage),
+            TableCell(cellType: .translationLanguage)
+        ]
+        
+        optionCells =  [
+            TableCell(cellType: .reportBug),
+            TableCell(cellType: .sendFeedback),
+            TableCell(cellType: .share),
+            TableCell(cellType: .rate)
+        ]
+        
+        languageSection = TableSection(title: LocalizedString("mobile.ios.conjugate.settings.section.language"),
+                                       cells: languageCells)
+        
+        optionSection = TableSection(title: "",
+                                     cells: optionCells)
+        
+        sections = [languageSection, optionSection]
     }
     
     func getOptions() {
-        viewModel = makeViewModel(from: settingsData)
+        viewModel = makeViewModel(languageSection: languageSection, optionSection: optionSection)
         view.render(with: viewModel)
     }
     
-    func optionSelected(at index: Int, sourceView: View, sourceRect: CGRect) {
-        let selectedSettings = settingsData[index]
+    func optionSelected(at section: Int, index: Int, sourceView: View, sourceRect: CGRect) {
+        let option = sections[section].cells[index]
         
-        switch selectedSettings.cellType {
+        switch option.cellType {
         case .reportBug:
             sendSupportEmail(subject: "konj.me iOS bug")
         case .sendFeedback:
@@ -68,19 +96,40 @@ class SettingsPresenter: SettingsPresenterType {
             shareController.shareApp(sourceView: sourceView, sourceRect: sourceRect)
         case .rate:
             rateUs()
+        default:
+            break
         }
     }
     
-    func makeViewModel(from options: [TableCell]) -> SettingsViewModel {
-        let options = settingsData.map(makeSettingsOptionViewModel)
+    func makeViewModel(languageSection: TableSection, optionSection: TableSection) -> SettingsViewModel {
+        let languageSectionViewModel = makeSettingsLanguageSectionViewModel(from: languageSection)
+        let optionSectionViewModel = makeSettingsOptionSectionViewModel(from: optionSection)
+        
+        let sectionViewModels = [languageSectionViewModel, optionSectionViewModel]
         
         let footerURL = "http://verbix.com"
         let footerTitle = "In collaboration with " + footerURL
         
-        return SettingsViewModel(options: options, footerTitle: footerTitle, footerURL: footerURL)
+        return SettingsViewModel(sections: sectionViewModels, footerTitle: footerTitle, footerURL: footerURL)
     }
     
-    func makeSettingsOptionViewModel(cellData: TableCell) -> SettingsOptionViewModel {
+    func makeSettingsOptionSectionViewModel(from section: TableSection) -> TableSectionViewModel {
+        let title = section.title
+        let cellViewModels = section.cells.map(makeSettingsOptionViewModel)
+        
+        return TableSectionViewModel(title: title, cells: cellViewModels)
+    }
+    
+    func makeSettingsLanguageSectionViewModel(from section: TableSection) -> TableSectionViewModel {
+        let conjugationViewModel = SettingsLanguageViewModel(title: section.cells[0].cellTitle, languageName: "DE", languageImageName: "de_flag")
+        let translationViewModel = SettingsLanguageViewModel(title: section.cells[1].cellTitle, languageName: "EN", languageImageName: "gb_flag")
+        
+        let cells = [conjugationViewModel, translationViewModel]
+        
+        return TableSectionViewModel(title: section.title, cells: cells)
+    }
+    
+    func makeSettingsOptionViewModel(from cellData: TableCell) -> SettingsOptionViewModel {
         let title = cellData.cellTitle
         let imageName = cellData.cellType.imageName
         
@@ -101,7 +150,6 @@ class SettingsPresenter: SettingsPresenterType {
     
     func rateUs(){
         UIApplication.shared.openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1163600729")! as URL)
-
     }
 }
 

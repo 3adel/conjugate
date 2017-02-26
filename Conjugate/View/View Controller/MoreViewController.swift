@@ -49,7 +49,7 @@ class MoreViewController: UIViewController, SettingsView {
         attributedString.set(viewModel.footerURL, asLink: viewModel.footerURL)
 
         footerTextView.attributedText = attributedString
-        dataSource?.render(with: viewModel.options)
+        dataSource?.render(with: viewModel.sections)
     }
 }
 
@@ -62,7 +62,7 @@ extension MoreViewController: UITextViewDelegate {
 class SettingsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     let tableView: UITableView
     
-    var options = [SettingsOptionViewModel]()
+    var sections = [TableSectionViewModel]()
     
     let presenter: SettingsPresenter
     
@@ -75,15 +75,19 @@ class SettingsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         self.tableView.dataSource = self
     }
     
-    func render(with options: [SettingsOptionViewModel]) {
-        self.options = options
+    func render(with sections: [TableSectionViewModel]) {
+        self.sections = sections
         tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let frameForCell = tableView.rectForRow(at: indexPath)
-        presenter.optionSelected(at: indexPath.row, sourceView: tableView, sourceRect: frameForCell)
+        presenter.optionSelected(at: indexPath.section, index: indexPath.row, sourceView: tableView, sourceRect: frameForCell)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section].title
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -91,19 +95,39 @@ class SettingsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func makeCell(for indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.Identifier) as? SettingsCell else { return UITableViewCell() }
+        var cell: UITableViewCell?
         
-        let option = options[indexPath.row]
-        cell.update(with: option)
+        let section = sections[indexPath.section]
+        let viewModel = section.cells[indexPath.row]
+
+        if let optionViewModel = viewModel as? SettingsOptionViewModel {
+            cell = makeSettingsOptionCell(with: optionViewModel)
+        } else if let languageViewModel = viewModel as? SettingsLanguageViewModel {
+            cell = makeSettingsLanguageCell(with: languageViewModel)
+        }
         
-        return cell
+        return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return options.count
+        return sections[section].cells.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sections.count
+    }
+    
+    private func makeSettingsLanguageCell(with viewModel: SettingsLanguageViewModel) -> SettingsLanguageCell? {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsLanguageCell.Identifier) as? SettingsLanguageCell else { return nil }
+        
+        cell.update(with: viewModel)
+        return cell
+    }
+    
+    private func makeSettingsOptionCell(with viewModel: SettingsOptionViewModel) -> SettingsOptionCell? {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsOptionCell.Identifier) as? SettingsOptionCell else { return nil }
+        
+        cell.update(with: viewModel)
+        return cell
     }
 }
