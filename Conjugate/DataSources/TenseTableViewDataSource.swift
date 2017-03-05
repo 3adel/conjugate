@@ -7,7 +7,7 @@ import UIKit
 class TenseTableViewDataSource: NSObject {
     let tableView: UITableView
     
-    let speaker = TextSpeaker(locale: Locale(identifier: "de_DE"))
+    let speaker = TextSpeaker(language: AppDependencyManager.shared.languageConfig.selectedConjugationLanguage)
     
     var viewModel = TenseTabViewModel.empty {
         didSet {

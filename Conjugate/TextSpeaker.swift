@@ -11,7 +11,7 @@ protocol TextSpeakerDelegate {
 }
 
 class TextSpeaker: NSObject {
-    var locale = Locale(identifier: "de_DE")
+    var language: Language
     
     var delegate: TextSpeakerDelegate?
     
@@ -22,8 +22,8 @@ class TextSpeaker: NSObject {
     var isPlaying = false
     var textPlayed = ""
     
-    init(locale: Locale) {
-        self.locale = locale
+    init(language: Language) {
+        self.language = language
         
         super.init()
         
@@ -35,7 +35,7 @@ class TextSpeaker: NSObject {
         
         utterance = AVSpeechUtterance(string: text)
         utterance?.rate = AVSpeechUtteranceDefaultSpeechRate
-        utterance?.voice = AVSpeechSynthesisVoice(language: locale.identifier)
+        utterance?.voice = AVSpeechSynthesisVoice(language: language.localeIdentifier)
         
         guard let utterance = utterance else { return }
         stop()

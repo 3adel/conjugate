@@ -31,7 +31,7 @@ class Router {
     
     var quickActionToBePerformed: QuickAction?
     
-    init(viewController: UIViewController, appDependencyManager: AppDependencyManager = .configuringDefault()) {
+    init(viewController: UIViewController, appDependencyManager: AppDependencyManager = .shared) {
         self.rootViewController = viewController
         self.appDependencyManager = appDependencyManager
     }
@@ -101,7 +101,7 @@ class Router {
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else { return nil }
         
-        let conjugatePresenter = ConjugatePresenter(view: vc, quickActionController: appDelegate.quickActionController)
+        let conjugatePresenter = ConjugatePresenter(view: vc, appDependencyManager: appDependencyManager, quickActionController: appDelegate.quickActionController)
         vc.presenter = conjugatePresenter
         vc.viewModel = conjugatePresenter.makeConjugateViewModel(from: verb)
         
@@ -112,7 +112,7 @@ class Router {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else { return nil }
         
-        return ConjugatePresenter(view: viewController, quickActionController: appDelegate.quickActionController)
+        return ConjugatePresenter(view: viewController, appDependencyManager: appDependencyManager, quickActionController: appDelegate.quickActionController)
     }
     
     func makeLanguageSelectionViewController() -> LanguageSelectionViewController? {

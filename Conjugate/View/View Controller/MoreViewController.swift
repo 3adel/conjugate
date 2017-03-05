@@ -33,7 +33,7 @@ class MoreViewController: UIViewController, SettingsView {
     }
     
     func setupPresenter() {
-        presenter = SettingsPresenter(view: self, appDependencyManager: AppDependencyManager.configuringDefault())
+        presenter = SettingsPresenter(view: self, appDependencyManager: AppDependencyManager.shared)
     }
     
     func setupCollectionView() {

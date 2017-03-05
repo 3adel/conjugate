@@ -70,6 +70,8 @@
 		24F96BB61E3A53F700EC27A0 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F96BB51E3A53F700EC27A0 /* AlertHandler.swift */; };
 		24F96BB81E3A542E00EC27A0 /* TenseTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F96BB71E3A542E00EC27A0 /* TenseTableViewDataSource.swift */; };
 		24F96BBE1E3A546B00EC27A0 /* FlexLanguageTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F96BBA1E3A546B00EC27A0 /* FlexLanguageTextField.m */; };
+		24FAC0FC1E6C659100FD476B /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FAC0FB1E6C659100FD476B /* NotificationName.swift */; };
+		24FAC1651E6C792900FD476B /* DictionaryKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FAC1641E6C792900FD476B /* DictionaryKey.swift */; };
 		9F66A0B41E2BD7CD007646A5 /* TranslationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F66A0B31E2BD7CD007646A5 /* TranslationDataSource.swift */; };
 		9F66A0B91E2BD92D007646A5 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F66A0B81E2BD92D007646A5 /* Identifiable.swift */; };
 		9F66A0BF1E2BDED7007646A5 /* UIKitViewPresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F66A0BE1E2BDED7007646A5 /* UIKitViewPresenterInterface.swift */; };
@@ -335,6 +337,8 @@
 		24F96BB71E3A542E00EC27A0 /* TenseTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenseTableViewDataSource.swift; sourceTree = "<group>"; };
 		24F96BB91E3A546B00EC27A0 /* FlexLanguageTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexLanguageTextField.h; sourceTree = "<group>"; };
 		24F96BBA1E3A546B00EC27A0 /* FlexLanguageTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexLanguageTextField.m; sourceTree = "<group>"; };
+		24FAC0FB1E6C659100FD476B /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		24FAC1641E6C792900FD476B /* DictionaryKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryKey.swift; sourceTree = "<group>"; };
 		9F66A0B31E2BD7CD007646A5 /* TranslationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationDataSource.swift; sourceTree = "<group>"; };
 		9F66A0B81E2BD92D007646A5 /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		9F66A0BE1E2BDED7007646A5 /* UIKitViewPresenterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitViewPresenterInterface.swift; sourceTree = "<group>"; };
@@ -395,6 +399,8 @@
 				24F96B7C1E39FAB000EC27A0 /* QuickAction.swift */,
 				24A4E5881E466C5600FCD144 /* AppReviewController.swift */,
 				2451D4761E63113F0009F6F4 /* AppDependencyManager.swift */,
+				24FAC0FB1E6C659100FD476B /* NotificationName.swift */,
+				24FAC1641E6C792900FD476B /* DictionaryKey.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -906,6 +912,7 @@
 				24A4E5891E466C5600FCD144 /* AppReviewController.swift in Sources */,
 				24F96B961E3A51D400EC27A0 /* SavedVerbPresenter.swift in Sources */,
 				9F66A0B91E2BD92D007646A5 /* Identifiable.swift in Sources */,
+				24FAC0FC1E6C659100FD476B /* NotificationName.swift in Sources */,
 				24F96BBE1E3A546B00EC27A0 /* FlexLanguageTextField.m in Sources */,
 				24B9D8EB1DAC5232004EE256 /* DataStore.swift in Sources */,
 				245D32EA1DBB76FE00E5352F /* Localization.swift in Sources */,
@@ -915,6 +922,7 @@
 				245D32D01DBB6DCF00E5352F /* ConjugateError.swift in Sources */,
 				2451D4791E6315540009F6F4 /* LanguageSelectionPresenter.swift in Sources */,
 				24B9D8ED1DAC5261004EE256 /* DataClient.swift in Sources */,
+				24FAC1651E6C792900FD476B /* DictionaryKey.swift in Sources */,
 				24F96BB61E3A53F700EC27A0 /* AlertHandler.swift in Sources */,
 				24B9D9A21DAED525004EE256 /* Verb.swift in Sources */,
 				24F96BA91E3A535900EC27A0 /* TabbedMenu.swift in Sources */,
