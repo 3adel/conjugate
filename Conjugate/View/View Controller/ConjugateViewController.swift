@@ -6,9 +6,9 @@ import UIKit
 
 
 class ConjugateViewController: UIViewController {
-    @IBOutlet var searchView: UIView!
-    @IBOutlet var searchField: FlexLanguageTextField!
-    @IBOutlet var searchLanguageSwitch: SevenSwitch!
+    @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var searchField: FlexLanguageTextField!
+    @IBOutlet weak var searchLanguageSwitch: SevenSwitch!
     
     let verbDetailSegue = "verbDetailSegue"
     
