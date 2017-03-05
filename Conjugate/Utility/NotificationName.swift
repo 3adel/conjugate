@@ -52,3 +52,13 @@ public extension NotificationObserver {
         NotificationCenter.default.removeObserver(self)
     }
 }
+
+public protocol NotificationSender: class {
+    func send(_ notificationName: NotificationName, userInfo: [AnyHashable: Any]?)
+}
+
+public extension NotificationSender {
+    func send(_ notificationName: NotificationName, userInfo: [AnyHashable: Any]?) {
+        NotificationCenter.default.post(name: notificationName.name, object: nil, userInfo: userInfo)
+    }
+}

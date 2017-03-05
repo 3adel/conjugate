@@ -9,7 +9,7 @@
 import Foundation
 
 
-class AppDependencyManager {
+class AppDependencyManager: NotificationSender {
     enum Notification: String, NotificationName {
         case conjugationLanguageDidChange
         case translationLanguageDidChange
@@ -30,5 +30,19 @@ class AppDependencyManager {
     
     init(languageConfig: LanguageConfig) {
         self.languageConfig = languageConfig
+    }
+    
+    func change(conjugationLanguageTo language: Language) {
+        languageConfig = languageConfig.byChangingConjugationLanguage(to: language)
+        
+        let userInfo: [AnyHashable: Any] = [NotificationKey.language.key: language]
+        send(Notification.conjugationLanguageDidChange, userInfo: userInfo)
+    }
+    
+    func change(translationLanguageTo language: Language) {
+        languageConfig = languageConfig.byChangingTranslationLanguage(to: language)
+        
+        let userInfo: [AnyHashable: Any] = [NotificationKey.language.key: language]
+        send(Notification.translationLanguageDidChange, userInfo: userInfo)
     }
 }

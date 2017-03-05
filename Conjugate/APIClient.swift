@@ -15,13 +15,14 @@ class APIClient: DataClient {
     
     let genericErrorResult: AnyResult = .failure(ConjugateError.genericError)
     
-    func search(for verb: String, in language: Locale, completion: @escaping ResultHandler) {
+    func search(for verb: String, in language: Language, completion: @escaping ResultHandler) {
         cancelAllOperations()
         
         let endpoint = Endpoint.finder
         
-        guard let languageCode = language.isoLanguageCode,
-            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb.lowercased()])
+        let languageCode = language.isoCode
+        
+        guard let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb.lowercased()])
             else {
                 let errorResult: AnyResult = .failure(ConjugateError.genericError)
                 completion(errorResult)
@@ -30,13 +31,14 @@ class APIClient: DataClient {
         send(request: request, endpoint: endpoint, completion: completion)
     }
     
-    func conjugate(for verb: String, in language: Locale, completion: @escaping (AnyResult) -> Void) {
+    func conjugate(for verb: String, in language: Language, completion: @escaping (AnyResult) -> Void) {
         cancelAllOperations()
         
         let endpoint = Endpoint.conjugator
         
-        guard let languageCode = language.isoLanguageCode,
-            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb.lowercased()])
+        let languageCode = language.isoCode
+        
+        guard let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb.lowercased()])
             else {
                 completion(genericErrorResult)
                 return
@@ -45,14 +47,12 @@ class APIClient: DataClient {
         send(request: request, endpoint: endpoint, completion: completion)
     }
     
-    func translate(for verb: String, from: Locale, to: Locale, completion: @escaping (AnyResult) -> Void) {
+    func translate(for verb: String, from: Language, to: Language, completion: @escaping (AnyResult) -> Void) {
         cancelAllOperations()
         
         let endpoint = Endpoint.translator
         
-        guard let fromLanguageCode = from.languageCode,
-            let toLanguageCode = to.languageCode,
-            let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": fromLanguageCode, "toLanguageKey": toLanguageCode, "verbKey": verb.lowercased()])
+        guard let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": from.languageCode, "toLanguageKey": to.languageCode, "verbKey": verb.lowercased()])
             else {
                 completion(genericErrorResult)
                 return
@@ -80,25 +80,25 @@ class APIClient: DataClient {
     }
 }
 
-extension Locale {
-    private enum Language: String {
-        case de
-        case en
-        
-        var isoLanguageCode: String {
-            switch self {
-            case .de:
-                return "deu"
-            case .en:
-                return "eng"
-            }
-        }
-    }
-    
-    public var isoLanguageCode: String?  {
-        guard let languageCode = languageCode,
-            let language = Language(rawValue: languageCode) else { return nil }
-        
-        return language.isoLanguageCode
-    }
-}
+//extension Locale {
+//    private enum Language: String {
+//        case de
+//        case en
+//        
+//        var isoLanguageCode: String {
+//            switch self {
+//            case .de:
+//                return "deu"
+//            case .en:
+//                return "eng"
+//            }
+//        }
+//    }
+//    
+//    public var isoLanguageCode: String?  {
+//        guard let languageCode = languageCode,
+//            let language = Language(rawValue: languageCode) else { return nil }
+//        
+//        return language.isoLanguageCode
+//    }
+//}

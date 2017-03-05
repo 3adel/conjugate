@@ -69,6 +69,19 @@ enum Language: String {
         }
     }
     
+    var isoCode: String {
+        get {
+            switch(self) {
+            case .english:
+                return "eng"
+            case .german:
+                return "deu"
+            case .spanish:
+                return "spa"
+            }
+        }
+    }
+    
     var countryCode: String {
         get {
             return self.locale.regionCode!

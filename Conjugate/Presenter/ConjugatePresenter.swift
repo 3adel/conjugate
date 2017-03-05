@@ -7,7 +7,7 @@ import Fabric
 import Crashlytics
 
 
-enum SearchLanguageType {
+enum LanguageType {
     case interfaceLanguage
     case conjugationLanguage
 }
@@ -41,7 +41,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     var translations = [Translation]()
     let speaker: TextSpeaker
-    var searchLanguageType: SearchLanguageType
+    var searchLanguageType: LanguageType
     
     let storage = Storage()
     
@@ -88,10 +88,10 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     func reset() {
         viewModel = ConjugateViewModel.empty
         verb = nil
-        view.updateUI(with: viewModel)
+        getInitialData()
     }
     
-    func search(for verb: String, searchLanguageType: SearchLanguageType? = nil) {
+    func search(for verb: String, searchLanguageType: LanguageType? = nil) {
         lastSearchText = verb
         
         view.showLoader()
@@ -100,7 +100,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
         let searchLanguageType = searchLanguageType ?? self.searchLanguageType
         
         if searchLanguageType == .interfaceLanguage {
-            translate(verb, fromInterfaceLanguage: interfaceLanguage.locale, to: targetLanguage.locale) { [weak self] translations in
+            translate(verb, fromInterfaceLanguage: interfaceLanguage, to: targetLanguage) { [weak self] translations in
                 self?.view.hideLoader()
                 
                 guard let strongSelf = self else { return }
@@ -118,7 +118,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
                 
             }
         } else {
-            dataStore.getInfinitive(of: verb, in: targetLanguage.locale) { [weak self] result in
+            dataStore.getInfinitive(of: verb, in: targetLanguage) { [weak self] result in
                 guard let strongSelf = self else { return }
                 
                 switch result {
@@ -141,7 +141,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     
     func conjugate(_ verb: String) {
-        dataStore.conjugate(verb, in: targetLanguage.locale) { [weak self] result in
+        dataStore.conjugate(verb, in: targetLanguage) { [weak self] result in
             guard let strongSelf = self else { return }
             
             switch result {
@@ -154,7 +154,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     
     func translate(_ verb: Verb) {
-        dataStore.getTranslation(of: verb, in: targetLanguage.locale, for: interfaceLanguage.locale) { [weak self] result in
+        dataStore.getTranslation(of: verb, in: targetLanguage, for: interfaceLanguage) { [weak self] result in
             guard let strongSelf = self else { return }
             
             strongSelf.view.hideLoader()
@@ -168,7 +168,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
         }
     }
     
-    func translate(_ verb: String, fromInterfaceLanguage interfaceLanguage: Locale, to targetLocale: Locale, completion: (([Translation]?) -> ())? = nil) {
+    func translate(_ verb: String, fromInterfaceLanguage interfaceLanguage: Language, to targetLocale: Language, completion: (([Translation]?) -> ())? = nil) {
         view.showLoader()
         
         dataStore.getTranslation(of: verb, in: interfaceLanguage, for: targetLocale) { [weak self] result in
@@ -258,11 +258,11 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     
     func searchLanguageChanged(to languageCode: String) {
-        let type: SearchLanguageType = languageCode.lowercased() == targetLanguage.languageCode.lowercased() ? .conjugationLanguage : .interfaceLanguage
+        let type: LanguageType = languageCode.lowercased() == targetLanguage.languageCode.lowercased() ? .conjugationLanguage : .interfaceLanguage
         searchLanguageTypeChanged(to: type)
     }
     
-    func searchLanguageTypeChanged(to type: SearchLanguageType) {
+    func searchLanguageTypeChanged(to type: LanguageType) {
         self.searchLanguageType = type
         
         let languageCode = type == .conjugationLanguage ? targetLanguage.languageCode : interfaceLanguage.languageCode

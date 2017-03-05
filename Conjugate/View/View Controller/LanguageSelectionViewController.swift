@@ -24,6 +24,10 @@ class LanguageSelectionViewController: UIViewController, LanguageSelectionView {
     override func setupUI() {
         super.setupUI()
         dataSource = LanguageSelectionDataSource(tableView: tableView)
+        
+        dataSource?.didSelectLanguage = { [weak self] index in
+            self?.presenter?.didSelectLanguage(at: index)
+        }
     }
     
     func render(with viewModel: LanguageSelectionViewModel) {
@@ -36,6 +40,8 @@ class LanguageSelectionDataSource: NSObject, UITableViewDataSource, UITableViewD
     let tableView: UITableView
     
     var languages: [LanguageViewModel] = []
+    
+    var didSelectLanguage: ((Int) -> ())?
     
     init(tableView: UITableView) {
         self.tableView = tableView
@@ -61,5 +67,9 @@ class LanguageSelectionDataSource: NSObject, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return languages.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectLanguage?(indexPath.row)
     }
 }

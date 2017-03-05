@@ -58,10 +58,8 @@ class SettingsPresenter: SettingsPresenterType {
     
     init(view: SettingsView, appDependencyManager: AppDependencyManager) {
         self.view = view
-        router = Router(view: view)
+        self.router = Router(view: view)
         self.appDependencyManager = appDependencyManager
-        
-        
         
         languageCells = [
             TableCell(cellType: .conjugationLanguage),
@@ -177,17 +175,13 @@ class SettingsPresenter: SettingsPresenterType {
         let selectedLanguage = appDependencyManager.languageConfig.selectedConjugationLanguage
         let languages = appDependencyManager.languageConfig.availableConjugationLanguages
         
-        let title = LocalizedString("mobile.ios.conjugate.languageSelection.conjugation")
-        
-        router?.openLanguageSelection(title: title, languages: languages, selectedLanguage: selectedLanguage)
+        router?.openLanguageSelection(languages: languages, selectedLanguage: selectedLanguage, languageType: .conjugationLanguage)
     }
     
     func openTranslationLanguageSelection() {
         let selectedLanguage = appDependencyManager.languageConfig.selectedTranslationLanguage
         let languages = appDependencyManager.languageConfig.availableTranslationLanguages
         
-        let title = LocalizedString("mobile.ios.conjugate.languageSelection.translation")
-        
-        router?.openLanguageSelection(title: title, languages: languages, selectedLanguage: selectedLanguage)
+        router?.openLanguageSelection(languages: languages, selectedLanguage: selectedLanguage, languageType: .interfaceLanguage)
     }
 }

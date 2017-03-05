@@ -81,10 +81,10 @@ class Router {
         rootViewController.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func openLanguageSelection(title: String, languages: [Language], selectedLanguage: Language) {
+    func openLanguageSelection(languages: [Language], selectedLanguage: Language, languageType: LanguageType) {
         guard let vc = makeLanguageSelectionViewController() else { return }
         
-        let presenter = LanguageSelectionPresenter(view: vc, title: title, languages: languages, selectedLanguage: selectedLanguage)
+        let presenter = LanguageSelectionPresenter(view: vc, appDependencyManager: AppDependencyManager.shared, languages: languages, selectedLanguage: selectedLanguage, languageType: languageType)
         vc.presenter = presenter
         
         rootViewController.navigationController?.pushViewController(vc, animated: true)
