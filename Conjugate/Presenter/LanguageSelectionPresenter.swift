@@ -12,10 +12,10 @@ class LanguageSelectionPresenter: LanguageSelectionPresenterType {
     
     unowned let view: LanguageSelectionView
     let languages: [Language]
-    let selectedLanguage: Language
     let languageType: LanguageType
     let appDependencyManager: AppDependencyManager
     
+    var selectedLanguage: Language
     var viewModel = LanguageSelectionViewModel.empty
     
     init(view: LanguageSelectionView, appDependencyManager: AppDependencyManager, languages: [Language], selectedLanguage: Language, languageType: LanguageType) {
@@ -24,14 +24,14 @@ class LanguageSelectionPresenter: LanguageSelectionPresenterType {
         self.languages = languages
         self.selectedLanguage = selectedLanguage
         self.languageType = languageType
-        
+    }
+    
+    func getLanguages() {
         let title = languageType == .conjugationLanguage ?LocalizedString("mobile.ios.conjugate.languageSelection.conjugation") :  LocalizedString("mobile.ios.conjugate.languageSelection.translation")
         
         let languageViewModels = languages.map(makeLanguageViewModel)
         viewModel = LanguageSelectionViewModel(title: title, languages: languageViewModels)
-    }
-    
-    func getLanguages() {
+        
         view.render(with: viewModel)
     }
     
@@ -40,9 +40,12 @@ class LanguageSelectionPresenter: LanguageSelectionPresenterType {
         
         if languageType == .conjugationLanguage {
             appDependencyManager.change(conjugationLanguageTo: language)
+            selectedLanguage = appDependencyManager.languageConfig.selectedConjugationLanguage
         } else {
             appDependencyManager.change(translationLanguageTo: language)
+            selectedLanguage = appDependencyManager.languageConfig.selectedTranslationLanguage
         }
+        getLanguages()
     }
 }
 

@@ -18,7 +18,12 @@ class MoreViewController: UIViewController, SettingsView {
     var presenter: SettingsPresenter!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         presenter.getOptions()
     }
     
