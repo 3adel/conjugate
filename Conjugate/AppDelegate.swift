@@ -15,8 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var quickActionController = QuickActionController()
     
     var router: Router?
+    var appDependencyManager: AppDependencyManager!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        appDependencyManager = AppDependencyManager.configuringDefault()
+        
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -80.0), for: .default)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.black], for: .normal)
         
         Fabric.with([Crashlytics.self])
         

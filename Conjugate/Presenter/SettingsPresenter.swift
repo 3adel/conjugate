@@ -53,9 +53,15 @@ class SettingsPresenter: SettingsPresenterType {
     var emailComposer: EmailComposer?
     
     unowned let view: SettingsView
+    let appDependencyManager: AppDependencyManager
+    let router: Router?
     
-    init(view: SettingsView) {
+    init(view: SettingsView, appDependencyManager: AppDependencyManager) {
         self.view = view
+        router = Router(view: view)
+        self.appDependencyManager = appDependencyManager
+        
+        
         
         languageCells = [
             TableCell(cellType: .conjugationLanguage),
@@ -96,8 +102,10 @@ class SettingsPresenter: SettingsPresenterType {
             shareController.shareApp(sourceView: sourceView, sourceRect: sourceRect)
         case .rate:
             rateUs()
-        default:
-            break
+        case .conjugationLanguage:
+            openConjugationLanguageSelection()
+        case .translationLanguage:
+            openTranslationLanguageSelection()
         }
     }
     
@@ -121,8 +129,21 @@ class SettingsPresenter: SettingsPresenterType {
     }
     
     func makeSettingsLanguageSectionViewModel(from section: TableSection) -> TableSectionViewModel {
-        let conjugationViewModel = SettingsLanguageViewModel(title: section.cells[0].cellTitle, languageName: "DE", languageImageName: "de_flag")
-        let translationViewModel = SettingsLanguageViewModel(title: section.cells[1].cellTitle, languageName: "EN", languageImageName: "gb_flag")
+        let languageConfig = appDependencyManager.languageConfig
+        
+        let conjugationLanguage = languageConfig.selectedConjugationLanguage.languageCode.uppercased()
+        let conjugationLanguageImage = languageConfig.selectedConjugationLanguage.countryCode.lowercased()+"_flag"
+        
+        let translationLanguage = languageConfig.selectedTranslationLanguage.languageCode.uppercased()
+        let translationLanguageImage = languageConfig.selectedTranslationLanguage.countryCode.lowercased()+"_flag"
+        
+        let conjugationViewModel = SettingsLanguageViewModel(title: section.cells[0].cellTitle,
+                                                             languageName: conjugationLanguage,
+                                                             languageImageName: conjugationLanguageImage)
+        
+        let translationViewModel = SettingsLanguageViewModel(title: section.cells[1].cellTitle,
+                                                             languageName: translationLanguage,
+                                                             languageImageName: translationLanguageImage)
         
         let cells = [conjugationViewModel, translationViewModel]
         
@@ -151,5 +172,22 @@ class SettingsPresenter: SettingsPresenterType {
     func rateUs(){
         UIApplication.shared.openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1163600729")! as URL)
     }
+    
+    func openConjugationLanguageSelection() {
+        let selectedLanguage = appDependencyManager.languageConfig.selectedConjugationLanguage
+        let languages = appDependencyManager.languageConfig.availableConjugationLanguages
+        
+        let title = LocalizedString("mobile.ios.conjugate.languageSelection.conjugation")
+        
+        router?.openLanguageSelection(title: title, languages: languages, selectedLanguage: selectedLanguage)
+    }
+    
+    func openTranslationLanguageSelection() {
+        let selectedLanguage = appDependencyManager.languageConfig.selectedTranslationLanguage
+        let languages = appDependencyManager.languageConfig.availableTranslationLanguages
+        
+        let title = LocalizedString("mobile.ios.conjugate.languageSelection.translation")
+        
+        router?.openLanguageSelection(title: title, languages: languages, selectedLanguage: selectedLanguage)
+    }
 }
-

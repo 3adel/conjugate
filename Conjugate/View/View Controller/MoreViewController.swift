@@ -33,7 +33,7 @@ class MoreViewController: UIViewController, SettingsView {
     }
     
     func setupPresenter() {
-        presenter = SettingsPresenter(view: self)
+        presenter = SettingsPresenter(view: self, appDependencyManager: AppDependencyManager.configuringDefault())
     }
     
     func setupCollectionView() {
@@ -49,7 +49,7 @@ class MoreViewController: UIViewController, SettingsView {
         attributedString.set(viewModel.footerURL, asLink: viewModel.footerURL)
 
         footerTextView.attributedText = attributedString
-        dataSource?.render(with: viewModel.sections)
+        dataSource?.updateUI(with: viewModel.sections)
     }
 }
 
@@ -75,7 +75,7 @@ class SettingsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         self.tableView.dataSource = self
     }
     
-    func render(with sections: [TableSectionViewModel]) {
+    func updateUI(with sections: [TableSectionViewModel]) {
         self.sections = sections
         tableView.reloadData()
     }

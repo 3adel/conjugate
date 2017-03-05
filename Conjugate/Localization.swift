@@ -39,3 +39,45 @@ public func replacePlaceholders(_ placeholderString: String, args: [String]) -> 
     }
     return finalStr
 }
+
+enum Language: String {
+    case german, english, spanish
+    
+    
+    var name: String {
+        get {
+            return rawValue.capitalized
+        }
+    }
+    
+    var localeIdentifier: String {
+        get {
+            switch self {
+            case .german:
+                return "de_DE"
+            case .english:
+                return "en_GB"
+            case .spanish:
+                return "es_ES"
+            }
+        }
+    }
+    
+    var languageCode: String {
+        get {
+            return self.locale.languageCode!
+        }
+    }
+    
+    var countryCode: String {
+        get {
+            return self.locale.regionCode!
+        }
+    }
+    
+    var locale: Locale {
+        get {
+            return Locale(identifier: localeIdentifier)
+        }
+    }
+}

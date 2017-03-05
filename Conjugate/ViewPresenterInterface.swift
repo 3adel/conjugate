@@ -66,6 +66,15 @@ protocol SettingsPresenterType {
     func optionSelected(at section: Int, index: Int, sourceView: View, sourceRect: CGRect)
 }
 
+protocol LanguageSelectionView: View {
+    func render(with viewModel: LanguageSelectionViewModel)
+}
+
+protocol LanguageSelectionPresenterType {
+    func getLanguages()
+    func didSelectLanguage(at index: Int)
+}
+
 struct ConjugateViewModel {
     let verb: String
     let searchText: String
@@ -146,4 +155,19 @@ struct SettingsLanguageViewModel: CellViewModel {
     let title: String
     let languageName: String
     let languageImageName: String
+}
+
+struct LanguageSelectionViewModel {
+    let title: String
+    let languages: [LanguageViewModel]
+    
+    static var empty: LanguageSelectionViewModel {
+        return LanguageSelectionViewModel(title: "", languages: [])
+    }
+}
+
+struct LanguageViewModel {
+    let title: String
+    let imageName: String
+    let isSelected: Bool
 }

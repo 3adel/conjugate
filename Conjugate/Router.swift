@@ -11,6 +11,7 @@ class Router {
     }
     
     let rootViewController: UIViewController
+    let appDependencyManager: AppDependencyManager
     
     let presenterViewLookupTable: [String: PresenterType] = [
         ConjugateViewController.Identifier : .conjugate,
@@ -30,8 +31,9 @@ class Router {
     
     var quickActionToBePerformed: QuickAction?
     
-    init(viewController: UIViewController) {
+    init(viewController: UIViewController, appDependencyManager: AppDependencyManager = .configuringDefault()) {
         self.rootViewController = viewController
+        self.appDependencyManager = appDependencyManager
     }
     
     convenience init?(view: View) {
@@ -79,6 +81,15 @@ class Router {
         rootViewController.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func openLanguageSelection(title: String, languages: [Language], selectedLanguage: Language) {
+        guard let vc = makeLanguageSelectionViewController() else { return }
+        
+        let presenter = LanguageSelectionPresenter(view: vc, title: title, languages: languages, selectedLanguage: selectedLanguage)
+        vc.presenter = presenter
+        
+        rootViewController.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func makeDetailViewController(from verb: Verb) -> VerbDetailViewController? {
         guard let vc = UIStoryboard.main.instantiateViewController(withIdentifier: "VerbDetailViewController") as? VerbDetailViewController
             else { return nil}
@@ -102,6 +113,10 @@ class Router {
             else { return nil }
         
         return ConjugatePresenter(view: viewController, quickActionController: appDelegate.quickActionController)
+    }
+    
+    func makeLanguageSelectionViewController() -> LanguageSelectionViewController? {
+        return UIStoryboard.main.instantiateViewController(withIdentifier: LanguageSelectionViewController.Identifier) as? LanguageSelectionViewController
     }
     
     func route(using quickAction: QuickAction) {
