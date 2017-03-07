@@ -160,9 +160,11 @@ struct SettingsLanguageViewModel: CellViewModel {
 struct LanguageSelectionViewModel {
     let title: String
     let languages: [LanguageViewModel]
+    let applyButtonBackgroundColor: (CGFloat, CGFloat, CGFloat)
+    let applyButtonIsEnabled: Bool
     
     static var empty: LanguageSelectionViewModel {
-        return LanguageSelectionViewModel(title: "", languages: [])
+        return LanguageSelectionViewModel(title: "", languages: [], applyButtonBackgroundColor: (0,0,0), applyButtonIsEnabled: false)
     }
 }
 

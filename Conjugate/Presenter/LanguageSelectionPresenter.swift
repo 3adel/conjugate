@@ -11,11 +11,15 @@ import Foundation
 class LanguageSelectionPresenter: LanguageSelectionPresenterType {
     
     unowned let view: LanguageSelectionView
+    let router: Router?
+    
     let languages: [Language]
     let languageType: LanguageType
     let appDependencyManager: AppDependencyManager
     
     var selectedLanguage: Language
+    var newlySelectedLanguage: Language
+    
     var viewModel = LanguageSelectionViewModel.empty
     
     init(view: LanguageSelectionView, appDependencyManager: AppDependencyManager, languages: [Language], selectedLanguage: Language, languageType: LanguageType) {
@@ -24,13 +28,22 @@ class LanguageSelectionPresenter: LanguageSelectionPresenterType {
         self.languages = languages
         self.selectedLanguage = selectedLanguage
         self.languageType = languageType
+        self.newlySelectedLanguage = selectedLanguage
+        self.router = Router(view: view)
     }
     
     func getLanguages() {
         let title = languageType == .conjugationLanguage ?LocalizedString("mobile.ios.conjugate.languageSelection.conjugation") :  LocalizedString("mobile.ios.conjugate.languageSelection.translation")
         
         let languageViewModels = languages.map(makeLanguageViewModel)
-        viewModel = LanguageSelectionViewModel(title: title, languages: languageViewModels)
+        
+        let isApplyButtonEnabled = newlySelectedLanguage != selectedLanguage
+        let applyButtonBackgroundColor: (CGFloat, CGFloat, CGFloat) = isApplyButtonEnabled ? (45, 216, 11) : (151, 151, 151)
+        
+        viewModel = LanguageSelectionViewModel(title: title,
+                                               languages: languageViewModels,
+                                               applyButtonBackgroundColor: applyButtonBackgroundColor,
+                                               applyButtonIsEnabled: isApplyButtonEnabled)
         
         view.render(with: viewModel)
     }
@@ -38,14 +51,18 @@ class LanguageSelectionPresenter: LanguageSelectionPresenterType {
     func didSelectLanguage(at index: Int) {
         let language = languages[index]
         
-        if languageType == .conjugationLanguage {
-            appDependencyManager.change(conjugationLanguageTo: language)
-            selectedLanguage = appDependencyManager.languageConfig.selectedConjugationLanguage
-        } else {
-            appDependencyManager.change(translationLanguageTo: language)
-            selectedLanguage = appDependencyManager.languageConfig.selectedTranslationLanguage
-        }
+        newlySelectedLanguage = language
+
         getLanguages()
+    }
+    
+    func didPressApplyButton() {
+        if languageType == .conjugationLanguage {
+            appDependencyManager.change(conjugationLanguageTo: newlySelectedLanguage)
+        } else {
+            appDependencyManager.change(translationLanguageTo: newlySelectedLanguage)
+        }
+        router?.dismiss()
     }
 }
 
@@ -53,7 +70,7 @@ extension LanguageSelectionPresenter {
     func makeLanguageViewModel(from language: Language) -> LanguageViewModel {
         let name = language.name
         let imageName = language.languageCode.lowercased() + "_flag"
-        let isSelected = selectedLanguage == language
+        let isSelected = newlySelectedLanguage == language
         
         return LanguageViewModel(title: name,
                                  imageName: imageName,

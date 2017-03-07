@@ -79,26 +79,3 @@ class APIClient: DataClient {
         }
     }
 }
-
-//extension Locale {
-//    private enum Language: String {
-//        case de
-//        case en
-//        
-//        var isoLanguageCode: String {
-//            switch self {
-//            case .de:
-//                return "deu"
-//            case .en:
-//                return "eng"
-//            }
-//        }
-//    }
-//    
-//    public var isoLanguageCode: String?  {
-//        guard let languageCode = languageCode,
-//            let language = Language(rawValue: languageCode) else { return nil }
-//        
-//        return language.isoLanguageCode
-//    }
-//}

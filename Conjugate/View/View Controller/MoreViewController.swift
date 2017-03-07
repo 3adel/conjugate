@@ -25,6 +25,7 @@ class MoreViewController: UIViewController, SettingsView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.getOptions()
+        setupTabBar(shouldShow: true)
     }
     
     override func setupUI() {

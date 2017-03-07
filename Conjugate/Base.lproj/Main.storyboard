@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12100" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12072"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -642,7 +642,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="55" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="hz7-hV-yb4">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="597"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LanguageCell" rowHeight="55" id="dH5-Ne-srz" customClass="LanguageCell" customModule="Conjugate" customModuleProvider="target">
@@ -692,16 +692,31 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCA-I5-WR7">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="u1M-Re-Sfc"/>
+                                </constraints>
+                                <state key="normal" title="Apply"/>
+                                <connections>
+                                    <action selector="didPressApplyButton:" destination="ZSU-IU-nwW" eventType="touchUpInside" id="OQb-nh-jLw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="D0d-fp-ehg" firstAttribute="top" secondItem="hz7-hV-yb4" secondAttribute="bottom" id="5jl-LX-0je"/>
                             <constraint firstItem="hz7-hV-yb4" firstAttribute="top" secondItem="4zd-ex-fET" secondAttribute="bottom" id="7Rt-wc-pmK"/>
+                            <constraint firstItem="CCA-I5-WR7" firstAttribute="leading" secondItem="wda-sY-4Cu" secondAttribute="leading" id="F8q-Ik-uRA"/>
+                            <constraint firstItem="D0d-fp-ehg" firstAttribute="top" secondItem="CCA-I5-WR7" secondAttribute="bottom" id="P7Y-nZ-kh1"/>
                             <constraint firstItem="hz7-hV-yb4" firstAttribute="leading" secondItem="wda-sY-4Cu" secondAttribute="leading" id="TjW-LQ-EgC"/>
                             <constraint firstAttribute="trailing" secondItem="hz7-hV-yb4" secondAttribute="trailing" id="VsY-S2-kbQ"/>
+                            <constraint firstItem="CCA-I5-WR7" firstAttribute="top" secondItem="hz7-hV-yb4" secondAttribute="bottom" id="Xq8-r7-Cz3"/>
+                            <constraint firstAttribute="trailing" secondItem="CCA-I5-WR7" secondAttribute="trailing" id="qk1-iG-0PZ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="applyButton" destination="CCA-I5-WR7" id="UKu-f9-vdR"/>
                         <outlet property="tableView" destination="hz7-hV-yb4" id="3dy-Ma-jgY"/>
                     </connections>
                 </viewController>

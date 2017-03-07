@@ -151,7 +151,11 @@ class Router {
     }
     
     func dismiss() {
-        rootViewController.dismiss(animated: true, completion: nil)
+        if let navigationVC = rootViewController.navigationController {
+            navigationVC.popViewController(animated: true)
+        } else {
+            rootViewController.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

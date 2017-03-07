@@ -10,6 +10,7 @@ import UIKit
 
 class LanguageSelectionViewController: UIViewController, LanguageSelectionView {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var applyButton: UIButton!
     
     var dataSource: LanguageSelectionDataSource?
     
@@ -21,8 +22,15 @@ class LanguageSelectionViewController: UIViewController, LanguageSelectionView {
         presenter?.getLanguages()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupTabBar(shouldShow: false)
+    }
+    
     override func setupUI() {
         super.setupUI()
+        applyButton.setTitle(LocalizedString("languageSelection.apply"), for: .normal)
+        
         dataSource = LanguageSelectionDataSource(tableView: tableView)
         
         dataSource?.didSelectLanguage = { [weak self] index in
@@ -32,7 +40,21 @@ class LanguageSelectionViewController: UIViewController, LanguageSelectionView {
     
     func render(with viewModel: LanguageSelectionViewModel) {
         title = viewModel.title
+        
+        UIView.animate(withDuration: 0.3) {
+            self.applyButton.backgroundColor = UIColor(red: viewModel.applyButtonBackgroundColor.0/255,
+                                                  green: viewModel.applyButtonBackgroundColor.1/255,
+                                                  blue: viewModel.applyButtonBackgroundColor.2/255,
+                                                  alpha: 1.0)
+        }
+        
+        applyButton.isEnabled = viewModel.applyButtonIsEnabled
+        
         dataSource?.updateUI(with: viewModel.languages)
+    }
+    
+    @IBAction func didPressApplyButton(_ sender: UIButton) {
+        presenter?.didPressApplyButton()
     }
 }
 
