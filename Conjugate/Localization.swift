@@ -6,15 +6,21 @@ import Foundation
 
 // MARK: - Localize
 
-public func LocalizedString(_ key: String, args: String...) -> String {
+public func LocalizedString(_ key: String, languageType: LanguageType? = nil, args: String...) -> String {
     let prefix = "mobile.ios.conjugate"
     
     var finalKey = key
     if !key.contains(prefix) {
         finalKey = prefix+"."+key
     }
-
-    let str = NSLocalizedString(finalKey, comment: "")
+    
+    let str: String
+    
+    if let languageType = languageType {
+        str = AppDependencyManager.shared.languageConfig.localizedString(withKey: finalKey, languageType: languageType)
+    } else {
+        str = NSLocalizedString(finalKey, comment: "")
+    }
     return replacePlaceholders(str, args: args)
 }
 

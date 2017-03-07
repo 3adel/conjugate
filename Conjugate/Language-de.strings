@@ -1,0 +1,22 @@
+/* 
+  Language-DE.strings
+  Conjugate
+
+  Created by Halil Gursoy on 07/03/2017.
+  Copyright © 2017 Adel  Shehadeh. All rights reserved.
+*/
+
+"mobile.ios.conjugate.tense.present" = "Präsens";
+"mobile.ios.conjugate.tense.past" = "Präteritum";
+"mobile.ios.conjugate.tense.presentPerfect" = "Perfekt";
+"mobile.ios.conjugate.tense.pastPerfect" = "Plusquam";
+"mobile.ios.conjugate.tense.future" = "Futur I";
+"mobile.ios.conjugate.tense.future2" = "Futur II";
+"mobile.ios.conjugate.tense.conditionalPast" = "Präteritum (würde)";
+"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Plusquam (würde)";
+
+"mobile.ios.conjugate.searchPlaceholderVerbs" = "trank,hast";
+
+"mobile.ios.conjugate.tenseGroup.indicative" = "Indikativ";
+"mobile.ios.conjugate.tenseGroup.subjunctive" = "Konjunktiv";
+"mobile.ios.conjugate.tenseGroup.imperative" = "Imperative";

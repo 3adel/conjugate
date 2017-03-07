@@ -1,0 +1,22 @@
+/* 
+  Language-ES.strings
+  Conjugate
+
+  Created by Halil Gursoy on 07/03/2017.
+  Copyright © 2017 Adel  Shehadeh. All rights reserved.
+*/
+
+"mobile.ios.conjugate.tense.present" = "Presente";
+"mobile.ios.conjugate.tense.past" = "Imperfecto";
+"mobile.ios.conjugate.tense.presentPerfect" = "Pretérito perfecto";
+"mobile.ios.conjugate.tense.pastPerfect" = "Pluscuamperfecto";
+"mobile.ios.conjugate.tense.future" = "Futuro";
+"mobile.ios.conjugate.tense.future2" = "Futuro perfecto";
+"mobile.ios.conjugate.tense.conditionalPast" = "Condicional";
+"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Condicional perfecto";
+
+"mobile.ios.conjugate.searchPlaceholderVerbs" = "bebo,tengo";
+
+"mobile.ios.conjugate.tenseGroup.indicative" = "Indicativo";
+"mobile.ios.conjugate.tenseGroup.subjunctive" = "Subjuntivo";
+"mobile.ios.conjugate.tenseGroup.imperative" = "Imperativo";

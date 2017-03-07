@@ -26,6 +26,9 @@
 		245D33421DBBA81400E5352F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D33411DBBA81400E5352F /* Router.swift */; };
 		247770D11DD3AC030012EDFF /* EmailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247770D01DD3AC030012EDFF /* EmailComposer.swift */; };
 		247770D31DD3AC5A0012EDFF /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247770D21DD3AC5A0012EDFF /* ShareController.swift */; };
+		247A87701E6F5AFE00E5005C /* Language-de.strings in Resources */ = {isa = PBXBuildFile; fileRef = 247A876F1E6F5AFE00E5005C /* Language-de.strings */; };
+		247A87851E6F5B3400E5005C /* Language-es.strings in Resources */ = {isa = PBXBuildFile; fileRef = 247A87841E6F5B3400E5005C /* Language-es.strings */; };
+		247A87871E6F62BC00E5005C /* Language-en.strings in Resources */ = {isa = PBXBuildFile; fileRef = 247A87861E6F62BC00E5005C /* Language-en.strings */; };
 		249899071E23D8FA0071E423 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249899061E23D8FA0071E423 /* QuartzCore.framework */; };
 		2498991E1E2436E90071E423 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248597731DCFB884006D7AA2 /* AVFoundation.framework */; };
 		249FF0E21DD3E8A20083DB0C /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249FF0E11DD3E8A20083DB0C /* ActionController.swift */; };
@@ -295,6 +298,9 @@
 		245D33411DBBA81400E5352F /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		247770D01DD3AC030012EDFF /* EmailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailComposer.swift; sourceTree = "<group>"; };
 		247770D21DD3AC5A0012EDFF /* ShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
+		247A876F1E6F5AFE00E5005C /* Language-de.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Language-de.strings"; sourceTree = "<group>"; };
+		247A87841E6F5B3400E5005C /* Language-es.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Language-es.strings"; sourceTree = "<group>"; };
+		247A87861E6F62BC00E5005C /* Language-en.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Language-en.strings"; sourceTree = "<group>"; };
 		248597731DCFB884006D7AA2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		249899061E23D8FA0071E423 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		249FF0E11DD3E8A20083DB0C /* ActionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionController.swift; sourceTree = "<group>"; };
@@ -620,6 +626,9 @@
 			isa = PBXGroup;
 			children = (
 				245D331F1DBB9AE400E5352F /* Localizable.strings */,
+				247A876F1E6F5AFE00E5005C /* Language-de.strings */,
+				247A87841E6F5B3400E5005C /* Language-es.strings */,
+				247A87861E6F62BC00E5005C /* Language-en.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -858,10 +867,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				24EAB0F81E62E77800FD93E3 /* TenseTableViewCell.xib in Resources */,
+				247A87871E6F62BC00E5005C /* Language-en.strings in Resources */,
 				245D331D1DBB9AE400E5352F /* Localizable.strings in Resources */,
 				F56F08CE1CFA61DB008BD25B /* LaunchScreen.storyboard in Resources */,
 				F56F08CB1CFA61DB008BD25B /* Assets.xcassets in Resources */,
+				247A87851E6F5B3400E5005C /* Language-es.strings in Resources */,
 				F56F08C91CFA61DB008BD25B /* Main.storyboard in Resources */,
+				247A87701E6F5AFE00E5005C /* Language-de.strings in Resources */,
 				24EAB0FA1E62E77800FD93E3 /* TranslationCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

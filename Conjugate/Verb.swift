@@ -25,7 +25,7 @@ struct Verb {
         }
         
         var text: String {
-            return LocalizedString(translationKey)
+            return LocalizedString(translationKey, languageType: .conjugationLanguage)
         }
         
         var ids: [String] {
@@ -140,7 +140,7 @@ struct Tense {
             case .noTense:
                 return rawValue
             default:
-                return LocalizedString(translationKey)
+                return LocalizedString(translationKey, languageType: .conjugationLanguage)
             }
         }
         

@@ -16,22 +16,10 @@
 "mobile.ios.conjugate.error.networkUnavailable" = "You don't have internet connection.";
 "mobile.ios.conjugate.error.noSavedVerbs" = "No verbs have been saved yet.";
 
-"mobile.ios.conjugate.tense.present" = "Präsens";
-"mobile.ios.conjugate.tense.past" = "Präteritum";
-"mobile.ios.conjugate.tense.presentPerfect" = "Perfekt";
-"mobile.ios.conjugate.tense.pastPerfect" = "Plusquam";
-"mobile.ios.conjugate.tense.future" = "Futur I";
-"mobile.ios.conjugate.tense.future2" = "Futur II";
-"mobile.ios.conjugate.tense.conditionalPast" = "Präteritum (würde)";
-"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Plusquam (würde)";
-"mobile.ios.conjugate.searchPlaceholder" = "Try \"<verb1>\" or \"<verb2>\" or ...";
-
-"mobile.ios.conjugate.tenseGroup.indicative" = "Indikativ";
-"mobile.ios.conjugate.tenseGroup.subjunctive" = "Konjunktiv";
-"mobile.ios.conjugate.tenseGroup.imperative" = "Imperative";
-
 "mobile.ios.conjugate.verbSaved" = "The verb has been saved.";
 "mobile.ios.conjugate.verbDeleted" = "The verb has been deleted.";
+
+"mobile.ios.conjugate.searchPlaceholder" = "Try \"<verb1>\" or \"<verb2>\" or ...";
 
 "mobile.ios.conjugate.settings.section.language" = "Language Options";
 "mobile.ios.conjugate.settings.conjugationLanguage" = "Conjugation Language";

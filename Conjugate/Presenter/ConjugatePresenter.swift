@@ -6,12 +6,6 @@ import Foundation
 import Fabric
 import Crashlytics
 
-
-enum LanguageType {
-    case interfaceLanguage
-    case conjugationLanguage
-}
-
 class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     let dataStore = DataStore()
     let quickActionController: QuickActionController?
@@ -376,7 +370,7 @@ extension ConjugatePresenter {
     }
     
     func makeSearchPlaceHolderText() -> String {
-        let searchFieldPlaceholderVerbs = searchLanguageType == .conjugationLanguage ? ["trank", "hast"] : ["drink", "have"]
+        let searchFieldPlaceholderVerbs = LocalizedString("searchPlaceholderVerbs", languageType: searchLanguageType).components(separatedBy: ",")
         
         let searchFieldPlaceHolder = LocalizedString("searchPlaceholder", args: searchFieldPlaceholderVerbs[0], searchFieldPlaceholderVerbs[1])
         
