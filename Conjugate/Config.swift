@@ -15,6 +15,13 @@ public enum LanguageType {
 }
 
 struct LanguageConfig {
+    enum UserDefaultKey: String, DictionaryKey {
+        case conjugationLanguage
+        case translationLanguage
+        case availableConjugationLanguages
+        case availableTranslationLanguages
+    }
+    
     private var conjugationLookup: [String: String] = [:]
     private var translationLookup: [String: String] = [:]
     
@@ -22,6 +29,11 @@ struct LanguageConfig {
     let selectedTranslationLanguage: Language
     let availableConjugationLanguages: [Language]
     let availableTranslationLanguages: [Language]
+    
+    static var `default`: LanguageConfig = LanguageConfig(selectedConjugationLanguage: Language.german,
+                                                        selectedTranslationLanguage: Language.english,
+                                                        availableConjugationLanguages: [Language.german, Language.spanish],
+                                                        availableTranslationLanguages: [Language.english])
     
     init(selectedConjugationLanguage: Language,
          selectedTranslationLanguage: Language,
@@ -35,6 +47,34 @@ struct LanguageConfig {
         
         conjugationLookup = loadLookupTable(for: selectedConjugationLanguage.locale) ?? [:]
         translationLookup = loadLookupTable(for: selectedTranslationLanguage.locale) ?? [:]
+    }
+    
+    init?(dictionary: JSONDictionary) {
+        guard let conjugationLanguageIdentifier = dictionary[UserDefaultKey.conjugationLanguage.key] as? String,
+            let conjugationLanguage = Language(localeIdentifier: conjugationLanguageIdentifier),
+            
+            let translationLanguageIdentifier = dictionary[UserDefaultKey.translationLanguage.key] as? String,
+            let translationLanguage = Language(localeIdentifier: translationLanguageIdentifier),
+            
+            let availableConjugationLanguageIdentifiers = dictionary[UserDefaultKey.availableConjugationLanguages.key] as? [String],
+            let availableTranslationLanguageIdentifiers = dictionary[UserDefaultKey.availableTranslationLanguages.key] as? [String]
+        
+            else { return nil}
+        
+         let availableConjugationLanguages = availableConjugationLanguageIdentifiers.flatMap(Language.makeLanguage)
+         let availableTranslationLanguages = availableTranslationLanguageIdentifiers.flatMap(Language.makeLanguage)
+        
+        self.init(selectedConjugationLanguage: conjugationLanguage,
+                  selectedTranslationLanguage: translationLanguage,
+                  availableConjugationLanguages: availableConjugationLanguages,
+                  availableTranslationLanguages: availableTranslationLanguages)
+    }
+    
+    func dict() -> JSONDictionary {
+        return [UserDefaultKey.conjugationLanguage.key: selectedConjugationLanguage.localeIdentifier,
+                UserDefaultKey.translationLanguage.key: selectedTranslationLanguage.localeIdentifier,
+                UserDefaultKey.availableConjugationLanguages.key: availableConjugationLanguages.map { language in return language.localeIdentifier},
+                UserDefaultKey.availableTranslationLanguages.key: availableTranslationLanguages.map { language in return language.localeIdentifier}]
     }
     
     

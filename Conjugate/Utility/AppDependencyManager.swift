@@ -19,12 +19,20 @@ class AppDependencyManager: NotificationSender {
         case language
     }
     
-    static let shared: AppDependencyManager = AppDependencyManager(
-        languageConfig: LanguageConfig(selectedConjugationLanguage: Language.german,
-                                       selectedTranslationLanguage: Language.english,
-                                       availableConjugationLanguages: [Language.german, Language.spanish],
-                                       availableTranslationLanguages: [Language.english])
-    )
+    enum UserDefaultKey: String, DictionaryKey {
+        case savedLanguageConfig
+    }
+    
+    static let shared: AppDependencyManager = makeSharedManager()
+    
+    
+    private static func makeSharedManager() -> AppDependencyManager {
+        let languageConfig = getLanguageConfig() ?? LanguageConfig.default
+        
+        return AppDependencyManager(
+            languageConfig: languageConfig
+        )
+    }
     
     var languageConfig: LanguageConfig
     
@@ -36,6 +44,7 @@ class AppDependencyManager: NotificationSender {
         languageConfig = languageConfig.byChangingConjugationLanguage(to: language)
         
         let userInfo: [AnyHashable: Any] = [NotificationKey.language.key: language]
+        save()
         send(Notification.conjugationLanguageDidChange, userInfo: userInfo)
     }
     
@@ -43,6 +52,17 @@ class AppDependencyManager: NotificationSender {
         languageConfig = languageConfig.byChangingTranslationLanguage(to: language)
         
         let userInfo: [AnyHashable: Any] = [NotificationKey.language.key: language]
+        save()
         send(Notification.translationLanguageDidChange, userInfo: userInfo)
+    }
+    
+    static func getLanguageConfig(from userDefaults: UserDefaults = UserDefaults.standard) -> LanguageConfig? {
+        guard let languageConfigDict = userDefaults.dictionary(forKey: UserDefaultKey.savedLanguageConfig.key) else { return nil }
+        return LanguageConfig(dictionary: languageConfigDict)
+    }
+    
+    func save(to userDefaults: UserDefaults = UserDefaults.standard) {
+        let languageConfigDict = languageConfig.dict()
+        userDefaults.set(languageConfigDict, forKey: UserDefaultKey.savedLanguageConfig.key)
     }
 }
