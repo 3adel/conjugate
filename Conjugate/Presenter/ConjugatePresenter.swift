@@ -6,12 +6,14 @@ import Foundation
 import Fabric
 import Crashlytics
 
-
-class ConjugatePresenter: ConjugatePresenterType {
+class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     let dataStore = DataStore()
     let quickActionController: QuickActionController?
     
     unowned let view: ConjugateView
+    
+    let observedNotifications: [(NotificationName, Selector)] = [(AppDependencyManager.Notification.conjugationLanguageDidChange, #selector(conjugationLanguageDidChange(_:))),
+                                                                 (AppDependencyManager.Notification.translationLanguageDidChange, #selector(translationLanguageDidChange(_:)))]
     
     //A verb string can be pre-configured to automatically search when the view is presented
     var verbToBeSearched: String? {
@@ -32,13 +34,8 @@ class ConjugatePresenter: ConjugatePresenterType {
         }
     }
     var translations = [Translation]()
-    
-    let targetLocale = Locale(identifier: "de_DE")
-    let speaker = TextSpeaker(locale: Locale(identifier: "de_DE"))
-
-    let locale = Locale(identifier: "en_GB")
-    
-    var searchLocale: Locale
+    let speaker: TextSpeaker
+    var searchLanguageType: LanguageType
     
     let storage = Storage()
     
@@ -48,25 +45,56 @@ class ConjugatePresenter: ConjugatePresenterType {
     var searchTimer: Timer?
     let kMinNumbOfCharactersForSearch = 2
     
-    init(view: ConjugateView, quickActionController: QuickActionController? = nil) {
+    var targetLanguage: Language
+    var interfaceLanguage: Language
+    
+    init(view: ConjugateView, appDependencyManager: AppDependencyManager, quickActionController: QuickActionController? = nil) {
         self.view = view
         self.quickActionController = quickActionController
-        self.searchLocale = targetLocale
+        
+        targetLanguage = appDependencyManager.languageConfig.selectedConjugationLanguage
+        interfaceLanguage = appDependencyManager.languageConfig.selectedTranslationLanguage
+        
+        searchLanguageType = .conjugationLanguage
+        
+        speaker = TextSpeaker(language: targetLanguage)
         
         storage.getSavedVerbs()
         speaker.delegate = self
+        
+        subscribeForNotifications()
     }
     
-    func search(for verb: String, searchLocale: Locale?) {
+    @objc func conjugationLanguageDidChange(_ notification: Notification) {
+        guard let language = notification.userInfo?[AppDependencyManager.NotificationKey.language.key] as? Language else { return }
+        
+        targetLanguage = language
+        reset()
+    }
+    
+    @objc func translationLanguageDidChange(_ notification: Notification) {
+        guard let language = notification.userInfo?[AppDependencyManager.NotificationKey.language.key] as? Language else { return }
+        
+        interfaceLanguage = language
+        reset()
+    }
+    
+    func reset() {
+        viewModel = ConjugateViewModel.empty
+        verb = nil
+        getInitialData()
+    }
+    
+    func search(for verb: String, searchLanguageType: LanguageType? = nil) {
         lastSearchText = verb
         
         view.showLoader()
         view.hideErrorMessage()
         
-        let searchLocale = searchLocale ?? self.searchLocale
+        let searchLanguageType = searchLanguageType ?? self.searchLanguageType
         
-        if searchLocale == locale {
-            translate(verb, fromInterfaceLanguage: locale, to: targetLocale) { [weak self] translations in
+        if searchLanguageType == .interfaceLanguage {
+            translate(verb, fromInterfaceLanguage: interfaceLanguage, to: targetLanguage) { [weak self] translations in
                 self?.view.hideLoader()
                 
                 guard let strongSelf = self else { return }
@@ -84,7 +112,7 @@ class ConjugatePresenter: ConjugatePresenterType {
                 
             }
         } else {
-            dataStore.getInfinitive(of: verb, in: targetLocale) { [weak self] result in
+            dataStore.getInfinitive(of: verb, in: targetLanguage) { [weak self] result in
                 guard let strongSelf = self else { return }
                 
                 switch result {
@@ -98,16 +126,16 @@ class ConjugatePresenter: ConjugatePresenterType {
     }
     
     func search(for verb: String) {
-        search(for: verb, searchLocale: searchLocale)
+        search(for: verb, searchLanguageType: searchLanguageType)
     }
 
     func translationSelected(at index: Int) {
         let translation = translations[index]
-        search(for: translation.verb, searchLocale: targetLocale)
+        search(for: translation.verb, searchLanguageType: .conjugationLanguage)
     }
     
     func conjugate(_ verb: String) {
-        dataStore.conjugate(verb, in: targetLocale) { [weak self] result in
+        dataStore.conjugate(verb, in: targetLanguage) { [weak self] result in
             guard let strongSelf = self else { return }
             
             switch result {
@@ -120,7 +148,7 @@ class ConjugatePresenter: ConjugatePresenterType {
     }
     
     func translate(_ verb: Verb) {
-        dataStore.getTranslation(of: verb, in: targetLocale, for: locale) { [weak self] result in
+        dataStore.getTranslation(of: verb, in: targetLanguage, for: interfaceLanguage) { [weak self] result in
             guard let strongSelf = self else { return }
             
             strongSelf.view.hideLoader()
@@ -134,7 +162,7 @@ class ConjugatePresenter: ConjugatePresenterType {
         }
     }
     
-    func translate(_ verb: String, fromInterfaceLanguage interfaceLanguage: Locale, to targetLocale: Locale, completion: (([Translation]?) -> ())? = nil) {
+    func translate(_ verb: String, fromInterfaceLanguage interfaceLanguage: Language, to targetLocale: Language, completion: (([Translation]?) -> ())? = nil) {
         view.showLoader()
         
         dataStore.getTranslation(of: verb, in: interfaceLanguage, for: targetLocale) { [weak self] result in
@@ -162,9 +190,7 @@ class ConjugatePresenter: ConjugatePresenterType {
     }
     
     fileprivate func searchVerbToBeSearched(_ verbString: String) {
-        guard let targetLanguageCode = targetLocale.languageCode?.lowercased() else { return }
-        
-        searchLanguageChanged(to: targetLanguageCode)
+        searchLanguageTypeChanged(to: .conjugationLanguage)
         
         searchText = verbString
         search(for: verbString)
@@ -176,7 +202,7 @@ class ConjugatePresenter: ConjugatePresenterType {
         view.updateUI(with: viewModel)
         
         //Track successful conjugations
-        Answers.logCustomEvent(withName: "Success-\(targetLocale.description)-verb-conjugation",customAttributes: ["Query": searchText])
+        Answers.logCustomEvent(withName: "Success-\(targetLanguage.locale.description)-verb-conjugation",customAttributes: ["Query": searchText])
    
     }
     
@@ -226,9 +252,15 @@ class ConjugatePresenter: ConjugatePresenterType {
     }
     
     func searchLanguageChanged(to languageCode: String) {
-        searchLocale = targetLocale.languageCode?.lowercased() == languageCode.lowercased() ? targetLocale : locale
+        let type: LanguageType = languageCode.lowercased() == targetLanguage.languageCode.lowercased() ? .conjugationLanguage : .interfaceLanguage
+        searchLanguageTypeChanged(to: type)
+    }
+    
+    func searchLanguageTypeChanged(to type: LanguageType) {
+        self.searchLanguageType = type
         
-        view.update(searchLanguage: languageCode, searchFieldPlaceholder: makeSearchPlaceHolderText())
+        let languageCode = type == .conjugationLanguage ? targetLanguage.languageCode : interfaceLanguage.languageCode
+        view.update(searchLanguage: languageCode.uppercased(), searchFieldPlaceholder: makeSearchPlaceHolderText())
     }
     
     func updateViewModel() {
@@ -242,6 +274,10 @@ class ConjugatePresenter: ConjugatePresenterType {
         
         let shareController = ShareController(view: view)
         shareController.share(verb: verb, sourceView: sourceView)
+    }
+    
+    deinit {
+        unsubscribeForNotifications()
     }
 }
 
@@ -334,7 +370,7 @@ extension ConjugatePresenter {
     }
     
     func makeSearchPlaceHolderText() -> String {
-        let searchFieldPlaceholderVerbs = searchLocale == targetLocale ? ["trank", "hast"] : ["drink", "have"]
+        let searchFieldPlaceholderVerbs = LocalizedString("searchPlaceholderVerbs", languageType: searchLanguageType).components(separatedBy: ",")
         
         let searchFieldPlaceHolder = LocalizedString("searchPlaceholder", args: searchFieldPlaceholderVerbs[0], searchFieldPlaceholderVerbs[1])
         
@@ -344,13 +380,13 @@ extension ConjugatePresenter {
     func makeConjugateViewModel(from verb: Verb? = nil) -> ConjugateViewModel {
         let verbIsSaved = storage.getSavedVerbs().filter { $0 == verb }.isEmpty
         
-        let switchInterfaceLanguage = locale.languageCode!.uppercased()
+        let switchInterfaceLanguage = interfaceLanguage.languageCode.uppercased()
         
         let flagSuffix = "_flag"
-        let switchInterfaceLanguageFlagImage = locale.regionCode!.lowercased()+flagSuffix
-        let switchLanguageFlagImage = targetLocale.regionCode!.lowercased()+flagSuffix
+        let switchInterfaceLanguageFlagImage = interfaceLanguage.countryCode.lowercased()+flagSuffix
+        let switchLanguageFlagImage = targetLanguage.countryCode.lowercased()+flagSuffix
         
-        let switchSearchLanguage = targetLocale.regionCode!.uppercased()
+        let switchSearchLanguage = targetLanguage.countryCode.uppercased()
         
         let searchFieldPlaceHolder = makeSearchPlaceHolderText()
         
@@ -373,7 +409,7 @@ extension ConjugatePresenter {
                 meaningText += translation
             }
             
-            let language = locale.languageCode!.uppercased()
+            let language = targetLanguage.languageCode.uppercased()
             
             viewModel = ConjugateViewModel(verb: verb.name,
                                            searchText: searchText,
@@ -413,7 +449,8 @@ extension ConjugatePresenter {
         
         var tenseViewModels = [TenseViewModel]()
         
-        Tense.Name.allTenses.forEach { tenseName in
+        
+        Tense.Name.getTenses(for: targetLanguage).forEach { tenseName in
             let tensesWithThisName = tenses.filter { $0.name == tenseName }
             tenseViewModels.append(contentsOf: tensesWithThisName.map(makeTenseViewModel))
         }

@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -80.0), for: .default)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.black], for: .normal)
+        
         Fabric.with([Crashlytics.self])
         
         Endpoint.baseURI = "http://api.verbix.com"

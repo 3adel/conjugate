@@ -6,15 +6,21 @@ import Foundation
 
 // MARK: - Localize
 
-public func LocalizedString(_ key: String, args: String...) -> String {
+public func LocalizedString(_ key: String, languageType: LanguageType? = nil, args: String...) -> String {
     let prefix = "mobile.ios.conjugate"
     
     var finalKey = key
     if !key.contains(prefix) {
         finalKey = prefix+"."+key
     }
-
-    let str = NSLocalizedString(finalKey, comment: "")
+    
+    let str: String
+    
+    if let languageType = languageType {
+        str = AppDependencyManager.shared.languageConfig.localizedString(withKey: finalKey, languageType: languageType)
+    } else {
+        str = NSLocalizedString(finalKey, comment: "")
+    }
     return replacePlaceholders(str, args: args)
 }
 
@@ -38,4 +44,75 @@ public func replacePlaceholders(_ placeholderString: String, args: [String]) -> 
         str = str.replacingCharacters(in: range, with: "")
     }
     return finalStr
+}
+
+enum Language: String {
+    case german, english, spanish
+    
+    init?(localeIdentifier: String) {
+        switch localeIdentifier {
+        case "de_DE":
+            self = .german
+        case "en_GB":
+            self = .english
+        case "es_ES":
+            self = .spanish
+        default:
+            return nil
+        }
+    }
+    
+    static func makeLanguage(withLocaleIdentifier localeIdentifier: String) -> Language? {
+        return Language(localeIdentifier: localeIdentifier)
+    }
+    
+    var name: String {
+        get {
+            return rawValue.capitalized
+        }
+    }
+    
+    var localeIdentifier: String {
+        get {
+            switch self {
+            case .german:
+                return "de_DE"
+            case .english:
+                return "en_GB"
+            case .spanish:
+                return "es_ES"
+            }
+        }
+    }
+    
+    var languageCode: String {
+        get {
+            return self.locale.languageCode!
+        }
+    }
+    
+    var isoCode: String {
+        get {
+            switch(self) {
+            case .english:
+                return "eng"
+            case .german:
+                return "deu"
+            case .spanish:
+                return "spa"
+            }
+        }
+    }
+    
+    var countryCode: String {
+        get {
+            return self.locale.regionCode!
+        }
+    }
+    
+    var locale: Locale {
+        get {
+            return Locale(identifier: localeIdentifier)
+        }
+    }
 }

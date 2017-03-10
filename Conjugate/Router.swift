@@ -11,6 +11,7 @@ class Router {
     }
     
     let rootViewController: UIViewController
+    let appDependencyManager: AppDependencyManager
     
     let presenterViewLookupTable: [String: PresenterType] = [
         ConjugateViewController.Identifier : .conjugate,
@@ -30,8 +31,9 @@ class Router {
     
     var quickActionToBePerformed: QuickAction?
     
-    init(viewController: UIViewController) {
+    init(viewController: UIViewController, appDependencyManager: AppDependencyManager = .shared) {
         self.rootViewController = viewController
+        self.appDependencyManager = appDependencyManager
     }
     
     convenience init?(view: View) {
@@ -79,6 +81,15 @@ class Router {
         rootViewController.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func openLanguageSelection(languages: [Language], selectedLanguage: Language, languageType: LanguageType) {
+        guard let vc = makeLanguageSelectionViewController() else { return }
+        
+        let presenter = LanguageSelectionPresenter(view: vc, appDependencyManager: AppDependencyManager.shared, languages: languages, selectedLanguage: selectedLanguage, languageType: languageType)
+        vc.presenter = presenter
+        
+        rootViewController.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func makeDetailViewController(from verb: Verb) -> VerbDetailViewController? {
         guard let vc = UIStoryboard.main.instantiateViewController(withIdentifier: "VerbDetailViewController") as? VerbDetailViewController
             else { return nil}
@@ -90,7 +101,7 @@ class Router {
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else { return nil }
         
-        let conjugatePresenter = ConjugatePresenter(view: vc, quickActionController: appDelegate.quickActionController)
+        let conjugatePresenter = ConjugatePresenter(view: vc, appDependencyManager: appDependencyManager, quickActionController: appDelegate.quickActionController)
         vc.presenter = conjugatePresenter
         vc.viewModel = conjugatePresenter.makeConjugateViewModel(from: verb)
         
@@ -101,7 +112,11 @@ class Router {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else { return nil }
         
-        return ConjugatePresenter(view: viewController, quickActionController: appDelegate.quickActionController)
+        return ConjugatePresenter(view: viewController, appDependencyManager: appDependencyManager, quickActionController: appDelegate.quickActionController)
+    }
+    
+    func makeLanguageSelectionViewController() -> LanguageSelectionViewController? {
+        return UIStoryboard.main.instantiateViewController(withIdentifier: LanguageSelectionViewController.Identifier) as? LanguageSelectionViewController
     }
     
     func route(using quickAction: QuickAction) {
@@ -136,7 +151,11 @@ class Router {
     }
     
     func dismiss() {
-        rootViewController.dismiss(animated: true, completion: nil)
+        if let navigationVC = rootViewController.navigationController {
+            navigationVC.popViewController(animated: true)
+        } else {
+            rootViewController.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

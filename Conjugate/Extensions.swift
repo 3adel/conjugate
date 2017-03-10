@@ -106,6 +106,19 @@ extension UIViewController {
     func setupUI() {
         automaticallyAdjustsScrollViewInsets = false
     }
+    
+    func setupTabBar(shouldShow: Bool) {
+        let bottomPoint = view.frame.height
+        let yPoint = shouldShow ? bottomPoint - (tabBarController?.tabBar.frame.height)! : bottomPoint
+        
+        UIView.animate(withDuration: 0.3) {
+            var frame = self.tabBarController!.tabBar.frame
+            frame.origin.y = yPoint
+            
+            self.tabBarController?.tabBar.frame = frame
+            self.tabBarController?.tabBar.isHidden = !shouldShow
+        }
+    }
 }
 
 extension UIViewController: UITextFieldDelegate {

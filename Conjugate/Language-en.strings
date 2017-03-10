@@ -1,0 +1,22 @@
+/* 
+  Language-en.strings
+  Conjugate
+
+  Created by Halil Gursoy on 07/03/2017.
+  Copyright © 2017 Adel  Shehadeh. All rights reserved.
+*/
+
+"mobile.ios.conjugate.tense.present" = "Present";
+"mobile.ios.conjugate.tense.past" = "Past";
+"mobile.ios.conjugate.tense.presentPerfect" = "Present Perfect";
+"mobile.ios.conjugate.tense.pastPerfect" = "Past Perfect";
+"mobile.ios.conjugate.tense.future" = "Future";
+"mobile.ios.conjugate.tense.future2" = "Future Perfect";
+"mobile.ios.conjugate.tense.conditionalPast" = "";
+"mobile.ios.conjugate.tense.conditionalPastPerfect" = "";
+
+"mobile.ios.conjugate.searchPlaceholderVerbs" = "drink,have";
+
+"mobile.ios.conjugate.tenseGroup.indicative" = "Indicative";
+"mobile.ios.conjugate.tenseGroup.subjunctive" = "Subjunctive";
+"mobile.ios.conjugate.tenseGroup.imperative" = "Imperative";

@@ -7,13 +7,14 @@ import UIKit
 class VerbDetailViewController: UIViewController {
     @IBOutlet weak var verbLabel: UILabel!
     @IBOutlet weak var nominalLabel: UILabel!
-    @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var audioButton: AnimatedButton!
+    
+    @IBOutlet weak var translationLanguageImageView: UIImageView!
     
     @IBOutlet weak var nominalFormHeightConstraint: NSLayoutConstraint!
     
@@ -127,9 +128,11 @@ extension VerbDetailViewController: ConjugateView {
         
         errorLabel.isHidden = true
         
+        translationLanguageImageView.image = UIImage(named: viewModel.switchInterfaceLanguageFlagImage)
+        translationLanguageImageView.isHidden = viewModel.isEmpty
+        
         verbLabel.text = viewModel.verb
         nominalLabel.text = viewModel.nominalForms
-        languageLabel.text = viewModel.language.isEmpty ? "" : viewModel.language + " - "
         meaningLabel.text = viewModel.meaning
         
         nominalFormHeightConstraint.constant = viewModel.nominalForms.isEmpty ? 0 : 21
