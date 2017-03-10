@@ -14,6 +14,8 @@
 "mobile.ios.conjugate.tense.future2" = "Futuro perfecto";
 "mobile.ios.conjugate.tense.conditionalPast" = "Condicional";
 "mobile.ios.conjugate.tense.conditionalPastPerfect" = "Condicional perfecto";
+"mobile.ios.conjugate.tense.preterite" = "Pretérito";
+"mobile.ios.conjugate.tense.preterite2" = "Pretérito anterior";
 
 "mobile.ios.conjugate.searchPlaceholderVerbs" = "bebo,tengo";
 

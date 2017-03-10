@@ -39,8 +39,8 @@ open class ModelFactory {
     
 }
 
-extension Verb: JSONDictInitable {
-    init?(with dict: JSONDictionary) {
+extension Verb {
+    init?(with dict: JSONDictionary, language: Language) {
         guard let name = dict["verb"] as? String else { return nil }
         
         let tensesDict = dict["tenses"] as? [String: JSONDictionary]
@@ -68,7 +68,7 @@ extension Verb: JSONDictInitable {
             
             for (key, value) in tensesDict {
                 
-                guard let tense = Tense(with: value, verbixId: key),
+                guard let tense = Tense(with: value, verbixId: key, language: language),
                     let name = value["name"] as? String,
                     let firstComponent = name.firstComponent?.lowercased(),
                     var tenseGroup = TenseGroup(rawValue: firstComponent) else { continue }
@@ -86,9 +86,9 @@ extension Verb: JSONDictInitable {
 }
 
 extension Tense {
-    init?(with dict: JSONDictionary, verbixId: String = "") {
+    init?(with dict: JSONDictionary, verbixId: String = "", language: Language) {
         guard let nameString = dict["name"] as? String,
-            let name = Tense.Name(verbixId: verbixId) ?? Tense.Name(rawValue: nameString.secondComponent?.lowercased() ?? ""),
+            let name = Tense.Name(verbixId: verbixId, language: language) ?? Tense.Name(rawValue: nameString.secondComponent?.lowercased() ?? ""),
             let formDicts = dict["forms"] as? [JSONDictionary] else { return nil }
         
         let forms: [Form] = ModelFactory.arrayOf(formDicts)
@@ -115,15 +115,23 @@ extension Tense.Name {
             return "13"
         case .subjunctivePresentPerfect:
             return "11"
+        case .preterite:
+            return "4"
+        case .preterite2:
+            return "14"
+        case .subjunctiveFuture:
+            return "6"
+        case .subjunctiveFuture2:
+            return "16"
         default:
             return nil
         }
     }
     
-    init?(verbixId: String) {
+    init?(verbixId: String, language: Language) {
         var tense: Tense.Name? = nil
         
-        Tense.Name.allTenses.forEach { name in
+        Tense.Name.getTenses(for: language).forEach { name in
             if verbixId == name.verbixId {
                 tense = name
             }

@@ -449,7 +449,8 @@ extension ConjugatePresenter {
         
         var tenseViewModels = [TenseViewModel]()
         
-        Tense.Name.allTenses.forEach { tenseName in
+        
+        Tense.Name.getTenses(for: targetLanguage).forEach { tenseName in
             let tensesWithThisName = tenses.filter { $0.name == tenseName }
             tenseViewModels.append(contentsOf: tensesWithThisName.map(makeTenseViewModel))
         }

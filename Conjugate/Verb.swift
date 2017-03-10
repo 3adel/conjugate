@@ -124,6 +124,10 @@ struct Tense {
         case conditionalPastPerfect
         case subjunctivePresentPerfect
         case subjunctivePastPerfect
+        case preterite
+        case preterite2
+        case subjunctiveFuture
+        case subjunctiveFuture2
         
         case noTense = ""
         
@@ -137,6 +141,10 @@ struct Tense {
                 return Name.pastPerfect.text
             case .subjunctivePresentPerfect:
                 return Name.presentPerfect.text
+            case .subjunctiveFuture:
+                return Name.future.text
+            case .subjunctiveFuture2:
+                return Name.future2.text
             case .noTense:
                 return rawValue
             default:
@@ -144,7 +152,7 @@ struct Tense {
             }
         }
         
-        static let allTenses: [Tense.Name] = [
+        private static let germanTenses: [Tense.Name] = [
             .present,
             .past,
             .presentPerfect,
@@ -157,6 +165,36 @@ struct Tense {
             .conditionalPastPerfect,
             .noTense
         ]
+        
+        private static let spanishTenses: [Tense.Name] = [
+            .present,
+            .past,
+            .presentPerfect,
+            .subjunctivePresentPerfect,
+            .pastPerfect,
+            .subjunctivePastPerfect,
+            .preterite,
+            .preterite2,
+            .future,
+            .future2,
+            .subjunctiveFuture,
+            .subjunctiveFuture2,
+            .conditionalPast,
+            .conditionalPastPerfect,
+            .noTense
+
+        ]
+        
+        static func getTenses(for language: Language) -> [Tense.Name] {
+            switch language {
+            case .german:
+                return germanTenses
+            case .spanish:
+                return spanishTenses
+            default:
+                return []
+            }
+        }
     }
     
     static let nameKey = "name"

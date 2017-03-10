@@ -24,7 +24,7 @@ class DataStore {
             case .success(let value):
                 guard let array = value as? JSONArray,
                     let dict = array.first as? JSONDictionary,
-                    let verb = Verb(with: dict)
+                    let verb = Verb(with: dict, language: language)
                     else {
                         completion(.failure(ConjugateError.verbNotFound))
                         
@@ -48,7 +48,7 @@ class DataStore {
                 completion(.failure(error))
             case .success(let value):
                 guard let dict = value as? JSONDictionary,
-                    let verb = Verb(with: dict)
+                    let verb = Verb(with: dict, language: language)
                     else {
                         completion(.failure(ConjugateError.conjugationNotFound))
                         return
