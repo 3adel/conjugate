@@ -69,7 +69,7 @@ class LanguageSelectionPresenter: LanguageSelectionPresenterType {
 extension LanguageSelectionPresenter {
     func makeLanguageViewModel(from language: Language) -> LanguageViewModel {
         let name = language.name
-        let imageName = language.languageCode.lowercased() + "_flag"
+        let imageName = language.countryCode.lowercased() + "_flag"
         let isSelected = newlySelectedLanguage == language
         
         return LanguageViewModel(title: name,
