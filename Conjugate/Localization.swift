@@ -115,4 +115,10 @@ enum Language: String {
             return Locale(identifier: localeIdentifier)
         }
     }
+    
+    var flagImageName: String {
+        get {
+            return countryCode.lowercased() + "_flag"
+        }
+    }
 }

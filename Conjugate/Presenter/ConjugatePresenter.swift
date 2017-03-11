@@ -382,9 +382,8 @@ extension ConjugatePresenter {
         
         let switchInterfaceLanguage = interfaceLanguage.languageCode.uppercased()
         
-        let flagSuffix = "_flag"
-        let switchInterfaceLanguageFlagImage = interfaceLanguage.countryCode.lowercased()+flagSuffix
-        let switchLanguageFlagImage = targetLanguage.countryCode.lowercased()+flagSuffix
+        let switchInterfaceLanguageFlagImage = interfaceLanguage.flagImageName
+        let switchLanguageFlagImage = targetLanguage.flagImageName
         
         let switchSearchLanguage = targetLanguage.countryCode.uppercased()
         
