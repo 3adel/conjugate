@@ -43,6 +43,10 @@ class VerbDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.updateViewModel()
+        
+        let showNavBar = parent is UINavigationController ?? false
+        
+        navigationController?.isNavigationBarHidden = !showNavBar
     }
     
     override func setupUI() {

@@ -115,4 +115,21 @@ enum Language: String {
             return Locale(identifier: localeIdentifier)
         }
     }
+    
+    var flagImageName: String {
+        get {
+            return countryCode.lowercased() + "_flag"
+        }
+    }
+    
+    var tintColor: (CGFloat, CGFloat, CGFloat) {
+        switch self {
+        case .german:
+            return (245, 166, 35)
+        case .english:
+            return (0, 36, 125)
+        case .spanish:
+            return (204, 30, 26)
+        }
+    }
 }

@@ -38,7 +38,7 @@ class LanguageSelectionPresenter: LanguageSelectionPresenterType {
         let languageViewModels = languages.map(makeLanguageViewModel)
         
         let isApplyButtonEnabled = newlySelectedLanguage != selectedLanguage
-        let applyButtonBackgroundColor: (CGFloat, CGFloat, CGFloat) = isApplyButtonEnabled ? (45, 216, 11) : (151, 151, 151)
+        let applyButtonBackgroundColor: (CGFloat, CGFloat, CGFloat) = isApplyButtonEnabled ? (102, 176, 76) : (151, 151, 151)
         
         viewModel = LanguageSelectionViewModel(title: title,
                                                languages: languageViewModels,

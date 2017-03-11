@@ -5,11 +5,13 @@
 import UIKit
 
 class SavedVerbsViewController: UIViewController {
-    @IBOutlet var tableView: UITableView!
     @IBOutlet var noVerbsLabel: UILabel!
     @IBOutlet var noVerbsImageView: UIImageView!
     
-    var viewModel = SavedVerbViewModel.empty
+    @IBOutlet weak var menuHeightConstraint: NSLayoutConstraint!
+    
+    let tabbedMenuSegue = "tabbedMenuSegue"
+    let tabbedContentSegue = "tabbedContentSegue"
     
     var presenter: SavedVerbPresenterType!
     
@@ -17,11 +19,40 @@ class SavedVerbsViewController: UIViewController {
     
     var previewDelegate: SavedVerbPreviewingDelegate?
     
+    var tabbedMenuViewController: TabbedMenuViewController?
+    var tabbedContentViewController: TabbedContentViewController?
+    
+    var tabTableViewDatasources = [SavedVerbDataSource]()
+    var tabTableViews = [UITableView]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPresenter()
         setupUI()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.getSavedVerbs()
+        
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    func setupPresenter() {
+        presenter = SavedVerbPresenter(view: self)
+    }
+    
+    override func setupUI() {
+        setStatusBar(backgroundColor: UIColor.white)
+        
+        navigationController?.navigationBar.tintColor = Theme.mainTintColor
+        alertHandler = AlertHandler(view: view, topLayoutGuide: topLayoutGuide, bottomLayoutGuide: bottomLayoutGuide)
+        
+        noVerbsLabel.text = ConjugateError.noSavedVerbs.localizedDescription
+    }
+    
+    fileprivate func setupPreviewDelegate(with tableView: UITableView) {
         previewDelegate = SavedVerbPreviewingDelegate(tableView: tableView, getVerbDetailView: { index in
             return self.presenter.getVerbDetailView(at: index) as? VerbDetailViewController
         },
@@ -31,33 +62,105 @@ class SavedVerbsViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        presenter.getSavedVerbs()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == tabbedMenuSegue {
+            guard let
+                menuViewController = segue.destination as? TabbedMenuViewController
+                else { return }
+            setup(tabbedMenuViewController: menuViewController)
+        } else if segue.identifier == tabbedContentSegue {
+            guard let
+                tabContentViewController = segue.destination as? TabbedContentViewController
+                else { return }
+            setup(tabbedContentViewController: tabContentViewController)
+        }
     }
     
-    func setupPresenter() {
-        presenter = SavedVerbPresenter(view: self)
+    func setup(tabbedMenuViewController: TabbedMenuViewController) {
+        self.tabbedMenuViewController = tabbedMenuViewController
     }
     
-    override func setupUI() {
-        navigationController?.navigationBar.tintColor = Theme.mainTintColor
-        tableView.tableFooterView = UIView()
-        alertHandler = AlertHandler(view: view, topLayoutGuide: topLayoutGuide, bottomLayoutGuide: bottomLayoutGuide)
-        
-        noVerbsLabel.text = ConjugateError.noSavedVerbs.localizedDescription
+    func setup(tabbedContentViewController: TabbedContentViewController) {
+        self.tabbedContentViewController = tabbedContentViewController
+        self.tabbedContentViewController?.delegate = self
     }
 }
 
-
 extension SavedVerbsViewController: SavedVerbView {
     func update(with viewModel: SavedVerbViewModel) {
-        self.viewModel = viewModel
-        tableView.reloadSections([0], with: .automatic)
+        setupTabs(languageViewModels: viewModel.savedVerbLanguages)
         
-        tableView.isHidden = !viewModel.showVerbsList
+        tabbedContentViewController?.view.isHidden = !viewModel.showVerbsList
         noVerbsLabel.isHidden = !viewModel.showNoSavedVerbMessage
         noVerbsImageView.isHidden = noVerbsLabel.isHidden
+    }
+    
+    func setupTabs(languageViewModels: [SavedVerbLanguageViewModel]) {
+        tabbedMenuViewController?.contentController = tabbedContentViewController
+        tabbedContentViewController?.menuController = tabbedMenuViewController
+        
+        setupTabTheme(with: languageViewModels)
+        
+        var tabs: [TabbedMenuViewController.Tab] = []
+        
+        tabTableViews.removeAll()
+        tabTableViewDatasources.removeAll()
+        
+        languageViewModels.forEach { languageViewModel in
+            let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+            tableView.allowsMultipleSelection = false
+            tableView.allowsSelection = true
+            
+            let dataSource = SavedVerbDataSource(tableView: tableView, verbs: languageViewModel.savedVerbs)
+            
+            dataSource.onVerbDidSelect = { [weak self] index in
+                self?.presenter.openVerbDetails(at: index)
+            }
+            
+            dataSource.onVerbShouldDelete = { [weak self] index in
+                self?.presenter.deleteVerb(at: index)
+            }
+            
+            tableView.dataSource = dataSource
+            tableView.delegate = dataSource
+            
+            tabTableViews.append(tableView)
+            tabTableViewDatasources.append(dataSource)
+            
+            let flagImage = UIImage(named: languageViewModel.flagImageName)
+            let imageSize = CGSize(width: 14, height: 14)
+            
+            let tab = TabbedMenuViewController.Tab(title: languageViewModel.name.uppercased(), image: flagImage, imageSize: imageSize, view: tableView)
+            tabs.append(tab)
+        }
+        
+        tabbedMenuViewController?.tabs = tabs
+        tabbedContentViewController?.views = tabTableViews
+        tabbedContentViewController?.isScrollEnabled = false
+        
+//        if tabs.count <= 1 {
+//            menuHeightConstraint.constant = 0
+//        } else {
+            menuHeightConstraint.constant = 44
+//        }
+    }
+    
+    func setupTabTheme(with languageViewModels: [SavedVerbLanguageViewModel]) {
+        
+        let borderColor = UIColor.clear
+        let textColor = UIColor.black
+        let selectedColors: [UIColor] = languageViewModels.map { languageViewModel in
+            return UIColor(red: languageViewModel.tintColor.0/255,
+                           green: languageViewModel.tintColor.1/255,
+                           blue: languageViewModel.tintColor.2/255,
+                           alpha: 1.0)
+            
+        }//UIColor(red: 74/255, green: 144/255, blue: 226/255, alpha: 1)
+        let font = UIFont.boldSystemFont(ofSize: 13)
+        
+        let theme = TabbedMenuTheme(textColor: textColor, selectedColors: selectedColors, font: font, borderColor: borderColor)
+        
+        tabbedMenuViewController?.setTheme(theme)
     }
     
     func show(successMessage: String) {
@@ -65,40 +168,12 @@ extension SavedVerbsViewController: SavedVerbView {
     }
 }
 
-
-extension SavedVerbsViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.verbs.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SavedVerbCell") as? SavedVerbCell else { return UITableViewCell() }
-        
-        let cellViewModel = viewModel.verbs[indexPath.row]
-        cell.update(with: cellViewModel)
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.openVerbDetails(at: indexPath.row)
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            presenter.deleteVerb(at: indexPath.row)
-        }
+extension SavedVerbsViewController: TabbedContentDelegate {
+    func tabbedViewDidScroll(toTabAt index: Int) {
+        let tableView = tabTableViews[index]
+        setupPreviewDelegate(with: tableView)
     }
 }
-
 
 class SavedVerbPreviewingDelegate: NSObject, UIViewControllerPreviewingDelegate {
     let tableView: UITableView
@@ -127,15 +202,5 @@ class SavedVerbPreviewingDelegate: NSObject, UIViewControllerPreviewingDelegate 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         previewingContext.sourceRect = tableView.rectForRow(at: IndexPath(row: index, section: 0))
         openVerbDetail(self.index)
-    }
-
-}
-
-class SavedVerbCell: UITableViewCell {
-    static let identifier = "SavedVerbCell"
-    
-    func update(with viewModel: SavedVerbCellViewModel) {
-        textLabel?.text = viewModel.verb
-        detailTextLabel?.text = viewModel.meaning
     }
 }

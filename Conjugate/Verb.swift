@@ -91,9 +91,9 @@ extension Verb: DictConvertible {
     }
 
     static func from(dict: JSONDictionary) -> Verb? {
-        guard let name = dict[Verb.nameKey] as? String,
-            let translations = dict[Verb.translationsKey] as? [String]?,
-            let tenseArray = dict[Verb.tensesKey] as? [String: JSONArray]
+        guard let name = dict[UserDefaultKey.name.key] as? String ?? dict[Verb.nameKey] as? String,
+            let translations = (dict[UserDefaultKey.translation.key] as? [String]) ?? dict[Verb.translationsKey] as? [String],
+        let tenseArray = dict[UserDefaultKey.tenses.key] as? [String: JSONArray] ?? dict[Verb.tensesKey] as? [String: JSONArray]
             else { return nil }
         
         var tenses = Tenses()
