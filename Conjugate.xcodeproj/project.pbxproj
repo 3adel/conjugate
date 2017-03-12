@@ -24,11 +24,13 @@
 		245D32EA1DBB76FE00E5352F /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D32E91DBB76FE00E5352F /* Localization.swift */; };
 		245D331D1DBB9AE400E5352F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 245D331F1DBB9AE400E5352F /* Localizable.strings */; };
 		245D33421DBBA81400E5352F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D33411DBBA81400E5352F /* Router.swift */; };
+		246B23D01E75D7CA001E4A43 /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246B23CF1E75D7CA001E4A43 /* OnboardingPresenter.swift */; };
 		247770D11DD3AC030012EDFF /* EmailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247770D01DD3AC030012EDFF /* EmailComposer.swift */; };
 		247770D31DD3AC5A0012EDFF /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247770D21DD3AC5A0012EDFF /* ShareController.swift */; };
 		247A87701E6F5AFE00E5005C /* Language-de.strings in Resources */ = {isa = PBXBuildFile; fileRef = 247A876F1E6F5AFE00E5005C /* Language-de.strings */; };
 		247A87851E6F5B3400E5005C /* Language-es.strings in Resources */ = {isa = PBXBuildFile; fileRef = 247A87841E6F5B3400E5005C /* Language-es.strings */; };
 		247A87871E6F62BC00E5005C /* Language-en.strings in Resources */ = {isa = PBXBuildFile; fileRef = 247A87861E6F62BC00E5005C /* Language-en.strings */; };
+		249181F61E758936008A1BE8 /* OnboardingLanguageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249181F51E758936008A1BE8 /* OnboardingLanguageSelectionViewController.swift */; };
 		249899071E23D8FA0071E423 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249899061E23D8FA0071E423 /* QuartzCore.framework */; };
 		2498991E1E2436E90071E423 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248597731DCFB884006D7AA2 /* AVFoundation.framework */; };
 		249FF0E21DD3E8A20083DB0C /* ActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249FF0E11DD3E8A20083DB0C /* ActionController.swift */; };
@@ -299,12 +301,14 @@
 		245D32E91DBB76FE00E5352F /* Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		245D331E1DBB9AE400E5352F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		245D33411DBBA81400E5352F /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		246B23CF1E75D7CA001E4A43 /* OnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 		247770D01DD3AC030012EDFF /* EmailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailComposer.swift; sourceTree = "<group>"; };
 		247770D21DD3AC5A0012EDFF /* ShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		247A876F1E6F5AFE00E5005C /* Language-de.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Language-de.strings"; sourceTree = "<group>"; };
 		247A87841E6F5B3400E5005C /* Language-es.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Language-es.strings"; sourceTree = "<group>"; };
 		247A87861E6F62BC00E5005C /* Language-en.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Language-en.strings"; sourceTree = "<group>"; };
 		248597731DCFB884006D7AA2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		249181F51E758936008A1BE8 /* OnboardingLanguageSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingLanguageSelectionViewController.swift; sourceTree = "<group>"; };
 		249899061E23D8FA0071E423 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		249FF0E11DD3E8A20083DB0C /* ActionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionController.swift; sourceTree = "<group>"; };
 		249FF3371DD51B5E0083DB0C /* Clipboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clipboard.swift; sourceTree = "<group>"; };
@@ -529,6 +533,7 @@
 				24F96B931E3A51D400EC27A0 /* SavedVerbPresenter.swift */,
 				24F96B941E3A51D400EC27A0 /* SettingsPresenter.swift */,
 				2451D4781E6315540009F6F4 /* LanguageSelectionPresenter.swift */,
+				246B23CF1E75D7CA001E4A43 /* OnboardingPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -566,6 +571,7 @@
 				24F96BA31E3A535900EC27A0 /* TabBarController.swift */,
 				24F96BA41E3A535900EC27A0 /* VerbDetailViewController.swift */,
 				2451D47A1E6320DE0009F6F4 /* LanguageSelectionViewController.swift */,
+				249181F51E758936008A1BE8 /* OnboardingLanguageSelectionViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -935,6 +941,7 @@
 				2451D47D1E632BCF0009F6F4 /* LanguageCell.swift in Sources */,
 				24A4E5891E466C5600FCD144 /* AppReviewController.swift in Sources */,
 				24F96B961E3A51D400EC27A0 /* SavedVerbPresenter.swift in Sources */,
+				249181F61E758936008A1BE8 /* OnboardingLanguageSelectionViewController.swift in Sources */,
 				9F66A0B91E2BD92D007646A5 /* Identifiable.swift in Sources */,
 				24FAC0FC1E6C659100FD476B /* NotificationName.swift in Sources */,
 				24F96BBE1E3A546B00EC27A0 /* FlexLanguageTextField.m in Sources */,
@@ -947,6 +954,7 @@
 				2451D4791E6315540009F6F4 /* LanguageSelectionPresenter.swift in Sources */,
 				24B9D8ED1DAC5261004EE256 /* DataClient.swift in Sources */,
 				24FAC1651E6C792900FD476B /* DictionaryKey.swift in Sources */,
+				246B23D01E75D7CA001E4A43 /* OnboardingPresenter.swift in Sources */,
 				24F96BB61E3A53F700EC27A0 /* AlertHandler.swift in Sources */,
 				24B9D9A21DAED525004EE256 /* Verb.swift in Sources */,
 				24F96BA91E3A535900EC27A0 /* TabbedMenu.swift in Sources */,

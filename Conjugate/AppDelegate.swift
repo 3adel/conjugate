@@ -26,13 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Endpoint.baseURI = "http://api.verbix.com"
         Endpoint.apiKey = "35b1e140-257a-11e6-be88-00089be4dcbc/"
         
-        let tabBarController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController() as! TabBarController
-        
-        window?.rootViewController = tabBarController
-        
-        router = Router(viewController: tabBarController)
-        
-        tabBarController.router = router
+        setupInitialView()
         
         if let shortcutItems = UIApplication.shared.shortcutItems {
             quickActionController.update(from: shortcutItems)
@@ -67,6 +61,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKAppEvents.activateApp()
     }
     
+    func setupInitialView() {
+        if let languageConfig = AppDependencyManager.getLanguageConfig() {
+            AppDependencyManager.shared.languageConfig = languageConfig
+            setupTabBarController()
+        } else {
+            guard let onboardingVC = Router.makeOnboardingView() else { return }
+            router = Router(viewController: onboardingVC)
+            
+            window?.rootViewController = onboardingVC
+        }
+    }
+    
+    func setupTabBarController() {
+        let tabBarController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController() as! TabBarController
+        window?.rootViewController = tabBarController
+        
+        router = Router(viewController: tabBarController)
+        tabBarController.router = router
+    }
 }
 
 extension AppDelegate {

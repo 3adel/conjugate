@@ -14,7 +14,7 @@ class LanguageSelectionViewController: UIViewController, LanguageSelectionView {
     
     var dataSource: LanguageSelectionDataSource?
     
-    var presenter: LanguageSelectionPresenter?
+    var presenter: LanguageSelectionPresenterType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,10 @@ class LanguageSelectionViewController: UIViewController, LanguageSelectionView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupTabBar(shouldShow: false)
+        
+        if let _ = tabBarController {
+            setupTabBar(shouldShow: false)
+        }
     }
     
     override func setupUI() {
@@ -40,6 +43,8 @@ class LanguageSelectionViewController: UIViewController, LanguageSelectionView {
     
     func render(with viewModel: LanguageSelectionViewModel) {
         title = viewModel.title
+        
+        applyButton.setTitle(viewModel.applyButtonTitle, for: .normal)
         
         UIView.animate(withDuration: 0.3) {
             self.applyButton.backgroundColor = UIColor(red: viewModel.applyButtonBackgroundColor.0/255,

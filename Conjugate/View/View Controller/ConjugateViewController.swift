@@ -40,7 +40,7 @@ class ConjugateViewController: UIViewController {
             searchText = welcomeVerb
             search()
             
-            launchChecker.appLaunched()
+            launchChecker.appDidLaunch()
         }
     }
     

@@ -40,10 +40,13 @@ class LanguageSelectionPresenter: LanguageSelectionPresenterType {
         let isApplyButtonEnabled = newlySelectedLanguage != selectedLanguage
         let applyButtonBackgroundColor: (CGFloat, CGFloat, CGFloat) = isApplyButtonEnabled ? (102, 176, 76) : (151, 151, 151)
         
+        let applyButtonTitle = LocalizedString("mobile.ios.conjugate.languageSelection.apply")
+        
         viewModel = LanguageSelectionViewModel(title: title,
                                                languages: languageViewModels,
                                                applyButtonBackgroundColor: applyButtonBackgroundColor,
-                                               applyButtonIsEnabled: isApplyButtonEnabled)
+                                               applyButtonIsEnabled: isApplyButtonEnabled,
+                                               applyButtonTitle: applyButtonTitle)
         
         view.render(with: viewModel)
     }

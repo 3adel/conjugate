@@ -14,7 +14,7 @@ class AppLaunchChecker {
         return UserDefaults.standard.value(forKey: UserDefaultKeys.IsFirstInstall) as? Bool ?? true
     }
     
-    func appLaunched() {
+    func appDidLaunch() {
         UserDefaults.standard.set(false, forKey: UserDefaultKeys.IsFirstInstall)
     }
 }

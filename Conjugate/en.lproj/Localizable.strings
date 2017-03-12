@@ -32,6 +32,8 @@
 "mobile.ios.conjugate.languageSelection.conjugation" = "Conjugation Language";
 "mobile.ios.conjugate.languageSelection.translation" = "Translation Language";
 "mobile.ios.conjugate.languageSelection.apply" = "Apply";
+"mobile.ios.conjugate.languageSelection.continue" = "Continue";
 
+"mobile.ios.conjugate.onboarding.description" = "Please select a language you want to conjugate in";
 
 
