@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol OnboardingDelegate: class {
+    func didSelectConjugationLanguage()
+}
+
 
 class OnboardingPresenter: OnboardingPresenterType, LanguageSelectionPresenterType {    
     unowned let view: OnboardingViewType
@@ -19,11 +23,14 @@ class OnboardingPresenter: OnboardingPresenterType, LanguageSelectionPresenterTy
     
     var viewModel: OnboardingViewModel = .empty
     
-    init(view: OnboardingViewType, appDependencyManager: AppDependencyManager, languages: [Language]) {
+    weak var delegate: OnboardingDelegate?
+    
+    init(view: OnboardingViewType, appDependencyManager: AppDependencyManager, languages: [Language], delegate: OnboardingDelegate?) {
         self.view = view
         self.appDependencyManager = appDependencyManager
         self.languages = languages
         self.selectedLanguage = nil
+        self.delegate = delegate
     }
     
     func getInitialData() {
@@ -57,6 +64,8 @@ class OnboardingPresenter: OnboardingPresenterType, LanguageSelectionPresenterTy
                                             availableTranslationLanguages: defaultConfig.availableTranslationLanguages)
         
         appDependencyManager.languageConfig = languageConfig
+        
+        delegate?.didSelectConjugationLanguage()
         
     }
     

@@ -82,6 +82,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension AppDelegate: OnboardingDelegate {
+    func didSelectConjugationLanguage() {
+        setupInitialView()
+    }
+}
+
 extension AppDelegate {
     override class func initialize() {
         AppDelegate.setupAppReviewController()

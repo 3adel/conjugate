@@ -15,7 +15,11 @@ class ConjugateViewController: UIViewController {
     var loadingView: LoadingView?
     var alertHandler: AlertHandler?
     
-    var presenter: ConjugatePresenterType?
+    var presenter: ConjugatePresenterType? {
+        didSet {
+            verbDetailViewController?.presenter = presenter
+        }
+    }
     var verbDetailViewController: VerbDetailViewController?
     
     var searchTimer: Timer?

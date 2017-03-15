@@ -34,7 +34,11 @@ class AppDependencyManager: NotificationSender {
         )
     }
     
-    var languageConfig: LanguageConfig
+    var languageConfig: LanguageConfig {
+        didSet {
+            save()
+        }
+    }
     
     init(languageConfig: LanguageConfig) {
         self.languageConfig = languageConfig
