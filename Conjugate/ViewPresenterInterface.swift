@@ -73,6 +73,15 @@ protocol LanguageSelectionView: View {
 protocol LanguageSelectionPresenterType {
     func getLanguages()
     func didSelectLanguage(at index: Int)
+    func didPressApplyButton()
+}
+
+protocol OnboardingPresenterType {
+    func getInitialData()
+}
+
+protocol OnboardingViewType: View {
+    func render(with viewModel: OnboardingViewModel)
 }
 
 struct ConjugateViewModel {
@@ -157,19 +166,27 @@ struct SettingsLanguageViewModel: CellViewModel {
     let languageImageName: String
 }
 
+struct LanguageViewModel {
+    let title: String
+    let imageName: String
+    let isSelected: Bool
+}
+
 struct LanguageSelectionViewModel {
     let title: String
     let languages: [LanguageViewModel]
     let applyButtonBackgroundColor: (CGFloat, CGFloat, CGFloat)
     let applyButtonIsEnabled: Bool
+    let applyButtonTitle: String
     
-    static var empty: LanguageSelectionViewModel {
-        return LanguageSelectionViewModel(title: "", languages: [], applyButtonBackgroundColor: (0,0,0), applyButtonIsEnabled: false)
-    }
+    static let empty: LanguageSelectionViewModel = LanguageSelectionViewModel(title: "", languages: [], applyButtonBackgroundColor: (0,0,0), applyButtonIsEnabled: false, applyButtonTitle: "")
 }
 
-struct LanguageViewModel {
-    let title: String
-    let imageName: String
-    let isSelected: Bool
+struct OnboardingViewModel {
+    let descriptionText: String
+    let languageSelectionViewModel: LanguageSelectionViewModel
+    
+    static let empty: OnboardingViewModel = OnboardingViewModel(descriptionText: "",
+                                                                languageSelectionViewModel: .empty)
+    
 }

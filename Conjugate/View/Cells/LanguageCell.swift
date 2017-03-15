@@ -19,7 +19,7 @@ class LanguageCell: UITableViewCell {
         
         selectedImageView.isHidden = !viewModel.isSelected
         
-        accessoryType = viewModel.isSelected ? .none : .disclosureIndicator
+        accessoryType = .none
         selectionStyle = .none
     }
 }

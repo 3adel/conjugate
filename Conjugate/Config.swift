@@ -35,6 +35,7 @@ struct LanguageConfig {
                                                         availableConjugationLanguages: [Language.german, Language.spanish],
                                                         availableTranslationLanguages: [Language.english])
     
+    
     init(selectedConjugationLanguage: Language,
          selectedTranslationLanguage: Language,
          availableConjugationLanguages: [Language],

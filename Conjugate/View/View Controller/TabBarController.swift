@@ -45,14 +45,13 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTabs()
         
         tabBar.backgroundColor = UIColor.white
         
         router?.isViewReady = true
     }
     
-    private func setupTabs() {
+    func setupTabs() {
         var controllers = [UIViewController]()
         Tab.allTabs.forEach {
             guard let tabNavigationController = storyboard?.instantiateViewController(withIdentifier: $0.navigationControllerIdentifier) as? UINavigationController,

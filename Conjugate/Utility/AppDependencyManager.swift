@@ -23,10 +23,10 @@ class AppDependencyManager: NotificationSender {
         case savedLanguageConfig
     }
     
-    static let shared: AppDependencyManager = makeSharedManager()
+    static var shared: AppDependencyManager = setupSharedManager()
     
     
-    private static func makeSharedManager() -> AppDependencyManager {
+    private static func setupSharedManager() -> AppDependencyManager {
         let languageConfig = getLanguageConfig() ?? LanguageConfig.default
         
         return AppDependencyManager(
@@ -34,7 +34,11 @@ class AppDependencyManager: NotificationSender {
         )
     }
     
-    var languageConfig: LanguageConfig
+    var languageConfig: LanguageConfig {
+        didSet {
+            save()
+        }
+    }
     
     init(languageConfig: LanguageConfig) {
         self.languageConfig = languageConfig
