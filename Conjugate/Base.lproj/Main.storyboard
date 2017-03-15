@@ -797,9 +797,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alignCenterConstraint" destination="5ZK-Tz-wdI" id="yep-TH-avc"/>
+                        <outlet property="bottomConstraint" destination="ewv-jB-k23" id="M3h-Cy-3xa"/>
+                        <outlet property="contentTopConstraint" destination="trw-Mx-DKr" id="4AU-BO-RJe"/>
                         <outlet property="introTextLabel" destination="hWD-fC-ekC" id="ncL-Od-k8I"/>
                         <outlet property="languageSelectionView" destination="YS1-gh-Pf1" id="5Zt-bD-u3z"/>
                         <outlet property="logoLabel" destination="VwY-4g-jHC" id="RCa-3g-wSt"/>
+                        <outlet property="topConstraint" destination="aG2-yf-blj" id="4Ea-NY-7Wu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eGb-Ua-VUj" userLabel="First Responder" sceneMemberID="firstResponder"/>

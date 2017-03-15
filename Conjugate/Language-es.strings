@@ -22,3 +22,5 @@
 "mobile.ios.conjugate.tenseGroup.indicative" = "Indicativo";
 "mobile.ios.conjugate.tenseGroup.subjunctive" = "Subjuntivo";
 "mobile.ios.conjugate.tenseGroup.imperative" = "Imperativo";
+
+"mobile.ios.conjugate.verb.welcome" = "acoger";

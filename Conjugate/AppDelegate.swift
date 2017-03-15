@@ -79,6 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         router = Router(viewController: tabBarController)
         tabBarController.router = router
+        
+        tabBarController.setupTabs()
     }
 }
 
