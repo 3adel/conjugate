@@ -81,7 +81,7 @@ extension Verb {
             }
         }
         
-        self.init(name: name, tenses: tenses, nominalForms: nominalForms)
+        self.init(name: name, language: language, tenses: tenses, nominalForms: nominalForms)
     }
 }
 

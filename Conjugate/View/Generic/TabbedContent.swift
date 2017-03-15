@@ -6,6 +6,12 @@ import UIKit
 
 protocol TabbedContentDelegate: class {
     func tabbedViewDidScroll(_ scrollView: UIScrollView)
+    func tabbedViewDidScroll(toTabAt index: Int)
+}
+
+extension TabbedContentDelegate {
+    func tabbedViewDidScroll(_ scrollView: UIScrollView) {}
+    func tabbedViewDidScroll(toTabAt index: Int) {}
 }
 
 class TabbedContentViewController: UIViewController {
@@ -19,6 +25,12 @@ class TabbedContentViewController: UIViewController {
     
     weak var menuController: TabController?
     weak var delegate: TabbedContentDelegate?
+    
+    var isScrollEnabled = true {
+        didSet {
+            tabbedContentView.scrollView.isScrollEnabled = isScrollEnabled
+        }
+    }
     
     var hasFullSizedContent: Bool {
         get {
@@ -49,6 +61,7 @@ extension TabbedContentViewController: TabController {
     
     func indexChanged(to index: Int) {
         menuController?.select(index: index)
+        delegate?.tabbedViewDidScroll(toTabAt: index)
     }
 }
 

@@ -51,6 +51,9 @@
 		24B9D9A21DAED525004EE256 /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9A11DAED525004EE256 /* Verb.swift */; };
 		24B9D9A41DAED9D5004EE256 /* ModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9A31DAED9D5004EE256 /* ModelFactory.swift */; };
 		24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AF1DAEF621004EE256 /* Extensions.swift */; };
+		24C1FFA41E73876300B4484E /* SavedVerbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24C1FFA31E73876300B4484E /* SavedVerbCell.xib */; };
+		24C1FFB91E7387AA00B4484E /* SavedVerbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C1FFB81E7387AA00B4484E /* SavedVerbCell.swift */; };
+		24C1FFBB1E73892200B4484E /* SavedVerbDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C1FFBA1E73892200B4484E /* SavedVerbDataSource.swift */; };
 		24D4FAD51E337506004FBE62 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D4FAD41E337506004FBE62 /* Translation.swift */; };
 		24E6F4011DB3EBAC00550C8E /* TextSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E6F4001DB3EBAC00550C8E /* TextSpeaker.swift */; };
 		24EAB0F81E62E77800FD93E3 /* TenseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EAB0F51E62E77800FD93E3 /* TenseTableViewCell.xib */; };
@@ -320,6 +323,9 @@
 		24B9D9A11DAED525004EE256 /* Verb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
 		24B9D9A31DAED9D5004EE256 /* ModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFactory.swift; sourceTree = "<group>"; };
 		24B9D9AF1DAEF621004EE256 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		24C1FFA31E73876300B4484E /* SavedVerbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavedVerbCell.xib; sourceTree = "<group>"; };
+		24C1FFB81E7387AA00B4484E /* SavedVerbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedVerbCell.swift; sourceTree = "<group>"; };
+		24C1FFBA1E73892200B4484E /* SavedVerbDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedVerbDataSource.swift; sourceTree = "<group>"; };
 		24D4FAD41E337506004FBE62 /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		24E6F4001DB3EBAC00550C8E /* TextSpeaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSpeaker.swift; sourceTree = "<group>"; };
 		24EAB0F51E62E77800FD93E3 /* TenseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TenseTableViewCell.xib; sourceTree = "<group>"; };
@@ -510,6 +516,8 @@
 				24EAB0F71E62E77800FD93E3 /* TranslationCell.xib */,
 				2451D45F1E62E9330009F6F4 /* SettingsCell.swift */,
 				2451D47C1E632BCF0009F6F4 /* LanguageCell.swift */,
+				24C1FFB81E7387AA00B4484E /* SavedVerbCell.swift */,
+				24C1FFA31E73876300B4484E /* SavedVerbCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -567,6 +575,7 @@
 			children = (
 				24F96BB71E3A542E00EC27A0 /* TenseTableViewDataSource.swift */,
 				9F66A0B31E2BD7CD007646A5 /* TranslationDataSource.swift */,
+				24C1FFBA1E73892200B4484E /* SavedVerbDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -872,6 +881,7 @@
 				F56F08CE1CFA61DB008BD25B /* LaunchScreen.storyboard in Resources */,
 				F56F08CB1CFA61DB008BD25B /* Assets.xcassets in Resources */,
 				247A87851E6F5B3400E5005C /* Language-es.strings in Resources */,
+				24C1FFA41E73876300B4484E /* SavedVerbCell.xib in Resources */,
 				F56F08C91CFA61DB008BD25B /* Main.storyboard in Resources */,
 				247A87701E6F5AFE00E5005C /* Language-de.strings in Resources */,
 				24EAB0FA1E62E77800FD93E3 /* TranslationCell.xib in Resources */,
@@ -905,7 +915,9 @@
 				24F96B7D1E39FAB000EC27A0 /* QuickAction.swift in Sources */,
 				2451D4751E63104E0009F6F4 /* Config.swift in Sources */,
 				245D33421DBBA81400E5352F /* Router.swift in Sources */,
+				24C1FFB91E7387AA00B4484E /* SavedVerbCell.swift in Sources */,
 				2451D4771E63113F0009F6F4 /* AppDependencyManager.swift in Sources */,
+				24C1FFBB1E73892200B4484E /* SavedVerbDataSource.swift in Sources */,
 				24D4FAD51E337506004FBE62 /* Translation.swift in Sources */,
 				24F96BAA1E3A535900EC27A0 /* ConjugateViewController.swift in Sources */,
 				24EAB0F91E62E77800FD93E3 /* TranslationCell.swift in Sources */,

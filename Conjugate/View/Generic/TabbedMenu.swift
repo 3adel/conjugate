@@ -16,7 +16,19 @@ protocol TabController: class {
 public class TabbedMenuViewController: UIViewController {
     struct Tab {
         let title: String
+        let image: UIImage?
+        let imageSize: CGSize?
         let view: UIView?
+        
+        init(title: String,
+             image: UIImage? = nil,
+             imageSize: CGSize? = nil,
+             view: UIView? = nil) {
+            self.title = title
+            self.image = image
+            self.imageSize = imageSize
+            self.view = view
+        }
     }
     
     fileprivate let tabbedMenuView: TabbedMenuView
@@ -60,7 +72,8 @@ public class TabbedMenuView: UIView {
     public struct Theme {
         let backgroundColor: UIColor
         let textColor: UIColor
-        let selectedColor: UIColor
+        let selectedColors: [UIColor]
+        let selectedColor: UIColor?
         let font: UIFont
         let buttonPadding: CGFloat
         let borderColor: UIColor
@@ -76,7 +89,7 @@ public class TabbedMenuView: UIView {
         
         init(backgroundColor: UIColor = Theme.defaultTheme.backgroundColor,
              textColor: UIColor = Theme.defaultTheme.textColor,
-             selectedColor: UIColor = Theme.defaultTheme.selectedColor,
+             selectedColor: UIColor = Theme.defaultTheme.selectedColor!,
              font: UIFont = Theme.defaultTheme.font,
              buttonPadding: CGFloat = Theme.defaultTheme.buttonPadding,
              borderColor: UIColor = Theme.defaultTheme.borderColor) {
@@ -84,9 +97,27 @@ public class TabbedMenuView: UIView {
             self.backgroundColor = backgroundColor
             self.textColor = textColor
             self.selectedColor = selectedColor
+            self.selectedColors = [selectedColor]
             self.font = font
             self.buttonPadding = buttonPadding
             self.borderColor = borderColor
+            
+        }
+        
+        init(backgroundColor: UIColor = Theme.defaultTheme.backgroundColor,
+             textColor: UIColor = Theme.defaultTheme.textColor,
+             selectedColors: [UIColor],
+             font: UIFont = Theme.defaultTheme.font,
+             buttonPadding: CGFloat = Theme.defaultTheme.buttonPadding,
+             borderColor: UIColor = Theme.defaultTheme.borderColor) {
+            
+            self.backgroundColor = backgroundColor
+            self.textColor = textColor
+            self.selectedColors = selectedColors
+            self.font = font
+            self.buttonPadding = buttonPadding
+            self.borderColor = borderColor
+            self.selectedColor = nil
         }
     }
     
@@ -205,7 +236,7 @@ public class TabbedMenuView: UIView {
     }
     
     fileprivate func setup(tab: Tab) {
-        let button = makeTabButton(withTitle: tab.title)
+        let button = makeTabButton(for: tab)
         
         var buttonFrame = button.frame
         
@@ -226,7 +257,7 @@ public class TabbedMenuView: UIView {
         }
 
         var selectedButton = buttons[newIndex]
-        updateUI(for: &selectedButton, with: theme, selected: true)
+        updateUI(for: &selectedButton, with: theme, index: newIndex, selected: true)
     }
     
     fileprivate func moveBottomLine(from fromButton: UIButton, to toButton: UIButton, animate: Bool) {
@@ -245,19 +276,29 @@ public class TabbedMenuView: UIView {
         var newFrame = selectedBottomLine.frame
         
         let linePadding: CGFloat = 5
-        newFrame.size.width = button.textWidth + linePadding * 2
+        newFrame.size.width = button.frame.width + linePadding * 2
         newFrame.centerX = button.frame.origin.x + button.frame.centerX
         
         return newFrame
     }
     
-    fileprivate func makeTabButton(withTitle title: String) -> UIButton {
+    fileprivate func makeTabButton(for tab: Tab) -> UIButton {
         var button = UIButton(type: .custom)
         
-        button.setTitle(title, for: .normal)
+        button.setTitle(tab.title, for: .normal)
+        
+        let imageRightPadding: CGFloat = 10
+        
+        if let image = tab.image,
+            let size = tab.imageSize {
+            button.setImage(image.byScaling(to: size), for: .normal)
+            button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: imageRightPadding)
+        }
         updateUI(for: &button, with: theme, selected: false)
         
-        let width = title.widthWithConstrainedHeight(height: frame.height, font: theme.font)
+        let imageWidth = tab.imageSize != nil ? (tab.imageSize?.width ?? 0) + imageRightPadding : 0
+        
+        let width = tab.title.widthWithConstrainedHeight(height: frame.height, font: theme.font) + imageWidth
         let buttonFrame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: frame.height))
         button.frame = buttonFrame
         
@@ -266,11 +307,14 @@ public class TabbedMenuView: UIView {
         return button
     }
     
-    fileprivate func updateUI(for button: inout UIButton, with theme: Theme, selected: Bool) {
-        let titleColor = selected ? theme.selectedColor : theme.textColor
+    fileprivate func updateUI(for button: inout UIButton, with theme: Theme, index: Int = 0, selected: Bool) {
+        let selectedColor = theme.selectedColor ?? theme.selectedColors[index]
+        
+        let titleColor = selected ? selectedColor : theme.textColor
         
         button.setTitleColor(titleColor, for: .normal)
         button.titleLabel?.font = theme.font
+        selectedBottomLine.backgroundColor = selectedColor
     }
     
     @objc fileprivate func buttonSelected(_ button: UIButton) {
