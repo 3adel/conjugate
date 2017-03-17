@@ -7,8 +7,8 @@
 */
 
 
-"mobile.ios.conjugate.error.verbNotFound" = "Verb is not found. Check spelling please!";
-"mobile.ios.conjugate.error.translationNotFound" = "The translation for the verb could not be found";
+"mobile.ios.conjugate.error.verbNotFound" = "Verb not found. Check spelling please!";
+"mobile.ios.conjugate.error.translationNotFound" = "Verb not found. Check spelling please!";
 "mobile.ios.conjugate.error.conjugationNotFound" = "The verb could not be conjugated";
 "mobile.ios.conjugate.error.serverError" = "There was a problem with the server. Please try again";
 "mobile.ios.conjugate.error.genericError" = "There was an unknown problem. Please try again";
@@ -34,6 +34,6 @@
 "mobile.ios.conjugate.languageSelection.apply" = "Apply";
 "mobile.ios.conjugate.languageSelection.continue" = "Continue";
 
-"mobile.ios.conjugate.onboarding.description" = "Please select ther language you want to conjugate in";
+"mobile.ios.conjugate.onboarding.description" = "Please select the conjugation language";
 
 
