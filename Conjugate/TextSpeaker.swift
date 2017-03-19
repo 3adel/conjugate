@@ -5,7 +5,7 @@
 import Foundation
 import AVFoundation
 
-protocol TextSpeakerDelegate {
+protocol TextSpeakerDelegate: class {
     func speakerDidStartPlayback(for text: String)
     func speakerDidFinishPlayback(for text: String)
 }
@@ -13,7 +13,7 @@ protocol TextSpeakerDelegate {
 class TextSpeaker: NSObject {
     var language: Language
     
-    var delegate: TextSpeakerDelegate?
+    weak var delegate: TextSpeakerDelegate?
     
     let synthesizer = AVSpeechSynthesizer()
     
