@@ -77,6 +77,7 @@ public class TabbedMenuView: UIView {
         let font: UIFont
         let buttonPadding: CGFloat
         let borderColor: UIColor
+        let isFullWidth: Bool
         
         static let defaultTheme: Theme = Theme(
             backgroundColor: .white,
@@ -84,7 +85,8 @@ public class TabbedMenuView: UIView {
             selectedColor: .blue,
             font: UIFont.systemFont(ofSize: 14),
             buttonPadding: 30,
-            borderColor: UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0)
+            borderColor: UIColor(red: 210/255.0, green: 210/255.0, blue: 210/255.0, alpha: 1.0),
+            isFullWidth: false
         )
         
         init(backgroundColor: UIColor = Theme.defaultTheme.backgroundColor,
@@ -92,7 +94,8 @@ public class TabbedMenuView: UIView {
              selectedColor: UIColor = Theme.defaultTheme.selectedColor!,
              font: UIFont = Theme.defaultTheme.font,
              buttonPadding: CGFloat = Theme.defaultTheme.buttonPadding,
-             borderColor: UIColor = Theme.defaultTheme.borderColor) {
+             borderColor: UIColor = Theme.defaultTheme.borderColor,
+             isFullWidth: Bool = Theme.defaultTheme.isFullWidth) {
             
             self.backgroundColor = backgroundColor
             self.textColor = textColor
@@ -101,6 +104,7 @@ public class TabbedMenuView: UIView {
             self.font = font
             self.buttonPadding = buttonPadding
             self.borderColor = borderColor
+            self.isFullWidth = isFullWidth
             
         }
         
@@ -109,7 +113,8 @@ public class TabbedMenuView: UIView {
              selectedColors: [UIColor],
              font: UIFont = Theme.defaultTheme.font,
              buttonPadding: CGFloat = Theme.defaultTheme.buttonPadding,
-             borderColor: UIColor = Theme.defaultTheme.borderColor) {
+             borderColor: UIColor = Theme.defaultTheme.borderColor,
+             isFullWidth: Bool = Theme.defaultTheme.isFullWidth) {
             
             self.backgroundColor = backgroundColor
             self.textColor = textColor
@@ -118,6 +123,7 @@ public class TabbedMenuView: UIView {
             self.buttonPadding = buttonPadding
             self.borderColor = borderColor
             self.selectedColor = nil
+            self.isFullWidth = isFullWidth
         }
     }
     
@@ -165,8 +171,8 @@ public class TabbedMenuView: UIView {
             $0.frame = frame
         }
         
-        if contentWidth < frame.width && !tabs.isEmpty {
-            adjustButtonSizes()
+        if theme.isFullWidth {
+            adjustButtonSizesForFullWidth()
         }
         
         selectedBottomLine.frame.origin.y = scrollView.frame.height - selectedBottomLine.frame.height
@@ -220,9 +226,15 @@ public class TabbedMenuView: UIView {
 
         updateSelectedButtons(newIndex: selectedIndex)
         moveBottomLine(from: buttons[selectedIndex], to: buttons[selectedIndex], animate: false)
+        
+        if theme.isFullWidth {
+            adjustButtonSizesForFullWidth()
+        }
     }
     
-    fileprivate func adjustButtonSizes() {
+    fileprivate func adjustButtonSizesForFullWidth() {
+        guard contentWidth < frame.width && !tabs.isEmpty else { return }
+        
         let buttonWidth = frame.width / CGFloat(buttons.count)
         buttons.forEach { button in
             guard let index = buttons.index(of: button) else { return }
