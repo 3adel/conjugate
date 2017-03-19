@@ -83,8 +83,8 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     
     func reset() {
-        viewModel = ConjugateViewModel.empty
         verb = nil
+        searchText = ""
         getInitialData()
     }
     
