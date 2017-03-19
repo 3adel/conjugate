@@ -130,10 +130,10 @@ class SettingsPresenter: SettingsPresenterType {
         let languageConfig = appDependencyManager.languageConfig
         
         let conjugationLanguage = languageConfig.selectedConjugationLanguage.languageCode.uppercased()
-        let conjugationLanguageImage = languageConfig.selectedConjugationLanguage.countryCode.lowercased()+"_flag"
+        let conjugationLanguageImage = languageConfig.selectedConjugationLanguage.flagImageName
         
         let translationLanguage = languageConfig.selectedTranslationLanguage.languageCode.uppercased()
-        let translationLanguageImage = languageConfig.selectedTranslationLanguage.countryCode.lowercased()+"_flag"
+        let translationLanguageImage = languageConfig.selectedTranslationLanguage.flagImageName
         
         let conjugationViewModel = SettingsLanguageViewModel(title: section.cells[0].cellTitle,
                                                              languageName: conjugationLanguage,
