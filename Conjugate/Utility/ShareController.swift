@@ -21,7 +21,7 @@ class ShareController {
     
     func shareApp(sourceView: View, sourceRect: CGRect? = nil) {
         let textToShare = "Easy German verbs conjugation with konj.me. Download for iOS now at "
-        let urlStringToShare = "http://www.konj.me"
+        let urlStringToShare = "https://goo.gl/0iUTJI"
         
         share(text: textToShare, url: urlStringToShare, sourceView: sourceView, sourceRect: sourceRect)
     }
