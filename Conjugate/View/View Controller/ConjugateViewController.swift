@@ -15,7 +15,11 @@ class ConjugateViewController: UIViewController {
     var loadingView: LoadingView?
     var alertHandler: AlertHandler?
     
-    var presenter: ConjugatePresenterType?
+    var presenter: ConjugatePresenterType? {
+        didSet {
+            verbDetailViewController?.presenter = presenter
+        }
+    }
     var verbDetailViewController: VerbDetailViewController?
     
     var searchTimer: Timer?
@@ -32,16 +36,6 @@ class ConjugateViewController: UIViewController {
         setupUI()
         
         presenter?.getInitialData()
-        
-        let launchChecker = AppLaunchChecker()
-        if launchChecker.isFirstInstall {
-            let welcomeVerb = "begrüßen"
-            searchField.text = welcomeVerb
-            searchText = welcomeVerb
-            search()
-            
-            launchChecker.appLaunched()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

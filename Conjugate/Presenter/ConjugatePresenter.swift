@@ -45,6 +45,8 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     var searchTimer: Timer?
     let kMinNumbOfCharactersForSearch = 2
     
+    let languageConfig: LanguageConfig
+    
     var targetLanguage: Language
     var interfaceLanguage: Language
     
@@ -54,6 +56,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
         
         targetLanguage = appDependencyManager.languageConfig.selectedConjugationLanguage
         interfaceLanguage = appDependencyManager.languageConfig.selectedTranslationLanguage
+        languageConfig = appDependencyManager.languageConfig
         
         searchLanguageType = .conjugationLanguage
         
@@ -80,8 +83,8 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     
     func reset() {
-        viewModel = ConjugateViewModel.empty
         verb = nil
+        searchText = ""
         getInitialData()
     }
     
@@ -181,6 +184,15 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     
     func getInitialData() {
+        let launchChecker = AppLaunchChecker()
+        if launchChecker.isFirstInstall {
+            let welcomeVerb = languageConfig.localizedString(withKey: "mobile.ios.conjugate.verb.welcome", languageType: .conjugationLanguage)
+            verbToBeSearched = welcomeVerb
+            launchChecker.appDidLaunch()
+            
+            return
+        }
+        
         if let verbString = verbToBeSearched {
             searchVerbToBeSearched(verbString)
         } else {

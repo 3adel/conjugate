@@ -6,6 +6,12 @@ import UIKit
 
 protocol TabbedContentDelegate: class {
     func tabbedViewDidScroll(_ scrollView: UIScrollView)
+    func tabbedViewDidScroll(toTabAt index: Int)
+}
+
+extension TabbedContentDelegate {
+    func tabbedViewDidScroll(_ scrollView: UIScrollView) {}
+    func tabbedViewDidScroll(toTabAt index: Int) {}
 }
 
 class TabbedContentViewController: UIViewController {
@@ -19,6 +25,12 @@ class TabbedContentViewController: UIViewController {
     
     weak var menuController: TabController?
     weak var delegate: TabbedContentDelegate?
+    
+    var isScrollEnabled = true {
+        didSet {
+            tabbedContentView.scrollView.isScrollEnabled = isScrollEnabled
+        }
+    }
     
     var hasFullSizedContent: Bool {
         get {
@@ -40,15 +52,26 @@ class TabbedContentViewController: UIViewController {
     override public func loadView() {
         view = tabbedContentView
     }
+    
+    public func changeIndex(to index: Int, animated: Bool = true) {
+        tabbedContentView.select(index: index)
+        indexChanged(to: index, animated: animated)
+    }
 }
 
 extension TabbedContentViewController: TabController {
-    func select(index: Int) {
-        tabbedContentView.select(index: index)
+    func select(index: Int, animated: Bool) {
+        tabbedContentView.select(index: index, animated: animated)
+        delegate?.tabbedViewDidScroll(toTabAt: index)
     }
     
     func indexChanged(to index: Int) {
-        menuController?.select(index: index)
+        indexChanged(to: index, animated: true)
+    }
+    
+    func indexChanged(to index: Int, animated: Bool) {
+        menuController?.select(index: index, animated: animated)
+        delegate?.tabbedViewDidScroll(toTabAt: index)
     }
 }
 
@@ -152,8 +175,8 @@ class TabbedContentView: UIView {
         scrollView.addSubview(containerView)
     }
     
-    func select(index: Int) {
-        scrollView.setContentOffset(CGPoint(x: CGFloat(index) * frame.width, y: 0), animated: true)
+    func select(index: Int, animated: Bool = true) {
+        scrollView.setContentOffset(CGPoint(x: CGFloat(index) * frame.width, y: 0), animated: animated)
         selectedIndex = index
     }
 }

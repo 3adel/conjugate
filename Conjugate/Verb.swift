@@ -13,6 +13,14 @@ protocol DictConvertible {
 typealias Tenses = [Verb.TenseGroup: [Tense]]
 
 struct Verb {
+    enum UserDefaultsKey: String, DictionaryKey {
+        case name
+        case language
+        case translations
+        case tenses
+        case nominalForms
+    }
+    
     enum TenseGroup: String {
         case indicative
         case conditional
@@ -51,19 +59,10 @@ struct Verb {
     let tenses: Tenses
     let nominalForms: [String]
     
-    // User defaults keys as static constants are deprecated
     static let nameKey = "name"
     static let translationsKey = "translations"
     static let tensesKey = "tenses"
     static let nominalFormKey = "nomialForm"
-    
-    enum UserDefaultKey: String, DictionaryKey {
-        case name
-        case translation
-        case tenses
-        case nominalForm
-        case language
-    }
     
     init(name: String, language: Language, translations: [String]? = nil, tenses: Tenses = Tenses(), nominalForms: [String] = []) {
         self.name = name
@@ -84,9 +83,9 @@ extension Verb: DictConvertible {
     func asDict() -> JSONDictionary {
         var dict = JSONDictionary()
         
-        dict[UserDefaultKey.name.key] = name
-        dict[UserDefaultKey.nominalForm.key] = nominalForms
-        dict[UserDefaultKey.translation.key] = translations
+        dict[UserDefaultsKey.name.key] = name
+        dict[UserDefaultsKey.nominalForms.key] = nominalForms
+        dict[UserDefaultsKey.translations.key] = translations
         
         var tensesArray = [String: JSONArray]()
         
@@ -96,16 +95,16 @@ extension Verb: DictConvertible {
             }
         }
         
-        dict[UserDefaultKey.tenses.key] = tensesArray
-        dict[UserDefaultKey.language.key] = language.localeIdentifier
+        dict[UserDefaultsKey.tenses.key] = tensesArray
+        dict[UserDefaultsKey.language.key] = language.localeIdentifier
         
         return dict
     }
 
     static func from(dict: JSONDictionary) -> Verb? {
-        guard let name = dict[UserDefaultKey.name.key] as? String ?? dict[Verb.nameKey] as? String,
-            let translations = dict[UserDefaultKey.translation.key] as? [String]? ?? dict[Verb.translationsKey] as? [String]?,
-        let tenseArray = dict[UserDefaultKey.tenses.key] as? [String: JSONArray] ?? dict[Verb.tensesKey] as? [String: JSONArray]
+        guard let name = dict[UserDefaultsKey.name.key] as? String ?? dict[Verb.nameKey] as? String,
+            let translations = (dict[UserDefaultsKey.translations.key] as? [String]) ?? dict[Verb.translationsKey] as? [String],
+        let tenseArray = dict[UserDefaultsKey.tenses.key] as? [String: JSONArray] ?? dict[Verb.tensesKey] as? [String: JSONArray]
             else { return nil }
         
         var tenses = Tenses()
@@ -118,11 +117,11 @@ extension Verb: DictConvertible {
             }
         }
         
-        let nominalForms = (dict[UserDefaultKey.nominalForm.key] as? [String] ?? dict[Verb.nominalFormKey] as? [String]) ?? [String]()
+        let nominalForms = dict[UserDefaultsKey.nominalForms.key] as? [String] ?? (dict[Verb.nominalFormKey] as? [String] ?? [String]())
         
-        let languageIdentifier = dict[UserDefaultKey.language.key] as? String ?? ""
+        let languageIdentifier = dict[UserDefaultsKey.language.key] as? String ?? ""
         
-        // Language was introduced in v1.2. Before this the only available conjugation language was German. So if the language doesn't exist in the storage, this verb was German
+        //Language property was introduced with v1.2 together with multi-lingual conjugation. If this doesn't exist, it the verb should be in German as that was the only language supported before that
         let language = Language(localeIdentifier: languageIdentifier) ?? .german
         
         return self.init(name: name, language: language, translations: translations, tenses: tenses, nominalForms: nominalForms)

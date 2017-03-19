@@ -23,7 +23,7 @@ class VerbDetailViewController: UIViewController {
     
     var loadingView: LoadingView?
     
-    var presenter: ConjugatePresenterType!
+    var presenter: ConjugatePresenterType?
     var viewModel = ConjugateViewModel.empty
     
     var alertHandler: AlertHandler?
@@ -42,7 +42,11 @@ class VerbDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.updateViewModel()
+        presenter?.updateViewModel()
+        
+        let showNavBar = parent is UINavigationController ?? false
+        
+        navigationController?.isNavigationBarHidden = !showNavBar
     }
     
     override func setupUI() {
@@ -100,14 +104,14 @@ class VerbDetailViewController: UIViewController {
 //Actions
 extension VerbDetailViewController {
     @IBAction func saveButtonPressed(_ sender: UIButton) {
-        presenter.toggleSavingVerb()
+        presenter?.toggleSavingVerb()
     }
     
     @IBAction func playAudio(_ sender: UIButton) {
-        presenter.playAudioForInfinitveVerb()
+        presenter?.playAudioForInfinitveVerb()
     }
     @IBAction func shareButtonPressed(_ sender: UIButton) {
-        presenter.shareVerb(sourceView: sender)
+        presenter?.shareVerb(sourceView: sender)
     }
 }
 
@@ -170,7 +174,7 @@ extension VerbDetailViewController: ConjugateView {
             
             let tabIndex = viewModel.tenseTabs.index(of: tenseViewModel) ?? 0
             dataSource.onRowDidSelect = { [weak self] row, section in
-                self?.presenter.tappedForm(inTab: tabIndex, atTense: section, at: row)
+                self?.presenter?.tappedForm(inTab: tabIndex, atTense: section, at: row)
             }
             
             dataSource.viewModel = tenseViewModel
@@ -211,11 +215,11 @@ extension VerbDetailViewController: ConjugateView {
         let source = getSource(inTab: tab, atTense: tense, atForm: index)
         
         let copyAction: ()->() = {
-            self.presenter.copyForm(inTab: tab, atTense: tense, at: index)
+            self.presenter?.copyForm(inTab: tab, atTense: tense, at: index)
         }
         
         let shareAction: ()->() = {
-            self.presenter.shareForm(inTab: tab, atTense: tense, at: index, sourceView: source.sourceView, sourceRect: source.sourceRect)
+            self.presenter?.shareForm(inTab: tab, atTense: tense, at: index, sourceView: source.sourceView, sourceRect: source.sourceRect)
         }
         
         let actions = [copyAction, shareAction]

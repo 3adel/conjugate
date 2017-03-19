@@ -38,12 +38,15 @@ class LanguageSelectionPresenter: LanguageSelectionPresenterType {
         let languageViewModels = languages.map(makeLanguageViewModel)
         
         let isApplyButtonEnabled = newlySelectedLanguage != selectedLanguage
-        let applyButtonBackgroundColor: (CGFloat, CGFloat, CGFloat) = isApplyButtonEnabled ? (150, 200, 36) : (151, 151, 151)
+        let applyButtonBackgroundColor: (CGFloat, CGFloat, CGFloat) = isApplyButtonEnabled ? (102, 176, 76) : (151, 151, 151)
+        
+        let applyButtonTitle = LocalizedString("mobile.ios.conjugate.languageSelection.apply")
         
         viewModel = LanguageSelectionViewModel(title: title,
                                                languages: languageViewModels,
                                                applyButtonBackgroundColor: applyButtonBackgroundColor,
-                                               applyButtonIsEnabled: isApplyButtonEnabled)
+                                               applyButtonIsEnabled: isApplyButtonEnabled,
+                                               applyButtonTitle: applyButtonTitle)
         
         view.render(with: viewModel)
     }
@@ -69,7 +72,7 @@ class LanguageSelectionPresenter: LanguageSelectionPresenterType {
 extension LanguageSelectionPresenter {
     func makeLanguageViewModel(from language: Language) -> LanguageViewModel {
         let name = language.name
-        let imageName = language.flagImageName
+        let imageName = language.countryCode.lowercased() + "_flag"
         let isSelected = newlySelectedLanguage == language
         
         return LanguageViewModel(title: name,

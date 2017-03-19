@@ -199,16 +199,11 @@ public enum Endpoint: String {
             
             return ConjugateError.serverError
             
-
-            
         } else if apiError == .networkUnavailable {
             
             Answers.logCustomEvent(withName: "Error-network-unavailable",customAttributes: ["Error": apiError.localizedDescription])
             
             return ConjugateError.networkUnavailable
-            
-            
-            
         }
         
         switch (self) {

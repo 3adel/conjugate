@@ -68,6 +68,17 @@ class Router {
         }
     }
     
+    static func makeOnboardingView() -> OnboardingLanguageSelectionViewController? {
+        guard let vc = UIStoryboard.main.instantiateViewController(withIdentifier: OnboardingLanguageSelectionViewController.Identifier) as? OnboardingLanguageSelectionViewController,
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
+        
+        let presenter = OnboardingPresenter(view: vc, appDependencyManager: .shared, languages: AppDependencyManager.shared.languageConfig.availableConjugationLanguages, delegate: appDelegate)
+        
+        vc.presenter = presenter
+        
+        return vc
+    }
+    
     func openSearch(withVerb verb: String) {
         let tabBarController = rootViewController as? TabBarController
         tabBarController?.selectedIndex = 0

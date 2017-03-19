@@ -78,7 +78,7 @@ class DataStore {
                     translations.append(translation)
                 }
                 
-                let newVerb = Verb(name: verb.name, language: fromLanguage, translations: translations, tenses: verb.tenses, nominalForms: verb.nominalForms)
+                let newVerb = Verb(name: verb.name, language: verb.language, translations: translations, tenses: verb.tenses, nominalForms: verb.nominalForms)
                 completion(.success(newVerb))
             }
         }

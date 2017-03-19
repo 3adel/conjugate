@@ -244,3 +244,103 @@ public func isRetina() -> Bool {
     return UIScreen.main.scale >= 2.0
 }
 
+extension UIImage {
+    
+    func byScaling(to newSize: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0)
+        draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+}
+
+/**
+ UINavigationBar extension for filling empty status bar background
+ */
+
+public extension UINavigationBar {
+    private struct AssociatedKeys {
+        static var backgroundViewName = "conjugate_NavigationBarBackground"
+    }
+    
+    var backgroundView: UIView? {
+        get {
+            return objc_getAssociatedObject(self,
+                                            &AssociatedKeys.backgroundViewName) as? UIView
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self,
+                                     &AssociatedKeys.backgroundViewName,
+                                     newValue,
+                                     .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+    func setBackground(color: UIColor, includingStatusBar: Bool = true) {
+        backgroundView?.backgroundColor = UIColor.clear
+        backgroundColor = UIColor.clear
+        barTintColor = UIColor.clear
+        
+        if includingStatusBar {
+            backgroundView?.isHidden = false
+            if backgroundView == nil {
+                setupBackgroundView()
+            }
+            backgroundView?.backgroundColor = color
+        } else {
+            backgroundView?.isHidden = true
+            backgroundColor = color
+        }
+    }
+    
+    private func setupBackgroundView() {
+        var backgroundFrame = bounds
+        backgroundFrame.origin.y = -20
+        backgroundFrame.size.height = 64
+        
+        backgroundView = UIView(frame: backgroundFrame)
+        backgroundView?.isUserInteractionEnabled = false
+        
+        insertSubview(backgroundView!, at: 0)
+    }
+}
+
+public extension UIViewController {
+    private struct AssociatedKeys {
+        static var statusBarBackgroundView = "conjugate_StatusBarBackground"
+    }
+    
+    var statusBarBackgroundView: UIView? {
+        get {
+            return objc_getAssociatedObject(self,
+                                            &AssociatedKeys.statusBarBackgroundView) as? UIView
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self,
+                                     &AssociatedKeys.statusBarBackgroundView,
+                                     newValue,
+                                     .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+    func setStatusBar(backgroundColor: UIColor) {
+        if statusBarBackgroundView == nil {
+            setupBackgroundView()
+        }
+        statusBarBackgroundView?.backgroundColor = backgroundColor
+    }
+    
+    private func setupBackgroundView() {
+        let backgroundFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: 20)
+        
+        statusBarBackgroundView = UIView(frame: backgroundFrame)
+        statusBarBackgroundView?.isUserInteractionEnabled = false
+        
+        view.insertSubview(statusBarBackgroundView!, at: 0)
+    }
+
+}
+
