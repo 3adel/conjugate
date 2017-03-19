@@ -10,7 +10,7 @@ fileprivate typealias Tab = TabbedMenuViewController.Tab
 
 protocol TabController: class {
     func indexChanged(to index: Int)
-    func select(index: Int)
+    func select(index: Int, animated: Bool)
 }
 
 public class TabbedMenuViewController: UIViewController {
@@ -59,11 +59,11 @@ public class TabbedMenuViewController: UIViewController {
 
 extension TabbedMenuViewController: TabController {
     func indexChanged(to index: Int) {
-        contentController?.select(index: index)
+        contentController?.select(index: index, animated: true)
     }
     
-    func select(index: Int) {
-        tabbedMenuView.select(index: index)
+    func select(index: Int, animated: Bool) {
+        tabbedMenuView.select(index: index, animated: animated)
     }
 }
 
@@ -338,14 +338,14 @@ public class TabbedMenuView: UIView {
         controller.indexChanged(to: index)
     }
     
-    func select(index: Int) {
+    func select(index: Int, animated: Bool = true) {
         guard index < buttons.count else { return }
         
         updateSelectedButtons(newIndex: index, oldIndex: selectedIndex)
         let oldButton = buttons[selectedIndex]
         let newButton = buttons[index]
         
-        moveBottomLine(from: oldButton, to: newButton, animate: true)
+        moveBottomLine(from: oldButton, to: newButton, animate: animated)
         
         selectedIndex = index
         

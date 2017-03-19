@@ -21,6 +21,7 @@ class SavedVerbsViewController: UIViewController {
     
     var tabbedMenuViewController: TabbedMenuViewController?
     var tabbedContentViewController: TabbedContentViewController?
+    var selectedTab: Int = 0
     
     var tabTableViewDatasources = [SavedVerbDataSource]()
     var tabTableViews = [UITableView]()
@@ -53,8 +54,8 @@ class SavedVerbsViewController: UIViewController {
     }
     
     fileprivate func setupPreviewDelegate(with tableView: UITableView) {
-        previewDelegate = SavedVerbPreviewingDelegate(tableView: tableView, getVerbDetailView: { index in
-            return self.presenter.getVerbDetailView(at: index) as? VerbDetailViewController
+        previewDelegate = SavedVerbPreviewingDelegate(tableView: tableView, tab: selectedTab, getVerbDetailView: { index in
+            return self.presenter.getVerbDetailView(at: index, ofLanguageAt: self.selectedTab) as? VerbDetailViewController
         },
                                                       openVerbDetail: presenter.openVerbDetails)
         if let previewDelegate = previewDelegate {
@@ -93,6 +94,7 @@ extension SavedVerbsViewController: SavedVerbView {
         tabbedContentViewController?.view.isHidden = !viewModel.showVerbsList
         noVerbsLabel.isHidden = !viewModel.showNoSavedVerbMessage
         noVerbsImageView.isHidden = noVerbsLabel.isHidden
+        tabbedContentViewController?.changeIndex(to: selectedTab, animated: false)
     }
     
     func setupTabs(languageViewModels: [SavedVerbLanguageViewModel]) {
@@ -114,11 +116,15 @@ extension SavedVerbsViewController: SavedVerbView {
             let dataSource = SavedVerbDataSource(tableView: tableView, verbs: languageViewModel.savedVerbs)
             
             dataSource.onVerbDidSelect = { [weak self] index in
-                self?.presenter.openVerbDetails(at: index)
+                guard let strongSelf = self else { return }
+                
+                strongSelf.presenter.openVerbDetails(at: index, ofLanguageAt: strongSelf.selectedTab)
             }
             
             dataSource.onVerbShouldDelete = { [weak self] index in
-                self?.presenter.deleteVerb(at: index)
+                guard let strongSelf = self else { return }
+                
+                strongSelf.presenter.deleteVerb(at: index, ofLanguageAt: strongSelf.selectedTab)
             }
             
             tableView.dataSource = dataSource
@@ -170,6 +176,7 @@ extension SavedVerbsViewController: SavedVerbView {
 
 extension SavedVerbsViewController: TabbedContentDelegate {
     func tabbedViewDidScroll(toTabAt index: Int) {
+        selectedTab = index
         let tableView = tabTableViews[index]
         setupPreviewDelegate(with: tableView)
     }
@@ -178,13 +185,15 @@ extension SavedVerbsViewController: TabbedContentDelegate {
 class SavedVerbPreviewingDelegate: NSObject, UIViewControllerPreviewingDelegate {
     let tableView: UITableView
     let getVerbDetailView: (_: Int) -> VerbDetailViewController?
-    let openVerbDetail: (_: Int) -> ()
+    let openVerbDetail: (_: Int, _: Int) -> ()
+    let tab: Int
     
     var index = 0
     
     
-    init(tableView: UITableView, getVerbDetailView: @escaping (_: Int) -> VerbDetailViewController?, openVerbDetail: @escaping (_: Int) -> ()) {
+    init(tableView: UITableView, tab: Int, getVerbDetailView: @escaping (_: Int) -> VerbDetailViewController?, openVerbDetail: @escaping (_: Int, _: Int) -> ()) {
         self.tableView = tableView
+        self.tab = tab
         self.getVerbDetailView = getVerbDetailView
         self.openVerbDetail = openVerbDetail
     }
@@ -201,6 +210,6 @@ class SavedVerbPreviewingDelegate: NSObject, UIViewControllerPreviewingDelegate 
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         previewingContext.sourceRect = tableView.rectForRow(at: IndexPath(row: index, section: 0))
-        openVerbDetail(self.index)
+        openVerbDetail(self.index, tab)
     }
 }

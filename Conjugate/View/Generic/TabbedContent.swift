@@ -52,15 +52,25 @@ class TabbedContentViewController: UIViewController {
     override public func loadView() {
         view = tabbedContentView
     }
+    
+    public func changeIndex(to index: Int, animated: Bool = true) {
+        tabbedContentView.select(index: index)
+        indexChanged(to: index, animated: animated)
+    }
 }
 
 extension TabbedContentViewController: TabController {
-    func select(index: Int) {
-        tabbedContentView.select(index: index)
+    func select(index: Int, animated: Bool) {
+        tabbedContentView.select(index: index, animated: animated)
+        delegate?.tabbedViewDidScroll(toTabAt: index)
     }
     
     func indexChanged(to index: Int) {
-        menuController?.select(index: index)
+        indexChanged(to: index, animated: true)
+    }
+    
+    func indexChanged(to index: Int, animated: Bool) {
+        menuController?.select(index: index, animated: animated)
         delegate?.tabbedViewDidScroll(toTabAt: index)
     }
 }
@@ -165,8 +175,8 @@ class TabbedContentView: UIView {
         scrollView.addSubview(containerView)
     }
     
-    func select(index: Int) {
-        scrollView.setContentOffset(CGPoint(x: CGFloat(index) * frame.width, y: 0), animated: true)
+    func select(index: Int, animated: Bool = true) {
+        scrollView.setContentOffset(CGPoint(x: CGFloat(index) * frame.width, y: 0), animated: animated)
         selectedIndex = index
     }
 }

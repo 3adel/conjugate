@@ -11,10 +11,10 @@ protocol SavedVerbView: View {
 
 protocol SavedVerbPresenterType {
     func getSavedVerbs()
-    func openVerbDetails(at index: Int)
+    func openVerbDetails(at index: Int, ofLanguageAt languageIndex: Int)
     func open(verbDetailView view: ConjugateView)
-    func deleteVerb(at index: Int)
-    func getVerbDetailView(at index: Int) -> ConjugateView?
+    func deleteVerb(at index: Int, ofLanguageAt languageIndex: Int)
+    func getVerbDetailView(at index: Int, ofLanguageAt languageIndex: Int) -> ConjugateView?
 }
 
 struct SavedVerbViewModel {
@@ -46,18 +46,8 @@ class SavedVerbPresenter: SavedVerbPresenterType {
     unowned let view: SavedVerbView
     
     var viewModel = SavedVerbViewModel.empty
-    var verbs = [Verb]() {
-        didSet {
-            var languages: [Language] = []
-            for verb in verbs {
-                if !languages.contains(verb.language) {
-                    languages.append(verb.language)
-                }
-            }
-            self.languages = languages
-        }
-    }
-    var languages = [Language]()
+    var languageVerbs: [Language: [Verb]] = [:]
+    var languages: [Language] = []
     
     let router: Router?
     
@@ -67,22 +57,38 @@ class SavedVerbPresenter: SavedVerbPresenterType {
     }
     
     func getSavedVerbs() {
-        verbs = storage.getSavedVerbs()
+        let verbs = storage.getSavedVerbs()
         
-        viewModel = makeViewModel(from: verbs)
+        languageVerbs = verbs.reduce([Language: [Verb]]()) { (languageVerbs, verb) in
+            var languageVerbs = languageVerbs
+            var verbsOfLanguage: [Verb] = languageVerbs[verb.language] ?? []
+            verbsOfLanguage.append(verb)
+            
+            languageVerbs[verb.language] = verbsOfLanguage
+            
+            if !languages.contains(verb.language) {
+                languages.append(verb.language)
+            }
+            
+            return languageVerbs
+        }
+        
+        viewModel = makeViewModel(from: languageVerbs, languages: languages)
         view.update(with: viewModel)
     }
     
-    func makeViewModel(from verbs: [Verb]) -> SavedVerbViewModel {
-        let languagesViewModel = makeLanguagesViewModel(from: languages, verbs: verbs)
+    func makeViewModel(from languageVerbs: [Language: [Verb]], languages: [Language]) -> SavedVerbViewModel {
+        let languagesViewModel = makeLanguagesViewModel(from: languageVerbs, languages: languages)
         
         let showNoSavedVerbMessage = languagesViewModel.isEmpty
         
         return SavedVerbViewModel(savedVerbLanguages: languagesViewModel, showNoSavedVerbMessage: showNoSavedVerbMessage, showVerbsList: !showNoSavedVerbMessage)
     }
     
-    func makeLanguagesViewModel(from languages: [Language], verbs: [Verb]) -> [SavedVerbLanguageViewModel] {
-        let languageViewModels: [SavedVerbLanguageViewModel] = languages.map { language in
+    func makeLanguagesViewModel(from languageVerbs: [Language: [Verb]], languages: [Language]) -> [SavedVerbLanguageViewModel] {
+        let languageViewModels: [SavedVerbLanguageViewModel] = languages.flatMap { language in
+            guard let verbs = languageVerbs[language] else { return nil }
+            
             let verbCellViewModels: [SavedVerbCellViewModel] = verbs.flatMap({ verb in
                 guard verb.language == language else { return nil }
                 return makeCellViewModel(from: verb)
@@ -105,22 +111,29 @@ class SavedVerbPresenter: SavedVerbPresenterType {
         return SavedVerbCellViewModel(verb: verb.name, meaning: meaningText)
     }
     
-    func openVerbDetails(at index: Int) {
-        let verb = verbs[index]
+    func openVerbDetails(at index: Int, ofLanguageAt languageIndex: Int) {
+        let language = languages[languageIndex]
+        guard let verb = languageVerbs[language]?[index] else { return }
+        
         let router = Router(view: view)
         
         router?.openDetail(of: verb)
     }
     
-    func deleteVerb(at index: Int) {
-        storage.remove(verb: verbs[index])
+    func deleteVerb(at index: Int, ofLanguageAt languageIndex: Int) {
+        let language = languages[languageIndex]
+        guard let verb = languageVerbs[language]?[index] else { return }
+        
+        storage.remove(verb: verb)
         getSavedVerbs()
         
         view.show(successMessage: LocalizedString("mobile.ios.conjugate.verbDeleted"))
     }
     
-    func getVerbDetailView(at index: Int) -> ConjugateView? {
-        let verb = verbs[index]
+    func getVerbDetailView(at index: Int, ofLanguageAt languageIndex: Int) -> ConjugateView? {
+        let language = languages[languageIndex]
+        guard let verb = languageVerbs[language]?[index] else { return nil }
+        
         return router?.makeDetailView(from: verb)
     }
     
