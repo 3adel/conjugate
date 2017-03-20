@@ -72,6 +72,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
         guard let language = notification.userInfo?[AppDependencyManager.NotificationKey.language.key] as? Language else { return }
         
         targetLanguage = language
+        speaker.language = language
         reset()
     }
     
