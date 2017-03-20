@@ -144,10 +144,10 @@ extension SavedVerbsViewController: SavedVerbView {
         tabbedContentViewController?.isScrollEnabled = false
         
         // If the selected tab isn't available anymore select the last tab
-        if tabs.count <= selectedTab {
+        if tabs.count <= selectedTab && !tabs.isEmpty {
             selectedTab = tabs.count - 1
         }
-        if selectedTab >= 0 {
+        if tabs.count > 0 {
             tabbedContentViewController?.changeIndex(to: selectedTab, animated: false)
         }
         
