@@ -94,7 +94,6 @@ extension SavedVerbsViewController: SavedVerbView {
         tabbedContentViewController?.view.isHidden = !viewModel.showVerbsList
         noVerbsLabel.isHidden = !viewModel.showNoSavedVerbMessage
         noVerbsImageView.isHidden = noVerbsLabel.isHidden
-        tabbedContentViewController?.changeIndex(to: selectedTab, animated: false)
     }
     
     func setupTabs(languageViewModels: [SavedVerbLanguageViewModel]) {
@@ -144,11 +143,15 @@ extension SavedVerbsViewController: SavedVerbView {
         tabbedContentViewController?.views = tabTableViews
         tabbedContentViewController?.isScrollEnabled = false
         
-//        if tabs.count <= 1 {
-//            menuHeightConstraint.constant = 0
-//        } else {
-            menuHeightConstraint.constant = 44
-//        }
+        // If the selected tab isn't available anymore select the last tab
+        if tabs.count <= selectedTab {
+            selectedTab = tabs.count - 1
+        }
+        if selectedTab >= 0 {
+            tabbedContentViewController?.changeIndex(to: selectedTab, animated: false)
+        }
+        
+        menuHeightConstraint.constant = 44
     }
     
     func setupTabTheme(with languageViewModels: [SavedVerbLanguageViewModel]) {
@@ -177,6 +180,8 @@ extension SavedVerbsViewController: SavedVerbView {
 extension SavedVerbsViewController: TabbedContentDelegate {
     func tabbedViewDidScroll(toTabAt index: Int) {
         selectedTab = index
+        
+        guard tabTableViews.count > index + 1 else { return }
         let tableView = tabTableViews[index]
         setupPreviewDelegate(with: tableView)
     }
