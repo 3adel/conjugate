@@ -54,6 +54,8 @@ class TabbedContentViewController: UIViewController {
     }
     
     public func changeIndex(to index: Int, animated: Bool = true) {
+        guard tabbedContentView.numberOfTabs > index else { return }
+        
         tabbedContentView.select(index: index)
         indexChanged(to: index, animated: animated)
     }
@@ -85,6 +87,10 @@ class TabbedContentView: UIView {
     
     var selectedIndex = 0
     var hasFullSizeContent = true
+    
+    var numberOfTabs: Int {
+        return views.count
+    }
     
     var contentWidth: CGFloat {
         get {
