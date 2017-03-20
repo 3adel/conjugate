@@ -59,6 +59,7 @@ class SavedVerbPresenter: SavedVerbPresenterType {
     func getSavedVerbs() {
         let verbs = storage.getSavedVerbs()
         
+        languages.removeAll()
         languageVerbs = verbs.reduce([Language: [Verb]]()) { (languageVerbs, verb) in
             var languageVerbs = languageVerbs
             var verbsOfLanguage: [Verb] = languageVerbs[verb.language] ?? []
