@@ -182,11 +182,11 @@ public enum Endpoint: String {
     public var endTokens: String {
         switch self {
         case .conjugator:
-            return "fromLanguageKey/verbKey"
+            return "{apiVersion}/{fromLanguageKey}/{verbKey}"
         case .finder:
-            return "fromLanguageKey/verbKey"
+            return "{apiVersion}/{fromLanguageKey}/{verbKey}"
         case .translator:
-            return "fromLanguageKey/toLanguageKey/verbKey"
+            return "{fromLanguageKey}/{toLanguageKey}/{verbKey}"
         }
     }
     
@@ -247,7 +247,7 @@ public enum Endpoint: String {
         
         if let replacements = ids {
             for (token, value) in replacements {
-                populatedEndPoint = populatedEndPoint.replacingOccurrences(of: token, with: value)
+                populatedEndPoint = populatedEndPoint.replacingOccurrences(of: "{\(token)}", with: value)
             }
         }
         

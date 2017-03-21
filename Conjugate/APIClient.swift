@@ -22,7 +22,7 @@ class APIClient: DataClient {
         
         let languageCode = language.isoCode
         
-        guard let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb.lowercased()])
+        guard let request = webClient.createRequest(endpoint: endpoint, ids: ["apiVersion": "v2", "fromLanguageKey": languageCode, "verbKey": verb.lowercased()])
             else {
                 let errorResult: AnyResult = .failure(ConjugateError.genericError)
                 completion(errorResult)
@@ -38,7 +38,7 @@ class APIClient: DataClient {
         
         let languageCode = language.isoCode
         
-        guard let request = webClient.createRequest(endpoint: endpoint, ids: ["fromLanguageKey": languageCode, "verbKey": verb.lowercased()])
+        guard let request = webClient.createRequest(endpoint: endpoint, ids: ["apiVersion": "v2", "fromLanguageKey": languageCode, "verbKey": verb.lowercased()])
             else {
                 completion(genericErrorResult)
                 return
