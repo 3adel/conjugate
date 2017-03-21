@@ -30,10 +30,10 @@ struct LanguageConfig {
     let availableConjugationLanguages: [Language]
     let availableTranslationLanguages: [Language]
     
-    static var `default`: LanguageConfig = LanguageConfig(selectedConjugationLanguage: Language.german,
-                                                        selectedTranslationLanguage: Language.english,
-                                                        availableConjugationLanguages: [Language.german, Language.spanish],
-                                                        availableTranslationLanguages: [Language.english])
+    static var `default`: LanguageConfig = LanguageConfig(selectedConjugationLanguage: .german,
+                                                        selectedTranslationLanguage: .english,
+                                                        availableConjugationLanguages: [.german, .spanish, .french],
+                                                        availableTranslationLanguages: [.english])
     
     
     init(selectedConjugationLanguage: Language,

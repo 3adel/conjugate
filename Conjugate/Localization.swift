@@ -47,7 +47,7 @@ public func replacePlaceholders(_ placeholderString: String, args: [String]) -> 
 }
 
 enum Language: String {
-    case german, english, spanish
+    case german, english, spanish, french
     
     init?(localeIdentifier: String) {
         switch localeIdentifier {
@@ -57,6 +57,8 @@ enum Language: String {
             self = .english
         case "es_ES":
             self = .spanish
+        case "fr_FR":
+            self = .french
         default:
             return nil
         }
@@ -81,6 +83,8 @@ enum Language: String {
                 return "en_GB"
             case .spanish:
                 return "es_ES"
+            case .french:
+                return "fr_FR"
             }
         }
     }
@@ -100,6 +104,8 @@ enum Language: String {
                 return "deu"
             case .spanish:
                 return "spa"
+            case .french:
+                return "fra"
             }
         }
     }
@@ -130,6 +136,8 @@ enum Language: String {
             return (0, 36, 125)
         case .spanish:
             return (204, 30, 26)
+        default:
+            return (0, 35, 149)
         }
     }
 }

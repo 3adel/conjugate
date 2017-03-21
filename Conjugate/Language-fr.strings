@@ -1,0 +1,25 @@
+/* 
+  Language-en.strings
+  Conjugate
+
+  Created by Halil Gursoy on 07/03/2017.
+  Copyright © 2017 Adel  Shehadeh. All rights reserved.
+*/
+
+"mobile.ios.conjugate.tense.present" = "Présent";
+"mobile.ios.conjugate.tense.past" = "Imparfait";
+"mobile.ios.conjugate.tense.presentPerfect" = "Passé composé";
+"mobile.ios.conjugate.tense.pastPerfect" = "Plus-que-parfait";
+"mobile.ios.conjugate.tense.future" = "Futur simple";
+"mobile.ios.conjugate.tense.future2" = "Futur antérieur";
+"mobile.ios.conjugate.tense.conditionalPast" = "Présent";
+"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Passé";
+"mobile.ios.conjugate.tense.preterite" = "Passé simple";
+"mobile.ios.conjugate.tense.preterite2" = "Passé antérieur";
+
+
+"mobile.ios.conjugate.searchPlaceholderVerbs" = "bois,ai";
+
+"mobile.ios.conjugate.tenseGroup.indicative" = "Indicatif";
+"mobile.ios.conjugate.tenseGroup.subjunctive" = "Subjonctif";
+"mobile.ios.conjugate.tenseGroup.imperative" = "Imperatif";
