@@ -30,10 +30,10 @@ struct LanguageConfig {
     let availableConjugationLanguages: [Language]
     let availableTranslationLanguages: [Language]
     
-    static var `default`: LanguageConfig = LanguageConfig(selectedConjugationLanguage: Language.german,
-                                                        selectedTranslationLanguage: Language.english,
-                                                        availableConjugationLanguages: [Language.german, Language.spanish],
-                                                        availableTranslationLanguages: [Language.english])
+    static var `default`: LanguageConfig = LanguageConfig(selectedConjugationLanguage: .german,
+                                                        selectedTranslationLanguage: .english,
+                                                        availableConjugationLanguages: [.german, .spanish, .french],
+                                                        availableTranslationLanguages: [.english])
     
     
     init(selectedConjugationLanguage: Language,
@@ -55,15 +55,12 @@ struct LanguageConfig {
             let conjugationLanguage = Language(localeIdentifier: conjugationLanguageIdentifier),
             
             let translationLanguageIdentifier = dictionary[UserDefaultKey.translationLanguage.key] as? String,
-            let translationLanguage = Language(localeIdentifier: translationLanguageIdentifier),
-            
-            let availableConjugationLanguageIdentifiers = dictionary[UserDefaultKey.availableConjugationLanguages.key] as? [String],
-            let availableTranslationLanguageIdentifiers = dictionary[UserDefaultKey.availableTranslationLanguages.key] as? [String]
+            let translationLanguage = Language(localeIdentifier: translationLanguageIdentifier)
         
             else { return nil}
         
-         let availableConjugationLanguages = availableConjugationLanguageIdentifiers.flatMap(Language.makeLanguage)
-         let availableTranslationLanguages = availableTranslationLanguageIdentifiers.flatMap(Language.makeLanguage)
+         let availableConjugationLanguages = LanguageConfig.default.availableConjugationLanguages
+         let availableTranslationLanguages = LanguageConfig.default.availableTranslationLanguages
         
         self.init(selectedConjugationLanguage: conjugationLanguage,
                   selectedTranslationLanguage: translationLanguage,
@@ -73,9 +70,8 @@ struct LanguageConfig {
     
     func dict() -> JSONDictionary {
         return [UserDefaultKey.conjugationLanguage.key: selectedConjugationLanguage.localeIdentifier,
-                UserDefaultKey.translationLanguage.key: selectedTranslationLanguage.localeIdentifier,
-                UserDefaultKey.availableConjugationLanguages.key: availableConjugationLanguages.map { language in return language.localeIdentifier},
-                UserDefaultKey.availableTranslationLanguages.key: availableTranslationLanguages.map { language in return language.localeIdentifier}]
+                UserDefaultKey.translationLanguage.key: selectedTranslationLanguage.localeIdentifier
+        ]
     }
     
     

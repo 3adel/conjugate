@@ -178,12 +178,12 @@ extension Translation: JSONDictInitable {
 
 extension String {
     var firstComponent: String? {
-        let stringComponents = components(separatedBy: "/")
-        return stringComponents.count >= 1 ? stringComponents[1] : nil
+        let stringComponents = components(separatedBy: " ")
+        return stringComponents.count >= 1 ? stringComponents[0] : nil
     }
     var secondComponent: String? {
-        let stringComponents = components(separatedBy: "/")
-        return stringComponents.count >= 3 ? stringComponents[2] : nil
+        let stringComponents = components(separatedBy: " ")
+        return stringComponents.count >= 2 ? stringComponents[1] : nil
     }
     
     func adding(components: [String], withSeperator seperator: String = "") -> String {
