@@ -32,8 +32,33 @@ struct LanguageConfig {
     
     static var `default`: LanguageConfig = LanguageConfig(selectedConjugationLanguage: .german,
                                                         selectedTranslationLanguage: .english,
-                                                        availableConjugationLanguages: [.german, .spanish, .french],
-                                                        availableTranslationLanguages: [.english])
+                                                        availableConjugationLanguages: [
+                                                            .german,
+                                                            .spanish,
+                                                            .french],
+                                                        availableTranslationLanguages: [
+                                                            .arabic,
+                                                            .bengali,
+                                                            .english,
+                                                            .french,
+                                                            .german,
+                                                            .hindi,
+                                                            .italian,
+                                                            .japanese,
+                                                            .korean,
+                                                            .malay,
+                                                            .mandarin,
+                                                            .marathi,
+                                                            .portuguese,
+                                                            .punjabi,
+                                                            .russian,
+                                                            .spanish,
+                                                            .swahili,
+                                                            .tamil,
+                                                            .telugu,
+                                                            .turkish,
+                                                            .urdu,
+                                                            .vietnamese])
     
     
     init(selectedConjugationLanguage: Language,
@@ -46,8 +71,8 @@ struct LanguageConfig {
         self.availableConjugationLanguages = availableConjugationLanguages
         self.availableTranslationLanguages = availableTranslationLanguages
         
-        conjugationLookup = loadLookupTable(for: selectedConjugationLanguage.locale) ?? [:]
-        translationLookup = loadLookupTable(for: selectedTranslationLanguage.locale) ?? [:]
+        conjugationLookup = loadLookupTable(for: selectedConjugationLanguage) ?? [:]
+        translationLookup = loadLookupTable(for: selectedTranslationLanguage) ?? [:]
     }
     
     init?(dictionary: JSONDictionary) {
@@ -98,9 +123,9 @@ struct LanguageConfig {
         }
     }
     
-    private func loadLookupTable(for locale: Locale) -> [String: String]? {
+    private func loadLookupTable(for language: Language) -> [String: String]? {
         let result = FileParser.dictWithBundle(Bundle.main,
-                                               resource: "Language-"+locale.languageCode!,
+                                               resource: "Language-"+language.languageCode,
                                                withExtension: "strings",
                                                subdirectory: ""
         )

@@ -47,21 +47,64 @@ public func replacePlaceholders(_ placeholderString: String, args: [String]) -> 
 }
 
 enum Language: String {
-    case german, english, spanish, french
+    case
+    german,
+    english,
+    spanish,
+    french,
+    mandarin,
+    hindi,
+    portuguese,
+    arabic,
+    bengali,
+    russian,
+    punjabi,
+    japanese,
+    telugu,
+    malay,
+    korean,
+    tamil,
+    marathi,
+    turkish,
+    vietnamese,
+    urdu,
+    italian,
+    persian,
+    swahili
+    
+    static var localeIdentifiers: [Language: String] {
+        get {
+            return [
+                .german: "de_DE",
+                .english: "en_GB",
+                .spanish: "es_ES",
+                .french: "fr_FR",
+                .mandarin: "zh_Hans_CN",
+                .hindi: "hi_IN",
+                .portuguese: "pt_PT",
+                .arabic: "ar_SA",
+                .bengali: "bn_BD",
+                .russian: "ru_RU",
+                .punjabi: "pa_Arab_PK",
+                .japanese: "ja_JP",
+                .telugu: "te_IN",
+                .malay: "ms_MY",
+                .korean: "ko_KR",
+                .tamil: "ta_LK",
+                .marathi: "mr_IN",
+                .turkish: "tr_TR",
+                .vietnamese: "vi_VN",
+                .urdu: "ur_PK",
+                .italian: "it_IT",
+                .persian: "fa_IR",
+                .swahili: "sw_TZ"
+            ]
+        }
+    }
     
     init?(localeIdentifier: String) {
-        switch localeIdentifier {
-        case "de_DE":
-            self = .german
-        case "en_GB":
-            self = .english
-        case "es_ES":
-            self = .spanish
-        case "fr_FR":
-            self = .french
-        default:
-            return nil
-        }
+        let locale = Language.localeIdentifiers.filter { $0.value == localeIdentifier }.first!
+        self = locale.key
     }
     
     static func makeLanguage(withLocaleIdentifier localeIdentifier: String) -> Language? {
@@ -76,22 +119,32 @@ enum Language: String {
     
     var localeIdentifier: String {
         get {
-            switch self {
-            case .german:
-                return "de_DE"
-            case .english:
-                return "en_GB"
-            case .spanish:
-                return "es_ES"
-            case .french:
-                return "fr_FR"
-            }
+            return Language.localeIdentifiers[self]!
         }
     }
     
     var languageCode: String {
         get {
-            return self.locale.languageCode!
+            switch self {
+            case .mandarin:
+                return "cmn"
+            case .punjabi:
+                return "pa"
+            default:
+                return self.locale.languageCode!
+            }
+        }
+    }
+    
+    //Special case for Mandarin
+    var displayLanguageCode: String {
+        get {
+            switch self {
+            case .mandarin:
+                return "zh"
+            default:
+                return self.languageCode
+            }
         }
     }
     
@@ -106,6 +159,8 @@ enum Language: String {
                 return "spa"
             case .french:
                 return "fra"
+            default:
+                return ""
             }
         }
     }

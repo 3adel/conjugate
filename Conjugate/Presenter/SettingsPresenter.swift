@@ -129,10 +129,10 @@ class SettingsPresenter: SettingsPresenterType {
     func makeSettingsLanguageSectionViewModel(from section: TableSection) -> TableSectionViewModel {
         let languageConfig = appDependencyManager.languageConfig
         
-        let conjugationLanguage = languageConfig.selectedConjugationLanguage.languageCode.uppercased()
+        let conjugationLanguage = languageConfig.selectedConjugationLanguage.displayLanguageCode.uppercased()
         let conjugationLanguageImage = languageConfig.selectedConjugationLanguage.flagImageName
         
-        let translationLanguage = languageConfig.selectedTranslationLanguage.languageCode.uppercased()
+        let translationLanguage = languageConfig.selectedTranslationLanguage.displayLanguageCode.uppercased()
         let translationLanguageImage = languageConfig.selectedTranslationLanguage.flagImageName
         
         let conjugationViewModel = SettingsLanguageViewModel(title: section.cells[0].cellTitle,
