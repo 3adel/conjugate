@@ -112,7 +112,7 @@ class Router {
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else { return nil }
         
-        let conjugatePresenter = ConjugatePresenter(view: vc, appDependencyManager: appDependencyManager, quickActionController: appDelegate.quickActionController)
+        let conjugatePresenter = ConjugatePresenter(view: vc, appDependencyManager: appDependencyManager, targetLanguage: verb.language, quickActionController: appDelegate.quickActionController)
         vc.presenter = conjugatePresenter
         vc.viewModel = conjugatePresenter.makeConjugateViewModel(from: verb)
         

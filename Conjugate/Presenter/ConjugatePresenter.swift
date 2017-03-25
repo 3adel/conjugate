@@ -50,17 +50,17 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     var targetLanguage: Language
     var interfaceLanguage: Language
     
-    init(view: ConjugateView, appDependencyManager: AppDependencyManager, quickActionController: QuickActionController? = nil) {
+    init(view: ConjugateView, appDependencyManager: AppDependencyManager, targetLanguage: Language? = nil, quickActionController: QuickActionController? = nil) {
         self.view = view
         self.quickActionController = quickActionController
         
-        targetLanguage = appDependencyManager.languageConfig.selectedConjugationLanguage
+        self.targetLanguage = targetLanguage ?? appDependencyManager.languageConfig.selectedConjugationLanguage
         interfaceLanguage = appDependencyManager.languageConfig.selectedTranslationLanguage
         languageConfig = appDependencyManager.languageConfig
         
         searchLanguageType = .conjugationLanguage
         
-        speaker = TextSpeaker(language: targetLanguage)
+        speaker = TextSpeaker(language: self.targetLanguage)
         
         storage.getSavedVerbs()
         speaker.delegate = self
