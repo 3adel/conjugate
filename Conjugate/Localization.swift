@@ -148,6 +148,18 @@ enum Language: String {
         }
     }
     
+    //Special case for Mandarin
+    var minWordCharacterCount: Int {
+        get {
+            switch self {
+            case .mandarin:
+                return 1
+            default:
+                return 2
+            }
+        }
+    }
+    
     var isoCode: String {
         get {
             switch(self) {

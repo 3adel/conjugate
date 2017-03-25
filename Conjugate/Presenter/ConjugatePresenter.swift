@@ -43,7 +43,12 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     var lastSearchText = ""
     
     var searchTimer: Timer?
-    let kMinNumbOfCharactersForSearch = 2
+    var minNumbOfCharactersForSearch: Int {
+        get {
+            let language = searchLanguageType == .conjugationLanguage ? targetLanguage : interfaceLanguage
+            return language.minWordCharacterCount
+        }
+    }
     
     let languageConfig: LanguageConfig
     
@@ -302,7 +307,7 @@ extension ConjugatePresenter {
         clearSearchTimer()
         
         self.searchText = searchText
-        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+        if searchText.characters.count >= minNumbOfCharactersForSearch {
             searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(doSearch), userInfo: nil, repeats: false)
             
         }
@@ -310,14 +315,14 @@ extension ConjugatePresenter {
     
     func userDidTapSearchButton() {
         clearSearchTimer()
-        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+        if searchText.characters.count >= minNumbOfCharactersForSearch {
             doSearch()
         }
     }
     
     @objc func doSearch() {
         cancelSearch()
-        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+        if searchText.characters.count >= minNumbOfCharactersForSearch {
             search(for: searchText)
         }
     }
