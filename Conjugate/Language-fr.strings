@@ -17,9 +17,10 @@
 "mobile.ios.conjugate.tense.preterite" = "Passé simple";
 "mobile.ios.conjugate.tense.preterite2" = "Passé antérieur";
 
-
 "mobile.ios.conjugate.searchPlaceholderVerbs" = "boire,ai";
 
 "mobile.ios.conjugate.tenseGroup.indicative" = "Indicatif";
 "mobile.ios.conjugate.tenseGroup.subjunctive" = "Subjonctif";
 "mobile.ios.conjugate.tenseGroup.imperative" = "Imperatif";
+
+"mobile.ios.conjugate.verb.welcome" = "recevoir";
