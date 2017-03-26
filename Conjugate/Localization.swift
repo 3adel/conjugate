@@ -103,7 +103,19 @@ enum Language: String {
     }
     
     init?(localeIdentifier: String) {
-        let locale = Language.localeIdentifiers.filter { $0.value == localeIdentifier }.first!
+        guard let locale = Language.localeIdentifiers.filter ({ $0.value == localeIdentifier }).first
+        else { return nil }
+        
+        self = locale.key
+    }
+    
+    init?(languageCode: String) {
+        guard let locale = Language.localeIdentifiers.filter({ keyValue in
+            let didFindLanguage = (keyValue.value.components(separatedBy: "_").first ?? "") == languageCode
+            return didFindLanguage
+        }).first
+        else { return nil }
+        
         self = locale.key
     }
     
