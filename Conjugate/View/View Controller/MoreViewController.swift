@@ -127,6 +127,7 @@ class SettingsDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsLanguageCell.Identifier) as? SettingsLanguageCell else { return nil }
         
         cell.update(with: viewModel)
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
