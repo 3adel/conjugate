@@ -172,6 +172,8 @@ extension VerbDetailViewController: ConjugateView {
             
             let dataSource = TenseTableViewDataSource(tableView: tableView)
             
+            dataSource.language = viewModel.speakerLanguage
+            
             let tabIndex = viewModel.tenseTabs.index(of: tenseViewModel) ?? 0
             dataSource.onRowDidSelect = { [weak self] row, section in
                 self?.presenter?.tappedForm(inTab: tabIndex, atTense: section, at: row)
