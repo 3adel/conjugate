@@ -49,6 +49,7 @@ struct LanguageConfig {
                                                             .malay,
                                                             .mandarin,
                                                             .marathi,
+                                                            .persian,
                                                             .portuguese,
                                                             .punjabi,
                                                             .russian,
