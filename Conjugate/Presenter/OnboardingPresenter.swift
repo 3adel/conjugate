@@ -58,8 +58,11 @@ class OnboardingPresenter: OnboardingPresenterType, LanguageSelectionPresenterTy
         
         let defaultConfig = LanguageConfig.default
         
+        let currentLanguageCode = Locale.current.identifier.components(separatedBy: "_").first ?? ""
+        let translationLanguage = Language(languageCode: currentLanguageCode) ?? defaultConfig.selectedTranslationLanguage
+        
         let languageConfig = LanguageConfig(selectedConjugationLanguage: selectedLanguage,
-                                            selectedTranslationLanguage: defaultConfig.selectedTranslationLanguage,
+                                            selectedTranslationLanguage: translationLanguage,
                                             availableConjugationLanguages: defaultConfig.availableConjugationLanguages,
                                             availableTranslationLanguages: defaultConfig.availableTranslationLanguages)
         

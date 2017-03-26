@@ -1,0 +1,9 @@
+/* 
+  Language-en.strings
+  Conjugate
+
+  Created by Halil Gursoy on 07/03/2017.
+  Copyright © 2017 Adel  Shehadeh. All rights reserved.
+*/
+
+"mobile.ios.conjugate.searchPlaceholderVerbs" = "beber,ter";

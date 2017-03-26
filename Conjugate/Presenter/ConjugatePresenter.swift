@@ -43,7 +43,12 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     var lastSearchText = ""
     
     var searchTimer: Timer?
-    let kMinNumbOfCharactersForSearch = 2
+    var minNumbOfCharactersForSearch: Int {
+        get {
+            let language = searchLanguageType == .conjugationLanguage ? targetLanguage : interfaceLanguage
+            return language.minWordCharacterCount
+        }
+    }
     
     let languageConfig: LanguageConfig
     
@@ -262,14 +267,14 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     
     func searchLanguageChanged(to languageCode: String) {
-        let type: LanguageType = languageCode.lowercased() == targetLanguage.languageCode.lowercased() ? .conjugationLanguage : .interfaceLanguage
+        let type: LanguageType = languageCode.lowercased() == targetLanguage.displayLanguageCode.lowercased() ? .conjugationLanguage : .interfaceLanguage
         searchLanguageTypeChanged(to: type)
     }
     
     func searchLanguageTypeChanged(to type: LanguageType) {
         self.searchLanguageType = type
         
-        let languageCode = type == .conjugationLanguage ? targetLanguage.languageCode : interfaceLanguage.languageCode
+        let languageCode = type == .conjugationLanguage ? targetLanguage.displayLanguageCode : interfaceLanguage.displayLanguageCode
         view.update(searchLanguage: languageCode.uppercased(), searchFieldPlaceholder: makeSearchPlaceHolderText())
     }
     
@@ -299,7 +304,7 @@ extension ConjugatePresenter {
         clearSearchTimer()
         
         self.searchText = searchText
-        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+        if searchText.characters.count >= minNumbOfCharactersForSearch {
             searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(doSearch), userInfo: nil, repeats: false)
             
         }
@@ -307,14 +312,14 @@ extension ConjugatePresenter {
     
     func userDidTapSearchButton() {
         clearSearchTimer()
-        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+        if searchText.characters.count >= minNumbOfCharactersForSearch {
             doSearch()
         }
     }
     
     @objc func doSearch() {
         cancelSearch()
-        if searchText.characters.count >= kMinNumbOfCharactersForSearch {
+        if searchText.characters.count >= minNumbOfCharactersForSearch {
             search(for: searchText)
         }
     }
@@ -390,7 +395,7 @@ extension ConjugatePresenter {
     func makeConjugateViewModel(from verb: Verb? = nil) -> ConjugateViewModel {
         let verbIsSaved = storage.getSavedVerbs().filter { $0 == verb }.isEmpty
         
-        let switchInterfaceLanguage = interfaceLanguage.languageCode.uppercased()
+        let switchInterfaceLanguage = interfaceLanguage.displayLanguageCode.uppercased()
         
         let switchInterfaceLanguageFlagImage = interfaceLanguage.flagImageName
         let switchLanguageFlagImage = targetLanguage.flagImageName
@@ -418,7 +423,7 @@ extension ConjugatePresenter {
                 meaningText += translation
             }
             
-            let language = targetLanguage.languageCode.uppercased()
+            let language = targetLanguage.displayLanguageCode.uppercased()
             let speakerLanguage = speaker.language
             
             viewModel = ConjugateViewModel(verb: verb.name,
