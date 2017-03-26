@@ -7,7 +7,14 @@ import UIKit
 class TenseTableViewDataSource: NSObject {
     let tableView: UITableView
     
-    let speaker = TextSpeaker(language: AppDependencyManager.shared.languageConfig.selectedConjugationLanguage)
+    var language: Language? {
+        didSet {
+            guard let language = language else { return }
+            speaker = TextSpeaker(language: language)
+        }
+    }
+    
+    var speaker = TextSpeaker(language: AppDependencyManager.shared.languageConfig.selectedConjugationLanguage)
     
     var viewModel = TenseTabViewModel.empty {
         didSet {
@@ -16,6 +23,7 @@ class TenseTableViewDataSource: NSObject {
     }
     
     var onRowDidSelect: ((_ row: Int, _ section: Int) -> ())?
+    
     var playedAudioButton: AnimatedButton?
     var edgeInsetsForCell = UIEdgeInsetsMake(0, 7, 0, 0)
     
