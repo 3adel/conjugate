@@ -255,9 +255,6 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
             
             //Track saving a verb
             Answers.logCustomEvent(withName: "Favorited Verb",customAttributes: ["Verb": verb.name])
-            
-            
-            
         }
         
         viewModel = makeConjugateViewModel(from: verb)
@@ -422,6 +419,7 @@ extension ConjugatePresenter {
             }
             
             let language = targetLanguage.languageCode.uppercased()
+            let speakerLanguage = speaker.language
             
             viewModel = ConjugateViewModel(verb: verb.name,
                                            searchText: searchText,
@@ -434,7 +432,8 @@ extension ConjugatePresenter {
                                            meaning: meaningText,
                                            starSelected: !verbIsSaved,
                                            tenseTabs: tenseTabs,
-                                           searchFieldPlaceholder: searchFieldPlaceHolder)
+                                           searchFieldPlaceholder: searchFieldPlaceHolder,
+                                           speakerLanguage: speakerLanguage)
         } else {
             viewModel = ConjugateViewModel(verb: "",
                                            searchText: searchText,
@@ -447,7 +446,8 @@ extension ConjugatePresenter {
                                            meaning: "",
                                            starSelected: false,
                                            tenseTabs: [],
-                                           searchFieldPlaceholder: searchFieldPlaceHolder)
+                                           searchFieldPlaceholder: searchFieldPlaceHolder,
+                                           speakerLanguage: nil)
 
         }
         return viewModel

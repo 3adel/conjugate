@@ -97,12 +97,13 @@ struct ConjugateViewModel {
     let starSelected: Bool
     let tenseTabs: [TenseTabViewModel]
     let searchFieldPlaceholder: String
+    let speakerLanguage: Language?
     
     var isEmpty: Bool {
         return verb == ""
     }
     
-    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", searchText: "", nominalForms: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "")
+    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", searchText: "", nominalForms: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "", speakerLanguage: nil)
 }
 
 struct TranslationsViewModel {
