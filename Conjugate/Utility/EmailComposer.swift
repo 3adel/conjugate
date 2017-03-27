@@ -54,6 +54,6 @@ extension EmailComposer: MFMailComposeViewControllerDelegate {
     
     public func mailComposeController(_ controller: MFMailComposeViewController,
                                       didFinishWith result: MFMailComposeResult, error: Error?) {
-        router?.dismiss()
+        router?.dismissModal()
     }
 }
