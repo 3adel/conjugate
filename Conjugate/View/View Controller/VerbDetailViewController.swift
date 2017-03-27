@@ -116,6 +116,8 @@ extension VerbDetailViewController {
 }
 
 extension VerbDetailViewController: ConjugateView {
+    func hideTranslationList() {}
+    
     func updateUI(with viewModel: ConjugateViewModel) {
         self.updateUI(with: viewModel, all: false)
     }

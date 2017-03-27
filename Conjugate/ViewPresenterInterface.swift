@@ -33,6 +33,7 @@ protocol ConjugateView: View {
     func showVerbNotFoundError(message: String)
     func animateInfinitveAudioButton()
     func stopAnimatingInfinitiveAudioButton()
+    func hideTranslationList()
     func showActionsForForm(inTab tab: Int, atTense tense: Int, at index: Int)
 }
 

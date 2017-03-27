@@ -300,6 +300,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
 // MARK: Handle user input for search
 extension ConjugatePresenter {
     func userDidInput(searchText: String) {
+        view.hideTranslationList()
         cancelSearch()
         clearSearchTimer()
         
