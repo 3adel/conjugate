@@ -168,6 +168,10 @@ class Router {
             rootViewController.dismiss(animated: true, completion: nil)
         }
     }
+    
+    func dismissModal() {
+        rootViewController.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension UIStoryboard {
