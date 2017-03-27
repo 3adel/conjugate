@@ -42,6 +42,9 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     var searchText = ""
     var lastSearchText = ""
     
+    //TODO: Decouple handling verb detail to another presenter
+    let isVerbDetail: Bool
+    
     var searchTimer: Timer?
     var minNumbOfCharactersForSearch: Int {
         get {
@@ -59,6 +62,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
         self.view = view
         self.quickActionController = quickActionController
         
+        isVerbDetail = targetLanguage != nil
         self.targetLanguage = targetLanguage ?? appDependencyManager.languageConfig.selectedConjugationLanguage
         interfaceLanguage = appDependencyManager.languageConfig.selectedTranslationLanguage
         languageConfig = appDependencyManager.languageConfig
@@ -74,7 +78,8 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     
     @objc func conjugationLanguageDidChange(_ notification: Notification) {
-        guard let language = notification.userInfo?[AppDependencyManager.NotificationKey.language.key] as? Language else { return }
+        guard let language = notification.userInfo?[AppDependencyManager.NotificationKey.language.key] as? Language,
+            !isVerbDetail else { return }
         
         targetLanguage = language
         speaker.language = language
@@ -82,7 +87,8 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     
     @objc func translationLanguageDidChange(_ notification: Notification) {
-        guard let language = notification.userInfo?[AppDependencyManager.NotificationKey.language.key] as? Language else { return }
+        guard let language = notification.userInfo?[AppDependencyManager.NotificationKey.language.key] as? Language,
+            !isVerbDetail else { return }
         
         interfaceLanguage = language
         reset()
