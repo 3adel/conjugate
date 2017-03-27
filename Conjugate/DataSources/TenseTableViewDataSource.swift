@@ -11,6 +11,7 @@ class TenseTableViewDataSource: NSObject {
         didSet {
             guard let language = language else { return }
             speaker = TextSpeaker(language: language)
+            speaker.delegate = self
         }
     }
     
@@ -138,6 +139,7 @@ class TenseTableViewCell: UITableViewCell {
     }
     
     func setupUI() {
+        audioButton.defaultImage = UIImage(named: "speaker")
         audioButton.images = [#imageLiteral(resourceName: "speaker_1"), #imageLiteral(resourceName: "speaker"), #imageLiteral(resourceName: "speaker_3")]
     }
     
