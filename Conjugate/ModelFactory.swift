@@ -48,8 +48,14 @@ extension Verb {
         var tenses: [TenseGroup: [Tense]] = [
             .indicative: [],
             .imperative: [],
+            .conditional: [],
             .subjunctive: [],
         ]
+        
+        //German shouldn't have conditional
+        if language == .german {
+            tenses.removeValue(forKey: .conditional)
+        }
         
         var nominalForms = [String]()
         if let tensesDict = tensesDict {
@@ -73,7 +79,7 @@ extension Verb {
                     let firstComponent = name.firstComponent?.lowercased(),
                     var tenseGroup = TenseGroup(firstComponentOfTense: firstComponent) else { continue }
                 
-                if tenseGroup == .conditional {
+                if tenseGroup == .conditional && language == .german {
                     tenseGroup = .subjunctive
                 }
                 

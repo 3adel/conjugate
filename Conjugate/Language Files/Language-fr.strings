@@ -21,6 +21,7 @@
 
 "mobile.ios.conjugate.tenseGroup.indicative" = "Indicatif";
 "mobile.ios.conjugate.tenseGroup.subjunctive" = "Subjonctif";
+"mobile.ios.conjugate.tenseGroup.conditional" = "Conditionnel";
 "mobile.ios.conjugate.tenseGroup.imperative" = "Imperatif";
 
 "mobile.ios.conjugate.verb.welcome" = "saluer";

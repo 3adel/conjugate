@@ -12,8 +12,8 @@
 "mobile.ios.conjugate.tense.pastPerfect" = "Pluscuamperfecto";
 "mobile.ios.conjugate.tense.future" = "Futuro";
 "mobile.ios.conjugate.tense.future2" = "Futuro perfecto";
-"mobile.ios.conjugate.tense.conditionalPast" = "Condicional";
-"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Condicional perfecto";
+"mobile.ios.conjugate.tense.conditionalPast" = "Presente";
+"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Perfecto";
 "mobile.ios.conjugate.tense.preterite" = "Pretérito";
 "mobile.ios.conjugate.tense.preterite2" = "Pretérito anterior";
 
@@ -21,6 +21,7 @@
 
 "mobile.ios.conjugate.tenseGroup.indicative" = "Indicativo";
 "mobile.ios.conjugate.tenseGroup.subjunctive" = "Subjuntivo";
+"mobile.ios.conjugate.tenseGroup.conditional" = "Condicional";
 "mobile.ios.conjugate.tenseGroup.imperative" = "Imperativo";
 
 "mobile.ios.conjugate.verb.welcome" = "acoger";
