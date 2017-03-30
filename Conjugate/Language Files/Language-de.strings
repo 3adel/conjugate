@@ -19,6 +19,7 @@
 
 "mobile.ios.conjugate.tenseGroup.indicative" = "Indikativ";
 "mobile.ios.conjugate.tenseGroup.subjunctive" = "Konjunktiv";
+"mobile.ios.conjugate.tenseGroup.conditional" = "Konjunktiv";
 "mobile.ios.conjugate.tenseGroup.imperative" = "Imperative";
 
 "mobile.ios.conjugate.verb.welcome" = "begrüßen";
