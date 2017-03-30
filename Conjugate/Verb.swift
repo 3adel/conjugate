@@ -242,6 +242,22 @@ struct Tense {
             .noTense
         ]
         
+        private static let italianTenses: [Tense.Name] = [
+            .present,
+            .past,
+            .presentPerfect,
+            .subjunctivePresentPerfect,
+            .pastPerfect,
+            .subjunctivePastPerfect,
+            .preterite,
+            .preterite2,
+            .future,
+            .future2,
+            .conditionalPast,
+            .conditionalPastPerfect,
+            .noTense
+        ]
+        
         static func getTenses(for language: Language) -> [Tense.Name] {
             switch language {
             case .german:
@@ -250,6 +266,8 @@ struct Tense {
                 return spanishTenses
             case .french:
                 return frenchTenses
+            case .italian:
+                return italianTenses
                 
             default:
                 return []
