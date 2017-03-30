@@ -38,6 +38,21 @@ struct Verb {
             }
         }
         
+        init?(verbixId: String) {
+            switch verbixId {
+            case "0", "2", "10", "12", "4", "14", "5", "15":
+                self = .indicative
+            case "1", "3", "11", "13", "6", "16":
+                self = .subjunctive
+            case "7", "17":
+                self = .conditional
+            case "8":
+                self = .imperative
+            default:
+                return nil
+            }
+        }
+        
         var translationKey: String {
             return "mobile.ios.conjugate.tenseGroup."+self.rawValue
         }
@@ -227,6 +242,22 @@ struct Tense {
             .noTense
         ]
         
+        private static let italianTenses: [Tense.Name] = [
+            .present,
+            .past,
+            .presentPerfect,
+            .subjunctivePresentPerfect,
+            .pastPerfect,
+            .subjunctivePastPerfect,
+            .preterite,
+            .preterite2,
+            .future,
+            .future2,
+            .conditionalPast,
+            .conditionalPastPerfect,
+            .noTense
+        ]
+        
         static func getTenses(for language: Language) -> [Tense.Name] {
             switch language {
             case .german:
@@ -235,6 +266,8 @@ struct Tense {
                 return spanishTenses
             case .french:
                 return frenchTenses
+            case .italian:
+                return italianTenses
                 
             default:
                 return []

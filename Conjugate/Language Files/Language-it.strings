@@ -6,4 +6,22 @@
   Copyright © 2017 Adel  Shehadeh. All rights reserved.
 */
 
+"mobile.ios.conjugate.tense.present" = "Presente";
+"mobile.ios.conjugate.tense.past" = "Imperfetto";
+"mobile.ios.conjugate.tense.presentPerfect" = "Passato prossimo";
+"mobile.ios.conjugate.tense.pastPerfect" = "Trapassato prossimo";
+"mobile.ios.conjugate.tense.future" = "Futuro";
+"mobile.ios.conjugate.tense.future2" = "Futuro anteriore";
+"mobile.ios.conjugate.tense.conditionalPast" = "Presente";
+"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Passato";
+"mobile.ios.conjugate.tense.preterite" = "Passato remoto";
+"mobile.ios.conjugate.tense.preterite2" = "Trapassato remoto";
+
 "mobile.ios.conjugate.searchPlaceholderVerbs" = "bere,leggere";
+
+"mobile.ios.conjugate.tenseGroup.indicative" = "Indicativo";
+"mobile.ios.conjugate.tenseGroup.subjunctive" = "Congiuntivo";
+"mobile.ios.conjugate.tenseGroup.conditional" = "Condizionale";
+"mobile.ios.conjugate.tenseGroup.imperative" = "Imperativo";
+
+"mobile.ios.conjugate.verb.welcome" = "accogliere";

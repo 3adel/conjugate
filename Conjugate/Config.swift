@@ -34,8 +34,9 @@ struct LanguageConfig {
                                                         selectedTranslationLanguage: .english,
                                                         availableConjugationLanguages: [
                                                             .german,
-                                                            .spanish,
-                                                            .french],
+                                                            .french,
+                                                            .italian,
+                                                            .spanish],
                                                         availableTranslationLanguages: [
                                                             .arabic,
                                                             .bengali,
