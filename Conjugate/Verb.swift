@@ -38,6 +38,21 @@ struct Verb {
             }
         }
         
+        init?(verbixId: String) {
+            switch verbixId {
+            case "0", "2", "10", "12", "4", "14", "5", "15":
+                self = .indicative
+            case "1", "3", "11", "13", "6", "16":
+                self = .subjunctive
+            case "7", "17":
+                self = .conditional
+            case "8":
+                self = .imperative
+            default:
+                return nil
+            }
+        }
+        
         var translationKey: String {
             return "mobile.ios.conjugate.tenseGroup."+self.rawValue
         }

@@ -75,9 +75,7 @@ extension Verb {
             for (key, value) in tensesDict {
                 
                 guard let tense = Tense(with: value, verbixId: key, language: language),
-                    let name = value["name"] as? String,
-                    let firstComponent = name.firstComponent?.lowercased(),
-                    var tenseGroup = TenseGroup(firstComponentOfTense: firstComponent) else { continue }
+                    var tenseGroup = TenseGroup(verbixId: key) else { continue }
                 
                 if tenseGroup == .conditional && language == .german {
                     tenseGroup = .subjunctive
