@@ -28,6 +28,16 @@ struct Verb {
         case subjunctive
         case nominal
         
+        
+        //TODO: Workaround for tense with id 14 coming with name that doesn't have the tense group name. Fix this more elegantly
+        init?(firstComponentOfTense: String) {
+            if firstComponentOfTense == "preterite" {
+                self.init(rawValue: "indicative")
+            } else {
+                self.init(rawValue: firstComponentOfTense)
+            }
+        }
+        
         var translationKey: String {
             return "mobile.ios.conjugate.tenseGroup."+self.rawValue
         }
