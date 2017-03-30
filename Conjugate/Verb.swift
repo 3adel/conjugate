@@ -225,6 +225,7 @@ struct Tense {
                 return spanishTenses
             case .french:
                 return frenchTenses
+                
             default:
                 return []
             }
