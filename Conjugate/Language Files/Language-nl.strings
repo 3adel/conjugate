@@ -1,0 +1,28 @@
+/* 
+  Language-DE.strings
+  Conjugate
+
+  Created by Halil Gursoy on 07/03/2017.
+  Copyright © 2017 Adel  Shehadeh. All rights reserved.
+*/
+
+"mobile.ios.conjugate.tense.0" = "Onvoltooid tegenwoordige tijd [o t t]";
+"mobile.ios.conjugate.tense.2" = "Onvoltooid verleden tijd [o v t]";
+"mobile.ios.conjugate.tense.5" = "Onvoltooid tegenwoordige toekomende tijd [o t t t]";
+"mobile.ios.conjugate.tense.7" = "Onvoltooid verleden toekomende tijd [o v t t]";
+"mobile.ios.conjugate.tense.8" = "";
+"mobile.ios.conjugate.tense.10" = "Voltooid tegenwoordige tijd [v t t]";
+"mobile.ios.conjugate.tense.12" = "Voltooid verleden tijd [v v t]";
+"mobile.ios.conjugate.tense.15" = "Voltooid tegenwoordige toekomende tijd [v t t t]";
+"mobile.ios.conjugate.tense.17" = "Voltooid verleden toekomende tijd [v v t t]";
+"mobile.ios.conjugate.tense.20" = "";
+"mobile.ios.conjugate.tense.21" = "";
+"mobile.ios.conjugate.tense.22" = "";
+
+"mobile.ios.conjugate.searchPlaceholderVerbs" = "dronk,hebben";
+
+"mobile.ios.conjugate.tenseGroup.indicative" = "Aantonende wijs";
+"mobile.ios.conjugate.tenseGroup.conditional" = "Voorwaardelijke wijs";
+"mobile.ios.conjugate.tenseGroup.imperative" = "gebiedende wijs";
+
+"mobile.ios.conjugate.verb.welcome" = "begrüßen";
