@@ -39,7 +39,8 @@ struct LanguageConfig {
                                                             .german,
                                                             .italian,
                                                             .portuguese,
-                                                            .spanish],
+                                                            .spanish,
+                                                            .swedish],
                                                         availableTranslationLanguages: [
                                                             .arabic,
                                                             .bengali,
@@ -60,6 +61,7 @@ struct LanguageConfig {
                                                             .russian,
                                                             .spanish,
                                                             .swahili,
+                                                            .swedish,
                                                             .tamil,
                                                             .telugu,
                                                             .turkish,
