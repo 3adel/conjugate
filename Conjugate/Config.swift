@@ -33,6 +33,7 @@ struct LanguageConfig {
     static var `default`: LanguageConfig = LanguageConfig(selectedConjugationLanguage: .german,
                                                         selectedTranslationLanguage: .english,
                                                         availableConjugationLanguages: [
+                                                            .english,
                                                             .french,
                                                             .german,
                                                             .italian,
