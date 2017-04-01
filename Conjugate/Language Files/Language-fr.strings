@@ -6,16 +6,24 @@
   Copyright © 2017 Adel  Shehadeh. All rights reserved.
 */
 
-"mobile.ios.conjugate.tense.present" = "Présent";
-"mobile.ios.conjugate.tense.past" = "Imparfait";
-"mobile.ios.conjugate.tense.presentPerfect" = "Passé composé";
-"mobile.ios.conjugate.tense.pastPerfect" = "Plus-que-parfait";
-"mobile.ios.conjugate.tense.future" = "Futur simple";
-"mobile.ios.conjugate.tense.future2" = "Futur antérieur";
-"mobile.ios.conjugate.tense.conditionalPast" = "Présent";
-"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Passé";
-"mobile.ios.conjugate.tense.preterite" = "Passé simple";
-"mobile.ios.conjugate.tense.preterite2" = "Passé antérieur";
+"mobile.ios.conjugate.tense.0" = "Présent";
+"mobile.ios.conjugate.tense.1" = "Présent";
+"mobile.ios.conjugate.tense.2" = "Imparfait";
+"mobile.ios.conjugate.tense.3" = "Imparfait";
+"mobile.ios.conjugate.tense.4" = "Passé simple";
+"mobile.ios.conjugate.tense.5" = "Futur simple";
+"mobile.ios.conjugate.tense.7" = "Présent";
+"mobile.ios.conjugate.tense.8" = "";
+"mobile.ios.conjugate.tense.10" = "Passé composé";
+"mobile.ios.conjugate.tense.11" = "Passé composé";
+"mobile.ios.conjugate.tense.12" = "Plus-que-parfait";
+"mobile.ios.conjugate.tense.13" = "Plus-que-parfait";
+"mobile.ios.conjugate.tense.14" = "Passé antérieur";
+"mobile.ios.conjugate.tense.15" = "Futur antérieur";
+"mobile.ios.conjugate.tense.17" = "Passé";
+"mobile.ios.conjugate.tense.20" = "Infinitif";
+"mobile.ios.conjugate.tense.22" = "Participe passé";
+"mobile.ios.conjugate.tense.23" = "Participe présent";
 
 "mobile.ios.conjugate.searchPlaceholderVerbs" = "boire,ai";
 

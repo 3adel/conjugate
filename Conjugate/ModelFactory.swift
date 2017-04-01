@@ -36,7 +36,6 @@ open class ModelFactory {
             return dictionary
         }
     }
-    
 }
 
 extension Verb {
@@ -45,16 +44,11 @@ extension Verb {
         
         let tensesDict = dict["tenses"] as? [String: JSONDictionary]
         
-        var tenses: [TenseGroup: [Tense]] = [
-            .indicative: [],
-            .imperative: [],
-            .conditional: [],
-            .subjunctive: [],
-        ]
-        
-        //German shouldn't have conditional
-        if language == .german {
-            tenses.removeValue(forKey: .conditional)
+        var tenses: [TenseGroup: [Tense]] = language.tenseGroups.reduce([TenseGroup: [Tense]]()) { dict, tenseGroup in
+            
+            var newDict = dict
+            newDict[tenseGroup] = []
+            return newDict
         }
         
         var nominalForms = [String]()
@@ -74,12 +68,8 @@ extension Verb {
             
             for (key, value) in tensesDict {
                 
-                guard let tense = Tense(with: value, verbixId: key, language: language),
-                    var tenseGroup = TenseGroup(verbixId: key) else { continue }
-                
-                if tenseGroup == .conditional && language == .german {
-                    tenseGroup = .subjunctive
-                }
+                guard let tenseGroup = TenseGroup(verbixId: key, language: language),
+                    let tense = Tense(with: value, verbixID: key, tenseGroup: tenseGroup, language: language) else { continue }
                 
                 tenses[tenseGroup]?.append(tense)
             }
@@ -90,19 +80,20 @@ extension Verb {
 }
 
 extension Tense {
-    init?(with dict: JSONDictionary, verbixId: String = "", language: Language) {
-        guard let nameString = dict["name"] as? String,
-            let name = Tense.Name(verbixId: verbixId, language: language) ?? Tense.Name(rawValue: nameString.secondComponent?.lowercased() ?? ""),
-            let formDicts = dict["forms"] as? [JSONDictionary] else { return nil }
+    init?(with dict: JSONDictionary, verbixID: String, tenseGroup: TenseGroup, language: Language) {
+        guard let formDicts = dict["forms"] as? [JSONDictionary] else { return nil }
         
         let forms: [Form] = ModelFactory.arrayOf(formDicts)
-        self.init(name: name, forms: forms)
+        
+        self.init(verbixID: verbixID, tenseGroup: tenseGroup, forms: forms)
     }
 }
 
 extension Tense.Name {
     var verbixId: String? {
         switch self {
+        case .present:
+            return "0"
         case .presentPerfect:
             return "10"
         case .pastPerfect:
@@ -127,22 +118,11 @@ extension Tense.Name {
             return "6"
         case .subjunctiveFuture2:
             return "16"
+        case .pluperfect:
+            return "9"
         default:
             return nil
         }
-    }
-    
-    init?(verbixId: String, language: Language) {
-        var tense: Tense.Name? = nil
-        
-        Tense.Name.getTenses(for: language).forEach { name in
-            if verbixId == name.verbixId {
-                tense = name
-            }
-        }
-        
-        guard let name = tense else { return nil }
-        self = name
     }
 }
 

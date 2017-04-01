@@ -6,14 +6,22 @@
   Copyright © 2017 Adel  Shehadeh. All rights reserved.
 */
 
-"mobile.ios.conjugate.tense.present" = "Präsens";
-"mobile.ios.conjugate.tense.past" = "Präteritum";
-"mobile.ios.conjugate.tense.presentPerfect" = "Perfekt";
-"mobile.ios.conjugate.tense.pastPerfect" = "Plusquam";
-"mobile.ios.conjugate.tense.future" = "Futur I";
-"mobile.ios.conjugate.tense.future2" = "Futur II";
-"mobile.ios.conjugate.tense.conditionalPast" = "Präteritum (würde)";
-"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Plusquam (würde)";
+"mobile.ios.conjugate.tense.0" = "Präsens";
+"mobile.ios.conjugate.tense.1" = "Präsens";
+"mobile.ios.conjugate.tense.2" = "Präteritum";
+"mobile.ios.conjugate.tense.3" = "Präteritum";
+"mobile.ios.conjugate.tense.5" = "Futur I";
+"mobile.ios.conjugate.tense.7" = "Präteritum (würde)";
+"mobile.ios.conjugate.tense.8" = "";
+"mobile.ios.conjugate.tense.10" = "Perfekt";
+"mobile.ios.conjugate.tense.11" = "Perfekt";
+"mobile.ios.conjugate.tense.12" = "Plusquam";
+"mobile.ios.conjugate.tense.13" = "Plusquam";
+"mobile.ios.conjugate.tense.15" = "Futur II";
+"mobile.ios.conjugate.tense.17" = "Plusquam (würde)";
+"mobile.ios.conjugate.tense.20" = "Infinitiv Präsens";
+"mobile.ios.conjugate.tense.21" = "Partizip Präsens";
+"mobile.ios.conjugate.tense.22" = "Partizip Perfekt";
 
 "mobile.ios.conjugate.searchPlaceholderVerbs" = "trank,hast";
 

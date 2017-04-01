@@ -209,6 +209,24 @@ enum Language: String {
         }
     }
     
+    var tenseGroups: [TenseGroup] {
+        switch self {
+        case .german:
+            return [
+                .indicative,
+                .imperative,
+                .subjunctive
+            ]
+        default:
+            return [
+                .indicative,
+                .imperative,
+                .conditional,
+                .subjunctive
+            ]
+        }
+    }
+    
     var tintColor: (CGFloat, CGFloat, CGFloat) {
         switch self {
         case .german:

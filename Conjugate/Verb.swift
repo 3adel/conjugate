@@ -10,7 +10,76 @@ protocol DictConvertible {
     func asDict() -> JSONDictionary
 }
 
-typealias Tenses = [Verb.TenseGroup: [Tense]]
+typealias Tenses = [TenseGroup: [Tense]]
+
+enum TenseGroup: String {
+    case indicative
+    case conditional
+    case imperative
+    case subjunctive
+    case inflected
+    case nominal
+    
+    init?(verbixId: String, language: Language) {
+        switch verbixId {
+        case "0", "2", "10", "12", "4", "14", "5", "15":
+            self = .indicative
+        case "1", "3", "11", "13", "6", "16":
+            self = .subjunctive
+        case "7", "17":
+            if language == .german {
+                self = .subjunctive
+            } else {
+                self = .conditional
+            }
+        case "8":
+            self = .imperative
+        default:
+            return nil
+        }
+    }
+    
+    var translationKey: String {
+        return "mobile.ios.conjugate.tenseGroup."+self.rawValue
+    }
+    
+    var text: String {
+        return LocalizedString(translationKey, languageType: .conjugationLanguage)
+    }
+    
+    var ids: [String] {
+        switch self {
+        case .nominal:
+            return ["2","10","21"]
+        default:
+            return []
+        }
+    }
+    
+    var sortedTenseIDs: [String] {
+        switch (self){
+        case .indicative:
+            return ["0", "2", "10", "12", "4", "14", "5", "9", "15"]
+        case .subjunctive:
+            return ["1", "3", "11", "13", "6", "16", "7", "17"]
+        case .conditional:
+            return ["7", "17"]
+        case .imperative:
+            return ["8"]
+        case .inflected:
+            return ["18", "28"]
+        default:
+            return []
+        }
+    }
+    
+    static let allCases: [TenseGroup] = [
+        .indicative,
+        .subjunctive,
+        .conditional,
+        .imperative
+    ]
+}
 
 struct Verb {
     enum UserDefaultsKey: String, DictionaryKey {
@@ -21,63 +90,6 @@ struct Verb {
         case nominalForms
     }
     
-    enum TenseGroup: String {
-        case indicative
-        case conditional
-        case imperative
-        case subjunctive
-        case nominal
-        
-        
-        //TODO: Workaround for tense with id 14 coming with name that doesn't have the tense group name. Fix this more elegantly
-        init?(firstComponentOfTense: String) {
-            if firstComponentOfTense == "preterite" {
-                self.init(rawValue: "indicative")
-            } else {
-                self.init(rawValue: firstComponentOfTense)
-            }
-        }
-        
-        init?(verbixId: String) {
-            switch verbixId {
-            case "0", "2", "10", "12", "4", "14", "5", "15":
-                self = .indicative
-            case "1", "3", "11", "13", "6", "16":
-                self = .subjunctive
-            case "7", "17":
-                self = .conditional
-            case "8":
-                self = .imperative
-            default:
-                return nil
-            }
-        }
-        
-        var translationKey: String {
-            return "mobile.ios.conjugate.tenseGroup."+self.rawValue
-        }
-        
-        var text: String {
-            return LocalizedString(translationKey, languageType: .conjugationLanguage)
-        }
-        
-        var ids: [String] {
-            switch self {
-            case .nominal:
-                return ["2","10","21"]
-            default:
-                return []
-            }
-        }
-        
-        static let allCases: [TenseGroup] = [
-            .indicative,
-            .subjunctive,
-            .conditional,
-            .imperative
-        ]
-    }
-
     let name: String
     let language: Language
     let translations: [String]?
@@ -154,6 +166,8 @@ extension Verb: DictConvertible {
 }
 
 struct Tense {
+    
+    //TODO: DEPRECATED - REMOVE WHEN POSSIBLE
     enum Name: String {
         case present
         case past
@@ -169,138 +183,78 @@ struct Tense {
         case preterite2
         case subjunctiveFuture
         case subjunctiveFuture2
+        case pluperfect
+        case inflectedInfinitivePresent
+        case inflectedInfinitivePerfect
         
         case noTense = ""
         
-        var translationKey: String {
-            return "mobile.ios.conjugate.tense."+rawValue
-        }
-        
-        var text: String {
-            switch self {
-            case .subjunctivePastPerfect:
-                return Name.pastPerfect.text
-            case .subjunctivePresentPerfect:
-                return Name.presentPerfect.text
-            case .subjunctiveFuture:
-                return Name.future.text
-            case .subjunctiveFuture2:
-                return Name.future2.text
-            case .noTense:
-                return rawValue
-            default:
-                return LocalizedString(translationKey, languageType: .conjugationLanguage)
-            }
-        }
-        
-        private static let germanTenses: [Tense.Name] = [
-            .present,
-            .past,
-            .presentPerfect,
-            .subjunctivePresentPerfect,
-            .pastPerfect,
-            .subjunctivePastPerfect,
-            .future,
-            .future2,
-            .conditionalPast,
-            .conditionalPastPerfect,
-            .noTense
-        ]
-        
-        private static let spanishTenses: [Tense.Name] = [
-            .present,
-            .past,
-            .presentPerfect,
-            .subjunctivePresentPerfect,
-            .pastPerfect,
-            .subjunctivePastPerfect,
-            .preterite,
-            .preterite2,
-            .future,
-            .future2,
-            .subjunctiveFuture,
-            .subjunctiveFuture2,
-            .conditionalPast,
-            .conditionalPastPerfect,
-            .noTense
-
-        ]
-        
-        private static let frenchTenses: [Tense.Name] = [
-            .present,
-            .past,
-            .presentPerfect,
-            .subjunctivePresentPerfect,
-            .pastPerfect,
-            .subjunctivePastPerfect,
-            .preterite,
-            .preterite2,
-            .future,
-            .future2,
-            .conditionalPast,
-            .conditionalPastPerfect,
-            .noTense
-        ]
-        
-        private static let italianTenses: [Tense.Name] = [
-            .present,
-            .past,
-            .presentPerfect,
-            .subjunctivePresentPerfect,
-            .pastPerfect,
-            .subjunctivePastPerfect,
-            .preterite,
-            .preterite2,
-            .future,
-            .future2,
-            .conditionalPast,
-            .conditionalPastPerfect,
-            .noTense
-        ]
-        
-        static func getTenses(for language: Language) -> [Tense.Name] {
-            switch language {
-            case .german:
-                return germanTenses
-            case .spanish:
-                return spanishTenses
-            case .french:
-                return frenchTenses
-            case .italian:
-                return italianTenses
-                
-            default:
-                return []
-            }
-        }
+    }
+    
+    enum UserDefaultsKey: String, DictionaryKey {
+        case name
+        case verbixID
+        case tenseGroup
+        case forms
     }
     
     static let nameKey = "name"
     static let formsKey = "forms"
     
-    let name: Name
+    let verbixID: String
+    let tenseGroup: TenseGroup
     let forms: [Form]
+    
+    var order: Int {
+        return tenseGroup.sortedTenseIDs.index(of: verbixID) ?? 0
+    }
+    
+    var localizedTitle: String {
+        return LocalizedString("mobile.ios.conjugate.tense.\(verbixID)", languageType: .conjugationLanguage)
+    }
+}
+
+extension Tense: Equatable {
+    static func ==(lhs: Tense, rhs: Tense) -> Bool {
+        return lhs.verbixID == rhs.verbixID
+    }
+}
+
+extension Tense: Comparable {
+    static func <(lhs: Tense, rhs: Tense) -> Bool {
+        return  lhs.order < rhs.order
+    }
 }
 
 extension Tense: DictConvertible {
     func asDict() -> JSONDictionary {
         var dict = JSONDictionary()
         
-        dict[Tense.nameKey] = name.rawValue
-        dict[Tense.formsKey] = forms.map { $0.asDict() }
+        dict[Tense.UserDefaultsKey.verbixID.key] = verbixID
+        dict[Tense.UserDefaultsKey.forms.key] = forms.map { $0.asDict() }
         
         return dict
     }
     
     static func from(dict: JSONDictionary) -> Tense? {
-        guard let nameString = dict[Tense.nameKey] as? String,
-            let name = Tense.Name(rawValue: nameString),
-            let formsArray = dict[Tense.formsKey] as? [JSONDictionary]
+        guard let formsArray = dict[Tense.formsKey] as? [JSONDictionary]
             else { return nil }
+        
+        let verbixID: String
+        
+        if let nameString = dict[Tense.nameKey] as? String,
+            let name = Tense.Name(rawValue: nameString){
+            verbixID = name.verbixId!
+        } else {
+            verbixID = dict[Tense.UserDefaultsKey.verbixID.key] as? String ?? ""
+        }
         
         let forms = formsArray.flatMap { Form.from(dict: $0) }
         
-        return self.init(name: name, forms: forms)
+        //Workaround for old saved verbs that doesn't have the tense group saved
+        let tenseGroup: TenseGroup = dict[Tense.UserDefaultsKey.tenseGroup.key] as? TenseGroup ?? .indicative
+        
+        return self.init(verbixID: verbixID, tenseGroup: tenseGroup, forms: forms)
     }
 }
 

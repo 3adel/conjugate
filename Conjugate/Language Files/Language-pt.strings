@@ -6,4 +6,22 @@
   Copyright © 2017 Adel  Shehadeh. All rights reserved.
 */
 
+"mobile.ios.conjugate.tense.present" = "Presente";
+"mobile.ios.conjugate.tense.past" = "Pretérito imperfeito";
+"mobile.ios.conjugate.tense.presentPerfect" = "Mais-que-perfeito";
+"mobile.ios.conjugate.tense.pastPerfect" = "Mais-que-perfeito";
+"mobile.ios.conjugate.tense.future" = "Futuro";
+"mobile.ios.conjugate.tense.future2" = "Futuro anterior";
+"mobile.ios.conjugate.tense.conditionalPast" = "Presente";
+"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Perfecto";
+"mobile.ios.conjugate.tense.preterite" = "Pretérito";
+"mobile.ios.conjugate.tense.pluperfect" = "Pretérito Mais-Que-Perfeito";
+
 "mobile.ios.conjugate.searchPlaceholderVerbs" = "beber,ter";
+
+"mobile.ios.conjugate.tenseGroup.indicative" = "Indicativo";
+"mobile.ios.conjugate.tenseGroup.subjunctive" = "Subjuntivo";
+"mobile.ios.conjugate.tenseGroup.conditional" = "Condicional";
+"mobile.ios.conjugate.tenseGroup.imperative" = "Imperativo";
+
+"mobile.ios.conjugate.verb.welcome" = "acoger";

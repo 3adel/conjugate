@@ -418,7 +418,7 @@ extension ConjugatePresenter {
             self.verb = verb
             let nominalFormsString = verb.nominalForms.joined(separator: ", ")
             
-            let tenseTabs = Verb.TenseGroup.allCases.flatMap(makeTenseTabViewModel)
+            let tenseTabs = TenseGroup.allCases.flatMap(makeTenseTabViewModel)
             
             var meaningText = ""
             
@@ -465,19 +465,14 @@ extension ConjugatePresenter {
         return viewModel
     }
     
-    func makeTenseTabViewModel(from tenseGroup: Verb.TenseGroup) -> TenseTabViewModel? {
+    func makeTenseTabViewModel(from tenseGroup: TenseGroup) -> TenseTabViewModel? {
         guard let verb = self.verb,
             let tenses = verb.tenses[tenseGroup],
             !tenses.isEmpty
             else { return nil }
         
-        var tenseViewModels = [TenseViewModel]()
+        let tenseViewModels = tenses.sorted().map(makeTenseViewModel)
         
-        
-        Tense.Name.getTenses(for: targetLanguage).forEach { tenseName in
-            let tensesWithThisName = tenses.filter { $0.name == tenseName }
-            tenseViewModels.append(contentsOf: tensesWithThisName.map(makeTenseViewModel))
-        }
         return TenseTabViewModel(name: tenseGroup.text.capitalized, tenses: tenseViewModels)
     }
     
@@ -511,7 +506,7 @@ extension ConjugatePresenter {
     
     func makeTenseViewModel(from tense: Tense) -> TenseViewModel {
         let formViewModels = tense.forms.map(makeFormViewModel)
-        return TenseViewModel(name: tense.name.text, forms: formViewModels)
+        return TenseViewModel(name: tense.localizedTitle, forms: formViewModels)
     }
 }
 
