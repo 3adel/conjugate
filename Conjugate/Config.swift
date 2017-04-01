@@ -36,6 +36,7 @@ struct LanguageConfig {
                                                             .french,
                                                             .german,
                                                             .italian,
+                                                            .portuguese,
                                                             .spanish],
                                                         availableTranslationLanguages: [
                                                             .arabic,

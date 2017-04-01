@@ -22,7 +22,7 @@ enum TenseGroup: String {
     
     init?(verbixId: String, language: Language) {
         switch verbixId {
-        case "0", "2", "10", "12", "4", "14", "5", "15":
+        case "0", "2", "10", "12", "4", "14", "5", "9", "15":
             self = .indicative
         case "1", "3", "11", "13", "6", "16":
             self = .subjunctive
