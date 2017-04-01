@@ -71,7 +71,8 @@ enum Language: String {
     italian,
     persian,
     swahili,
-    dutch
+    dutch,
+    swedish
     
     static var localeIdentifiers: [Language: String] {
         get {
@@ -99,7 +100,8 @@ enum Language: String {
                 .italian: "it_IT",
                 .persian: "fa_IR",
                 .swahili: "sw_TZ",
-                .dutch: "nl_NL"
+                .dutch: "nl_NL",
+                .swedish: "sv_SE"
             ]
         }
     }
@@ -191,6 +193,8 @@ enum Language: String {
                 return "por"
             case .dutch:
                 return "nld"
+            case .swedish:
+                return "swe"
             default:
                 return ""
             }
@@ -262,6 +266,8 @@ enum Language: String {
             return (0, 102, 0)
         case .dutch:
             return (174, 28, 40)
+        case .swedish:
+            return (254, 203, 0)
         default:
             return (0, 35, 149)
         }

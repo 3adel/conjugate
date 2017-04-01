@@ -1,0 +1,31 @@
+/* 
+  Language-DE.strings
+  Conjugate
+
+  Created by Halil Gursoy on 07/03/2017.
+  Copyright © 2017 Adel  Shehadeh. All rights reserved.
+*/
+
+"mobile.ios.conjugate.tense.0" = "Presens";
+"mobile.ios.conjugate.tense.1" = "Presens";
+"mobile.ios.conjugate.tense.2" = "Preteritum";
+"mobile.ios.conjugate.tense.3" = "Preteritum";
+"mobile.ios.conjugate.tense.5" = "Futurum simplex";
+"mobile.ios.conjugate.tense.7" = "Konditionalis 1";
+"mobile.ios.conjugate.tense.8" = "";
+"mobile.ios.conjugate.tense.10" = "Perfekt";
+"mobile.ios.conjugate.tense.11" = "Perfekt";
+"mobile.ios.conjugate.tense.12" = "Pluskvamperfekt";
+"mobile.ios.conjugate.tense.13" = "Pluskvamperfekt";
+"mobile.ios.conjugate.tense.15" = "Futurum exaktum";
+"mobile.ios.conjugate.tense.17" = "Konditionalis 2";
+"mobile.ios.conjugate.tense.21" = "Gerund";
+
+"mobile.ios.conjugate.searchPlaceholderVerbs" = "drack,ha";
+
+"mobile.ios.conjugate.tenseGroup.indicative" = "Indikativ";
+"mobile.ios.conjugate.tenseGroup.subjunctive" = "Konjunktiv";
+"mobile.ios.conjugate.tenseGroup.conditional" = "Konditionalis";
+"mobile.ios.conjugate.tenseGroup.imperative" = "Imperativ";
+
+"mobile.ios.conjugate.verb.welcome" = "begrüßen";

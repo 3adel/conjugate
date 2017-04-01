@@ -20,6 +20,7 @@
 		2451D47B1E6320DE0009F6F4 /* LanguageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2451D47A1E6320DE0009F6F4 /* LanguageSelectionViewController.swift */; };
 		2451D47D1E632BCF0009F6F4 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2451D47C1E632BCF0009F6F4 /* LanguageCell.swift */; };
 		245523101E9047AF00946F2D /* Language-nl.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2455230F1E9047AF00946F2D /* Language-nl.strings */; };
+		2455232D1E904B6B00946F2D /* Language-sv.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2455232C1E904B6B00946F2D /* Language-sv.strings */; };
 		245D31E41DB82E9500E5352F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D31E31DB82E9500E5352F /* Storage.swift */; };
 		245D32D01DBB6DCF00E5352F /* ConjugateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D32CF1DBB6DCF00E5352F /* ConjugateError.swift */; };
 		245D32EA1DBB76FE00E5352F /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D32E91DBB76FE00E5352F /* Localization.swift */; };
@@ -318,6 +319,7 @@
 		2451D47A1E6320DE0009F6F4 /* LanguageSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewController.swift; sourceTree = "<group>"; };
 		2451D47C1E632BCF0009F6F4 /* LanguageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
 		2455230F1E9047AF00946F2D /* Language-nl.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Language-nl.strings"; sourceTree = "<group>"; };
+		2455232C1E904B6B00946F2D /* Language-sv.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Language-sv.strings"; sourceTree = "<group>"; };
 		245D31E31DB82E9500E5352F /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		245D32CF1DBB6DCF00E5352F /* ConjugateError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConjugateError.swift; sourceTree = "<group>"; };
 		245D32E91DBB76FE00E5352F /* Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				2467FF851E86962C005F2B51 /* Language-ja.strings */,
 				2467FF861E86962C005F2B51 /* Language-ko.strings */,
 				2467FF871E86962C005F2B51 /* Language-mr.strings */,
+				2455232C1E904B6B00946F2D /* Language-sv.strings */,
 				2467FF881E86962C005F2B51 /* Language-ms.strings */,
 				2467FF891E86962C005F2B51 /* Language-pa.strings */,
 				2467FF8A1E86962C005F2B51 /* Language-pt.strings */,
@@ -957,6 +960,7 @@
 				2467FFA21E86962C005F2B51 /* Language-tr.strings in Resources */,
 				2467FF931E86962C005F2B51 /* Language-bn.strings in Resources */,
 				245D331D1DBB9AE400E5352F /* Localizable.strings in Resources */,
+				2455232D1E904B6B00946F2D /* Language-sv.strings in Resources */,
 				2467FF9D1E86962C005F2B51 /* Language-pt.strings in Resources */,
 				F56F08CE1CFA61DB008BD25B /* LaunchScreen.storyboard in Resources */,
 				245523101E9047AF00946F2D /* Language-nl.strings in Resources */,
