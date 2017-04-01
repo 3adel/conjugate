@@ -19,6 +19,8 @@ enum TenseGroup: String {
     case subjunctive
     case inflected
     case nominal
+    case progressiveIndicative
+    case progressiveConditional
     
     init?(verbixId: String, language: Language) {
         switch verbixId {
@@ -34,6 +36,10 @@ enum TenseGroup: String {
             }
         case "8":
             self = .imperative
+        case "41", "42", "43", "44", "45", "46":
+            self = .progressiveIndicative
+        case "47", "48":
+            self = .progressiveConditional
         default:
             return nil
         }
@@ -68,6 +74,10 @@ enum TenseGroup: String {
             return ["8"]
         case .inflected:
             return ["18", "28"]
+        case .progressiveIndicative:
+            return ["41", "43", "42", "44", "45", "46"]
+        case .progressiveConditional:
+            return ["47", "48"]
         default:
             return []
         }
@@ -77,7 +87,9 @@ enum TenseGroup: String {
         .indicative,
         .subjunctive,
         .conditional,
-        .imperative
+        .imperative,
+        .progressiveIndicative,
+        .progressiveConditional
     ]
 }
 

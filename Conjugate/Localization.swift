@@ -219,6 +219,15 @@ enum Language: String {
                 .imperative,
                 .subjunctive
             ]
+        case .english:
+            return [
+                .indicative,
+                .imperative,
+                .subjunctive,
+                .conditional,
+                .progressiveIndicative,
+                .progressiveConditional
+            ]
         default:
             return [
                 .indicative,

@@ -6,17 +6,36 @@
   Copyright © 2017 Adel  Shehadeh. All rights reserved.
 */
 
-"mobile.ios.conjugate.tense.present" = "Present";
-"mobile.ios.conjugate.tense.past" = "Past";
-"mobile.ios.conjugate.tense.presentPerfect" = "Present Perfect";
-"mobile.ios.conjugate.tense.pastPerfect" = "Past Perfect";
-"mobile.ios.conjugate.tense.future" = "Future";
-"mobile.ios.conjugate.tense.future2" = "Future Perfect";
-"mobile.ios.conjugate.tense.conditionalPast" = "";
-"mobile.ios.conjugate.tense.conditionalPastPerfect" = "";
+"mobile.ios.conjugate.tense.0" = "Present";
+"mobile.ios.conjugate.tense.1" = "Present";
+"mobile.ios.conjugate.tense.2" = "Past";
+"mobile.ios.conjugate.tense.3" = "Past";
+"mobile.ios.conjugate.tense.5" = "Future";
+"mobile.ios.conjugate.tense.7" = "Present";
+"mobile.ios.conjugate.tense.8" = "";
+"mobile.ios.conjugate.tense.10" = "Perfect";
+"mobile.ios.conjugate.tense.11" = "Perfect";
+"mobile.ios.conjugate.tense.12" = "Past perfect";
+"mobile.ios.conjugate.tense.13" = "Past perfect";
+"mobile.ios.conjugate.tense.15" = "Future Perfect";
+"mobile.ios.conjugate.tense.17" = "Perfect";
+"mobile.ios.conjugate.tense.20" = "Infinitive";
+"mobile.ios.conjugate.tense.21" = "Gerund";
+"mobile.ios.conjugate.tense.22" = "Past Participle";
+"mobile.ios.conjugate.tense.41" = "Present Continuous";
+"mobile.ios.conjugate.tense.42" = "Perfect Continuous";
+"mobile.ios.conjugate.tense.43" = "Past continuous";
+"mobile.ios.conjugate.tense.44" = "Past perfect continuous";
+"mobile.ios.conjugate.tense.45" = "Future Continuous";
+"mobile.ios.conjugate.tense.46" = "Future Perfect Continuous";
+"mobile.ios.conjugate.tense.47" = "Conditional Continuous";
+"mobile.ios.conjugate.tense.48" = "Conditional Perfect Continuous";
 
 "mobile.ios.conjugate.searchPlaceholderVerbs" = "drink,have";
 
 "mobile.ios.conjugate.tenseGroup.indicative" = "Indicative";
+"mobile.ios.conjugate.tenseGroup.conditional" = "Conditional";
 "mobile.ios.conjugate.tenseGroup.subjunctive" = "Subjunctive";
 "mobile.ios.conjugate.tenseGroup.imperative" = "Imperative";
+"mobile.ios.conjugate.tenseGroup.progressiveIndicative" = "Progressive Indicative";
+"mobile.ios.conjugate.tenseGroup.progressiveConditional" = "Progressive Conditional";
