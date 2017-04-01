@@ -6,16 +6,29 @@
   Copyright © 2017 Adel  Shehadeh. All rights reserved.
 */
 
-"mobile.ios.conjugate.tense.present" = "Presente";
-"mobile.ios.conjugate.tense.past" = "Pretérito imperfeito";
-"mobile.ios.conjugate.tense.presentPerfect" = "Mais-que-perfeito";
-"mobile.ios.conjugate.tense.pastPerfect" = "Mais-que-perfeito";
-"mobile.ios.conjugate.tense.future" = "Futuro";
-"mobile.ios.conjugate.tense.future2" = "Futuro anterior";
-"mobile.ios.conjugate.tense.conditionalPast" = "Presente";
-"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Perfecto";
-"mobile.ios.conjugate.tense.preterite" = "Pretérito";
-"mobile.ios.conjugate.tense.pluperfect" = "Pretérito Mais-Que-Perfeito";
+"mobile.ios.conjugate.tense.0" = "Presente";
+"mobile.ios.conjugate.tense.1" = "Presente";
+"mobile.ios.conjugate.tense.2" = "Pretérito imperfeito";
+"mobile.ios.conjugate.tense.3" = "Pretérito imperfeito";
+"mobile.ios.conjugate.tense.4" = "Pretérito";
+"mobile.ios.conjugate.tense.5" = "Futuro";
+"mobile.ios.conjugate.tense.6" = "Futuro";
+"mobile.ios.conjugate.tense.7" = "Presente";
+"mobile.ios.conjugate.tense.8" = "";
+"mobile.ios.conjugate.tense.9" = "Pretérito Mais-Que-Perfeito";
+"mobile.ios.conjugate.tense.10" = "Mais-que-perfeito";
+"mobile.ios.conjugate.tense.11" = "Perfeito";
+"mobile.ios.conjugate.tense.12" = "Mais-que-perfeito";
+"mobile.ios.conjugate.tense.13" = "Mais-que-perfeito";
+"mobile.ios.conjugate.tense.14" = "Pretérito anterior";
+"mobile.ios.conjugate.tense.15" = "Futuro anterior";
+"mobile.ios.conjugate.tense.16" = "Futuro anterior";
+"mobile.ios.conjugate.tense.17" = "Perfeito";
+"mobile.ios.conjugate.tense.18" = "Presente";
+"mobile.ios.conjugate.tense.20" = "Infinitivo";
+"mobile.ios.conjugate.tense.21" = "Gerundio";
+"mobile.ios.conjugate.tense.22" = "Participio";
+"mobile.ios.conjugate.tense.28" = "Perfeito";
 
 "mobile.ios.conjugate.searchPlaceholderVerbs" = "beber,ter";
 

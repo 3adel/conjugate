@@ -185,6 +185,8 @@ enum Language: String {
                 return "fra"
             case .italian:
                 return "ita"
+            case .portuguese:
+                return "por"
             default:
                 return ""
             }
@@ -235,6 +237,10 @@ enum Language: String {
             return (0, 36, 125)
         case .spanish:
             return (204, 30, 26)
+        case .italian:
+            return (0, 146, 70)
+        case .portuguese:
+            return (0, 102, 0)
         default:
             return (0, 35, 149)
         }
