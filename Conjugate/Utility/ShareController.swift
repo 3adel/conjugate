@@ -27,7 +27,7 @@ class ShareController {
     }
     
     func share(verb: Verb, sourceView: View, sourceRect: CGRect? = nil) {
-        guard let presentTenseForms = verb.tenses[.indicative]?.filter({ $0.name == .present }).first?.forms else { return }
+        guard let presentTenseForms = verb.tenses[.indicative]?.filter({ $0.verbixID == "0" }).first?.forms else { return }
         
         var textToShare = "Präsens forms of the verb \(verb.name):" + "\n\n"
         for form in presentTenseForms {

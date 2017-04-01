@@ -6,16 +6,25 @@
   Copyright © 2017 Adel  Shehadeh. All rights reserved.
 */
 
-"mobile.ios.conjugate.tense.present" = "Presente";
-"mobile.ios.conjugate.tense.past" = "Imperfetto";
-"mobile.ios.conjugate.tense.presentPerfect" = "Passato prossimo";
-"mobile.ios.conjugate.tense.pastPerfect" = "Trapassato prossimo";
-"mobile.ios.conjugate.tense.future" = "Futuro";
-"mobile.ios.conjugate.tense.future2" = "Futuro anteriore";
-"mobile.ios.conjugate.tense.conditionalPast" = "Presente";
-"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Passato";
-"mobile.ios.conjugate.tense.preterite" = "Passato remoto";
-"mobile.ios.conjugate.tense.preterite2" = "Trapassato remoto";
+"mobile.ios.conjugate.tense.0" = "Presente";
+"mobile.ios.conjugate.tense.1" = "Presente";
+"mobile.ios.conjugate.tense.2" = "Imperfetto";
+"mobile.ios.conjugate.tense.3" = "Imperfetto";
+"mobile.ios.conjugate.tense.4" = "Passato remoto";
+"mobile.ios.conjugate.tense.5" = "Futuro";
+"mobile.ios.conjugate.tense.7" = "Presente";
+"mobile.ios.conjugate.tense.8" = "";
+"mobile.ios.conjugate.tense.10" = "Passato prossimo";
+"mobile.ios.conjugate.tense.11" = "Passato prossimo";
+"mobile.ios.conjugate.tense.12" = "Trapassato prossimo";
+"mobile.ios.conjugate.tense.13" = "Trapassato prossimo";
+"mobile.ios.conjugate.tense.14" = "Trapassato remoto";
+"mobile.ios.conjugate.tense.15" = "Futuro anteriore";
+"mobile.ios.conjugate.tense.17" = "Passato";
+"mobile.ios.conjugate.tense.20" = "Infinito";
+"mobile.ios.conjugate.tense.21" = "Gerundio";
+"mobile.ios.conjugate.tense.22" = "Participio passato";
+"mobile.ios.conjugate.tense.23" = "Participio presente";
 
 "mobile.ios.conjugate.searchPlaceholderVerbs" = "bere,leggere";
 

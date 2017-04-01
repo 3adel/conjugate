@@ -6,16 +6,26 @@
   Copyright © 2017 Adel  Shehadeh. All rights reserved.
 */
 
-"mobile.ios.conjugate.tense.present" = "Presente";
-"mobile.ios.conjugate.tense.past" = "Imperfecto";
-"mobile.ios.conjugate.tense.presentPerfect" = "Pretérito perfecto";
-"mobile.ios.conjugate.tense.pastPerfect" = "Pluscuamperfecto";
-"mobile.ios.conjugate.tense.future" = "Futuro";
-"mobile.ios.conjugate.tense.future2" = "Futuro perfecto";
-"mobile.ios.conjugate.tense.conditionalPast" = "Presente";
-"mobile.ios.conjugate.tense.conditionalPastPerfect" = "Perfecto";
-"mobile.ios.conjugate.tense.preterite" = "Pretérito";
-"mobile.ios.conjugate.tense.preterite2" = "Pretérito anterior";
+"mobile.ios.conjugate.tense.0" = "Presente";
+"mobile.ios.conjugate.tense.1" = "Presente";
+"mobile.ios.conjugate.tense.2" = "Imperfecto";
+"mobile.ios.conjugate.tense.3" = "Imperfecto";
+"mobile.ios.conjugate.tense.4" = "Pretérito";
+"mobile.ios.conjugate.tense.5" = "Futuro";
+"mobile.ios.conjugate.tense.6" = "Futuro";
+"mobile.ios.conjugate.tense.7" = "Presente";
+"mobile.ios.conjugate.tense.8" = "";
+"mobile.ios.conjugate.tense.10" = "Pretérito perfecto";
+"mobile.ios.conjugate.tense.11" = "Pretérito perfecto";
+"mobile.ios.conjugate.tense.12" = "Pluscuamperfecto";
+"mobile.ios.conjugate.tense.13" = "Pluscuamperfecto";
+"mobile.ios.conjugate.tense.14" = "Pretérito anterior";
+"mobile.ios.conjugate.tense.15" = "Futuro perfecto";
+"mobile.ios.conjugate.tense.16" = "Futuro perfecto";
+"mobile.ios.conjugate.tense.17" = "Perfecto";
+"mobile.ios.conjugate.tense.20" = "Infinitivo";
+"mobile.ios.conjugate.tense.21" = "Gerundio";
+"mobile.ios.conjugate.tense.22" = "Participio";
 
 "mobile.ios.conjugate.searchPlaceholderVerbs" = "bebo,tengo";
 
