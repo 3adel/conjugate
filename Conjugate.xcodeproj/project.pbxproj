@@ -21,6 +21,7 @@
 		2451D47D1E632BCF0009F6F4 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2451D47C1E632BCF0009F6F4 /* LanguageCell.swift */; };
 		245523101E9047AF00946F2D /* Language-nl.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2455230F1E9047AF00946F2D /* Language-nl.strings */; };
 		2455232D1E904B6B00946F2D /* Language-sv.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2455232C1E904B6B00946F2D /* Language-sv.strings */; };
+		245523661E911F6000946F2D /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245523651E911F6000946F2D /* Language.swift */; };
 		245D31E41DB82E9500E5352F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D31E31DB82E9500E5352F /* Storage.swift */; };
 		245D32D01DBB6DCF00E5352F /* ConjugateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D32CF1DBB6DCF00E5352F /* ConjugateError.swift */; };
 		245D32EA1DBB76FE00E5352F /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245D32E91DBB76FE00E5352F /* Localization.swift */; };
@@ -320,6 +321,7 @@
 		2451D47C1E632BCF0009F6F4 /* LanguageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
 		2455230F1E9047AF00946F2D /* Language-nl.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Language-nl.strings"; sourceTree = "<group>"; };
 		2455232C1E904B6B00946F2D /* Language-sv.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Language-sv.strings"; sourceTree = "<group>"; };
+		245523651E911F6000946F2D /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		245D31E31DB82E9500E5352F /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		245D32CF1DBB6DCF00E5352F /* ConjugateError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConjugateError.swift; sourceTree = "<group>"; };
 		245D32E91DBB76FE00E5352F /* Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 				245D32CF1DBB6DCF00E5352F /* ConjugateError.swift */,
 				245D32E91DBB76FE00E5352F /* Localization.swift */,
 				9F66A0B81E2BD92D007646A5 /* Identifiable.swift */,
+				245523651E911F6000946F2D /* Language.swift */,
 			);
 			name = Foundation;
 			sourceTree = "<group>";
@@ -1058,6 +1061,7 @@
 				24F96BA81E3A535900EC27A0 /* TabbedContent.swift in Sources */,
 				24F96BAE1E3A535900EC27A0 /* VerbDetailViewController.swift in Sources */,
 				24F96BAD1E3A535900EC27A0 /* TabBarController.swift in Sources */,
+				245523661E911F6000946F2D /* Language.swift in Sources */,
 				240992301DC80284008F763D /* AppLaunchChecker.swift in Sources */,
 				24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */,
 				24B9D9A41DAED9D5004EE256 /* ModelFactory.swift in Sources */,

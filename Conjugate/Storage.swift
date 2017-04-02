@@ -24,6 +24,9 @@ class Storage {
             return Verb.from(dict: dict)
         }
         
+        //Workaround for saved verbs with the old tense structure, save them again with the new structure
+        saveVerbs()
+        
         return savedVerbs
     }
     

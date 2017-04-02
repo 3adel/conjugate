@@ -49,8 +49,8 @@ enum TenseGroup: String {
         return "mobile.ios.conjugate.tenseGroup."+self.rawValue
     }
     
-    var text: String {
-        return LocalizedString(translationKey, languageType: .conjugationLanguage)
+    func localizedTitle(in language: Language) -> String {
+        return LocalizedString(translationKey, in: language)
     }
     
     var ids: [String] {
@@ -161,7 +161,7 @@ extension Verb: DictConvertible {
             if let tense = tenseArray[tenseGroup.rawValue] {
                 tenses[tenseGroup] = tense.flatMap {
                     guard let dict = $0 as? JSONDictionary else { return nil }
-                    return Tense.from(dict: dict)
+                    return Tense.from(dict: dict, tenseGroup: tenseGroup)
                 }
             }
         }
@@ -196,8 +196,6 @@ struct Tense {
         case subjunctiveFuture
         case subjunctiveFuture2
         case pluperfect
-        case inflectedInfinitivePresent
-        case inflectedInfinitivePerfect
         
         case noTense = ""
         
@@ -221,8 +219,8 @@ struct Tense {
         return tenseGroup.sortedTenseIDs.index(of: verbixID) ?? 0
     }
     
-    var localizedTitle: String {
-        return LocalizedString("mobile.ios.conjugate.tense.\(verbixID)", languageType: .conjugationLanguage)
+    func localizedTitle(in language: Language) -> String {
+        return LocalizedString("mobile.ios.conjugate.tense.\(verbixID)", in: language)
     }
 }
 
@@ -249,6 +247,11 @@ extension Tense: DictConvertible {
     }
     
     static func from(dict: JSONDictionary) -> Tense? {
+        //Tense group parameter is a workaround for the saved verbs with the old tense structure. This will be removed after being sure that there are no saved verbs with the old tense structure
+        return from(dict: dict, tenseGroup: .indicative)
+    }
+    
+    static func from(dict: JSONDictionary, tenseGroup: TenseGroup) -> Tense? {
         guard let formsArray = dict[Tense.formsKey] as? [JSONDictionary]
             else { return nil }
         
@@ -256,7 +259,7 @@ extension Tense: DictConvertible {
         
         if let nameString = dict[Tense.nameKey] as? String,
             let name = Tense.Name(rawValue: nameString){
-            verbixID = name.verbixId!
+            verbixID = getVerbixID(from: name, tenseGroup: tenseGroup)
         } else {
             verbixID = dict[Tense.UserDefaultsKey.verbixID.key] as? String ?? ""
         }
@@ -264,9 +267,27 @@ extension Tense: DictConvertible {
         let forms = formsArray.flatMap { Form.from(dict: $0) }
         
         //Workaround for old saved verbs that doesn't have the tense group saved
-        let tenseGroup: TenseGroup = dict[Tense.UserDefaultsKey.tenseGroup.key] as? TenseGroup ?? .indicative
+        let tenseGroup: TenseGroup = dict[Tense.UserDefaultsKey.tenseGroup.key] as? TenseGroup ?? tenseGroup
         
         return self.init(verbixID: verbixID, tenseGroup: tenseGroup, forms: forms)
+    }
+    
+    //Temp function to map tense names to verbixIDs. This will be removed after Tense.Name enum is removed
+    static func getVerbixID(from tenseName: Tense.Name, tenseGroup: TenseGroup) -> String {
+        switch (tenseGroup, tenseName) {
+        case (_, .noTense):
+            return "8" //Imperative
+        case (.indicative, .present):
+            return "0"
+        case (.subjunctive,.present):
+            return "1"
+        case (.indicative, .past):
+            return "2"
+        case (.subjunctive, .past):
+            return "3"
+        default:
+            return tenseName.verbixId!
+        }
     }
 }
 

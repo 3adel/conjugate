@@ -94,6 +94,8 @@ extension Tense.Name {
         switch self {
         case .present:
             return "0"
+        case .past:
+            return "2"
         case .presentPerfect:
             return "10"
         case .pastPerfect:
@@ -120,8 +122,8 @@ extension Tense.Name {
             return "16"
         case .pluperfect:
             return "9"
-        default:
-            return nil
+        case .noTense:
+            return "-1"
         }
     }
 }
