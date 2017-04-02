@@ -97,9 +97,15 @@ extension ConjugateViewController: ConjugateView {
     }
     
     func update(searchLanguage: String, searchFieldPlaceholder: String) {
-        let searchLanguageSwitchOn = searchLanguage == viewModel.switchInterfaceLanguage
-        searchLanguageSwitch.setOn(searchLanguageSwitchOn, animated: false)
         
+        let searchLanguageSwitchOn: Bool
+            
+        if viewModel.switchSearchLanguage == viewModel.switchInterfaceLanguage {
+            searchLanguageSwitchOn = !searchLanguageSwitch.isOn()
+        } else {
+            searchLanguageSwitchOn = searchLanguage == viewModel.switchInterfaceLanguage
+            searchLanguageSwitch.setOn(searchLanguageSwitchOn, animated: false)
+        }
         searchField.placeholder = searchFieldPlaceholder
     }
     

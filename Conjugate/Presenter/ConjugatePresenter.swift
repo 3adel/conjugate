@@ -273,7 +273,13 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     }
     
     func searchLanguageChanged(to languageCode: String) {
-        let type: LanguageType = languageCode.lowercased() == targetLanguage.displayLanguageCode.lowercased() ? .conjugationLanguage : .interfaceLanguage
+        let type: LanguageType
+        
+        if targetLanguage == interfaceLanguage {
+            type = searchLanguageType == .conjugationLanguage ? .interfaceLanguage : .conjugationLanguage
+        } else {
+            type =  languageCode.lowercased() == targetLanguage.displayLanguageCode.lowercased() ? .conjugationLanguage : .interfaceLanguage
+        }
         searchLanguageTypeChanged(to: type)
     }
     
@@ -407,7 +413,7 @@ extension ConjugatePresenter {
         let switchInterfaceLanguageFlagImage = interfaceLanguage.flagImageName
         let switchLanguageFlagImage = targetLanguage.flagImageName
         
-        let switchSearchLanguage = targetLanguage.countryCode.uppercased()
+        let switchSearchLanguage = targetLanguage.displayLanguageCode.uppercased()
         
         let searchFieldPlaceHolder = makeSearchPlaceHolderText()
         
