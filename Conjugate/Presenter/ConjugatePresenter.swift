@@ -473,7 +473,9 @@ extension ConjugatePresenter {
         
         let tenseViewModels = tenses.sorted().map(makeTenseViewModel)
         
-        return TenseTabViewModel(name: tenseGroup.text.capitalized, tenses: tenseViewModels)
+        let tenseGroupTitle = tenseGroup.localizedTitle(in: verb.language).capitalized
+        
+        return TenseTabViewModel(name: tenseGroupTitle, tenses: tenseViewModels)
     }
     
     func makeFormViewModel(from form: Form) -> FormViewModel {
@@ -506,7 +508,11 @@ extension ConjugatePresenter {
     
     func makeTenseViewModel(from tense: Tense) -> TenseViewModel {
         let formViewModels = tense.forms.map(makeFormViewModel)
-        return TenseViewModel(name: tense.localizedTitle, forms: formViewModels)
+        
+        let language = verb?.language ?? .english
+        let tenseTitle = tense.localizedTitle(in: language)
+        
+        return TenseViewModel(name: tenseTitle, forms: formViewModels)
     }
 }
 

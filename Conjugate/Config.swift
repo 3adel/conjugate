@@ -131,6 +131,11 @@ struct LanguageConfig {
         }
     }
     
+    func localizedString(withKey key: String, in language: Language) -> String {
+        guard let lookupTable = loadLookupTable(for: language) else { return key }
+        return lookupTable[key] ?? key
+    }
+    
     private func loadLookupTable(for language: Language) -> [String: String]? {
         let result = FileParser.dictWithBundle(Bundle.main,
                                                resource: "Language-"+language.languageCode,
