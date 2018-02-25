@@ -88,7 +88,13 @@ extension Tense {
     init?(with dict: JSONDictionary, verbixID: String, tenseGroup: TenseGroup, language: Language) {
         guard let formDicts = dict["forms"] as? [JSONDictionary] else { return nil }
         
-        let forms: [Form] = ModelFactory.arrayOf(formDicts)
+        let formDictsWithoutArchaicForms = formDicts.filter {
+            guard let use = $0["use"] as? Int else { return true }
+            let archaicFormIDs = [3, 4]
+            return !archaicFormIDs.contains(use)
+        }
+        
+        let forms: [Form] = ModelFactory.arrayOf(formDictsWithoutArchaicForms)
         
         self.init(verbixID: verbixID, tenseGroup: tenseGroup, forms: forms)
     }
