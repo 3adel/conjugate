@@ -446,6 +446,11 @@ extension ConjugatePresenter {
             let language = targetLanguage.displayLanguageCode.uppercased()
             let speakerLanguage = speaker.language
             
+            let exampleSentences = verb.exampleSentences.reduce("") { wholeText, sentence in
+                let sentenceText = "\"\(sentence)\""
+                return wholeText.isEmpty ? sentenceText : "\(wholeText)\n\(sentenceText)"
+            }
+            
             viewModel = ConjugateViewModel(verb: verb.name,
                                            searchText: searchText,
                                            infoText: infoText,
@@ -459,7 +464,8 @@ extension ConjugatePresenter {
                                            starSelected: !verbIsSaved,
                                            tenseTabs: tenseTabs,
                                            searchFieldPlaceholder: searchFieldPlaceHolder,
-                                           speakerLanguage: speakerLanguage)
+                                           speakerLanguage: speakerLanguage,
+                                           exampleSentences: exampleSentences)
         } else {
             viewModel = ConjugateViewModel(verb: "",
                                            searchText: searchText,
@@ -474,7 +480,8 @@ extension ConjugatePresenter {
                                            starSelected: false,
                                            tenseTabs: [],
                                            searchFieldPlaceholder: searchFieldPlaceHolder,
-                                           speakerLanguage: nil)
+                                           speakerLanguage: nil,
+                                           exampleSentences: "")
 
         }
         return viewModel

@@ -100,12 +100,13 @@ struct ConjugateViewModel {
     let tenseTabs: [TenseTabViewModel]
     let searchFieldPlaceholder: String
     let speakerLanguage: Language?
+    let exampleSentences: String
     
     var isEmpty: Bool {
         return verb == ""
     }
     
-    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", searchText: "", infoText: NSAttributedString(string: ""), nominalForms: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "", speakerLanguage: nil)
+    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", searchText: "", infoText: NSAttributedString(string: ""), nominalForms: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "", speakerLanguage: nil, exampleSentences: "")
 }
 
 struct TranslationsViewModel {

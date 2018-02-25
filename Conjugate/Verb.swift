@@ -105,6 +105,7 @@ struct Verb {
         case nominalForms
         case regularity
         case auxiliaryVerb
+        case exampleSentences
     }
     
     enum Regularity: String {
@@ -117,14 +118,15 @@ struct Verb {
     let tenses: Tenses
     let nominalForms: [String]
     let auxiliaryVerb: String
-    let regularity: Regularity 
+    let regularity: Regularity
+    let exampleSentences: [String]
     
     static let nameKey = "name"
     static let translationsKey = "translations"
     static let tensesKey = "tenses"
     static let nominalFormKey = "nomialForm"
     
-    init(name: String, language: Language, auxiliaryVerb: String, regularity: Regularity = .regular, translations: [String]? = nil, tenses: Tenses = Tenses(), nominalForms: [String] = []) {
+    init(name: String, language: Language, auxiliaryVerb: String, regularity: Regularity = .regular, translations: [String]? = nil, tenses: Tenses = Tenses(), nominalForms: [String] = [], exampleSentences: [String] = []) {
         self.name = name
         self.language = language
         self.auxiliaryVerb = auxiliaryVerb
@@ -132,6 +134,7 @@ struct Verb {
         self.translations = translations
         self.tenses = tenses
         self.nominalForms = nominalForms
+        self.exampleSentences = exampleSentences
     }
 }
 
@@ -161,6 +164,7 @@ extension Verb: DictConvertible {
         dict[UserDefaultsKey.language.key] = language.localeIdentifier
         dict[UserDefaultsKey.auxiliaryVerb.key] = auxiliaryVerb
         dict[UserDefaultsKey.regularity.key] = regularity.rawValue
+        dict[UserDefaultsKey.exampleSentences.key] = exampleSentences
         
         return dict
     }
@@ -181,7 +185,7 @@ extension Verb: DictConvertible {
             }
         }
         
-        let nominalForms = dict[UserDefaultsKey.nominalForms.key] as? [String] ?? (dict[Verb.nominalFormKey] as? [String] ?? [String]())
+        let nominalForms = dict[UserDefaultsKey.nominalForms.key] as? [String] ?? (dict[Verb.nominalFormKey] as? [String] ?? [])
         
         let languageIdentifier = dict[UserDefaultsKey.language.key] as? String ?? ""
         
@@ -190,8 +194,9 @@ extension Verb: DictConvertible {
         
         let auxiliaryVerb = dict[UserDefaultsKey.auxiliaryVerb.key] as? String ?? ""
         let regularity = Regularity(rawValue: dict[UserDefaultsKey.regularity.key] as? String ?? "") ?? .regular
+        let exampleSentences = dict[UserDefaultsKey.exampleSentences.key] as? [String] ?? []
         
-        return self.init(name: name, language: language, auxiliaryVerb: auxiliaryVerb, regularity: regularity, translations: translations, tenses: tenses, nominalForms: nominalForms)
+        return self.init(name: name, language: language, auxiliaryVerb: auxiliaryVerb, regularity: regularity, translations: translations, tenses: tenses, nominalForms: nominalForms, exampleSentences: exampleSentences)
     }
 }
 
