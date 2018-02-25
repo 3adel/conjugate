@@ -9,6 +9,7 @@ class VerbDetailViewController: UIViewController {
     @IBOutlet private var infoLabel: UILabel!
     @IBOutlet private var nominalLabel: UILabel!
     @IBOutlet private var meaningLabel: UILabel!
+    @IBOutlet private var exampleSentencesLabel: UILabel!
     @IBOutlet private var errorLabel: UILabel!
     
     @IBOutlet private var saveButton: UIButton!
@@ -55,6 +56,8 @@ class VerbDetailViewController: UIViewController {
         
         verbLabel.set(labelType: .regular)
         errorLabel.set(labelType: .regular)
+        
+        exampleSentencesLabel.font = exampleSentencesLabel.font.italic
         
         audioButton.images = [#imageLiteral(resourceName: "speaker_1"), #imageLiteral(resourceName: "speaker"), #imageLiteral(resourceName: "speaker_3")]
 
@@ -122,7 +125,7 @@ extension VerbDetailViewController: ConjugateView {
         
         title = viewModel.verb
         
-        [saveButton, shareButton, audioButton, verbLabel, nominalLabel, infoLabel].forEach { $0.isHidden = viewModel.isEmpty }
+        [saveButton, shareButton, audioButton, verbLabel, nominalLabel, infoLabel, meaningLabel, exampleSentencesLabel].forEach { $0.isHidden = viewModel.isEmpty }
         
         errorLabel.isHidden = true
         
@@ -133,8 +136,7 @@ extension VerbDetailViewController: ConjugateView {
         nominalLabel.text = viewModel.nominalForms
         infoLabel.attributedText = viewModel.infoText
         meaningLabel.text = viewModel.meaning
-        
-//        nominalFormHeightConstraint.constant = viewModel.nominalForms.isEmpty ? 0 : 21
+        exampleSentencesLabel.text = viewModel.exampleSentences
         
         let starImageString = viewModel.starSelected ? "star_selected" : "star"
         

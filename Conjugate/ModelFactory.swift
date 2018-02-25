@@ -84,8 +84,9 @@ extension Verb {
         let isRegular = tenses.filter {!$0.value.filter { !$0.forms.filter { $0.type == .irregular }.isEmpty}.isEmpty }.isEmpty
         let regularity: Regularity = isRegular ? .regular : .irregular
         let auxiliaryVerb = (dict["auxiliaries"] as? [String])?.first ?? ""
+        let exampleSentences = dict["examples"] as? [String] ?? []
         
-        self.init(name: name, language: language, auxiliaryVerb: auxiliaryVerb, regularity: regularity, tenses: tenses, nominalForms: nominalForms)
+        self.init(name: name, language: language, auxiliaryVerb: auxiliaryVerb, regularity: regularity, tenses: tenses, nominalForms: nominalForms, exampleSentences: exampleSentences)
     }
 }
 
