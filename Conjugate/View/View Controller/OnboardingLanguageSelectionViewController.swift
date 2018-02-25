@@ -44,8 +44,8 @@ class OnboardingLanguageSelectionViewController: UIViewController, OnboardingVie
     
     override func setupUI() {
         view.backgroundColor = UIColor.white //UIColor.groupTableViewBackground
-        topConstraint.priority = UILayoutPriorityDefaultLow
-        alignCenterConstraint.priority = UILayoutPriorityDefaultHigh
+        topConstraint.priority = .defaultLow
+        alignCenterConstraint.priority = .defaultHigh
         
         logoLabel.font = UIFont.systemFont(ofSize: 54)
         
@@ -57,8 +57,8 @@ class OnboardingLanguageSelectionViewController: UIViewController, OnboardingVie
     func doInitialAnimation() {
         UIView.animate(withDuration: 0.5) {
             self.view.backgroundColor = UIColor.groupTableViewBackground
-            self.topConstraint.priority = UILayoutPriorityDefaultHigh
-            self.alignCenterConstraint.priority = UILayoutPriorityDefaultLow
+            self.topConstraint.priority = .defaultHigh
+            self.alignCenterConstraint.priority = .defaultLow
             
             self.logoLabel.font = UIFont.systemFont(ofSize: 36)
             

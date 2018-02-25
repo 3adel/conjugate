@@ -34,8 +34,8 @@ class MoreViewController: UIViewController, SettingsView {
         footerTextView.delegate = self
         skylineImageView.image = skylineImageView.image?.withRenderingMode(.alwaysTemplate)
         
-        let grayTone: Float = 207/255.0
-        skylineImageView.tintColor = UIColor(colorLiteralRed: grayTone, green: grayTone, blue: grayTone, alpha: 1.0)
+        let grayTone: CGFloat = 207/255.0
+        skylineImageView.tintColor = UIColor(red: grayTone, green: grayTone, blue: grayTone, alpha: 1.0)
     }
     
     func setupPresenter() {
@@ -50,8 +50,9 @@ class MoreViewController: UIViewController, SettingsView {
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.center
         let attributedString = NSMutableAttributedString(string: viewModel.footerTitle,
-                                                         attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSParagraphStyleAttributeName: style]
-        )
+                                                         attributes: [.font: UIFont.systemFont(ofSize: 12),
+                                                                      .paragraphStyle: style])
+        
         attributedString.set(viewModel.footerURL, asLink: viewModel.footerURL)
 
         footerTextView.attributedText = attributedString

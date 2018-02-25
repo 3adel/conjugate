@@ -59,9 +59,7 @@ class VerbDetailViewController: UIViewController {
 
         alertHandler = AlertHandler(view: view, topLayoutGuide: topLayoutGuide, bottomLayoutGuide: bottomLayoutGuide)
         
-        navigationItem.backBarButtonItem?.setTitleTextAttributes([
-            NSForegroundColorAttributeName: UIColor.clear
-            ],
+        navigationItem.backBarButtonItem?.setTitleTextAttributes([.foregroundColor: UIColor.clear],
             for: .normal
         )
     }

@@ -85,6 +85,7 @@ class ConjugateViewController: UIViewController {
         }
     }
     
+    @objc
     func switchChanged(_ sender: SevenSwitch) {
         let language = sender.isOn() ? viewModel.switchInterfaceLanguage : viewModel.switchSearchLanguage
         presenter?.searchLanguageChanged(to: language)
@@ -269,7 +270,7 @@ extension ConjugateViewController {
         presenter?.translationSelected(at: index)
     }
     
-    func hideTranslationTableView() {
+    @objc func hideTranslationTableView() {
         guard let tableView = translationTableView,
             let overlayView = translationOverlayView
             else { return }
@@ -298,7 +299,8 @@ extension ConjugateViewController {
     }
 }
 
-extension ConjugateViewController {    
+extension ConjugateViewController {
+    @objc
     func textFieldDidChange(_ textField: UITextField) {
         hideErrorMessage()
         

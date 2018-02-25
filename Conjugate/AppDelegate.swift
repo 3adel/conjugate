@@ -19,9 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -80.0), for: .default)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.black], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
         
         Fabric.with([Crashlytics.self])
+        setupAppReviewController()
         
         Endpoint.baseURI = "http://api.verbix.com"
         Endpoint.apiKey = "35b1e140-257a-11e6-be88-00089be4dcbc/"
@@ -91,11 +92,7 @@ extension AppDelegate: OnboardingDelegate {
 }
 
 extension AppDelegate {
-    override class func initialize() {
-        AppDelegate.setupAppReviewController()
-    }
-    
-    class func setupAppReviewController() {
+    func setupAppReviewController() {
         AppReviewController.with(appID: "1163600729")
     }
 }
