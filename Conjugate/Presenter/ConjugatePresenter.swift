@@ -422,6 +422,13 @@ extension ConjugatePresenter {
         if let verb = verb {
         
             self.verb = verb
+            
+            let infoText = NSMutableAttributedString(string: "\(verb.auxiliaryVerb) · ")
+            
+            let regularity = verb.regularity == .regular ? "Regular" : "Irregular"
+            let regularityText = NSAttributedString(string: regularity, attributes: [.foregroundColor: color(for: verb.regularity)])
+            
+            infoText.append(regularityText)
             let nominalFormsString = verb.nominalForms.joined(separator: ", ")
             
             let tenseTabs = TenseGroup.allCases.flatMap(makeTenseTabViewModel)
@@ -441,6 +448,7 @@ extension ConjugatePresenter {
             
             viewModel = ConjugateViewModel(verb: verb.name,
                                            searchText: searchText,
+                                           infoText: infoText,
                                            nominalForms: nominalFormsString,
                                            switchInterfaceLanguage: switchInterfaceLanguage,
                                            switchSearchLanguage: switchSearchLanguage,
@@ -455,6 +463,7 @@ extension ConjugatePresenter {
         } else {
             viewModel = ConjugateViewModel(verb: "",
                                            searchText: searchText,
+                                           infoText: NSAttributedString(string: ""),
                                            nominalForms: "",
                                            switchInterfaceLanguage: switchInterfaceLanguage,
                                            switchSearchLanguage: switchSearchLanguage,
@@ -519,6 +528,25 @@ extension ConjugatePresenter {
         let tenseTitle = tense.localizedTitle(in: language)
         
         return TenseViewModel(name: tenseTitle, forms: formViewModels)
+    }
+    
+    private func color(for regularity: Verb.Regularity) -> UIColor {
+        var colorR: CGFloat = 0
+        var colorG: CGFloat = 0
+        var colorB: CGFloat = 0
+        
+        switch regularity {
+        case .regular:
+            colorR = 63/255
+            colorG = colorR
+            colorB = colorR
+        case .irregular:
+            colorR = 208/255
+            colorG = 2/255
+            colorB = 27/255
+        }
+        
+        return UIColor(red: colorR, green: colorG, blue: colorB, alpha: 1)
     }
 }
 
