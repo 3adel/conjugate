@@ -53,10 +53,13 @@ enum TenseGroup: String {
         return LocalizedString(translationKey, in: language)
     }
     
-    var ids: [String] {
+    var ids: [(tenseID: String, formID: Int)] {
         switch self {
         case .nominal:
-            return ["2","10","21"]
+            return [
+                (tenseID: "2", formID: 3),
+                (tenseID: "10", formID: 3),
+                (tenseID: "21", formID: 1)]
         default:
             return []
         }

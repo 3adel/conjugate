@@ -54,9 +54,14 @@ extension Verb {
         var nominalForms = [String]()
         if let tensesDict = tensesDict {
             nominalForms = TenseGroup.nominal.ids.reduce([]) { forms, id in
-                guard let tenseDict = tensesDict[id],
+                guard let tenseDict = tensesDict[id.tenseID],
                     let formsArray = tenseDict["forms"] as? JSONArray,
-                    let formDict = formsArray.first as? JSONDictionary,
+                    
+                    let formDict = formsArray.first(where: {
+                        guard let dict = $0 as? JSONDictionary else { return false }
+                        return dict["id"] as? Int == id.formID
+                    }) as? JSONDictionary,
+                    
                     let form = formDict["form"] as? String
                     else { return forms }
                 
