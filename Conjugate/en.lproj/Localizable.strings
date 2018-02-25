@@ -28,6 +28,8 @@
 "mobile.ios.conjugate.settings.sendFeedback" = "Send Feedback";
 "mobile.ios.conjugate.settings.share" = "Tell a Friend";
 "mobile.ios.conjugate.settings.rate" = "Rate us";
+"mobile.ios.conjugate.settings.promoteDerSatz" = "Try our new app der Satz!";
+
 
 "mobile.ios.conjugate.languageSelection.conjugation" = "Conjugation Language";
 "mobile.ios.conjugate.languageSelection.translation" = "Translation Language";

@@ -16,6 +16,7 @@ class SettingsPresenter: SettingsPresenterType {
         case rate
         case conjugationLanguage
         case translationLanguage
+        case promoteDerSatz
         
         var title: String {
             return LocalizedString("mobile.ios.conjugate.settings."+rawValue)
@@ -70,7 +71,8 @@ class SettingsPresenter: SettingsPresenterType {
             TableCell(cellType: .reportBug),
             TableCell(cellType: .sendFeedback),
             TableCell(cellType: .share),
-            TableCell(cellType: .rate)
+            TableCell(cellType: .rate),
+            TableCell(cellType: .promoteDerSatz)
         ]
         
         languageSection = TableSection(title: LocalizedString("mobile.ios.conjugate.settings.section.language"),
@@ -104,6 +106,9 @@ class SettingsPresenter: SettingsPresenterType {
             openConjugationLanguageSelection()
         case .translationLanguage:
             openTranslationLanguageSelection()
+        case .promoteDerSatz:
+            promoteDerSatzApp()
+
         }
     }
     
@@ -170,6 +175,11 @@ class SettingsPresenter: SettingsPresenterType {
     func rateUs(){
         UIApplication.shared.openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1163600729")! as URL)
     }
+    
+    func promoteDerSatzApp(){
+        UIApplication.shared.openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1299564210")! as URL)
+    }
+    
     
     func openConjugationLanguageSelection() {
         let selectedLanguage = appDependencyManager.languageConfig.selectedConjugationLanguage
