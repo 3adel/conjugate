@@ -173,7 +173,7 @@ public enum Endpoint: String {
     public var path: String {
         switch self {
         case .translator:
-            return "translatorv2"
+            return "translator/v2"
         default:
             return self.rawValue
         }
