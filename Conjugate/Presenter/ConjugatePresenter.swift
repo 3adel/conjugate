@@ -425,7 +425,7 @@ extension ConjugatePresenter {
             
             let infoText = NSMutableAttributedString(string: "\(verb.auxiliaryVerb) · ")
             
-            let regularity = verb.regularity == .regular ? "Regular" : "Irregular"
+            let regularity = verb.regularity == .regular ? "regular" : "irregular"
             let regularityText = NSAttributedString(string: regularity, attributes: [.foregroundColor: color(for: verb.regularity)])
             
             infoText.append(regularityText)
