@@ -95,18 +95,22 @@ extension UIColor {
 }
 
 extension UIViewController {
+    @objc
     func showLoader() {
         
     }
     
+    @objc
     func hideLoader() {
         
     }
     
+    @objc
     func setupUI() {
         automaticallyAdjustsScrollViewInsets = false
     }
     
+    @objc
     func setupTabBar(shouldShow: Bool) {
         let bottomPoint = view.frame.height
         let yPoint = shouldShow ? bottomPoint - (tabBarController?.tabBar.frame.height)! : bottomPoint
@@ -122,11 +126,13 @@ extension UIViewController {
 }
 
 extension UIViewController: UITextFieldDelegate {
+    @objc
     func closeKeyboard() {
         view.endEditing(true)
         view.gestureRecognizers?.forEach(view.removeGestureRecognizer)
     }
     
+    @objc
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let tapRec = UITapGestureRecognizer(target: self, action: #selector(UIViewController.closeKeyboard))
         tapRec.cancelsTouchesInView = false
@@ -138,14 +144,14 @@ extension UIViewController: UITextFieldDelegate {
 extension String {
     func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
         
         return boundingBox.height
     }
     
     func widthWithConstrainedHeight(height: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
         
         return boundingBox.width
     }
@@ -210,7 +216,7 @@ extension NSMutableAttributedString {
     public func set(_ text :String, asLink link:String) -> Bool {
         let foundRange = self.mutableString.range(of: text)
         if foundRange.location != NSNotFound {
-            self.addAttribute(NSLinkAttributeName, value: link, range: foundRange)
+            self.addAttribute(.link, value: link, range: foundRange)
             return true
         }
         return false

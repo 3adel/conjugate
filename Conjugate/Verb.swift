@@ -53,10 +53,13 @@ enum TenseGroup: String {
         return LocalizedString(translationKey, in: language)
     }
     
-    var ids: [String] {
+    var ids: [(tenseID: String, formID: Int)] {
         switch self {
         case .nominal:
-            return ["2","10","21"]
+            return [
+                (tenseID: "2", formID: 3),
+                (tenseID: "10", formID: 3),
+                (tenseID: "21", formID: 1)]
         default:
             return []
         }
@@ -100,6 +103,12 @@ struct Verb {
         case translations
         case tenses
         case nominalForms
+        case regularity
+        case auxiliaryVerb
+    }
+    
+    enum Regularity: String {
+        case regular, irregular
     }
     
     let name: String
@@ -107,15 +116,19 @@ struct Verb {
     let translations: [String]?
     let tenses: Tenses
     let nominalForms: [String]
+    let auxiliaryVerb: String
+    let regularity: Regularity 
     
     static let nameKey = "name"
     static let translationsKey = "translations"
     static let tensesKey = "tenses"
     static let nominalFormKey = "nomialForm"
     
-    init(name: String, language: Language, translations: [String]? = nil, tenses: Tenses = Tenses(), nominalForms: [String] = []) {
+    init(name: String, language: Language, auxiliaryVerb: String, regularity: Regularity = .regular, translations: [String]? = nil, tenses: Tenses = Tenses(), nominalForms: [String] = []) {
         self.name = name
         self.language = language
+        self.auxiliaryVerb = auxiliaryVerb
+        self.regularity = regularity
         self.translations = translations
         self.tenses = tenses
         self.nominalForms = nominalForms
@@ -146,6 +159,8 @@ extension Verb: DictConvertible {
         
         dict[UserDefaultsKey.tenses.key] = tensesArray
         dict[UserDefaultsKey.language.key] = language.localeIdentifier
+        dict[UserDefaultsKey.auxiliaryVerb.key] = auxiliaryVerb
+        dict[UserDefaultsKey.regularity.key] = regularity.rawValue
         
         return dict
     }
@@ -173,7 +188,10 @@ extension Verb: DictConvertible {
         //Language property was introduced with v1.2 together with multi-lingual conjugation. If this doesn't exist, it the verb should be in German as that was the only language supported before that
         let language = Language(localeIdentifier: languageIdentifier) ?? .german
         
-        return self.init(name: name, language: language, translations: translations, tenses: tenses, nominalForms: nominalForms)
+        let auxiliaryVerb = dict[UserDefaultsKey.auxiliaryVerb.key] as? String ?? ""
+        let regularity = Regularity(rawValue: dict[UserDefaultsKey.regularity.key] as? String ?? "") ?? .regular
+        
+        return self.init(name: name, language: language, auxiliaryVerb: auxiliaryVerb, regularity: regularity, translations: translations, tenses: tenses, nominalForms: nominalForms)
     }
 }
 

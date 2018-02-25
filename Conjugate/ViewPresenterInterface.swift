@@ -88,6 +88,7 @@ protocol OnboardingViewType: View {
 struct ConjugateViewModel {
     let verb: String
     let searchText: String
+    let infoText: NSAttributedString
     let nominalForms: String
     let switchInterfaceLanguage: String
     let switchSearchLanguage: String
@@ -104,7 +105,7 @@ struct ConjugateViewModel {
         return verb == ""
     }
     
-    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", searchText: "", nominalForms: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "", speakerLanguage: nil)
+    static let empty: ConjugateViewModel = ConjugateViewModel(verb: "", searchText: "", infoText: NSAttributedString(string: ""), nominalForms: "", switchInterfaceLanguage: "", switchSearchLanguage: "", switchInterfaceLanguageFlagImage: "", switchLanguageFlagImage: "", language: "", meaning: "", starSelected: false, tenseTabs: [], searchFieldPlaceholder: "", speakerLanguage: nil)
 }
 
 struct TranslationsViewModel {

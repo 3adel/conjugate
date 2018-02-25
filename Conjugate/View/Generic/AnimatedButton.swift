@@ -30,6 +30,7 @@ class AnimatedButton: UIButton {
         setImage(defaultImage, for: .normal)
     }
     
+    @objc
     func changeToNextImage() {
         if animateImageIndex >= images.count {
             animateImageIndex = 0

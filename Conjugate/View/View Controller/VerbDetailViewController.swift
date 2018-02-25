@@ -5,18 +5,19 @@
 import UIKit
 
 class VerbDetailViewController: UIViewController {
-    @IBOutlet weak var verbLabel: UILabel!
-    @IBOutlet weak var nominalLabel: UILabel!
-    @IBOutlet weak var meaningLabel: UILabel!
-    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet private var verbLabel: UILabel!
+    @IBOutlet private var infoLabel: UILabel!
+    @IBOutlet private var nominalLabel: UILabel!
+    @IBOutlet private var meaningLabel: UILabel!
+    @IBOutlet private var errorLabel: UILabel!
     
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var audioButton: AnimatedButton!
+    @IBOutlet private var saveButton: UIButton!
+    @IBOutlet private var shareButton: UIButton!
+    @IBOutlet private var audioButton: AnimatedButton!
     
-    @IBOutlet weak var translationLanguageImageView: UIImageView!
+    @IBOutlet private var translationLanguageImageView: UIImageView!
     
-    @IBOutlet weak var nominalFormHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private var nominalFormHeightConstraint: NSLayoutConstraint!
     
     let tabbedMenuSegue = "tabbedMenuSegue"
     let tabbedContentSegue = "tabbedContentSegue"
@@ -44,7 +45,7 @@ class VerbDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         presenter?.updateViewModel()
         
-        let showNavBar = parent is UINavigationController ?? false
+        let showNavBar = parent is UINavigationController
         
         navigationController?.isNavigationBarHidden = !showNavBar
     }
@@ -59,9 +60,7 @@ class VerbDetailViewController: UIViewController {
 
         alertHandler = AlertHandler(view: view, topLayoutGuide: topLayoutGuide, bottomLayoutGuide: bottomLayoutGuide)
         
-        navigationItem.backBarButtonItem?.setTitleTextAttributes([
-            NSForegroundColorAttributeName: UIColor.clear
-            ],
+        navigationItem.backBarButtonItem?.setTitleTextAttributes([.foregroundColor: UIColor.clear],
             for: .normal
         )
     }
@@ -94,11 +93,9 @@ class VerbDetailViewController: UIViewController {
     }
     
     func setup(tabbedContentViewController: TabbedContentViewController) {
-        
         self.tabbedContentViewController = tabbedContentViewController
         self.tabbedContentViewController?.delegate = self
     }
-    
 }
 
 //Actions
@@ -125,12 +122,7 @@ extension VerbDetailViewController: ConjugateView {
         
         title = viewModel.verb
         
-        saveButton.isHidden = viewModel.isEmpty
-        shareButton.isHidden = viewModel.isEmpty
-        audioButton.isHidden = viewModel.isEmpty
-        
-        verbLabel.isHidden = viewModel.isEmpty
-        nominalLabel.isHidden = viewModel.isEmpty
+        [saveButton, shareButton, audioButton, verbLabel, nominalLabel, infoLabel].forEach { $0.isHidden = viewModel.isEmpty }
         
         errorLabel.isHidden = true
         
@@ -139,9 +131,10 @@ extension VerbDetailViewController: ConjugateView {
         
         verbLabel.text = viewModel.verb
         nominalLabel.text = viewModel.nominalForms
+        infoLabel.attributedText = viewModel.infoText
         meaningLabel.text = viewModel.meaning
         
-        nominalFormHeightConstraint.constant = viewModel.nominalForms.isEmpty ? 0 : 21
+//        nominalFormHeightConstraint.constant = viewModel.nominalForms.isEmpty ? 0 : 21
         
         let starImageString = viewModel.starSelected ? "star_selected" : "star"
         

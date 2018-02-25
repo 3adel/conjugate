@@ -53,14 +53,19 @@ extension Verb {
         
         var nominalForms = [String]()
         if let tensesDict = tensesDict {
-            nominalForms = TenseGroup.nominal.ids.reduce([]) {
-                guard let tenseDict = tensesDict[$0.1],
+            nominalForms = TenseGroup.nominal.ids.reduce([]) { forms, id in
+                guard let tenseDict = tensesDict[id.tenseID],
                     let formsArray = tenseDict["forms"] as? JSONArray,
-                    let formDict = formsArray.first as? JSONDictionary,
+                    
+                    let formDict = formsArray.first(where: {
+                        guard let dict = $0 as? JSONDictionary else { return false }
+                        return dict["id"] as? Int == id.formID
+                    }) as? JSONDictionary,
+                    
                     let form = formDict["form"] as? String
-                    else { return $0.0 }
+                    else { return forms }
                 
-                var finalForms = $0.0
+                var finalForms = forms
                 finalForms.append(form.trimmingWhitespaces())
                 
                 return finalForms
@@ -75,7 +80,12 @@ extension Verb {
             }
         }
         
-        self.init(name: name, language: language, tenses: tenses, nominalForms: nominalForms)
+        // isRegular = tenses.filter (tense groups that have at least one tense that has at least one irregular form).isEmpty
+        let isRegular = tenses.filter {!$0.value.filter { !$0.forms.filter { $0.type == .irregular }.isEmpty}.isEmpty }.isEmpty
+        let regularity: Regularity = isRegular ? .regular : .irregular
+        let auxiliaryVerb = (dict["auxiliaries"] as? [String])?.first ?? ""
+        
+        self.init(name: name, language: language, auxiliaryVerb: auxiliaryVerb, regularity: regularity, tenses: tenses, nominalForms: nominalForms)
     }
 }
 
@@ -83,7 +93,13 @@ extension Tense {
     init?(with dict: JSONDictionary, verbixID: String, tenseGroup: TenseGroup, language: Language) {
         guard let formDicts = dict["forms"] as? [JSONDictionary] else { return nil }
         
-        let forms: [Form] = ModelFactory.arrayOf(formDicts)
+        let formDictsWithoutArchaicForms = formDicts.filter {
+            guard let use = $0["use"] as? Int else { return true }
+            let archaicFormIDs = [3, 4]
+            return !archaicFormIDs.contains(use)
+        }
+        
+        let forms: [Form] = ModelFactory.arrayOf(formDictsWithoutArchaicForms)
         
         self.init(verbixID: verbixID, tenseGroup: tenseGroup, forms: forms)
     }
