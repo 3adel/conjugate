@@ -252,15 +252,16 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
     func toggleSavingVerb() {
         guard let verb = verb else { return }
         
+        let savedVerbs: [Verb]
         if storage.verbExists(verb) {
-            storage.remove(verb: verb)
+           savedVerbs = storage.remove(verb: verb)
             view.show(successMessage: LocalizedString("mobile.ios.conjugate.verbDeleted"))
             
             //Track deleting a verb
             Answers.logCustomEvent(withName: "Unfavorited Verb",customAttributes: ["Verb": verb.name])
             
         } else {
-            storage.save(verb: verb)
+            savedVerbs = storage.save(verb: verb)
             view.show(successMessage: LocalizedString("mobile.ios.conjugate.verbSaved"))
             AppReviewController.sharedInstance.didSignificantEvent()
             
@@ -268,7 +269,7 @@ class ConjugatePresenter: ConjugatePresenterType, NotificationObserver {
             Answers.logCustomEvent(withName: "Favorited Verb",customAttributes: ["Verb": verb.name])
         }
         
-        viewModel = makeConjugateViewModel(from: verb)
+        viewModel = makeConjugateViewModel(from: verb, savedVerbs: savedVerbs)
         view.updateUI(with: viewModel)
     }
     
@@ -405,8 +406,9 @@ extension ConjugatePresenter {
         return searchFieldPlaceHolder
     }
     
-    func makeConjugateViewModel(from verb: Verb? = nil) -> ConjugateViewModel {
-        let verbIsSaved = storage.getSavedVerbs().filter { $0 == verb }.isEmpty
+    func makeConjugateViewModel(from verb: Verb? = nil, savedVerbs: [Verb]? = nil) -> ConjugateViewModel {
+        let savedVerbs = savedVerbs ?? storage.getSavedVerbs()
+        let verbIsSaved = savedVerbs.filter { $0 == verb }.isEmpty
         
         let switchInterfaceLanguage = interfaceLanguage.displayLanguageCode.uppercased()
         
