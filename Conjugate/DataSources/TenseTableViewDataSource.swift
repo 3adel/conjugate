@@ -118,7 +118,7 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell?.onInstallNowTap = {
-                guard let url = URL(string: "itms-apps://itunes.apple.com/app/id1163600729") else { return }
+                guard let url = URL(string: "itms-apps://itunes.apple.com/app/id1299564210") else { return }
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 } else {
