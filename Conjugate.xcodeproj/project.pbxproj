@@ -76,6 +76,8 @@
 		24B9D9A21DAED525004EE256 /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9A11DAED525004EE256 /* Verb.swift */; };
 		24B9D9A41DAED9D5004EE256 /* ModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9A31DAED9D5004EE256 /* ModelFactory.swift */; };
 		24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B9D9AF1DAEF621004EE256 /* Extensions.swift */; };
+		24C1F08720472CB7005AA737 /* DerSatzPromotionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24C1F08620472CB7005AA737 /* DerSatzPromotionCell.xib */; };
+		24C1F09C20472F99005AA737 /* DerSatzPromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C1F09B20472F99005AA737 /* DerSatzPromotionCell.swift */; };
 		24C1FFA41E73876300B4484E /* SavedVerbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24C1FFA31E73876300B4484E /* SavedVerbCell.xib */; };
 		24C1FFB91E7387AA00B4484E /* SavedVerbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C1FFB81E7387AA00B4484E /* SavedVerbCell.swift */; };
 		24C1FFBB1E73892200B4484E /* SavedVerbDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C1FFBA1E73892200B4484E /* SavedVerbDataSource.swift */; };
@@ -374,6 +376,8 @@
 		24B9D9A11DAED525004EE256 /* Verb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
 		24B9D9A31DAED9D5004EE256 /* ModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFactory.swift; sourceTree = "<group>"; };
 		24B9D9AF1DAEF621004EE256 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		24C1F08620472CB7005AA737 /* DerSatzPromotionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DerSatzPromotionCell.xib; sourceTree = "<group>"; };
+		24C1F09B20472F99005AA737 /* DerSatzPromotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerSatzPromotionCell.swift; sourceTree = "<group>"; };
 		24C1FFA31E73876300B4484E /* SavedVerbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavedVerbCell.xib; sourceTree = "<group>"; };
 		24C1FFB81E7387AA00B4484E /* SavedVerbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedVerbCell.swift; sourceTree = "<group>"; };
 		24C1FFBA1E73892200B4484E /* SavedVerbDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedVerbDataSource.swift; sourceTree = "<group>"; };
@@ -604,6 +608,8 @@
 				2451D47C1E632BCF0009F6F4 /* LanguageCell.swift */,
 				24C1FFB81E7387AA00B4484E /* SavedVerbCell.swift */,
 				24C1FFA31E73876300B4484E /* SavedVerbCell.xib */,
+				24C1F08620472CB7005AA737 /* DerSatzPromotionCell.xib */,
+				24C1F09B20472F99005AA737 /* DerSatzPromotionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -986,6 +992,7 @@
 				F56F08C91CFA61DB008BD25B /* Main.storyboard in Resources */,
 				2467FF941E86962C005F2B51 /* Language-cmn.strings in Resources */,
 				2467FF991E86962C005F2B51 /* Language-ko.strings in Resources */,
+				24C1F08720472CB7005AA737 /* DerSatzPromotionCell.xib in Resources */,
 				2467FFA31E86962C005F2B51 /* Language-ur.strings in Resources */,
 				24EAB0FA1E62E77800FD93E3 /* TranslationCell.xib in Resources */,
 				2467FF961E86962C005F2B51 /* Language-hi.strings in Resources */,
@@ -1050,6 +1057,7 @@
 				24B9D8EB1DAC5232004EE256 /* DataStore.swift in Sources */,
 				245D32EA1DBB76FE00E5352F /* Localization.swift in Sources */,
 				24F96B951E3A51D400EC27A0 /* ConjugatePresenter.swift in Sources */,
+				24C1F09C20472F99005AA737 /* DerSatzPromotionCell.swift in Sources */,
 				24A510991DC5DD4E002BE909 /* ViewPresenterInterface.swift in Sources */,
 				24B9D7271DAAB048004EE256 /* AppDelegate.swift in Sources */,
 				245D32D01DBB6DCF00E5352F /* ConjugateError.swift in Sources */,

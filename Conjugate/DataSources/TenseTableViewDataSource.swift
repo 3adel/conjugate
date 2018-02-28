@@ -7,6 +7,13 @@ import UIKit
 class TenseTableViewDataSource: NSObject {
     let tableView: UITableView
     
+    var shouldShowPromotion = true {
+        didSet {
+            promotionSectionIndex = shouldShowPromotion ? 2 : nil
+        }
+    }
+    var promotionSectionIndex: Int? = 2
+    
     var language: Language? {
         didSet {
             guard let language = language else { return }
@@ -35,7 +42,8 @@ class TenseTableViewDataSource: NSObject {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib.init(nibName: TenseTableViewCell.nib, bundle: Bundle.main), forCellReuseIdentifier: TenseTableViewCell.identifier)
+        tableView.register(UINib(nibName: TenseTableViewCell.Nib, bundle: Bundle.main), forCellReuseIdentifier: TenseTableViewCell.Identifier)
+        tableView.register(UINib(nibName: DerSatzPromotionCell.Nib, bundle: Bundle.main), forCellReuseIdentifier: DerSatzPromotionCell.Identifier)
         tableView.cellLayoutMarginsFollowReadableWidth = false
         
         speaker.delegate = self
@@ -54,7 +62,7 @@ class TenseTableViewDataSource: NSObject {
         playedAudioButton?.stopAnimating()
         
         playedAudioButton = animatedButton
-        let tense = viewModel.tenses[indexPath.section].forms[indexPath.row]
+        let tense = viewModel.tenses[adjustedSection(indexPath.section)].forms[indexPath.row]
         
         if speaker.isPlaying(tense.audioText) {
             speaker.stop()
@@ -78,11 +86,14 @@ extension TenseTableViewDataSource: TextSpeakerDelegate {
 
 extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.tenses.count
+        guard viewModel.tenses.count > 3 else { return 0 }
+        return promotionSectionIndex == nil ? viewModel.tenses.count : viewModel.tenses.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let tense = viewModel.tenses[section]
+        guard promotionSectionIndex != section else { return 1 }
+        
+        let tense = viewModel.tenses[adjustedSection(section)]
         
         return tense.forms.count
     }
@@ -93,23 +104,30 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func cellFor(section: Int, row: Int) -> TenseTableViewCell? {
-         let cell = tableView.dequeueReusableCell(withIdentifier: TenseTableViewCell.identifier) as? TenseTableViewCell
-        cell?.audioButton.addTarget(self, action: #selector(soundButtonClicked(_:)), for: .touchUpInside)
-        
-        let tense = viewModel.tenses[section].forms[row]
-        
-        cell?.render(with: tense)
-        
-        return cell
+    func cellFor(section: Int, row: Int) -> UITableViewCell? {
+        if let promotionSectionIndex = promotionSectionIndex,
+            promotionSectionIndex == section {
+            return tableView.dequeueReusableCell(withIdentifier: DerSatzPromotionCell.Identifier)
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: TenseTableViewCell.Identifier) as? TenseTableViewCell
+            cell?.audioButton.addTarget(self, action: #selector(soundButtonClicked(_:)), for: .touchUpInside)
+            
+            let tense = viewModel.tenses[adjustedSection(section)].forms[row]
+            
+            cell?.render(with: tense)
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.tenses[section].name
+        return section == promotionSectionIndex ? nil : viewModel.tenses[adjustedSection(section)].name
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        onRowDidSelect?(indexPath.row, indexPath.section)
+        guard promotionSectionIndex != indexPath.section else { return }
+            
+        onRowDidSelect?(indexPath.row, adjustedSection(indexPath.section))
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -124,12 +142,18 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
             cell.layoutMargins = edgeInsetsForCell
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return promotionSectionIndex == indexPath.section ? 195 : 44
+    }
+    
+    private func adjustedSection(_ section: Int) -> Int {
+        guard let promotionSectionIndex = promotionSectionIndex else { return section }
+        return promotionSectionIndex <=  section ? section - 1 : section
+    }
 }
 
 class TenseTableViewCell: UITableViewCell {
-    static let identifier = "tenseCell"
-    static let nib = "TenseTableViewCell"
-    
     @IBOutlet var pronounLabel: UILabel!
     @IBOutlet var verbLabel: UILabel!
     @IBOutlet var audioButton: AnimatedButton!
