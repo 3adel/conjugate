@@ -10,9 +10,22 @@ import UIKit
 
 class DerSatzPromotionCell: UITableViewCell {
     
+    var onDismissButtonTap: (() -> Void)?
+    var onInstallNowTap: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
+    }
+    
+    @IBAction
+    func didTapDismissButton() {
+        onDismissButtonTap?()
+    }
+    
+    @IBAction
+    func didTapInstallNowButton() {
+        onInstallNowTap?()
     }
     
     private func setupUI() {

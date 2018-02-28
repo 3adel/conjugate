@@ -7,12 +7,14 @@ import UIKit
 class TenseTableViewDataSource: NSObject {
     let tableView: UITableView
     
-    var shouldShowPromotion = true {
+    var shouldShowPromotion = !UserDefaults.standard.didShowDerSatzPromotion {
         didSet {
             promotionSectionIndex = shouldShowPromotion ? 2 : nil
         }
     }
-    var promotionSectionIndex: Int? = 2
+    lazy var promotionSectionIndex: Int? = {
+        shouldShowPromotion ? 2 : nil
+    }()
     
     var language: Language? {
         didSet {
@@ -107,7 +109,26 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
     func cellFor(section: Int, row: Int) -> UITableViewCell? {
         if let promotionSectionIndex = promotionSectionIndex,
             promotionSectionIndex == section {
-            return tableView.dequeueReusableCell(withIdentifier: DerSatzPromotionCell.Identifier)
+            let cell = tableView.dequeueReusableCell(withIdentifier: DerSatzPromotionCell.Identifier) as? DerSatzPromotionCell
+            
+            cell?.onDismissButtonTap = { [weak self] in
+                guard let promotionSectionIndex = self?.promotionSectionIndex else { return }
+                self?.shouldShowPromotion = false
+                self?.tableView.deleteSections([promotionSectionIndex], with: .automatic)
+            }
+            
+            cell?.onInstallNowTap = {
+                guard let url = URL(string: "itms-apps://itunes.apple.com/app/id1163600729") else { return }
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
+            
+            UserDefaults.standard.didShowDerSatzPromotion = true
+            
+            return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: TenseTableViewCell.Identifier) as? TenseTableViewCell
             cell?.audioButton.addTarget(self, action: #selector(soundButtonClicked(_:)), for: .touchUpInside)

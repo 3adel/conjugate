@@ -62,6 +62,20 @@
                                         <integer key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapInstallNowButton" destination="daz-LJ-LsH" eventType="touchUpInside" id="8HZ-fu-exH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IQM-kH-3Ft">
+                                <rect key="frame" x="335" y="17" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="R4U-qh-UoU"/>
+                                    <constraint firstAttribute="width" constant="32" id="aWP-pa-C9J"/>
+                                </constraints>
+                                <state key="normal" image="cross"/>
+                                <connections>
+                                    <action selector="didTapDismissButton" destination="daz-LJ-LsH" eventType="touchUpInside" id="Rvp-Mv-R0d"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -69,8 +83,10 @@
                             <constraint firstItem="ytR-F9-sr8" firstAttribute="leading" secondItem="g5B-1c-CqX" secondAttribute="trailing" constant="20" id="0fx-Ji-YGT"/>
                             <constraint firstItem="xpH-i6-UEB" firstAttribute="trailing" secondItem="dhe-Va-zcd" secondAttribute="trailing" constant="21" id="A8I-6W-xD5"/>
                             <constraint firstItem="2zh-ib-eBe" firstAttribute="top" secondItem="xpH-i6-UEB" secondAttribute="top" constant="20" id="EQU-Zt-VKi"/>
+                            <constraint firstItem="IQM-kH-3Ft" firstAttribute="top" secondItem="xpH-i6-UEB" secondAttribute="top" constant="17" id="LR6-2b-tWX"/>
                             <constraint firstItem="dhe-Va-zcd" firstAttribute="leading" secondItem="g5B-1c-CqX" secondAttribute="trailing" constant="20" id="Ln7-77-gOC"/>
                             <constraint firstItem="g5B-1c-CqX" firstAttribute="centerY" secondItem="L88-dJ-Akt" secondAttribute="centerY" id="NyZ-MS-by8"/>
+                            <constraint firstItem="xpH-i6-UEB" firstAttribute="trailing" secondItem="IQM-kH-3Ft" secondAttribute="trailing" constant="8" id="QWp-1K-eQG"/>
                             <constraint firstItem="g5B-1c-CqX" firstAttribute="leading" secondItem="xpH-i6-UEB" secondAttribute="leading" constant="10" id="Wid-Nc-y8f"/>
                             <constraint firstItem="2zh-ib-eBe" firstAttribute="leading" secondItem="g5B-1c-CqX" secondAttribute="trailing" constant="20" id="Z79-lw-tj3"/>
                             <constraint firstItem="dhe-Va-zcd" firstAttribute="top" secondItem="2zh-ib-eBe" secondAttribute="bottom" constant="12" id="dHc-QP-cBS"/>
@@ -92,6 +108,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="cross" width="15" height="15"/>
         <image name="derSatz" width="1536" height="1536"/>
     </resources>
 </document>
