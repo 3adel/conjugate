@@ -40,20 +40,22 @@ class Storage {
         return !savedVerbs.filter { $0 == verb }.isEmpty
     }
     
-    func save(verb: Verb) {
+    func save(verb: Verb) -> [Verb] {
         if savedVerbs.index(of: verb) == nil {
             
             savedVerbs.insert(verb, at: 0)
             savedVerbDictArray.insert(verb.asDict(), at: 0)
             saveVerbs()
         }
+        return savedVerbs
     }
     
-    func remove(verb: Verb) {
+    func remove(verb: Verb) -> [Verb] {
         if let indexOfVerb = savedVerbs.index(of: verb) {
             savedVerbs.remove(at: indexOfVerb)
             savedVerbDictArray.remove(at: indexOfVerb)
             saveVerbs()
         }
+        return savedVerbs
     }
 }
