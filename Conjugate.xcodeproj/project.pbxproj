@@ -84,6 +84,7 @@
 		24EAB0F81E62E77800FD93E3 /* TenseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EAB0F51E62E77800FD93E3 /* TenseTableViewCell.xib */; };
 		24EAB0F91E62E77800FD93E3 /* TranslationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EAB0F61E62E77800FD93E3 /* TranslationCell.swift */; };
 		24EAB0FA1E62E77800FD93E3 /* TranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EAB0F71E62E77800FD93E3 /* TranslationCell.xib */; };
+		24EC72822047274900A66201 /* HTMLTagParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EC72812047274900A66201 /* HTMLTagParser.swift */; };
 		24F96B7D1E39FAB000EC27A0 /* QuickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F96B7C1E39FAB000EC27A0 /* QuickAction.swift */; };
 		24F96B951E3A51D400EC27A0 /* ConjugatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F96B921E3A51D400EC27A0 /* ConjugatePresenter.swift */; };
 		24F96B961E3A51D400EC27A0 /* SavedVerbPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F96B931E3A51D400EC27A0 /* SavedVerbPresenter.swift */; };
@@ -381,6 +382,7 @@
 		24EAB0F51E62E77800FD93E3 /* TenseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TenseTableViewCell.xib; sourceTree = "<group>"; };
 		24EAB0F61E62E77800FD93E3 /* TranslationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationCell.swift; sourceTree = "<group>"; };
 		24EAB0F71E62E77800FD93E3 /* TranslationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TranslationCell.xib; sourceTree = "<group>"; };
+		24EC72812047274900A66201 /* HTMLTagParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTagParser.swift; sourceTree = "<group>"; };
 		24F96B7C1E39FAB000EC27A0 /* QuickAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickAction.swift; sourceTree = "<group>"; };
 		24F96B921E3A51D400EC27A0 /* ConjugatePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConjugatePresenter.swift; sourceTree = "<group>"; };
 		24F96B931E3A51D400EC27A0 /* SavedVerbPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedVerbPresenter.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				2451D4761E63113F0009F6F4 /* AppDependencyManager.swift */,
 				24FAC0FB1E6C659100FD476B /* NotificationName.swift */,
 				24FAC1641E6C792900FD476B /* DictionaryKey.swift */,
+				24EC72812047274900A66201 /* HTMLTagParser.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1062,6 +1065,7 @@
 				24F96BAE1E3A535900EC27A0 /* VerbDetailViewController.swift in Sources */,
 				24F96BAD1E3A535900EC27A0 /* TabBarController.swift in Sources */,
 				245523661E911F6000946F2D /* Language.swift in Sources */,
+				24EC72822047274900A66201 /* HTMLTagParser.swift in Sources */,
 				240992301DC80284008F763D /* AppLaunchChecker.swift in Sources */,
 				24B9D9B01DAEF621004EE256 /* Extensions.swift in Sources */,
 				24B9D9A41DAED9D5004EE256 /* ModelFactory.swift in Sources */,

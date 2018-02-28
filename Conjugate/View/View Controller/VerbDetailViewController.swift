@@ -136,7 +136,11 @@ extension VerbDetailViewController: ConjugateView {
         nominalLabel.text = viewModel.nominalForms
         infoLabel.attributedText = viewModel.infoText
         meaningLabel.text = viewModel.meaning
-        exampleSentencesLabel.text = viewModel.exampleSentences
+        
+        exampleSentencesLabel.attributedText = viewModel.exampleSentences.attributedString(byReplacing: .bold,
+                                                                                           usingAttributes: [.font: exampleSentencesLabel.font.with(traits: [.traitBold, .traitItalic]),
+                                                                                                             .foregroundColor: UIColor.black],
+                                                                                           defaultAttributes: [.font: exampleSentencesLabel.font.italic])
         
         let starImageString = viewModel.starSelected ? "star_selected" : "star"
         
