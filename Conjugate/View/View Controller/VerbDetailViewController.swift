@@ -182,6 +182,10 @@ extension VerbDetailViewController: ConjugateView {
             
             dataSource.viewModel = tenseViewModel
             
+            dataSource.onPromotionBannerDismissed = { [weak self] in
+                self?.disableAllPromotionBanners()
+            }
+            
             tabTableViews.append(tableView)
             tabTableViewDatasources.append(dataSource)
             
@@ -191,6 +195,11 @@ extension VerbDetailViewController: ConjugateView {
         
         tabbedMenuViewController?.tabs = tabs
         tabbedContentViewController?.views = tabTableViews
+    }
+    
+    func disableAllPromotionBanners() {
+        tabTableViewDatasources.forEach { $0.shouldShowPromotion = false }
+        tabTableViews.forEach { $0.reloadData() }
     }
     
     func showVerbNotFoundError(message: String) {
