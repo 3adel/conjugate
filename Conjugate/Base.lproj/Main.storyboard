@@ -127,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCv-6b-7xl">
-                                <rect key="frame" x="0.0" y="198" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="191" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="LyS-Qe-Vxy"/>
                                 </constraints>
@@ -136,7 +136,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uk7-4V-R1z">
-                                <rect key="frame" x="0.0" y="238" width="375" height="255"/>
+                                <rect key="frame" x="0.0" y="231" width="375" height="262"/>
                                 <connections>
                                     <segue destination="hab-dK-RMs" kind="embed" identifier="tabbedContentSegue" id="bWn-Mc-oJS"/>
                                 </connections>
@@ -223,12 +223,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" scrollEnabled="NO" editable="NO" text="&quot;Example sentences&quot;" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8Pj-OL-jLr">
-                                <rect key="frame" x="16" y="157" width="343" height="33"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" insetsLayoutMarginsFromSafeArea="NO" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8Pj-OL-jLr">
+                                <rect key="frame" x="16" y="150" width="343" height="33"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="750" constant="17" id="gVw-cA-kAd"/>
-                                </constraints>
                                 <color key="textColor" red="0.39607843139999999" green="0.39607843139999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -242,7 +239,7 @@
                             <constraint firstItem="nIh-tB-kuK" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leadingMargin" id="4qZ-D1-hyt"/>
                             <constraint firstItem="f5X-ut-E5C" firstAttribute="trailing" secondItem="Oeq-U5-utG" secondAttribute="trailingMargin" id="5bc-ad-t5Y"/>
                             <constraint firstItem="Uk7-4V-R1z" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leading" id="6bz-br-dZK"/>
-                            <constraint firstItem="8Pj-OL-jLr" firstAttribute="top" secondItem="ZaV-99-AV1" secondAttribute="bottom" constant="15" id="6jX-qD-F4g"/>
+                            <constraint firstItem="8Pj-OL-jLr" firstAttribute="top" secondItem="ZaV-99-AV1" secondAttribute="bottom" constant="8" id="6jX-qD-F4g"/>
                             <constraint firstItem="Sjc-p0-m0e" firstAttribute="top" secondItem="xlN-5c-ujh" secondAttribute="bottom" constant="12" id="7wD-GG-sFT"/>
                             <constraint firstItem="Fh5-CX-Ejw" firstAttribute="centerY" secondItem="ZaV-99-AV1" secondAttribute="centerY" id="9zh-ZL-7rc"/>
                             <constraint firstItem="f5X-ut-E5C" firstAttribute="top" secondItem="nIh-tB-kuK" secondAttribute="bottom" constant="8" id="AJh-Nq-vxM"/>
@@ -443,7 +440,7 @@
                         <viewControllerLayoutGuide type="bottom" id="LWG-bf-yby"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pkf-bb-Gpa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="255"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="262"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

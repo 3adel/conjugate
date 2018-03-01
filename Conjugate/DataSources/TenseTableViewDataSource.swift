@@ -7,6 +7,8 @@ import UIKit
 class TenseTableViewDataSource: NSObject {
     let tableView: UITableView
     
+    var onPromotionBannerDismissed: (() -> Void)?
+    
     var shouldShowPromotion = !UserDefaults.standard.didShowDerSatzPromotion {
         didSet {
             promotionSectionIndex = shouldShowPromotion ? 2 : nil
@@ -114,6 +116,7 @@ extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
                 guard let promotionSectionIndex = self?.promotionSectionIndex else { return }
                 self?.shouldShowPromotion = false
                 self?.tableView.deleteSections([promotionSectionIndex], with: .automatic)
+                self?.onPromotionBannerDismissed?()
             }
             
             cell?.onInstallNowTap = {
