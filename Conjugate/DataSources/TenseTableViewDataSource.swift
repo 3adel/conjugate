@@ -88,8 +88,7 @@ extension TenseTableViewDataSource: TextSpeakerDelegate {
 
 extension TenseTableViewDataSource: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard viewModel.tenses.count > 3 else { return 0 }
-        return promotionSectionIndex == nil ? viewModel.tenses.count : viewModel.tenses.count + 1
+        return promotionSectionIndex == nil || viewModel.tenses.count < 3 ? viewModel.tenses.count : viewModel.tenses.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

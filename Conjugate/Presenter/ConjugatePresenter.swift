@@ -424,7 +424,6 @@ extension ConjugatePresenter {
         if let verb = verb {
         
             self.verb = verb
-            
             let infoText = NSMutableAttributedString(string: "\(verb.auxiliaryVerb) · ")
             
             let regularity = verb.regularity == .regular ? "regular" : "irregular"
@@ -448,7 +447,7 @@ extension ConjugatePresenter {
             let language = targetLanguage.displayLanguageCode.uppercased()
             let speakerLanguage = speaker.language
             
-            let exampleSentences = verb.exampleSentences.reduce("") { wholeText, sentence in
+            let exampleSentences = verb.exampleSentences.map { $0.capitalizingFirstLetter() }.reduce("") { wholeText, sentence in
                 let sentenceText = "\"\(sentence)\""
                 return wholeText.isEmpty ? sentenceText : "\(wholeText)\n\(sentenceText)"
             }
