@@ -451,7 +451,7 @@ extension ConjugatePresenter {
             let exampleSentences = verb.exampleSentences.map { $0.capitalizingFirstLetter() }.reduce("") { wholeText, sentence in
                 exampleSentenceCounter += 1
                 let sentenceText = "\(exampleSentenceCounter). \(sentence)"
-                return wholeText.isEmpty ? sentenceText : "\(wholeText)\n\(sentenceText)" 
+                return wholeText.isEmpty ? sentenceText : "\(wholeText)\n\(sentenceText)"
             }
             
             viewModel = ConjugateViewModel(verb: verb.name,

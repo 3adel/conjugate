@@ -130,8 +130,7 @@
                                 <rect key="frame" x="0.0" y="142" width="375" height="351"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" insetsLayoutMarginsFromSafeArea="NO" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8Pj-OL-jLr">
-                                        <rect key="frame" x="17" y="0.0" width="358" height="33"/>
-                                        <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="14" y="0.0" width="361" height="33"/>
                                         <color key="textColor" red="0.39607843139999999" green="0.39607843139999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -153,7 +152,6 @@
                                         </connections>
                                     </containerView>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="BCv-6b-7xl" secondAttribute="trailing" constant="65" id="0JV-qT-Scx"/>
                                     <constraint firstAttribute="bottom" secondItem="BCv-6b-7xl" secondAttribute="bottom" constant="278" id="26i-cd-kbn"/>
@@ -270,7 +268,7 @@
                             <constraint firstAttribute="trailing" secondItem="Uk7-4V-R1z" secondAttribute="trailing" id="Xlt-6X-7c1"/>
                             <constraint firstItem="ZaV-99-AV1" firstAttribute="trailing" secondItem="Oeq-U5-utG" secondAttribute="trailingMargin" constant="-7" id="Y66-Og-mg6"/>
                             <constraint firstItem="nIh-tB-kuK" firstAttribute="top" secondItem="Sjc-p0-m0e" secondAttribute="bottom" constant="5" id="YsN-BE-ApB"/>
-                            <constraint firstItem="8Pj-OL-jLr" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leading" constant="17" id="ZGo-Jx-yD2"/>
+                            <constraint firstItem="8Pj-OL-jLr" firstAttribute="leading" secondItem="Oeq-U5-utG" secondAttribute="leading" constant="14" id="ZGo-Jx-yD2"/>
                             <constraint firstItem="Sjc-p0-m0e" firstAttribute="leading" secondItem="pRe-nd-uKJ" secondAttribute="trailing" constant="7" id="bTE-Yn-68v"/>
                             <constraint firstAttribute="trailing" secondItem="jOl-dn-dSW" secondAttribute="trailing" id="byO-OW-gC0"/>
                             <constraint firstItem="ICH-dS-ovp" firstAttribute="leading" secondItem="Sjc-p0-m0e" secondAttribute="trailing" constant="12" id="fNs-wt-Jry"/>
