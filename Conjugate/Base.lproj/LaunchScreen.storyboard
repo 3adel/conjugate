@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,16 +22,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="konj.me" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eZ-6R-eOx">
-                                <rect key="frame" x="95.5" y="302" width="185.5" height="64.5"/>
+                                <rect key="frame" x="98" y="302" width="180" height="64.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="54"/>
                                 <color key="textColor" red="0.24543955520792793" green="0.69628435318368498" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="1" green="0.19095288473963568" blue="0.29760180030682537" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fOR-n6-cRr">
+                                <rect key="frame" x="87" y="381" width="201.5" height="20.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vIT-UR-U4y">
+                                        <rect key="frame" x="0.0" y="0.0" width="201.5" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="German verbs conjugation" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1O0-Tg-RvY">
+                                                <rect key="frame" x="0.0" y="0.0" width="201.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0eZ-6R-eOx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="O9B-B1-nlv"/>
+                            <constraint firstItem="fOR-n6-cRr" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XR6-RX-buT"/>
                             <constraint firstItem="0eZ-6R-eOx" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ZvS-kR-qw8"/>
+                            <constraint firstItem="1O0-Tg-RvY" firstAttribute="top" secondItem="0eZ-6R-eOx" secondAttribute="bottom" constant="15" id="l9N-e8-LqQ"/>
                         </constraints>
                     </view>
                 </viewController>

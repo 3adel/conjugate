@@ -444,12 +444,14 @@ extension ConjugatePresenter {
                 meaningText += translation
             }
             
+            var exampleSentenceCounter = 0
             let language = targetLanguage.displayLanguageCode.uppercased()
             let speakerLanguage = speaker.language
             
             let exampleSentences = verb.exampleSentences.map { $0.capitalizingFirstLetter() }.reduce("") { wholeText, sentence in
-                let sentenceText = "\"\(sentence)\""
-                return wholeText.isEmpty ? sentenceText : "\(wholeText)\n\(sentenceText)"
+                exampleSentenceCounter += 1
+                let sentenceText = "\(exampleSentenceCounter). \(sentence)"
+                return wholeText.isEmpty ? sentenceText : "\(wholeText)\n\(sentenceText)" 
             }
             
             viewModel = ConjugateViewModel(verb: verb.name,
