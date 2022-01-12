@@ -1,2 +1,2 @@
 # Conjugate
-A service that conjugate verbs. Created for the purpose of learning german.
+A service that conjugates german verbs. I created this for the purpose of learning German.
